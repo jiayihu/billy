@@ -14,6 +14,7 @@
   "license": "ISC",
   "devDependencies": {
     "cross-env": "^1.0.8",
+    "raw-loader": "^0.5.1",
     "rimraf": "^2.5.3",
     "ts-loader": "^0.8.2",
     "typescript": "^1.8.10",

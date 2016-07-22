@@ -27,7 +27,12 @@ module.exports = {
       {
         test: /\.tsx?$/,
         loader: 'ts',
-        exclude: /node_modules/,
+        include: root.src,
+      },
+      {
+        test: /\.html$/,
+        loader: 'raw',
+        include: root.src,
       },
     ],
   },
