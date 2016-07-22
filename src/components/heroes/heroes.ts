@@ -2,26 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import Hero from '../../entities/hero';
 import { HeroService } from '../../services/hero';
+import HeroDetailComponent from '../hero-detail/hero-detail';
 
 @Component({
   selector: 'heroes',
   styleUrls: ['src/components/heroes/heroes.css'],
-  template: `
-    <h2>My heroes</h2>
-    <ul class="heroes">
-      <li *ngFor="let hero of heroes" (click)="onSelect(hero)" [class.selected]="hero === selectedHero">
-        <span class="badge">{{hero.id}}</span> {{hero.name}}
-      </li>
-    </ul>
-    <div *ngIf="selectedHero">
-      <h2>
-        {{selectedHero.name | uppercase}} is my hero
-      </h2>
-      <button (click)="gotoDetail()">View Details</button>
-    </div>
-  `,
+  templateUrl: 'src/components/heroes/heroes.html',
+  directives: [HeroDetailComponent],
 })
 export default class HeroesComponent implements OnInit {
+  addingHero: boolean = false;
+  error: any;
   heroes: Hero[];
   selectedHero: Hero;
 
@@ -29,6 +20,27 @@ export default class HeroesComponent implements OnInit {
 
   ngOnInit() {
     this.getHeroes();
+  }
+
+  addHero() {
+    this.addingHero = true;
+    this.selectedHero = null;
+  }
+
+  close(savedHero: Hero) {
+    this.addingHero = false;
+    if (savedHero) { this.getHeroes(); }
+  }
+
+  deleteHero(hero: Hero, event: any) {
+    event.stopPropagation();
+    this.heroService
+      .delete(hero)
+      .then(res => {
+        this.heroes = this.heroes.filter(h => h !== hero);
+        if (this.selectedHero === hero) { this.selectedHero = null; }
+      })
+      .catch(error => this.error = error);
   }
 
   getHeroes() {
