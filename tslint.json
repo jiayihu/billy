@@ -1,0 +1,22 @@
+{
+  "extends": "tslint:recommended",
+
+  "rules": {
+    "object-literal-sort-keys": [
+      false
+    ],
+
+    "member-access": false,
+
+    "no-console": [
+      false
+    ],
+
+    "no-var-requires": false,
+
+    "quotemark": [
+      true,
+      "single"
+    ]
+  }
+}

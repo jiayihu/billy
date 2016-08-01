@@ -12,7 +12,7 @@ module.exports = {
     noInfo: false,
     port: 3000,
   } : {},
-  devtool: 'source-map',
+  devtool: 'eval',
   entry: root.src,
   output: {
     path: root.dest,
@@ -32,6 +32,11 @@ module.exports = {
       {
         test: /\.html$/,
         loader: 'raw',
+        include: root.src,
+      },
+      {
+        test: /\.scss$/,
+        loaders: ['style', 'css', 'sass'],
         include: root.src,
       },
     ],
