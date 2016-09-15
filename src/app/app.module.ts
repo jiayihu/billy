@@ -7,6 +7,8 @@ import NavComponent from './components/nav.component';
 import AuthModule from '../features/auth/auth.module';
 import DashboardModule from '../features/dashboard/dashboard.module';
 
+import StoreService from '../services/store.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,6 +20,7 @@ import DashboardModule from '../features/dashboard/dashboard.module';
     AuthModule,
     DashboardModule,
   ],
+  providers: [StoreService],
   bootstrap: [AppComponent],
 })
 export default class AppModule {

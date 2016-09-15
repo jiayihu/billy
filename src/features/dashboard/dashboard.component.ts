@@ -1,9 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import StoreService, { IUser } from '../../services/store.service';
 
 @Component({
   selector: 'dashboard',
-  template: '<h1>Dashboard</h1>',
+  template: require('./dashboard.component.html'),
 })
-export default class DashboardComponent {
+export default class DashboardComponent implements OnInit {
+  user: IUser;
 
+  constructor(private storeService: StoreService) {}
+
+  ngOnInit() {
+    this.user = this.storeService.getUser();
+  }
 }
