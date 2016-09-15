@@ -35,6 +35,11 @@ module.exports = {
         include: root.src,
       },
       {
+        test: /\.css$/,
+        loaders: ['style', 'css'],
+        include: root.src,
+      },
+      {
         test: /\.scss$/,
         loaders: ['style', 'css', 'sass'],
         include: root.src,

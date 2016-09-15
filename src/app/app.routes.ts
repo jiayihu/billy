@@ -1,8 +1,8 @@
-import { provideRouter, RouterConfig } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 import DashboardComponent from '../features/dashboard/dashboard.component';
 import SignupComponent from '../features/auth/signup/signup.component';
 
-const routes: RouterConfig = [
+const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
@@ -18,6 +18,7 @@ const routes: RouterConfig = [
   },
 ];
 
-const appRouterProviders = [provideRouter(routes)];
+export const appRoutingProviders: any[] = [
+];
 
-export default appRouterProviders;
+export default RouterModule.forRoot(routes);
