@@ -36,14 +36,14 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loaders: ['style', 'css'],
-        include: root.src,
-      },
-      {
-        test: /\.scss$/,
-        loaders: ['style', 'css', 'sass'],
+        loaders: ['style', 'css', 'postcss'],
         include: root.src,
       },
     ],
+  },
+  postcss() {
+    return [
+      require('postcss-cssnext'),
+    ];
   },
 };
