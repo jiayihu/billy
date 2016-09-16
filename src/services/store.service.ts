@@ -1,19 +1,21 @@
 import { Injectable } from '@angular/core';
 
-export interface IUser {
+export class User {
   firstName: string;
   lastName: string;
+
+  constructor(firstName: string, lastName: string) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
 }
 
 @Injectable()
 export default class StoreService {
-  user: IUser;
+  user: User;
 
   constructor() {
-    this.user = {
-      firstName: 'Jiayi',
-      lastName: 'Hu',
-    };
+    this.user = new User('Jiayi', 'Hu');
   }
 
   getUser() {

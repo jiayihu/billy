@@ -5,7 +5,7 @@ import AppComponent from './app.component';
 import NavComponent from './components/nav.component';
 
 import AuthModule from '../features/auth/auth.module';
-import DashboardModule from '../features/dashboard/dashboard.module';
+import CreateInvoiceModule from '../features/create-invoice/create-invoice.module';
 
 import StoreService from '../services/store.service';
 
@@ -18,7 +18,7 @@ import StoreService from '../services/store.service';
     BrowserModule,
     routing,
     AuthModule,
-    DashboardModule,
+    CreateInvoiceModule,
   ],
   providers: [StoreService],
   bootstrap: [AppComponent],

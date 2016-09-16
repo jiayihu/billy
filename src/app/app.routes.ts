@@ -1,16 +1,16 @@
 import { Routes, RouterModule } from '@angular/router';
-import DashboardComponent from '../features/dashboard/dashboard.component';
+import CreateInvoiceComponent from '../features/create-invoice/create-invoice.component';
 import SignupComponent from '../features/auth/signup/signup.component';
 
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'dashboard',
+    redirectTo: 'create',
   },
   {
-    component: DashboardComponent,
-    path: 'dashboard',
+    component: CreateInvoiceComponent,
+    path: 'create',
   },
   {
     component: SignupComponent,
