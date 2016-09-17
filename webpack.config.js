@@ -37,7 +37,13 @@ module.exports = {
       {
         test: /\.css$/,
         loaders: ['style', 'css', 'postcss'],
-        include: root.src,
+        include: path.join(root.src, 'styles'),
+      },
+      {
+        test: /\.css$/,
+        loaders: ['raw', 'postcss'],
+        include: path.src,
+        exclude: path.join(root.src, 'styles'),
       },
     ],
   },

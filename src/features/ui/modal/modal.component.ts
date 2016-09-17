@@ -5,10 +5,16 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   template: require('./modal.component.html'),
 })
 export default class Modal {
+  @Input() disabled: boolean;
   @Input() isVisible: boolean;
   @Output() onClose = new EventEmitter<void>();
+  @Output() onSuccess = new EventEmitter<void>();
 
   close() {
     this.onClose.emit();
+  }
+
+  success() {
+    this.onSuccess.emit();
   }
 }

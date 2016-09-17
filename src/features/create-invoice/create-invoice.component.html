@@ -1,4 +1,4 @@
-<h1>Create new invoice</h1>
-<p>Utente: {{user.firstName}}</p>
-<button (click)="toggleModal()" class="btn btn-outline-primary">Toggle Modal</button>
-<modal [isVisible]="isModalVisible" (onClose)="onModalClose()"></modal>
+<h2>New invoice</h2>
+<div class="invoice">
+  <user-business [user]="user"></user-business>
+</div>
