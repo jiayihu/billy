@@ -1,10 +1,36 @@
 const path = require('path');
+const env = require('./env.json');
+const webpack = require('webpack');
 
 const root = {
   src: path.join(__dirname, 'src'),
   dest: path.join(__dirname, 'dist'),
 };
 const IS_DEV = process.env.NODE_ENV !== 'production';
+
+const devPlugins = [
+  new webpack.NoErrorsPlugin(),
+  new webpack.DefinePlugin({
+    'process.env': {
+      NODE_ENV: JSON.stringify('development'),
+      GEONAMES: JSON.stringify(env.geonames),
+    },
+  }),
+];
+const prodPlugins = [
+  new webpack.optimize.OccurrenceOrderPlugin(),
+  new webpack.optimize.UglifyJsPlugin({
+    compressor: {
+      warnings: false,
+    },
+  }),
+  new webpack.DefinePlugin({
+    'process.env': {
+      NODE_ENV: JSON.stringify('production'),
+      GEONAMES: JSON.stringify(env.geonames),
+    },
+  }),
+];
 
 module.exports = {
   devServer: IS_DEV ? {
@@ -48,6 +74,7 @@ module.exports = {
       },
     ],
   },
+  plugins: IS_DEV ? devPlugins : prodPlugins,
   postcss() {
     return [
       require('postcss-cssnext'),

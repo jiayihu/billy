@@ -13,9 +13,9 @@ export interface IUser {
 
 @Injectable()
 export default class StoreService {
+  private user: IUser;
   private userSource = new BehaviorSubject<IUser>(this.user);
 
-  user: IUser;
   user$ = this.userSource.asObservable();
 
   constructor() {

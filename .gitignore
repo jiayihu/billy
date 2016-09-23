@@ -9,6 +9,7 @@ public
 dist
 tree.txt
 typings
+env.json
 
 # Compiled source #
 ###################
