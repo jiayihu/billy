@@ -1,4 +1,4 @@
-import { Component, Input, SimpleChange } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChange } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import invariant = require('invariant');
 import { IUser } from '../../../services/store.service';
@@ -9,6 +9,7 @@ import { IUser } from '../../../services/store.service';
 })
 export default class UserBusinessComponent {
   @Input() user: IUser;
+  @Output() onBusinessChange = new EventEmitter<IUser>();
   isEditOpen: boolean;
   model: IUser;
 
@@ -18,7 +19,6 @@ export default class UserBusinessComponent {
 
   handleEdit(): void {
     this.isEditOpen = true;
-    console.log(this.isEditOpen);
   }
 
   closeModal(): void {
@@ -28,6 +28,7 @@ export default class UserBusinessComponent {
   handleEditEnd(form: FormControl): void {
     invariant(form.valid, 'Form must be always valid at this point.');
 
-    this.user = Object.assign({}, this.model);
+    this.onBusinessChange.emit(this.model);
+    this.closeModal();
   }
 }

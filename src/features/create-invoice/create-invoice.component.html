@@ -1,4 +1,5 @@
 <h2>New invoice</h2>
 <div class="invoice">
-  <user-business [user]="user"></user-business>
+  <user-business [user]="user" (onBusinessChange)="handleBusinessChange($event)"></user-business>
+  <p>Ther user is {{user.name}}</p>
 </div>

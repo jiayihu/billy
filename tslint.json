@@ -2,17 +2,20 @@
   "extends": "tslint:recommended",
 
   "rules": {
+    "curly": false,
+
     "object-literal-sort-keys": false,
 
     "member-access": false,
+
+    "member-ordering": false,
 
     "no-console": false,
 
     "no-var-requires": false,
 
-    "quotemark": [
-      true,
-      "single"
-    ]
+    "quotemark": [true, "single"],
+
+    "variable-name": [true, "check-format", "allow-leading-underscore"]
   }
 }

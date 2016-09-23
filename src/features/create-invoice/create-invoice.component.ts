@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
 import StoreService, { IUser } from '../../services/store.service';
 
 @Component({
@@ -6,21 +7,19 @@ import StoreService, { IUser } from '../../services/store.service';
   template: require('./create-invoice.component.html'),
   styles: [require('./create-invoice.css')],
 })
-export default class CreateInvoiceComponent implements OnInit {
+export default class CreateInvoiceComponent {
   user: IUser;
-  isModalVisible: boolean = false;
+  private subscription: Subscription;
 
-  constructor(private storeService: StoreService) {}
-
-  ngOnInit() {
-    this.user = this.storeService.getUser();
+  constructor(private storeService: StoreService) {
+    this.subscription = storeService.user$.subscribe(user => this.user = user);
   }
 
-  onModalClose() {
-    this.isModalVisible = false;
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
-  toggleModal() {
-    this.isModalVisible = !this.isModalVisible;
+  handleBusinessChange(newBusinessInfo) {
+    this.storeService.setUser(newBusinessInfo);
   }
 }

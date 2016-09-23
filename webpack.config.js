@@ -23,6 +23,7 @@ module.exports = {
     extensions: ['', '.js', '.ts'],
   },
   module: {
+    noParse: /node_modules\/localforage\/dist\/localforage.js/,
     loaders: [
       {
         test: /\.tsx?$/,
