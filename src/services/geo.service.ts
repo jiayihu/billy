@@ -41,20 +41,11 @@ export default class GeoService {
     const searchParams = new URLSearchParams('q=adm2&maxRows=1000');
     searchParams.append('username', this.apiUsername);
     searchParams.append('country', countryCode);
+    searchParams.append('lang', countryCode);
 
     return this.http.get(ENDPOINT, { search: searchParams })
       .toPromise()
       .then(response => response.json().geonames)
-      .then((provinces: IProvince[]) => {
-        if (countryCode === 'IT') {
-          return provinces.map(province => {
-            province.name = province.name.replace(/(Province|Provincia) (of|di) /, '');
-            return province;
-          });
-        }
-
-        return provinces;
-      })
       .then((provinces: IProvince[]) => provinces.sort(this.sortByName));
   }
 }

@@ -1,5 +1,10 @@
 <h2>New invoice</h2>
 <div class="invoice">
   <user-business [user]="user" (onBusinessChange)="handleBusinessChange($event)"></user-business>
-  <p>Ther user is {{user.name}}</p>
+  <div class="row">
+    <div class="col-sm-6">Fattura n° 1</div>
+    <div class="col-sm-6">
+      <customer [customers]="customers"></customer>
+    </div>
+  </div>
 </div>

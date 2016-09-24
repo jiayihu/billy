@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
-import StoreService, { IUser } from '../../services/store.service';
+import StoreService, { IUser, ICustomer } from '../../services/store.service';
 
 @Component({
   selector: 'create-invoice',
@@ -9,18 +9,22 @@ import StoreService, { IUser } from '../../services/store.service';
 })
 export default class CreateInvoiceComponent {
   user: IUser;
+  customers: ICustomer[];
 
-  private subscription: Subscription;
+  private userSub: Subscription;
+  private customersSub: Subscription;
 
   constructor(private storeService: StoreService) {
-    this.subscription = storeService.user$.subscribe(user => this.user = user);
+    this.userSub = storeService.user$.subscribe(user => this.user = user);
+    this.customersSub = storeService.customers$.subscribe(customers => this.customers = customers);
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.userSub.unsubscribe();
+    this.customersSub.unsubscribe();
   }
 
-  handleBusinessChange(newBusinessInfo) {
+  handleBusinessChange(newBusinessInfo): void {
     this.storeService.setUser(newBusinessInfo);
   }
 }

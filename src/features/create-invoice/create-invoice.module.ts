@@ -5,12 +5,14 @@ import UIModule from '../ui/ui.module';
 
 import CreateInvoiceComponent from './create-invoice.component';
 import UserBusinessComponent from './user-business/user-business.component';
+import CustomerComponent from './customer/customer.component';
 
 @NgModule({
   imports: [CommonModule, FormsModule, UIModule],
   declarations: [
     CreateInvoiceComponent,
     UserBusinessComponent,
+    CustomerComponent,
    ],
   exports: [CreateInvoiceComponent],
 })

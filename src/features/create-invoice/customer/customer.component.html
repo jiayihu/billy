@@ -1,10 +1,18 @@
-<div class="user-business">
-  <modal [isVisible]="isEditing" [disabled]="!businessForm.form.valid" (onClose)="closeModal()" (onSuccess)="handleEditEnd(businessForm.form)">
-    <span class="modal-title">Edit your business</span>
+<div class="customer">
+  <a (click)="handleSelectCustomer()">Select a customer</a> or
+  <a (click)="handleAddCustomer()">Add a new customer</a>
+
+  <modal
+    [isVisible]="isAddingCustomer"
+    [disabled]="!newCustomerForm.form.valid"
+    (onClose)="closeModal()"
+    (onSuccess)="handleAddCustomerEnd(newCustomerForm.form)"
+  >
+    <span class="modal-title">Add a new customer</span>
     <div class="modal-body">
-      <form #businessForm="ngForm">
+      <form #newCustomerForm="ngForm">
         <div class="form-group row" [class.has-danger]="name.invalid && name.dirty">
-          <label class="col-sm-4 col-form-label">Business Name *</label>
+          <label class="col-sm-4 col-form-label">Customer Name *</label>
           <div class="col-sm-8">
             <input [(ngModel)]="model.name" name="name" #name="ngModel" class="form-control" type="text" required>
           </div>
@@ -71,13 +79,4 @@
       </form>
     </div>
   </modal>
-  <p><span class="name">{{user.name}}</span></p>
-  <p>{{user.address}}</p>
-  <p>
-    <span>{{user.zip}}</span>
-    <span>{{user.city}}</span>
-    <span [hidden]="!user.province">({{user.province}})</span>
-  </p>
-  <p>{{user.vat}}</p>
-  <a (click)="handleEdit()">Edit your business details</a>
 </div>

@@ -7,11 +7,12 @@ import GeoService, { ICountry, IProvince } from '../../../services/geo.service';
 @Component({
   selector: 'user-business',
   template: require('./user-business.component.html'),
+  styles: [require('./user-business.component.css')],
 })
 export default class UserBusinessComponent {
   countries: ICountry[];
   provinces: IProvince[];
-  isEditOpen: boolean;
+  isEditing: boolean;
   model: IUser;
 
   @Input() user: IUser;
@@ -39,11 +40,11 @@ export default class UserBusinessComponent {
   }
 
   handleEdit(): void {
-    this.isEditOpen = true;
+    this.isEditing = true;
   }
 
   closeModal(): void {
-    this.isEditOpen = false;
+    this.isEditing = false;
   }
 
   handleCountryChange(countryCode: string) {
