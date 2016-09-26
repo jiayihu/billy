@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+const uuid = require('uuid');
 
 export interface IUser {
   name: string;
@@ -11,7 +12,9 @@ export interface IUser {
   province?: string;
 }
 
+// The Customer Interface is equal to User for now, but in the future will have differences
 export interface ICustomer {
+  id: string;
   name: string;
   vat?: string;
   address?: string;
@@ -24,7 +27,7 @@ export interface ICustomer {
 @Injectable()
 export default class StoreService {
   private user: IUser = { name: 'Giovanni Jiayi Hu' };
-  private customers: ICustomer[] = [{ name: 'ACME s.r.l.' }];
+  private customers: ICustomer[] = [];
   private userSource = new BehaviorSubject<IUser>(this.user);
   private customersSource = new BehaviorSubject<ICustomer[]>(this.customers);
 
@@ -60,6 +63,8 @@ export default class StoreService {
   }
 
   addCustomer(customer: ICustomer): void {
+    const customerId = uuid.v4();
+    customer.id = `CUSTOMER_${customerId}`;
     this.customers = this.customers.concat(customer);
     this.persist('customers');
     this.customersSource.next(this.customers);

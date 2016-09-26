@@ -27,4 +27,8 @@ export default class CreateInvoiceComponent {
   handleBusinessChange(newBusinessInfo): void {
     this.storeService.setUser(newBusinessInfo);
   }
+
+  handleAddCustomer(newCustomer: ICustomer): void {
+    this.storeService.addCustomer(newCustomer);
+  }
 }

@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, Output, SimpleChange } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import invariant = require('invariant');
+import { FormGroup } from '@angular/forms';
 import { IUser } from '../../../services/store.service';
 import GeoService, { ICountry, IProvince } from '../../../services/geo.service';
 
@@ -13,7 +12,6 @@ export default class UserBusinessComponent {
   countries: ICountry[];
   provinces: IProvince[];
   isEditing: boolean;
-  model: IUser;
 
   @Input() user: IUser;
   @Output() onBusinessChange = new EventEmitter<IUser>();
@@ -26,11 +24,8 @@ export default class UserBusinessComponent {
   }
 
   ngOnChanges(changes: {user: SimpleChange}) {
-    const user = changes.user;
-
-    if (user) {
-      const currentValue: IUser = user.currentValue;
-      this.model = Object.assign({}, currentValue);
+    if (changes.user) {
+      const currentValue: IUser = changes.user.currentValue;
 
       if (currentValue.country && currentValue.province && !this.provinces) {
         this.geoService.getProvinces(currentValue.country)
@@ -52,10 +47,8 @@ export default class UserBusinessComponent {
       .then(provinces => this.provinces = provinces);
   }
 
-  handleEditEnd(form: FormControl): void {
-    invariant(form.valid, 'Form must be always valid at this point.');
-
-    this.onBusinessChange.emit(this.model);
+  handleEditEnd(form: FormGroup): void {
+    this.onBusinessChange.emit(form.value);
     this.closeModal();
   }
 }

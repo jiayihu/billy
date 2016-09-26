@@ -1,0 +1,11 @@
+a label {
+  cursor: pointer;
+}
+
+.name {
+  font-weight: bold;
+}
+
+.add-customer {
+  font-size: 2em;
+}
