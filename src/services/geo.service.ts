@@ -32,9 +32,8 @@ export default class GeoService {
     searchParams.append('username', this.apiUsername);
 
     return this.http.get(ENDPOINT, { search: searchParams })
-      .toPromise()
-      .then(response => response.json().geonames)
-      .then(countries => countries.sort(this.sortByName));
+      .map(response => response.json().geonames)
+      .map(countries => countries.sort(this.sortByName));
   }
 
   getProvinces(countryCode: string) {
@@ -44,8 +43,7 @@ export default class GeoService {
     searchParams.append('lang', countryCode);
 
     return this.http.get(ENDPOINT, { search: searchParams })
-      .toPromise()
-      .then(response => response.json().geonames)
-      .then((provinces: IProvince[]) => provinces.sort(this.sortByName));
+      .map(response => response.json().geonames)
+      .map((provinces: IProvince[]) => provinces.sort(this.sortByName));
   }
 }

@@ -25,7 +25,7 @@ export default class CustomerComponent {
 
   ngOnInit() {
     this.geoService.getCountries()
-      .then(countries => this.countries = countries);
+      .subscribe(countries => this.countries = countries);
   }
 
   ngOnChanges(changes: {customers: SimpleChange}) {
@@ -46,7 +46,11 @@ export default class CustomerComponent {
 
   handleCountryChange(countryCode: string) {
     this.geoService.getProvinces(countryCode)
-      .then(provinces => this.provinces = provinces);
+      .subscribe(provinces => this.provinces = provinces);
+  }
+
+  handleEditCustomer() {
+    console.log('Editing the customer');
   }
 
   handleRemoveCustomer(): void {

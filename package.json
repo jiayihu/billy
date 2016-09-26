@@ -37,7 +37,6 @@
     "@angular/platform-browser-dynamic": "^2.0.0",
     "@angular/router": "^3.0.0",
     "@angular/upgrade": "^2.0.0",
-    "bootstrap": "^3.3.6",
     "core-js": "^2.4.0",
     "firebase": "^3.4.0",
     "invariant": "^2.2.1",

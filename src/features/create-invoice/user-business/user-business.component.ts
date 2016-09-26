@@ -20,7 +20,7 @@ export default class UserBusinessComponent {
 
   ngOnInit() {
     this.geoService.getCountries()
-      .then(countries => this.countries = countries);
+      .subscribe(countries => this.countries = countries);
   }
 
   ngOnChanges(changes: {user: SimpleChange}) {
@@ -29,7 +29,7 @@ export default class UserBusinessComponent {
 
       if (currentValue.country && currentValue.province && !this.provinces) {
         this.geoService.getProvinces(currentValue.country)
-          .then(provinces => this.provinces = provinces);
+          .subscribe(provinces => this.provinces = provinces);
       }
     }
   }
@@ -44,7 +44,7 @@ export default class UserBusinessComponent {
 
   handleCountryChange(countryCode: string) {
     this.geoService.getProvinces(countryCode)
-      .then(provinces => this.provinces = provinces);
+      .subscribe(provinces => this.provinces = provinces);
   }
 
   handleEditEnd(form: FormGroup): void {
