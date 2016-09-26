@@ -1,6 +1,35 @@
 <div class="customer">
-  <a (click)="handleSelectCustomer()">Select a customer</a> or
-  <a (click)="handleAddCustomer()">Add a new customer</a>
+  <div *ngIf="!selectedCustomer">
+    <div class="row">
+      <div class="col-sm-6">
+        <select
+          (change)="handleSelectCustomer(selectCustomer.value)"
+          name="customer"
+          #selectCustomer
+          class="form-control"
+          id="select-customer"
+        >
+          <option disabled selected value>Select a customer</option>
+          <option *ngFor="let customer of customers" [value]="customer.id">{{customer.name}}</option>
+          <option disabled value>—————————————</option>
+          <option value="add" class="add-customer">Or add a new customer</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="selectedCustomer">
+    <p><span class="name">{{selectedCustomer.name}}</span></p>
+    <p>{{selectedCustomer.address}}</p>
+    <p>
+      <span>{{selectedCustomer.zip}}</span>
+      <span>{{selectedCustomer.city}}</span>
+      <span [hidden]="!selectedCustomer.province">({{selectedCustomer.province}})</span>
+    </p>
+    <p>VAT {{selectedCustomer.vat}}</p>
+    <a (click)="handleEditCustomer()">Edit customer</a> •
+    <a (click)="handleRemoveCustomer()">Remove</a>
+  </div>
 
   <modal
     [isVisible]="isAddingCustomer"
@@ -14,14 +43,14 @@
         <div class="form-group row" [class.has-danger]="name.invalid && name.dirty">
           <label class="col-sm-4 col-form-label">Customer Name *</label>
           <div class="col-sm-8">
-            <input [(ngModel)]="model.name" name="name" #name="ngModel" class="form-control" type="text" required>
+            <input [ngModel]="customer.name" name="name" #name="ngModel" class="form-control" type="text" required>
           </div>
         </div>
 
         <div class="form-group row">
           <label class="col-sm-4 col-form-label">VAT Number</label>
           <div class="col-sm-8">
-            <input [(ngModel)]="model.vat" name="vat" class="form-control" type="number">
+            <input [ngModel]="customer.vat" name="vat" class="form-control" type="number">
           </div>
         </div>
 
@@ -30,21 +59,21 @@
           <div class="form-group row">
             <label class="col-sm-4 col-form-label">Address</label>
             <div class="col-sm-8">
-              <input [(ngModel)]="model.address" name="address" class="form-control" type="text">
+              <input [ngModel]="customer.address" name="address" class="form-control" type="text">
             </div>
           </div>
 
           <div class="form-group row">
             <label class="col-sm-4 col-form-label">City</label>
             <div class="col-sm-8">
-              <input [(ngModel)]="model.city" name="city" class="form-control" type="text">
+              <input [ngModel]="customer.city" name="city" class="form-control" type="text">
             </div>
           </div>
 
           <div class="form-group row">
             <label class="col-sm-4 col-form-label">Postal / Zip Code</label>
             <div class="col-sm-8">
-              <input [(ngModel)]="model.zip" name="zip" class="form-control" type="number">
+              <input [ngModel]="customer.zip" name="zip" class="form-control" type="number">
             </div>
           </div>
 
@@ -52,7 +81,7 @@
             <label class="col-sm-4 col-form-label">Country</label>
             <div class="col-sm-8">
               <select
-                [(ngModel)]="model.country"
+                [ngModel]="customer.country"
                 name="country"
                 #country
                 (change)="handleCountryChange(country.value)"
@@ -68,7 +97,7 @@
           <div class="form-group row">
             <label class="col-sm-4 col-form-label">State / Province</label>
             <div class="col-sm-8">
-              <select [(ngModel)]="model.province" name="province" class="form-control">
+              <select [ngModel]="customer.province" name="province" class="form-control">
                 <option *ngFor="let province of provinces" [value]="province.name">
                   {{province.name}}
                 </option>
