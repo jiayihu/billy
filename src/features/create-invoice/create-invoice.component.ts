@@ -31,4 +31,8 @@ export default class CreateInvoiceComponent {
   handleAddCustomer(newCustomer: ICustomer): void {
     this.storeService.addCustomer(newCustomer);
   }
+
+  handleEditCustomer(newCustomer: ICustomer): void {
+    this.storeService.editCustomer(newCustomer.id, newCustomer);
+  }
 }

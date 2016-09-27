@@ -4,7 +4,11 @@
   <div class="row">
     <div class="col-sm-6">Fattura n° 1</div>
     <div class="col-sm-6">
-      <customer [customers]="customers" (onAddCustomer)="handleAddCustomer($event)"></customer>
+      <customer
+        [customers]="customers"
+        (onAddCustomer)="handleAddCustomer($event)"
+        (onEditCustomer)="handleEditCustomer($event)"
+      ></customer>
     </div>
   </div>
 </div>

@@ -69,4 +69,14 @@ export default class StoreService {
     this.persist('customers');
     this.customersSource.next(this.customers);
   }
+
+  editCustomer(customerId: string, newCustomer: ICustomer): void {
+    this.customers = this.customers.map(customer => {
+      if (customer.id !== customerId) return customer;
+
+      return Object.assign({}, customer, newCustomer);
+    });
+    this.persist('customers');
+    this.customersSource.next(this.customers);
+  }
 }

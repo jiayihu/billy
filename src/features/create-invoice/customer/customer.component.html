@@ -32,12 +32,19 @@
   </div>
 
   <modal
-    [isVisible]="isAddingCustomer"
+    [isVisible]="mode"
     [disabled]="!newCustomerForm.form.valid"
     (onClose)="closeModal()"
-    (onSuccess)="handleAddCustomerEnd(newCustomerForm.form)"
+    (onSuccess)=
+      "mode === 'adding'
+        ? handleAddCustomerEnd(newCustomerForm.form)
+        : handleEditCustomerEnd(newCustomerForm.form)
+      "
   >
-    <modal-title>Add a new customer</modal-title>
+    <modal-title>
+      <span *ngIf="mode === 'adding'">Add a new customer</span>
+      <span *ngIf="mode === 'editing'">Edit customer</span>
+    </modal-title>
     <modal-body>
       <form #newCustomerForm="ngForm">
         <div class="form-group row" [class.has-danger]="name.invalid && name.dirty">
@@ -91,7 +98,13 @@
           <div class="form-group row">
             <label class="col-sm-4 col-form-label">Postal / Zip Code</label>
             <div class="col-sm-8">
-              <input [ngModel]="customer.zip" name="zip" class="form-control" type="number" min="0">
+              <input
+                [ngModel]="customer.zip"
+                name="zip"
+                class="form-control"
+                type="text"
+                pattern="[0-9A-Z-]*"
+              >
             </div>
           </div>
 

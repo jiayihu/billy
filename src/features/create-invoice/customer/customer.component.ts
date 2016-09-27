@@ -12,12 +12,13 @@ export default class CustomerComponent {
   countries: ICountry[];
   provinces: IProvince[];
 
-  isAddingCustomer = false;
+  mode: 'adding' | 'editing' | '' = '';
   customer: ICustomer = { id: '', name: '' };
   selectedCustomer: ICustomer;
 
   @Input() customers: ICustomer[];
   @Output() onAddCustomer = new EventEmitter<ICustomer>();
+  @Output() onEditCustomer = new EventEmitter<ICustomer>();
 
   @ViewChild('selectCustomer') htmlSelectCustomer: ElementRef;
 
@@ -29,28 +30,45 @@ export default class CustomerComponent {
   }
 
   ngOnChanges(changes: {customers: SimpleChange}) {
-    if (changes.customers && !this.selectedCustomer && changes.customers.currentValue.length === 1) {
-      const selectedCustomerId = changes.customers.currentValue[0].id;
-      this.selectedCustomer = this.customers.find(customer => customer.id === selectedCustomerId);
+    if (changes.customers) {
+      if (!this.selectedCustomer && changes.customers.currentValue.length === 1) {
+        const selectedCustomerId = changes.customers.currentValue[0].id;
+        this.selectedCustomer = this.customers.find(customer => customer.id === selectedCustomerId);
+      } else if (this.selectedCustomer) {
+        this.selectedCustomer = this.customers.find(customer => customer.id === this.selectedCustomer.id);
+      }
+
+      if (this.selectedCustomer && this.selectedCustomer.country && !this.provinces) {
+        this.geoService.getProvinces(this.selectedCustomer.country)
+          .subscribe(provinces => this.provinces = provinces);
+      }
     }
   }
 
   closeModal(): void {
-    this.isAddingCustomer = false;
+    this.mode = '';
   }
 
   handleAddCustomerEnd(form: FormGroup): void {
     this.onAddCustomer.emit(form.value);
-    this.isAddingCustomer = false;
+    this.mode = '';
   }
 
-  handleCountryChange(countryCode: string) {
+  handleCountryChange(countryCode: string): void {
     this.geoService.getProvinces(countryCode)
       .subscribe(provinces => this.provinces = provinces);
   }
 
-  handleEditCustomer() {
-    console.log('Editing the customer');
+  handleEditCustomer(): void {
+    this.customer = this.selectedCustomer;
+    this.mode = 'editing';
+  }
+
+  handleEditCustomerEnd(form: FormGroup): void {
+    this.onEditCustomer.emit(Object.assign({}, form.value, {
+      id: this.selectedCustomer.id,
+    }));
+    this.mode = '';
   }
 
   handleRemoveCustomer(): void {
@@ -59,7 +77,7 @@ export default class CustomerComponent {
 
   handleSelectCustomer(selectedCustomerId: string): void {
     if (selectedCustomerId === 'add') {
-      this.isAddingCustomer = true;
+      this.mode = 'adding';
       this.htmlSelectCustomer.nativeElement.selectedIndex = 0;
       return;
     }
