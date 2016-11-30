@@ -1,0 +1,11 @@
+<h3>My customers</h3>
+<div class="headers">Name</div>
+<ul class="customers">
+  <li class="customer" *ngFor="let customer of customers">
+    <span class="customer-name">{{customer.name}}</span>
+    <div class="actions">
+      <span class="edit-action">Edit</span>
+      <span class="delete-action">Delete</span>
+    </div>
+  </li>
+</ul>

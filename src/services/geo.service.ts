@@ -23,7 +23,7 @@ export default class GeoService {
 
   constructor(private http: Http) {}
 
-  private sortByName(a, b): number {
+  static sortByName(a, b): number {
     if (a.name < b.name) return -1;
     if (a.name > b.name) return 1;
 
@@ -44,7 +44,7 @@ export default class GeoService {
 
         return this.countries;
       })
-      .map(countries => countries.sort(this.sortByName))
+      .map(countries => countries.sort(GeoService.sortByName))
       .share();
 
     return this.countriesSource;
@@ -58,6 +58,6 @@ export default class GeoService {
 
     return this.http.get(ENDPOINT, { search: searchParams })
       .map(response => response.json().geonames)
-      .map((provinces: IProvince[]) => provinces.sort(this.sortByName));
+      .map((provinces: IProvince[]) => provinces.sort(GeoService.sortByName));
   }
 }

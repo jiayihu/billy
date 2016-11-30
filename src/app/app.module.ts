@@ -8,6 +8,7 @@ import NavComponent from './components/nav.component';
 
 import AuthModule from '../features/auth/auth.module';
 import CreateInvoiceModule from '../features/create-invoice/create-invoice.module';
+import CustomersModule from '../features/customers/customers.module';
 
 import StoreService from '../services/store.service';
 import GeoService from '../services/geo.service';
@@ -23,6 +24,7 @@ import GeoService from '../services/geo.service';
     routing,
     AuthModule,
     CreateInvoiceModule,
+    CustomersModule,
   ],
   providers: [StoreService, GeoService],
   bootstrap: [AppComponent],

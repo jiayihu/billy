@@ -1,5 +1,6 @@
 import { Routes, RouterModule } from '@angular/router';
 import CreateInvoiceComponent from '../features/create-invoice/create-invoice.component';
+import CustomersComponent from '../features/customers/customers.component';
 import SignupComponent from '../features/auth/signup/signup.component';
 
 const routes: Routes = [
@@ -13,12 +14,13 @@ const routes: Routes = [
     path: 'create',
   },
   {
+    component: CustomersComponent,
+    path: 'customers',
+  },
+  {
     component: SignupComponent,
     path: 'signup',
   },
-];
-
-export const appRoutingProviders: any[] = [
 ];
 
 export default RouterModule.forRoot(routes);
