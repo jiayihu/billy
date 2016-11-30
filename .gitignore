@@ -10,6 +10,7 @@ dist
 tree.txt
 typings
 env.json
+.idea
 
 # Compiled source #
 ###################

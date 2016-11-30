@@ -1,19 +1,20 @@
 {
     "compilerOptions": {
-        "target": "es5",
-        "module": "commonjs",
-        "moduleResolution": "node",
+        "allowSyntheticDefaultImports": true,
+        "declaration": false,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
         "isolatedModules": false,
         "jsx": "react",
-        "experimentalDecorators": true,
-        "emitDecoratorMetadata": true,
-        "declaration": false,
+        "module": "commonjs",
+        "moduleResolution": "node",
         "noImplicitAny": false,
         "noImplicitUseStrict": false,
-        "removeComments": true,
         "noLib": false,
         "preserveConstEnums": true,
-        "suppressImplicitAnyIndexErrors": true
+        "removeComments": true,
+        "suppressImplicitAnyIndexErrors": true,
+        "target": "es5"
     },
     "exclude": [
         "dist",
