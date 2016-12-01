@@ -1,4 +1,4 @@
-<div class="modal fade in" [style.display]="isVisible ? 'block' : null">
+<div class="modal fade in" *ngIf="isVisible" [style.display]="'block'">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">

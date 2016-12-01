@@ -1,0 +1,40 @@
+import { Injectable } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+
+export interface IField {
+  value?: string;
+  name: string;
+  label: string;
+  maxLength?: number;
+  minLength?: number;
+  pattern?: string | RegExp;
+  required?: boolean;
+  onChange?: Function;
+  controlType?: 'text' | 'select';
+}
+
+export interface ISelectField extends IField {
+  options: Array<{ label: string, value: string }>;
+}
+
+export function isSelectField(object: any): object is ISelectField {
+  return object.options !== undefined;
+}
+
+@Injectable()
+export default class FormBuilderService {
+  buildFormGroup(fields: IField[]): FormGroup {
+    const group = fields.reduce((acc, field) => {
+      const validators = [];
+      if (field.required) validators.push(Validators.required);
+      if (field.maxLength) validators.push(Validators.maxLength(field.maxLength));
+      if (field.minLength) validators.push(Validators.minLength(field.minLength));
+      if (field.pattern) validators.push(Validators.pattern(field.pattern));
+
+      acc[field.name] = new FormControl(field.value || '', validators);
+      return acc;
+    }, {});
+
+    return new FormGroup(group);
+  }
+}

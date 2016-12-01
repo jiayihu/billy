@@ -2,6 +2,8 @@
   "extends": "tslint:recommended",
 
   "rules": {
+    "arrow-parens": false,
+
     "curly": false,
 
     "object-literal-sort-keys": false,
@@ -13,6 +15,8 @@
     "no-console": false,
 
     "no-var-requires": false,
+
+    "ordered-imports": false,
 
     "quotemark": [true, "single"],
 
