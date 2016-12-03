@@ -26,7 +26,7 @@ export interface ICustomer {
 
 @Injectable()
 export default class StoreService {
-  private user: IUser = { name: 'Giovanni Jiayi Hu' };
+  private user: IUser = { name: '' };
   private customers: ICustomer[] = [];
   private userSource = new BehaviorSubject<IUser>(this.user);
   private customersSource = new BehaviorSubject<ICustomer[]>(this.customers);

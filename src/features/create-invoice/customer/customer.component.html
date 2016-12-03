@@ -32,13 +32,14 @@
   </div>
 
   <modal
+    *ngIf="form"
     [isVisible]="mode"
-    [disabled]="!newCustomerForm.form.valid"
+    [disabled]="!form.valid"
     (onClose)="closeModal()"
     (onSuccess)=
       "mode === 'adding'
-        ? handleAddCustomerEnd(newCustomerForm.form)
-        : handleEditCustomerEnd(newCustomerForm.form)
+        ? handleAddCustomerEnd()
+        : handleEditCustomerEnd()
       "
   >
     <modal-title>
@@ -46,96 +47,39 @@
       <span *ngIf="mode === 'editing'">Edit customer</span>
     </modal-title>
     <modal-body>
-      <form #newCustomerForm="ngForm">
-        <div class="form-group row" [class.has-danger]="name.invalid && name.dirty">
-          <label class="col-sm-4 col-form-label">Customer Name *</label>
-          <div class="col-sm-8">
+      <form [formGroup]="form">
+        <div *ngFor="let field of fields" class="form-group row">
+          <label [attr.for]="field.name" class="col-sm-4 col-form-label">
+            {{field.label}}
+            <span *ngIf="field.required">*</span>
+          </label>
+          <div
+            [ngSwitch]="field.controlType"
+            class="col-sm-8"
+            [class.has-danger]="form.controls[field.name].invalid && form.controls[field.name].dirty"
+          >
+            <select
+              *ngSwitchCase="'select'"
+              [formControlName]="field.name"
+              [name]="field.name"
+              (change)="field.onChange && field.onChange(form.controls[field.name].value)"
+              class="form-control"
+            >
+              <option *ngFor="let option of field.options" [value]="option.value">
+                {{option.label}}
+              </option>
+            </select>
             <input
-              [ngModel]="customer.name"
-              name="name"
-              #name="ngModel"
+              *ngSwitchDefault
+              [formControlName]="field.name"
+              [name]="field.name"
+              [required]="field.required"
+              (change)="field.onChange && field.onChange(form.controls[field.name].value)"
               class="form-control"
               type="text"
-              required
-            >
+            />
           </div>
         </div>
-
-        <div class="form-group row">
-          <label class="col-sm-4 col-form-label">VAT Number</label>
-          <div class="col-sm-8">
-            <input [ngModel]="customer.vat" name="vat" class="form-control" type="number" maxlength="20">
-          </div>
-        </div>
-
-        <fieldset>
-          <legend>Address</legend>
-          <div class="form-group row">
-            <label class="col-sm-4 col-form-label">Address</label>
-            <div class="col-sm-8">
-              <input
-                [ngModel]="customer.address"
-                name="address"
-                class="form-control"
-                type="text"
-              >
-            </div>
-          </div>
-
-          <div class="form-group row">
-            <label class="col-sm-4 col-form-label">City</label>
-            <div class="col-sm-8">
-              <input
-                [ngModel]="customer.city"
-                name="city"
-                #customerCity="ngModel"
-                class="form-control"
-                type="text"
-              >
-            </div>
-          </div>
-
-          <div class="form-group row">
-            <label class="col-sm-4 col-form-label">Postal / Zip Code</label>
-            <div class="col-sm-8">
-              <input
-                [ngModel]="customer.zip"
-                name="zip"
-                class="form-control"
-                type="text"
-                pattern="[0-9A-Z-]*"
-              >
-            </div>
-          </div>
-
-          <div class="form-group row">
-            <label class="col-sm-4 col-form-label">Country</label>
-            <div class="col-sm-8">
-              <select
-                [ngModel]="customer.country"
-                name="country"
-                #country
-                (change)="handleCountryChange(country.value)"
-                class="form-control"
-              >
-                <option *ngFor="let country of countries" [value]="country.countryCode">
-                  {{country.name}}
-                </option>
-              </select>
-            </div>
-          </div>
-
-          <div class="form-group row">
-            <label class="col-sm-4 col-form-label">State / Province</label>
-            <div class="col-sm-8">
-              <select [ngModel]="customer.province" name="province" class="form-control">
-                <option *ngFor="let province of provinces" [value]="province.name">
-                  {{province.name}}
-                </option>
-              </select>
-            </div>
-          </div>
-        </fieldset>
       </form>
     </modal-body>
   </modal>

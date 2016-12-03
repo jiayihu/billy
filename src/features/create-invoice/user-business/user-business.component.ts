@@ -17,13 +17,54 @@ export default class UserBusinessComponent {
   @Input() user: IUser;
   @Output() onBusinessChange = new EventEmitter<IUser>();
 
-  constructor(private geoService: GeoService, private formBuilderService: FormBuilderService) {}
+  constructor(private geoService: GeoService, private formBuilderService: FormBuilderService) {
+    // @NOTE: Field values will be filled later in this.buildForm
+    this.fields = [
+        {
+          name: 'name',
+          label: 'Business name',
+          required: true,
+        },
+        {
+          name: 'vat',
+          label: 'VAT Number',
+          maxLength: 20,
+        },
+        {
+          name: 'zip',
+          label: 'Postal / ZIP Code',
+          pattern: '[0-9A-Z-]*',
+        },
+        {
+          controlType: 'select',
+          name: 'country',
+          label: 'Country',
+          options: [],
+          // Bind this needed, otherwise this will be the instance of FormControl
+          onChange: this.handleCountryChange.bind(this),
+        },
+        {
+          controlType: 'select',
+          name: 'province',
+          label: 'State / Province',
+          options: [],
+        },
+        {
+          name: 'city',
+          label: 'City',
+        },
+        {
+          name: 'address',
+          label: 'Address',
+        },
+      ];
+  }
 
   ngOnInit() {
     this.geoService.getCountries()
       .subscribe(countries => {
         const options = countries.map(country => ({ label: country.name, value: country.countryCode }));
-        this.setSelectOptions('country', options);
+        this.setFieldOptions('country', options);
       });
   }
 
@@ -37,59 +78,14 @@ export default class UserBusinessComponent {
         this.geoService.getProvinces(currentUser.country)
           .subscribe(provinces => {
             const options = provinces.map(province => ({ label: province.name, value: province.name }));
-            this.setSelectOptions('province', options);
+            this.setFieldOptions('province', options);
           });
       }
     }
   }
 
   buildForm(user: IUser): void {
-    this.fields = [
-        {
-          name: 'name',
-          label: 'Business name',
-          required: true,
-          value: user.name || '',
-        },
-        {
-          name: 'vat',
-          label: 'VAT Number',
-          maxLength: 20,
-          value: user.vat || '',
-        },
-        {
-          name: 'zip',
-          label: 'Postal / ZIP Code',
-          pattern: '[0-9A-Z-]*',
-          value: user.zip || '',
-        },
-        {
-          controlType: 'select',
-          name: 'country',
-          label: 'Country',
-          value: user.country || '',
-          options: [],
-          // Bind this needed, otherwise this will be the instance of FormControl
-          onChange: this.handleCountryChange.bind(this),
-        },
-        {
-          controlType: 'select',
-          name: 'province',
-          label: 'State / Province',
-          value: user.province || '',
-          options: [],
-        },
-        {
-          name: 'city',
-          label: 'City',
-          value: user.city || '',
-        },
-        {
-          name: 'address',
-          label: 'Address',
-          value: user.address || '',
-        },
-      ];
+    this.fields.forEach(field => field.value = user[field.name] || '');
 
     this.form = this.formBuilderService.buildFormGroup(this.fields);
   }
@@ -98,7 +94,7 @@ export default class UserBusinessComponent {
     this.isEditing = false;
   }
 
-  setSelectOptions(fieldName: string, options: any[]): void {
+  setFieldOptions(fieldName: string, options: any[]): void {
     const foundField = this.fields.find(field => field.name === fieldName);
     if (isSelectField(foundField)) {
       foundField.options = options;
@@ -113,7 +109,7 @@ export default class UserBusinessComponent {
     this.geoService.getProvinces(countryCode)
       .subscribe(provinces => {
         const options = provinces.map(province => ({ label: province.name, value: province.name }));
-        this.setSelectOptions('province', options);
+        this.setFieldOptions('province', options);
       });
   }
 

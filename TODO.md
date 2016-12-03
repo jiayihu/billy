@@ -1,2 +1,5 @@
 - Replace `typings` with `@types`
 - Create Tooltip directive for forms errors
+- Create Custom Validator for VAT for example
+- Angular 2 Dynamic Forms fix
+- Angular 2 docs should explain that template is not parsed in *ngIf="false"
