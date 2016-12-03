@@ -2,13 +2,9 @@ bower_components
 node_modules
 .publish
 .tmp
-.tern-project
 app.yaml
-webapp/public
 public
 dist
-tree.txt
-typings
 env.json
 .idea
 

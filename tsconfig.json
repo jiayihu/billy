@@ -5,6 +5,7 @@
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "isolatedModules": false,
+        "lib": ["es5", "dom", "es6", "dom.iterable", "scripthost"],
         "jsx": "react",
         "module": "commonjs",
         "moduleResolution": "node",
@@ -14,7 +15,8 @@
         "preserveConstEnums": true,
         "removeComments": true,
         "suppressImplicitAnyIndexErrors": true,
-        "target": "es5"
+        "target": "es5",
+        "types": ["node"]
     },
     "exclude": [
         "dist",
