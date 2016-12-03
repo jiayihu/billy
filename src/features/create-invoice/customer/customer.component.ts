@@ -1,7 +1,7 @@
 import { Component, ElementRef, Input, Output, EventEmitter, SimpleChange, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ICustomer } from '../../../services/store.service';
-import GeoService, { ICountry, IProvince } from '../../../services/geo.service';
+import GeoService from '../../../services/geo.service';
 import FormBuilderService, { IField, ISelectField, isSelectField } from '../../../services/form-builder.service';
 
 @Component({
@@ -13,7 +13,6 @@ export default class CustomerComponent {
   private selectedCustomer: ICustomer;
 
   private mode: 'adding' | 'editing' | '' = '';
-  private customer: ICustomer = { id: '', name: '' };
   private fields: Array<IField | ISelectField>;
   private form: FormGroup;
 
