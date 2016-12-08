@@ -1,5 +1,8 @@
 :root {
-  --primary: #0275d8;
+  --dark-primary: #0288D1;
+  --primary: #03A9F4;
+  --light-primary: #B3E5FC;
+  --accent: #FF5252;
 }
 
 a {
@@ -22,4 +25,12 @@ h6 {
 
 p {
   margin-bottom: .5rem;
+}
+
+/**
+ * Bootstrap overrides
+ */
+
+.modal {
+  background-color: rgba(0, 0, 0, .2);
 }

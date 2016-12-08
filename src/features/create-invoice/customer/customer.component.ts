@@ -41,7 +41,7 @@ export default class CustomerComponent {
 
   handleEditCustomerEnd(customer: ICustomer): void {
     console.log(customer);
-    if(this.mode === 'editing') {
+    if (this.mode === 'editing') {
       this.onEditCustomer.emit(Object.assign({}, customer, {
         id: this.selectedCustomer.id,
       }));

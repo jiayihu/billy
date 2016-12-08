@@ -1,0 +1,17 @@
+:root {
+  --dark-primary: #0288D1;
+  --primary: #03A9F4;
+  --light-primary: #B3E5FC;
+  --accent: #FF5252;
+}
+
+.customer {
+  display: flex;
+  padding-bottom: 1rem;
+}
+
+/deep/ .customer-name {
+  color: var(--accent);
+  flex-grow: 1;
+  font-weight: bold;
+}

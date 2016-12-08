@@ -3,7 +3,7 @@ import GeoService from '../../../services/geo.service';
 import { FormGroup } from '@angular/forms';
 import { ICustomer } from '../../../services/store.service';
 import FormBuilderService, { IField, ISelectField, isSelectField } from '../../../services/form-builder.service';
-const get = require('lodash/get');
+import get = require('lodash/get');
 
 @Component({
   selector: 'customer-edit',
@@ -71,11 +71,11 @@ export default class CustomerEditComponent {
 
   ngOnChanges(changes: { customer: SimpleChange, mode: SimpleChange }) {
     const mode = changes.mode;
-    if(mode && mode.currentValue !== '' && mode.currentValue !== mode.previousValue) {
+    if (mode && mode.currentValue !== '' && mode.currentValue !== mode.previousValue) {
       const newCustomer = get(changes, 'customer.currentValue', undefined) || this.customer;
       this.buildForm(newCustomer);
 
-      if(newCustomer.country) {
+      if (newCustomer.country) {
         this.geoService.getProvinces(newCustomer.country)
         .subscribe(provinces => {
           const options = provinces.map(province => ({ label: province.name, value: province.name }));
@@ -114,4 +114,3 @@ export default class CustomerEditComponent {
     this.onEditEnd.emit(this.form.value);
   }
 }
-

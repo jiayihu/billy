@@ -1,10 +1,11 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
-import StoreService, { ICustomer } from '../../services/store.service';
+import StoreService, { ICustomer } from '../../../services/store.service';
 
 @Component({
   selector: 'customers',
-  template: require('./customers.component.html'),
+  template: require('./customers-list.component.html'),
+  styles: [require('./customers-list.component.css')],
 })
 export default class CustomersComponent implements OnDestroy {
   private customersSub: Subscription;

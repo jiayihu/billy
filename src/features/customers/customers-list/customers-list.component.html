@@ -1,0 +1,10 @@
+<h3>My customers</h3>
+<ul class="customers list-group">
+  <li class="customer list-group-item" *ngFor="let customer of customers">
+    <btn type="link" class="customer-name">{{customer.name}}</btn>
+    <div class="actions">
+      <btn type="link" class="edit-action">Edit</btn>
+      <btn type="link" class="delete-action">Delete</btn>
+    </div>
+  </li>
+</ul>

@@ -1,6 +1,6 @@
 import { Routes, RouterModule } from '@angular/router';
 import CreateInvoiceComponent from '../features/create-invoice/create-invoice.component';
-import CustomersComponent from '../features/customers/customers.component';
+import CustomersComponent from '../features/customers/customers-list/customers-list.component';
 import SignupComponent from '../features/auth/signup/signup.component';
 
 const routes: Routes = [

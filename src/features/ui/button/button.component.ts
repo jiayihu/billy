@@ -6,7 +6,7 @@ import { Component, Input } from '@angular/core';
   styles: [require('./button.component.css')],
 })
 export default class BtnComponent {
-  @Input('class') className:string = '';
+  @Input('class') className: string = '';
   @Input() type: 'secondary' | 'primary' | 'link' = 'secondary';
 
   classnames() {
