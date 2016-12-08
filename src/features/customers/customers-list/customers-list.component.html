@@ -1,10 +1,37 @@
 <h3>My customers</h3>
 <ul class="customers list-group">
   <li class="customer list-group-item" *ngFor="let customer of customers">
-    <btn type="link" class="customer-name">{{customer.name}}</btn>
+    <btn
+      [id]="customer.id"
+      type="link"
+      class="customer-name"
+      (onClick)="handleCustomerEdit($event)"
+    >
+      {{customer.name}}
+    </btn>
     <div class="actions">
-      <btn type="link" class="edit-action">Edit</btn>
-      <btn type="link" class="delete-action">Delete</btn>
+      <btn
+        [id]="customer.id"
+        type="link"
+        class="edit-action"
+        (onClick)="handleCustomerEdit($event)"
+      >
+        Edit
+      </btn>
+      <btn
+        [id]="customer.id"
+        type="link"
+        class="delete-action"
+        (onClick)="handleCustomerDelete($event)"
+      >
+        Delete
+      </btn>
     </div>
   </li>
 </ul>
+<customer-edit
+  [mode]="isEditing ? 'editing' : null"
+  [customer]="editingCustomer"
+  (onCancel)="this.endEdit($event)"
+  (onEditEnd)="this.handleEditEnd($event)"
+></customer-edit>

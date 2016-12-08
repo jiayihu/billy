@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-const uuid = require('uuid');
+import uuid = require('uuid');
 
 export interface IUser {
   name: string;
@@ -26,6 +26,7 @@ export interface ICustomer {
 
 @Injectable()
 export default class StoreService {
+  // @TODO: Why are user and customers needed as fields? Probably for persist. Try to eliminate them.
   private user: IUser = { name: '' };
   private customers: ICustomer[] = [];
   private userSource = new BehaviorSubject<IUser>(this.user);
@@ -66,6 +67,12 @@ export default class StoreService {
     const customerId = uuid.v4();
     customer.id = `CUSTOMER_${customerId}`;
     this.customers = this.customers.concat(customer);
+    this.persist('customers');
+    this.customersSource.next(this.customers);
+  }
+
+  deleteCustomer(customerId: string): void {
+    this.customers = this.customers.filter(customer => customer.id !== customerId);
     this.persist('customers');
     this.customersSource.next(this.customers);
   }

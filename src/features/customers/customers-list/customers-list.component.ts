@@ -7,16 +7,43 @@ import StoreService, { ICustomer } from '../../../services/store.service';
   template: require('./customers-list.component.html'),
   styles: [require('./customers-list.component.css')],
 })
-export default class CustomersComponent implements OnDestroy {
-  private customersSub: Subscription;
+export default class CustomersListComponent implements OnDestroy {
+  private isEditing: boolean = false;
+  private editingCustomer: ICustomer;
 
-  customers: ICustomer[];
+  private customersSub: Subscription;
+  private customers: ICustomer[];
 
   constructor(private storeService: StoreService) {
-    this.customersSub = storeService.customers$.subscribe(customers => this.customers = customers);
+    this.customersSub = storeService.customers$.subscribe(customers => {
+      this.customers = customers;
+
+      if (this.editingCustomer) {
+        this.editingCustomer = customers.find(customer => customer.id === this.editingCustomer.id);
+      }
+    });
   }
 
   ngOnDestroy() {
     this.customersSub.unsubscribe();
+  }
+
+  endEdit() {
+    this.isEditing = false;
+    this.editingCustomer = null;
+  }
+
+  handleCustomerDelete({ id }): void {
+    this.storeService.deleteCustomer(id);
+  }
+
+  handleCustomerEdit({ id }): void {
+    this.isEditing = true;
+    this.editingCustomer = this.customers.find(customer => customer.id === id);
+  }
+
+  handleEditEnd(formValue) {
+    this.storeService.editCustomer(this.editingCustomer.id, formValue);
+    this.endEdit();
   }
 }
