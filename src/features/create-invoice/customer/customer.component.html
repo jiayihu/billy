@@ -30,28 +30,10 @@
     <a (click)="handleEditCustomer()">Edit customer</a> •
     <a (click)="handleRemoveCustomer()">Remove</a>
   </div>
-
-  <modal
-    *ngIf="form"
-    [isVisible]="mode"
-    [disabled]="!form.valid"
-    (onClose)="closeModal()"
-    (onSuccess)=
-      "mode === 'adding'
-        ? handleAddCustomerEnd()
-        : handleEditCustomerEnd()
-      "
-  >
-    <modal-title>
-      <span *ngIf="mode === 'adding'">Add a new customer</span>
-      <span *ngIf="mode === 'editing'">Edit customer</span>
-    </modal-title>
-    <modal-body>
-      <form [formGroup]="form">
-        <div *ngFor="let field of fields" class="form-group row">
-          <field [form]="form" [field]="field"></field>
-        </div>
-      </form>
-    </modal-body>
-  </modal>
+  <customer-edit
+    [mode]="mode"
+    [customer]="mode === 'adding' ? { id: '', name: '' } : selectedCustomer"
+    (onCancel)="closeModal($event)"
+    (onEditEnd)="handleEditCustomerEnd($event)"
+  ></customer-edit>
 </div>

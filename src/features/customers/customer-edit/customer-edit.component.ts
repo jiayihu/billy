@@ -1,0 +1,117 @@
+import { Component, EventEmitter, Input, Output, SimpleChange } from '@angular/core';
+import GeoService from '../../../services/geo.service';
+import { FormGroup } from '@angular/forms';
+import { ICustomer } from '../../../services/store.service';
+import FormBuilderService, { IField, ISelectField, isSelectField } from '../../../services/form-builder.service';
+const get = require('lodash/get');
+
+@Component({
+  selector: 'customer-edit',
+  template: require('./customer-edit.component.html'),
+})
+export default class CustomerEditComponent {
+  private fields: Array<IField | ISelectField>;
+  private form: FormGroup;
+
+  @Input() mode: 'adding' | 'editing' | '';
+  @Input() customer: ICustomer;
+  @Output() onCancel = new EventEmitter<void>();
+  @Output() onEditEnd = new EventEmitter<ICustomer>();
+
+  constructor(private geoService: GeoService, private formBuilderService: FormBuilderService) {
+    // @NOTE: Field values will be filled later in this.buildForm
+    this.fields = [
+        {
+          name: 'name',
+          label: 'Customer name',
+          required: true,
+        },
+        {
+          name: 'vat',
+          label: 'VAT Number',
+          maxLength: 20,
+        },
+        {
+          name: 'zip',
+          label: 'Postal / ZIP Code',
+          pattern: '[0-9A-Z-]*',
+        },
+        {
+          controlType: 'select',
+          name: 'country',
+          label: 'Country',
+          options: [],
+          // Bind this needed, otherwise this will be the instance of FormControl
+          onChange: this.handleCountryChange.bind(this),
+        },
+        {
+          controlType: 'select',
+          name: 'province',
+          label: 'State / Province',
+          options: [],
+        },
+        {
+          name: 'city',
+          label: 'City',
+        },
+        {
+          name: 'address',
+          label: 'Address',
+        },
+      ];
+  }
+
+  ngOnInit() {
+    this.geoService.getCountries()
+      .subscribe(countries => {
+        const options = countries.map(country => ({ label: country.name, value: country.countryCode }));
+        this.setFieldOptions('country', options);
+      });
+  }
+
+  ngOnChanges(changes: { customer: SimpleChange, mode: SimpleChange }) {
+    const mode = changes.mode;
+    if(mode && mode.currentValue !== '' && mode.currentValue !== mode.previousValue) {
+      const newCustomer = get(changes, 'customer.currentValue', undefined) || this.customer;
+      this.buildForm(newCustomer);
+
+      if(newCustomer.country) {
+        this.geoService.getProvinces(newCustomer.country)
+        .subscribe(provinces => {
+          const options = provinces.map(province => ({ label: province.name, value: province.name }));
+          this.setFieldOptions('province', options);
+        });
+      }
+    }
+  }
+
+  buildForm(customer: ICustomer): void {
+    this.fields.forEach(field => field.value = customer[field.name] || '');
+
+    this.form = this.formBuilderService.buildFormGroup(this.fields);
+  }
+
+  setFieldOptions(fieldName: string, options: any[]): void {
+    const foundField = this.fields.find(field => field.name === fieldName);
+    if (isSelectField(foundField)) {
+      foundField.options = options;
+    }
+  }
+
+  handleCancel() {
+    this.onCancel.emit();
+  }
+
+  handleCountryChange(countryCode: string): void {
+    this.geoService.getProvinces(countryCode)
+      .subscribe(provinces => {
+        const options = provinces.map(province => ({ label: province.name, value: province.name }));
+        this.setFieldOptions('province', options);
+      });
+  }
+
+  handleEditEnd() {
+    this.onEditEnd.emit(this.form.value);
+  }
+}
+

@@ -21,6 +21,7 @@
   "devDependencies": {
     "@types/invariant": "^2.2.28",
     "@types/localforage": "0.0.33",
+    "@types/lodash": "^4.14.43",
     "@types/node": "0.0.2",
     "cross-env": "^1.0.8",
     "css-loader": "^0.23.1",
