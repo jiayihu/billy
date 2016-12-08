@@ -1,6 +1,6 @@
 <modal
   *ngIf="form"
-  [isVisible]="mode !== ''"
+  [isVisible]="!!mode"
   [disabled]="!form.valid"
   (onClose)="handleCancel()"
   (onSuccess)="handleEditEnd()"

@@ -71,7 +71,7 @@ export default class CustomerEditComponent {
 
   ngOnChanges(changes: { customer: SimpleChange, mode: SimpleChange }) {
     const mode = changes.mode;
-    if (mode && mode.currentValue !== '' && mode.currentValue !== mode.previousValue) {
+    if (mode && mode.currentValue && mode.currentValue !== mode.previousValue) {
       const newCustomer = get(changes, 'customer.currentValue', undefined) || this.customer;
       this.buildForm(newCustomer);
 
