@@ -1,0 +1,26 @@
+@page {
+  margin: 0.5cm;
+}
+
+@media print and (max-width:8.5in) {
+  html {
+    width:8.5in;
+  }
+
+  body {
+    font-size: 9pt;
+  }
+
+  .container {
+    max-width: none !important;
+    padding: 9pt 24pt;
+  }
+
+  [class*="col-sm-"] {
+    float: left;
+  }
+
+  .col-sm-6 {
+    width: 50%;
+  }
+}
