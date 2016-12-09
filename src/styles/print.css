@@ -11,16 +11,19 @@
     font-size: 9pt;
   }
 
+  .print-hidden {
+    display: none !important;
+  }
+
   .container {
     max-width: none !important;
-    padding: 9pt 24pt;
+    padding: 9pt 32pt;
   }
 
   [class*="col-sm-"] {
     float: left;
   }
 
-  .col-sm-6 {
-    width: 50%;
-  }
+  .col-sm-6 { width: 50%; }
+  .offset-sm-6 { margin-left: 50%;  }
 }

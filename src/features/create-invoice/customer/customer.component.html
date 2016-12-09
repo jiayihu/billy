@@ -27,8 +27,10 @@
       <span [hidden]="!selectedCustomer.province">({{selectedCustomer.province}})</span>
     </p>
     <p>VAT {{selectedCustomer.vat}}</p>
-    <a (click)="handleEditCustomer()">Edit customer</a> •
-    <a (click)="handleRemoveCustomer()">Remove</a>
+    <div class="print-hidden">
+      <a (click)="handleEditCustomer()">Edit customer</a> •
+      <a (click)="handleRemoveCustomer()">Remove</a>
+    </div>
   </div>
   <customer-edit
     [mode]="mode"
