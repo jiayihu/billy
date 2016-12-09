@@ -9,3 +9,7 @@ a label {
 .add-customer {
   font-size: 2em;
 }
+
+.customer {
+  text-align: right;
+}

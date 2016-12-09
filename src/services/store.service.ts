@@ -25,9 +25,40 @@ export interface ICustomer {
   province?: string;
 }
 
+export interface ITask {
+  amount: string;
+  description: string;
+  quantity: number;
+  price: number;
+}
+
+export interface ITax {
+  name: string;
+  rate: number;
+}
+
+export interface IInvoice {
+  id: string;
+  currency?: string;
+  customer?: ICustomer;
+  date: string;
+  location?: string;
+  number: number;
+  tasks?: ITask[];
+  taxes?: ITax[];
+  user: IUser;
+}
+
+export interface ISettings {
+  currency: string;
+  taxes: ITax[];
+}
+
+
 export interface IStore {
   user?: IUser;
   customers?: ICustomer[];
+  invoices?: IInvoice[];
 }
 
 @Injectable()
@@ -66,7 +97,6 @@ export default class StoreService {
     this.persist('store', this.store);
     this.storeSource.next(this.store);
   }
-
 
   editUser(value): void {
     const updatedUser = Object.assign({}, this.store.user, value);
