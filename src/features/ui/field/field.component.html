@@ -8,17 +8,20 @@
   [formGroup]="form"
   [class.has-danger]="form.controls[field.name].invalid && form.controls[field.name].dirty"
 >
-  <select
-    *ngSwitchCase="'select'"
-    [formControlName]="field.name"
-    [name]="field.name"
-    (change)="field.onChange && field.onChange(form.controls[field.name].value)"
-    class="form-control"
-  >
-    <option *ngFor="let option of field.options" [value]="option.value">
-      {{option.label}}
-    </option>
-  </select>
+  <template [ngIf]="field.options && !!field.options.length">
+    <template [ngSwitchCase]="'select'">
+      <select
+        [formControlName]="field.name"
+        [name]="field.name"
+        (change)="field.onChange && field.onChange(form.controls[field.name].value)"
+        class="form-control"
+      >
+        <option *ngFor="let option of field.options" [value]="option.value">
+          {{option.label}}
+        </option>
+      </select>
+    </template>
+  </template>
   <input
     *ngSwitchDefault
     [formControlName]="field.name"
