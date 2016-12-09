@@ -21,6 +21,6 @@
     <span>{{user.city}}</span>
     <span [hidden]="!user.province">({{user.province}})</span>
   </p>
-  <p>VAT {{user.vat}}</p>
+  <p *ngIf="user.vat">VAT {{user.vat}}</p>
   <a class="print-hidden" (click)="handleEdit()">Edit your business details</a>
 </div>
