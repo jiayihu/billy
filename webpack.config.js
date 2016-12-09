@@ -1,6 +1,8 @@
 const path = require('path');
 const env = require('./env.json');
 const webpack = require('webpack');
+const cssnext = require('postcss-cssnext');
+const cssVariables = require('./src/variables');
 
 const root = {
   src: path.join(__dirname, 'src'),
@@ -77,7 +79,13 @@ module.exports = {
   plugins: IS_DEV ? devPlugins : prodPlugins,
   postcss() {
     return [
-      require('postcss-cssnext'),
+      cssnext({
+        features: {
+          customProperties: {
+            variables: cssVariables,
+          },
+        },
+      }),
     ];
   },
 };
