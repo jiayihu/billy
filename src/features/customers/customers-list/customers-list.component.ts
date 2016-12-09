@@ -11,11 +11,12 @@ export default class CustomersListComponent implements OnDestroy {
   private isEditing: boolean = false;
   private editingCustomer: ICustomer;
 
-  private customersSub: Subscription;
+  private storeSub: Subscription;
   private customers: ICustomer[];
 
   constructor(private storeService: StoreService) {
-    this.customersSub = storeService.customers$.subscribe(customers => {
+    this.storeSub = storeService.store$.subscribe(store => {
+      const customers = store.customers;
       this.customers = customers;
 
       if (this.editingCustomer) {
@@ -25,7 +26,7 @@ export default class CustomersListComponent implements OnDestroy {
   }
 
   ngOnDestroy() {
-    this.customersSub.unsubscribe();
+    this.storeSub.unsubscribe();
   }
 
   endEdit() {

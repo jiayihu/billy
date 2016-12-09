@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import uuid = require('uuid');
+import set = require('lodash/set');
 
 export interface IUser {
   name: string;
@@ -24,66 +25,73 @@ export interface ICustomer {
   province?: string;
 }
 
+export interface IStore {
+  user?: IUser;
+  customers?: ICustomer[];
+}
+
 @Injectable()
 export default class StoreService {
-  // @TODO: Why are user and customers needed as fields? Probably for persist. Try to eliminate them.
-  private user: IUser = { name: '' };
-  private customers: ICustomer[] = [];
-  private userSource = new BehaviorSubject<IUser>(this.user);
-  private customersSource = new BehaviorSubject<ICustomer[]>(this.customers);
+  private store: IStore = {};
+  private storeSource = new BehaviorSubject<IStore>(this.store);
 
-  user$ = this.userSource.asObservable();
-  customers$ = this.customersSource.asObservable();
+  store$ = this.storeSource.asObservable();
 
   constructor() {
+    const defaultStore: IStore = {
+      user: { name: '' },
+      customers: [],
+    };
+
     try {
-      const storedUser = JSON.parse(localStorage.getItem('billy-user'));
-      const storedCustomers = JSON.parse(localStorage.getItem('billy-customers'));
-      this.user = storedUser || this.user;
-      this.customers = storedCustomers || this.customers;
+      const persistedStore = JSON.parse(localStorage.getItem('billy-store'));
+      this.store = persistedStore || defaultStore;
     } catch (exception) {
       console.error('Something went wrong with localStorage in StoreService: ', exception);
     }
 
-    this.userSource.next(this.user);
-    this.customersSource.next(this.customers);
+    this.storeSource.next(this.store);
   }
 
-  private persist(property: string): void {
+  private persist(key: string, value: any): void {
     try {
-      localStorage.setItem(`billy-${property}`, JSON.stringify(this[property]));
+      localStorage.setItem(`billy-${key}`, JSON.stringify(value));
     } catch (exception) {
       console.error('Could not save to localStorage. ', exception);
     }
   }
 
-  setUser(updatedUser): void {
-    this.user = Object.assign({}, this.user, updatedUser);
-    this.persist('user');
-    this.userSource.next(this.user);
+  private editStore(path: string, value: any) {
+    this.store = set(this.store, path, value);
+    this.persist('store', this.store);
+    this.storeSource.next(this.store);
+  }
+
+
+  editUser(value): void {
+    const updatedUser = Object.assign({}, this.store.user, value);
+    this.editStore('user', updatedUser);
   }
 
   addCustomer(customer: ICustomer): void {
-    const customerId = uuid.v4();
-    customer.id = `CUSTOMER_${customerId}`;
-    this.customers = this.customers.concat(customer);
-    this.persist('customers');
-    this.customersSource.next(this.customers);
+    const customerId = `CUSTOMER_${uuid.v4()}`;
+    const newCustomer = Object.assign({}, customer, { id: customerId });
+    const newCustomers = this.store.customers.concat(newCustomer);
+
+    this.editStore('customers', newCustomers);
   }
 
   deleteCustomer(customerId: string): void {
-    this.customers = this.customers.filter(customer => customer.id !== customerId);
-    this.persist('customers');
-    this.customersSource.next(this.customers);
+    const filteredCustomers = this.store.customers.filter(customer => customer.id !== customerId);
+    this.editStore('customers', filteredCustomers);
   }
 
   editCustomer(customerId: string, newCustomer: ICustomer): void {
-    this.customers = this.customers.map(customer => {
+    const updatedCustomers = this.store.customers.map(customer => {
       if (customer.id !== customerId) return customer;
 
       return Object.assign({}, customer, newCustomer);
     });
-    this.persist('customers');
-    this.customersSource.next(this.customers);
+    this.editStore('customers', updatedCustomers);
   }
 }

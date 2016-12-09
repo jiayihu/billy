@@ -11,21 +11,21 @@ export default class CreateInvoiceComponent {
   user: IUser;
   customers: ICustomer[];
 
-  private userSub: Subscription;
-  private customersSub: Subscription;
+  private storeSub: Subscription;
 
   constructor(private storeService: StoreService) {
-    this.userSub = storeService.user$.subscribe(user => this.user = user);
-    this.customersSub = storeService.customers$.subscribe(customers => this.customers = customers);
+    this.storeSub = storeService.store$.subscribe(store => {
+      this.user = store.user;
+      this.customers = store.customers;
+    });
   }
 
   ngOnDestroy() {
-    this.userSub.unsubscribe();
-    this.customersSub.unsubscribe();
+    this.storeSub.unsubscribe();
   }
 
   handleBusinessChange(newBusinessInfo): void {
-    this.storeService.setUser(newBusinessInfo);
+    this.storeService.editUser(newBusinessInfo);
   }
 
   handleAddCustomer(newCustomer: ICustomer): void {
