@@ -1,0 +1,8 @@
+.input-display {
+  cursor: pointer;
+}
+
+.input-edit {
+  display: inline-block;
+  width: auto;
+}
