@@ -50,9 +50,9 @@ export default class CreateInvoiceComponent {
     this.invoice.location = newLocation;
   }
 
-  handleEditNumber(newNumber: string):void {
+  handleEditNumber(newNumber: string): void {
     const number = Number(newNumber);
-    if(isNaN(number)) return;
+    if (isNaN(number)) return;
 
     this.invoice.number = number;
   }

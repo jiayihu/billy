@@ -1,4 +1,13 @@
-import { Component, ElementRef, EventEmitter, Input, Output, QueryList, SimpleChange, ViewChildren } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  Output,
+  QueryList,
+  SimpleChange,
+  ViewChildren,
+} from '@angular/core';
 
 @Component({
   selector: 'input-edit',
