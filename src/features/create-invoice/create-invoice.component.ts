@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import StoreService, { IUser, ICustomer, IInvoice } from '../../services/store.service';
 import * as moment from 'moment';
+import isNaN = require('lodash/isNaN');
 
 @Component({
   selector: 'create-invoice',
@@ -43,5 +44,16 @@ export default class CreateInvoiceComponent {
 
   handleEditCustomer(newCustomer: ICustomer): void {
     this.storeService.editCustomer(newCustomer.id, newCustomer);
+  }
+
+  handleEditLocation(newLocation: string): void {
+    this.invoice.location = newLocation;
+  }
+
+  handleEditNumber(newNumber: string):void {
+    const number = Number(newNumber);
+    if(isNaN(number)) return;
+
+    this.invoice.number = number;
   }
 }

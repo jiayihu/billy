@@ -37,6 +37,8 @@ export interface ITax {
   rate: number;
 }
 
+// @TODO: Well, probably a class could fit better than an interface. But for now inheritance is not
+// needed.
 export interface IInvoice {
   id: string;
   currency?: string;
@@ -53,7 +55,6 @@ export interface ISettings {
   currency: string;
   taxes: ITax[];
 }
-
 
 export interface IStore {
   user?: IUser;

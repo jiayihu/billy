@@ -11,7 +11,18 @@
     </div>
   </div>
   <div class="invoice-date-number clearfix">
-    <span>{{invoice.location}}, {{invoice.date}}</span>
-    <span class="float-xs-right">Invoice #{{invoice.number}}</span>
+    <span>
+      <input-edit [initialValue]="invoice.location" (onChange)="handleEditLocation($event)"></input-edit>,
+      {{invoice.date}}
+    </span>
+    <span class="float-xs-right">
+      Fattura #
+      <input-edit
+        class="invoice-number"
+        [charsLength]="5"
+        [initialValue]="invoice.number"
+        (onChange)="handleEditNumber($event)"
+      ></input-edit>
+    </span>
   </div>
 </div>
