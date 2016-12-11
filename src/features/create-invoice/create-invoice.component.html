@@ -13,7 +13,7 @@
   <div class="invoice-date-number clearfix">
     <span>
       <input-edit [initialValue]="invoice.location" (onChange)="handleEditLocation($event)"></input-edit>,
-      {{invoice.date}}
+      <datepicker [value]="invoice.date" (onChange)="handleEditDate($event)"></datepicker>
     </span>
     <span class="float-xs-right">
       Fattura #

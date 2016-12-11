@@ -46,6 +46,10 @@ export default class CreateInvoiceComponent {
     this.storeService.editCustomer(newCustomer.id, newCustomer);
   }
 
+  handleEditDate(newDate: string): void {
+    this.invoice.date = newDate;
+  }
+
   handleEditLocation(newLocation: string): void {
     this.invoice.location = newLocation;
   }
