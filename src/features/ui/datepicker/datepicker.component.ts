@@ -35,7 +35,7 @@ export default class DatepickerComponent implements AfterViewInit, OnDestroy {
       onSelect: (date: Date) => {
         const formattedDate = moment(date).format(this.format);
         this.onChange.emit(formattedDate);
-      }
+      },
     });
 
     if (this.showOnInit) this.datepicker.show();

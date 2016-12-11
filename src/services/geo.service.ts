@@ -20,6 +20,7 @@ export default class GeoService {
   private apiUsername: string = process.env.GEONAMES;
   private countries: ICountry[];
   private countriesSource: Observable<ICountry[]>;
+  private provincesByCountry: { [key: string]: IProvince[] } = {};
 
   constructor(private http: Http) {}
 
@@ -51,6 +52,9 @@ export default class GeoService {
   }
 
   getProvinces(countryCode: string): Observable<IProvince[]> {
+    const cachedProvinces = this.provincesByCountry[countryCode];
+    if (cachedProvinces) return Observable.from([cachedProvinces]);
+
     const searchParams = new URLSearchParams('q=adm2&maxRows=1000');
     searchParams.append('username', this.apiUsername);
     searchParams.append('country', countryCode);
@@ -58,6 +62,11 @@ export default class GeoService {
 
     return this.http.get(ENDPOINT, { search: searchParams })
       .map(response => response.json().geonames)
-      .map((provinces: IProvince[]) => provinces.sort(GeoService.sortByName));
+      .map((provinces: IProvince[]) => {
+        const sortedProvinces = provinces.sort(GeoService.sortByName);
+        this.provincesByCountry[countryCode] = provinces;
+
+        return sortedProvinces;
+      });
   }
 }
