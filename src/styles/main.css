@@ -27,3 +27,8 @@ p {
 .modal {
   background-color: rgba(0, 0, 0, .2);
 }
+
+.form-control--inline {
+  display: inline-block;
+  width: auto;
+}

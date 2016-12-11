@@ -1,10 +1,9 @@
 <span class="input-display" *ngIf="!isEditing" (click)="handleStartEdit()">{{initialValue}}</span>
 <input
-  autofocus
   #input
   *ngIf="isEditing"
-  class="input-edit form-control"
-  [style.width.ch]="charsLength"
+  [attr.size]="currentValue.length || 3"
+  class="input-edit form-control form-control--inline"
   type="text"
   [value]="currentValue"
   (blur)="handleChange(input.value)"
