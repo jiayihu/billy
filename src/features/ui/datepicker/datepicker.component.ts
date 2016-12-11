@@ -4,9 +4,11 @@ import {
   ElementRef,
   EventEmitter,
   Input,
+  OnDestroy,
   Output,
   ViewChild,
 } from '@angular/core';
+import * as moment from 'moment';
 import pikaday = require('pikaday');
 import 'pikaday/css/pikaday.css';
 
@@ -15,13 +17,14 @@ import 'pikaday/css/pikaday.css';
   template: require('./datepicker.component.html'),
   styles: [require('./datepicker.component.css')],
 })
-export default class DatepickerComponent implements AfterViewInit {
+export default class DatepickerComponent implements AfterViewInit, OnDestroy {
   @ViewChild('input')
   private inputEl: ElementRef;
   private datepicker: Pikaday;
 
   @Input() format: string = 'DD/MM/YYYY';
   @Input() value: string;
+  @Input() showOnInit: boolean = false;
   @Output() onChange = new EventEmitter<string>();
 
   ngAfterViewInit() {
@@ -29,10 +32,16 @@ export default class DatepickerComponent implements AfterViewInit {
     this.datepicker = new pikaday({
       field: input,
       format: this.format,
+      onSelect: (date: Date) => {
+        const formattedDate = moment(date).format(this.format);
+        this.onChange.emit(formattedDate);
+      }
     });
+
+    if (this.showOnInit) this.datepicker.show();
   }
 
-  handleDateChange(date: string) {
-    this.onChange.emit(date);
+  ngOnDestroy() {
+    this.datepicker.destroy();
   }
 }
