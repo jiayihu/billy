@@ -23,6 +23,7 @@
     "@types/localforage": "0.0.33",
     "@types/lodash": "^4.14.43",
     "@types/node": "0.0.2",
+    "@types/pikaday": "0.0.32",
     "@types/uuid": "^2.0.29",
     "cross-env": "^1.0.8",
     "css-loader": "^0.23.1",
@@ -54,11 +55,12 @@
     "localforage": "^1.4.2",
     "lodash": "^4.15.0",
     "moment": "^2.17.1",
+    "pikaday": "^1.5.1",
     "reflect-metadata": "^0.1.8",
-    "rxjs": "^5.0.0-beta.12",
+    "rxjs": "^5.0.0-rc.4",
     "typescript": "^2.1.1",
     "uuid": "^2.0.3",
-    "zone.js": "^0.6.23"
+    "zone.js": "^0.7.2"
   },
   "repository": {
     "type": "git",

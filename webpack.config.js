@@ -66,13 +66,13 @@ module.exports = {
       {
         test: /\.css$/,
         loaders: ['style', 'css', 'postcss'],
-        include: path.join(root.src, 'styles'),
+        include: [path.join(root.src, 'styles'), /node_modules/],
       },
       {
         test: /\.css$/,
         loaders: ['raw', 'postcss'],
         include: path.src,
-        exclude: path.join(root.src, 'styles'),
+        exclude: [path.join(root.src, 'styles'), /node_modules/],
       },
     ],
   },
