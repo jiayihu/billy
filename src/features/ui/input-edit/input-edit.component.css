@@ -1,9 +1,11 @@
 .input-display {
+  border: 1px solid transparent;
   border-bottom: 3px dashed var(--secondary-text);
   cursor: pointer;
   padding: .5rem .75rem;
 }
 
-.input-edit {
-
+/* Number inputs */
+.input-edit[size="3"] {
+  width: 7ch;
 }

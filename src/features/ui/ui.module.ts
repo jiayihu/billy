@@ -15,14 +15,14 @@ import ModalComponent from './modal/modal.component';
     DatepickerComponent,
     FieldComponent,
     InputEditComponent,
-    ModalComponent
+    ModalComponent,
   ],
   exports: [
     BtnComponent,
     DatepickerComponent,
     FieldComponent,
     InputEditComponent,
-    ModalComponent
+    ModalComponent,
   ],
 })
 export default class UIModule { }

@@ -25,6 +25,7 @@ export default class InputEditComponent {
 
   @Input() initialValue: string;
   @Input() charsLength: number = 20;
+  @Input() type: string = 'text';
   @Output() onChange = new EventEmitter<string>();
 
   ngOnChanges(changes: { initialValue: SimpleChange }) {

@@ -1,11 +1,19 @@
 <span class="input-display" *ngIf="!isEditing" (click)="handleStartEdit()">{{initialValue}}</span>
-<input
-  #input
-  *ngIf="isEditing"
-  [attr.size]="currentValue.length || 3"
-  class="input-edit form-control form-control--inline"
-  type="text"
-  [value]="currentValue"
-  (blur)="handleChange(input.value)"
-  (keyup.enter)="handleChange(input.value)"
-/>
+<span *ngIf="isEditing" [ngSwitch]="type">
+  <datepicker
+    *ngSwitchCase="'datepicker'"
+    [value]="currentValue"
+    [showOnInit]="true"
+    (onChange)="handleChange($event)"
+  ></datepicker>
+  <input
+    #input
+    *ngSwitchDefault
+    [attr.size]="currentValue.length || 3"
+    class="input-edit form-control form-control--inline"
+    [type]="type"
+    [value]="currentValue"
+    (blur)="handleChange(input.value)"
+    (keyup.enter)="handleChange(input.value)"
+  />
+</span>
