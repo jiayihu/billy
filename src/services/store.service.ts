@@ -26,7 +26,8 @@ export interface ICustomer {
 }
 
 export interface ITask {
-  amount: string;
+  id: string;
+  amount: number;
   description: string;
   quantity: number;
   price: number;
@@ -124,5 +125,9 @@ export default class StoreService {
       return Object.assign({}, customer, newCustomer);
     });
     this.editStore('customers', updatedCustomers);
+  }
+
+  generateId(entity: string): string {
+    return `${entity.toUpperCase()}_${uuid.v4()}`;
   }
 }

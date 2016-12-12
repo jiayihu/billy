@@ -3,18 +3,28 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import CustomersModule from '../customers/customers.module';
+import PipesModule from '../pipes/pipes.module';
 import UIModule from '../ui/ui.module';
 
 import CreateInvoiceComponent from './create-invoice.component';
-import UserBusinessComponent from './user-business/user-business.component';
 import CustomerComponent from './customer/customer.component';
+import UserBusinessComponent from './user-business/user-business.component';
+import TasksComponent from './tasks/tasks.component';
 
 @NgModule({
-  imports: [CommonModule, CustomersModule, UIModule, FormsModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    CustomersModule,
+    UIModule,
+    FormsModule,
+    PipesModule,
+    ReactiveFormsModule,
+  ],
   declarations: [
     CreateInvoiceComponent,
-    UserBusinessComponent,
     CustomerComponent,
+    UserBusinessComponent,
+    TasksComponent,
    ],
   exports: [CreateInvoiceComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

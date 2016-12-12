@@ -1,0 +1,48 @@
+.tasks td {
+  vertical-align: middle;
+}
+
+.form-control {
+  display: inline-block;
+}
+
+.header-task {
+  min-width: 20rem;
+  width: 60%;
+}
+
+.header-quantity,
+.header-price {
+  min-width: 8rem;
+  width: 10%;
+}
+
+
+.header-amount {
+  min-width: 10rem;
+  width: 15%;
+}
+
+.task-desc,
+.new-task-desc {
+  position: relative;
+}
+
+.task-btn {
+  cursor: pointer;
+  left: -2rem;
+  position: absolute;
+  top: 1rem;
+}
+
+.add-btn {
+  color: var(--primary);
+}
+
+.delete-btn {
+  color: var(--accent);
+}
+
+.invoice-subtotal td:first-child {
+  text-align: right;
+}

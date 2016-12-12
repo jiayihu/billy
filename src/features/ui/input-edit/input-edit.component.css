@@ -1,8 +1,12 @@
 .input-display {
   border: 1px solid transparent;
-  border-bottom: 3px dashed var(--secondary-text);
+  border-bottom: 1px dashed var(--secondary-text);
   cursor: pointer;
   padding: .5rem .75rem;
+}
+
+.input-display:hover {
+  background-color: rgba(189, 189, 189, .2);
 }
 
 /* Number inputs */

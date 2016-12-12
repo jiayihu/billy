@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
-import StoreService, { IUser, ICustomer, IInvoice } from '../../services/store.service';
+import StoreService, { IUser, ICustomer, IInvoice, ITask } from '../../services/store.service';
 import * as moment from 'moment';
 import isNaN = require('lodash/isNaN');
+import uuid = require('uuid');
 
 @Component({
   selector: 'create-invoice',
@@ -16,12 +17,19 @@ export default class CreateInvoiceComponent {
 
   private storeSub: Subscription;
 
+  // @NOTE: Only for development
+  private persistTasks() {
+    window.localStorage.setItem('billy-tasks', JSON.stringify(this.invoice.tasks));
+  }
+
   constructor(private storeService: StoreService) {
+    const storedTasks = JSON.parse(window.localStorage.getItem('billy-tasks'));
     this.invoice = {
       id: '',
       date: moment().format('DD/MM/YYYY'),
       location: 'Padova',
       number: 1, // @TODO: update with latest invoice number + 1
+      tasks: storedTasks || [],
       user: this.user,
     };
     this.storeSub = storeService.store$.subscribe(store => {
@@ -38,6 +46,10 @@ export default class CreateInvoiceComponent {
     this.storeService.editUser(newBusinessInfo);
   }
 
+  /**
+   * Invoice customer event handlers
+   */
+
   handleAddCustomer(newCustomer: ICustomer): void {
     this.storeService.addCustomer(newCustomer);
   }
@@ -50,6 +62,10 @@ export default class CreateInvoiceComponent {
     this.invoice.date = newDate;
   }
 
+  /**
+   * Invoice location, date and number event listeners
+   */
+
   handleEditLocation(newLocation: string): void {
     this.invoice.location = newLocation;
   }
@@ -59,5 +75,39 @@ export default class CreateInvoiceComponent {
     if (isNaN(number)) return;
 
     this.invoice.number = number;
+  }
+
+  /**
+   * Invoice tasks event listeners
+   */
+
+  handleAddTask(task: ITask) {
+    const taskId = this.storeService.generateId('TASK');
+    const newTask = Object.assign({}, task, { id: taskId });
+    this.invoice = Object.assign({}, this.invoice, {
+      tasks: this.invoice.tasks.concat(newTask),
+    });
+    this.persistTasks();
+  }
+
+  handleEditTask(updatedTask: ITask) {
+    const updatedTasks = this.invoice.tasks.map(task => {
+      if (task.id === updatedTask.id) {
+        return Object.assign({}, task, updatedTask);
+      }
+      return task;
+    });
+
+    this.invoice = Object.assign({}, this.invoice, {
+      tasks: updatedTasks,
+    });
+    this.persistTasks();
+  }
+
+  handleRemoveTask(taskId: string) {
+    this.invoice = Object.assign({}, this.invoice, {
+      tasks: this.invoice.tasks.filter(task => task.id !== taskId),
+    });
+    this.persistTasks();
   }
 }

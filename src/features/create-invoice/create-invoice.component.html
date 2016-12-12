@@ -1,4 +1,4 @@
-<h2 class="print-hidden">New invoice</h2>
+<h2>New invoice</h2>
 <div class="invoice">
   <user-business [user]="user" (onBusinessChange)="handleBusinessChange($event)"></user-business>
   <div class="row">
@@ -25,4 +25,10 @@
       ></input-edit>
     </span>
   </div>
+  <tasks
+    [tasks]="invoice.tasks"
+    (onAddTask)="handleAddTask($event)"
+    (onEditTask)="handleEditTask($event)"
+    (onRemoveTask)="handleRemoveTask($event)"
+  ></tasks>
 </div>

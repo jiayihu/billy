@@ -25,5 +25,8 @@
   }
 
   .col-sm-6 { width: 50%; }
-  .offset-sm-6 { margin-left: 50%;  }
+  .offset-sm-6 { margin-left: 50%; }
+
+  .col-sm-4 { width: 33.333333%; }
+  .offset-sm-8 { margin-left: 66.666667%; }
 }

@@ -2,7 +2,7 @@ a {
   cursor: pointer;
 
   @nest &:not([href]):not([tabindex]) {
-    color: var(--primary);
+    color: var(--dark-primary);
   }
 }
 
