@@ -3,7 +3,6 @@ import { Subscription } from 'rxjs/Subscription';
 import StoreService, { IUser, ICustomer, IInvoice, ITask } from '../../services/store.service';
 import * as moment from 'moment';
 import isNaN = require('lodash/isNaN');
-import uuid = require('uuid');
 
 @Component({
   selector: 'create-invoice',
