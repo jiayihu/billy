@@ -4,7 +4,8 @@ import { HttpModule } from '@angular/http';
 
 import routing from './app.routes';
 import AppComponent from './app.component';
-import NavComponent from './components/nav.component';
+import FooterComponent from './components/footer/footer.component';
+import NavComponent from './components/nav/nav.component';
 
 import AuthModule from '../features/auth/auth.module';
 import CreateInvoiceModule from '../features/create-invoice/create-invoice.module';
@@ -15,10 +16,6 @@ import FormBuilderService from '../services/form-builder.service';
 import GeoService from '../services/geo.service';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavComponent,
-  ],
   imports: [
     BrowserModule,
     HttpModule,
@@ -26,6 +23,11 @@ import GeoService from '../services/geo.service';
     AuthModule,
     CreateInvoiceModule,
     CustomersModule,
+  ],
+  declarations: [
+    AppComponent,
+    FooterComponent,
+    NavComponent,
   ],
   providers: [StoreService, FormBuilderService, GeoService],
   bootstrap: [AppComponent],

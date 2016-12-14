@@ -1,0 +1,5 @@
+.app-footer {
+  color: var(--divider);
+  margin: 3rem auto 2rem;
+  text-align: center;
+}
