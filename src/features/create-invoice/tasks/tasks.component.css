@@ -6,21 +6,23 @@
   display: inline-block;
 }
 
-.header-task {
-  min-width: 20rem;
-  width: 60%;
-}
+.header {
+  &-task {
+    min-width: 20rem;
+    width: 60%;
+  }
 
-.header-quantity,
-.header-price {
-  min-width: 8rem;
-  width: 10%;
-}
+  &-quantity,
+  &-price {
+    min-width: 8rem;
+    width: 10%;
+  }
 
 
-.header-amount {
-  min-width: 10rem;
-  width: 15%;
+  &-amount {
+    min-width: 10rem;
+    width: 15%;
+  }
 }
 
 .task-desc,
