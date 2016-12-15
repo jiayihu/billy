@@ -34,6 +34,7 @@ export interface ITask {
 }
 
 export interface ITax {
+  id: string;
   name: string;
   rate: number;
 }
@@ -58,14 +59,15 @@ export interface ISettings {
 }
 
 export interface IStore {
-  user?: IUser;
-  customers?: ICustomer[];
-  invoices?: IInvoice[];
+  user: IUser;
+  customers: ICustomer[];
+  invoices: IInvoice[];
+  taxes: ITax[];
 }
 
 @Injectable()
 export default class StoreService {
-  private store: IStore = {};
+  private store: IStore;
   private storeSource = new BehaviorSubject<IStore>(this.store);
 
   store$ = this.storeSource.asObservable();
@@ -74,11 +76,13 @@ export default class StoreService {
     const defaultStore: IStore = {
       user: { name: '' },
       customers: [],
+      invoices: [],
+      taxes: [],
     };
 
     try {
       const persistedStore = JSON.parse(localStorage.getItem('billy-store'));
-      this.store = persistedStore || defaultStore;
+      this.store = Object.assign({}, defaultStore, persistedStore);
     } catch (exception) {
       console.error('Something went wrong with localStorage in StoreService: ', exception);
     }
@@ -95,9 +99,13 @@ export default class StoreService {
   }
 
   private editStore(path: string, value: any) {
-    this.store = set(this.store, path, value);
+    this.store = set(this.store, path, value) as IStore;
     this.persist('store', this.store);
     this.storeSource.next(this.store);
+  }
+
+  generateId(entity: string): string {
+    return `${entity.toUpperCase()}_${uuid.v4()}`;
   }
 
   editUser(value): void {
@@ -106,7 +114,7 @@ export default class StoreService {
   }
 
   addCustomer(customer: ICustomer): void {
-    const customerId = `CUSTOMER_${uuid.v4()}`;
+    const customerId = this.generateId('CUSTOMER');
     const newCustomer = Object.assign({}, customer, { id: customerId });
     const newCustomers = this.store.customers.concat(newCustomer);
 
