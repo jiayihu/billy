@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 
+import FilterPipe from './filter.pipe';
 import MoneyPipe from './money.pipe';
 import ReduceSumPipe from './reduce-sum.pipe';
 
-const pipes = [MoneyPipe, ReduceSumPipe];
+const pipes = [FilterPipe, MoneyPipe, ReduceSumPipe];
 
 @NgModule({
   imports: [],
