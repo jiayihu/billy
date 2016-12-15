@@ -20,6 +20,10 @@ export default class InvoicesComponent implements OnDestroy {
     this.storeSub.unsubscribe();
   }
 
+  handleTaxEdit(updatedTax: ITax) {
+    this.storeService.editTax(updatedTax);
+  }
+
   handleTaxDelete(taxId: string) {
     this.storeService.deleteTax(taxId);
   }

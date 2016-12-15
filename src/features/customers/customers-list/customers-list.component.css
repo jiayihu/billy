@@ -1,10 +1,20 @@
+.customer-headers {
+  color: var(--divider);
+  display: flex;
+  text-transform: uppercase;
+}
+
+.customer-headers span {
+  padding: .75rem;
+}
+
 .customer /deep/ > li {
   display: flex;
   padding-bottom: 1rem;
 }
 
+.customer-header-name,
 /deep/ .customer-name {
-  color: var(--accent);
   flex-grow: 1;
   font-weight: bold;
 }
