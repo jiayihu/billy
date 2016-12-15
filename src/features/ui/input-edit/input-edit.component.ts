@@ -1,12 +1,9 @@
 import {
   Component,
-  ElementRef,
   EventEmitter,
   Input,
   Output,
-  QueryList,
   SimpleChange,
-  ViewChildren,
 } from '@angular/core';
 
 @Component({
@@ -16,11 +13,6 @@ import {
 })
 export default class InputEditComponent {
   private currentValue: string;
-  // @NOTE: @ViewChild returns always undefined with *ngIf
-  // @see {http://stackoverflow.com/questions/34947154/angular-2-viewchild-annotation-returns-undefined}
-  @ViewChildren('input')
-  private childQuery: QueryList<ElementRef>;
-  private inputEl: ElementRef;
 
   @Input() initialValue: string;
   @Input() charsLength: number = 3;
@@ -31,16 +23,6 @@ export default class InputEditComponent {
     if (changes.initialValue.previousValue !== changes.initialValue.currentValue) {
       this.currentValue = changes.initialValue.currentValue;
     }
-  }
-
-  ngAfterViewInit() {
-    this.childQuery.changes.subscribe((comps: QueryList<ElementRef>) => {
-      this.inputEl = comps.first;
-    });
-  }
-
-  ngAfterViewChecked() {
-    if (this.inputEl) this.inputEl.nativeElement.focus();
   }
 
   handleChange(value: string) {

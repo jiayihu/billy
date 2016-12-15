@@ -5,7 +5,7 @@
 - Async Pipe
 - Replace pure tslint with codelyzer https://github.com/mgechev/codelyzer
 - Refactor to Angular2 official styleguide
-- ControlValueAccessor
+- ControlValueAccessor with input-edit in field component
   - Custom Form Controls: http://blog.thoughtram.io/angular/2016/07/27/custom-form-controls-in-angular-2.html
   - Angular2 API docs: https://angular.io/docs/ts/latest/api/forms/index/ControlValueAccessor-interface.html
 - Use moduleId: module.id for html loading
