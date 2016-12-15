@@ -27,7 +27,7 @@
     [formControlName]="field.name"
     [name]="field.name"
     [required]="field.required"
-    (change)="field.onChange && field.onChange(form.controls[field.name].value)"
+    (change)="handleChange()"
     class="form-control"
     type="text"
   />

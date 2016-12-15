@@ -16,7 +16,7 @@ export interface IField {
   pattern?: string | RegExp;
   required?: boolean;
   onChange?: Function;
-  controlType?: 'text' | 'select';
+  controlType?: 'text' | 'number' | 'select';
 }
 
 export interface ISelectField extends IField {

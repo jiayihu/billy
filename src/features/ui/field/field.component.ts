@@ -10,4 +10,19 @@ export default class FieldComponent {
   @Input() form: FormGroup;
   @Input() field: IField | ISelectField;
   @Input() inputClassName: string = 'col-sm-8';
+
+  handleChange() {
+    const field = this.field;
+
+    if (field.onChange) {
+      // @TODO: remove value formatting after ControlValueAccessor implementation with InputEdit
+      const rawValue: string = this.form.controls[field.name].value;
+      let formattedValue: any = rawValue;
+
+      if (field.controlType === 'number') formattedValue = Number(rawValue);
+      console.log(field.controlType);
+
+      field.onChange(formattedValue);
+    }
+  }
 }
