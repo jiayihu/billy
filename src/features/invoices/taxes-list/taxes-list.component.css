@@ -1,0 +1,25 @@
+.tax-headers {
+  color: var(--divider);
+  text-transform: uppercase;
+}
+
+.tax-headers span {
+  padding: .75rem;
+}
+
+.tax-headers,
+.tax /deep/ > li {
+  align-items: center;
+  display: flex;
+}
+
+.tax-header-name,
+/deep/ .tax-name {
+  flex-grow: 1;
+}
+
+.tax-header-actions,
+/deep/ .tax-actions {
+  flex-basis: 15%;
+  text-align: right;
+}

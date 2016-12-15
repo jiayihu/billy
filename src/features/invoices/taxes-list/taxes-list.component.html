@@ -1,0 +1,35 @@
+<div class="tax-headers">
+  <span class="tax-header-name">
+    Name
+  </span>
+  <span class="tax-header-rate">
+    Rate
+  </span>
+  <span class="tax-header-actions">
+    Actions
+  </span>
+</div>
+<list-group>
+  <list-group-item *ngFor="let tax of taxes" class="tax">
+    <span class="tax-name">
+      <strong>{{tax.name}}</strong>
+    </span>
+    <span class="tax-rate">{{tax.rate}}%</span>
+    <span class="tax-actions">
+      <btn
+        type="link"
+        class="edit-action"
+        (onClick)="handleTaxEdit(tax.id)"
+      >
+        Edit
+      </btn>
+      <btn
+        type="link"
+        class="delete-action"
+        (onClick)="handleTaxDelete(tax.id)"
+      >
+        Delete
+      </btn>
+    </span>
+  </list-group-item>
+</list-group>

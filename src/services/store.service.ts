@@ -148,7 +148,7 @@ export default class StoreService {
     this.editStore('taxes', updatedTaxes);
   }
 
-  removeTax(taxId: string) {
+  deleteTax(taxId: string) {
     const filteredTaxes = this.store.taxes.filter(tax => tax.id !== taxId);
     this.editStore('taxes', filteredTaxes);
   }

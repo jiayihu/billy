@@ -10,6 +10,7 @@ import NavComponent from './components/nav/nav.component';
 import AuthModule from '../features/auth/auth.module';
 import CreateInvoiceModule from '../features/create-invoice/create-invoice.module';
 import CustomersModule from '../features/customers/customers.module';
+import InvoicesModule from '../features/invoices/invoices.module';
 
 import StoreService from '../services/store.service';
 import FormBuilderService from '../services/form-builder.service';
@@ -23,6 +24,7 @@ import GeoService from '../services/geo.service';
     AuthModule,
     CreateInvoiceModule,
     CustomersModule,
+    InvoicesModule,
   ],
   declarations: [
     AppComponent,
