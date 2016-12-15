@@ -1,3 +1,9 @@
+/**
+ * This is just a custom implementation of FormBuilder, built in Angular 2. It's good learning to
+ * use FormGroup and FormControl from scratch.
+ * @see {https://angular.io/docs/ts/latest/api/forms/index/FormBuilder-class.html}
+ */
+
 import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 

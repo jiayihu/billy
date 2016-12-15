@@ -1,0 +1,21 @@
+<select
+  #select
+  (change)="handleSelect($event.target.value)"
+  class="form-control form-control--inline"
+>
+  <option disabled selected value="">{{defaultText}}</option>
+  <option
+    *ngFor="let option of options"
+    [value]="option.value || option.id"
+  >
+    {{option.name}}
+  </option>
+  <!--
+    ng-container is like template, but it allows to keep using * with built-in directives
+    @see https://github.com/angular/angular.io/issues/2303
+  -->
+  <ng-container *ngIf="addOption">
+    <option disabled value>—————————————</option>
+    <option value="add">{{addOptionText}}</option>
+  </ng-container>
+</select>

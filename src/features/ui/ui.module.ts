@@ -8,6 +8,7 @@ import FieldComponent from './field/field.component';
 import IconComponent from './icon/icon.component';
 import InputEditComponent from './input-edit/input-edit.component';
 import ModalComponent from './modal/modal.component';
+import SelectListComponent from './select-list/select-list.component';
 
 const uiComponents = [
   BtnComponent,
@@ -16,6 +17,7 @@ const uiComponents = [
   IconComponent,
   InputEditComponent,
   ModalComponent,
+  SelectListComponent,
 ];
 
 @NgModule({

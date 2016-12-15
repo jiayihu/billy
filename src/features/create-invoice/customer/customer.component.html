@@ -1,17 +1,13 @@
 <div class="customer">
   <div *ngIf="!selectedCustomer">
-    <select
-      (change)="handleSelectCustomer(selectCustomer.value)"
-      name="customer"
-      #selectCustomer
-      class="form-control"
-      id="select-customer"
+    <select-list
+      (onChange)="handleSelectCustomer($event)"
+      [options]="customers"
+      [addOption]="true"
+      addOptionText="Or add a new customer"
+      defaultText="Select a customer"
     >
-      <option disabled selected value>Select a customer</option>
-      <option *ngFor="let customer of customers" [value]="customer.id">{{customer.name}}</option>
-      <option disabled value>—————————————</option>
-      <option value="add" class="add-customer">Or add a new customer</option>
-    </select>
+    </select-list>
   </div>
 
   <div *ngIf="selectedCustomer">

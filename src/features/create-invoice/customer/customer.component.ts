@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, Output, EventEmitter, SimpleChange, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, Output, EventEmitter, SimpleChange } from '@angular/core';
 import { ICustomer } from '../../../services/store.service';
 
 @Component({
@@ -14,8 +14,6 @@ export default class CustomerComponent {
   @Input() customers: ICustomer[];
   @Output() onAddCustomer = new EventEmitter<ICustomer>();
   @Output() onEditCustomer = new EventEmitter<ICustomer>();
-
-  @ViewChild('selectCustomer') htmlSelectCustomer: ElementRef;
 
   ngOnChanges(changes: {customers: SimpleChange}) {
     if (changes.customers) {
@@ -58,7 +56,6 @@ export default class CustomerComponent {
   handleSelectCustomer(selectedCustomerId: string): void {
     if (selectedCustomerId === 'add') {
       this.mode = 'adding';
-      this.htmlSelectCustomer.nativeElement.selectedIndex = 0;
       return;
     }
 
