@@ -1,6 +1,6 @@
 <h3>My customers</h3>
-<ul class="customers list-group">
-  <li class="customer list-group-item" *ngFor="let customer of customers">
+<list-group class="customers">
+  <list-group-item *ngFor="let customer of customers" class="customer">
     <btn
       [id]="customer.id"
       type="link"
@@ -27,8 +27,8 @@
         Delete
       </btn>
     </div>
-  </li>
-</ul>
+  </list-group-item>
+</list-group>
 <customer-edit
   [mode]="isEditing ? 'editing' : null"
   [customer]="editingCustomer"

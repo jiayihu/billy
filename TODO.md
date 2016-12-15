@@ -10,6 +10,7 @@
   - Angular2 API docs: https://angular.io/docs/ts/latest/api/forms/index/ControlValueAccessor-interface.html
 - Use moduleId: module.id for html loading
 - i18n
+- Auth with routeGuards
 
 Long Future:
 - Code splitting and lazy loading maybe
