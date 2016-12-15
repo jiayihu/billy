@@ -15,7 +15,6 @@ import {
   styles: [require('./input-edit.component.css')],
 })
 export default class InputEditComponent {
-  private isEditing: boolean = false;
   private currentValue: string;
   // @NOTE: @ViewChild returns always undefined with *ngIf
   // @see {http://stackoverflow.com/questions/34947154/angular-2-viewchild-annotation-returns-undefined}
@@ -24,9 +23,9 @@ export default class InputEditComponent {
   private inputEl: ElementRef;
 
   @Input() initialValue: string;
-  @Input() charsLength: number = 20;
-  @Input() type: string = 'text';
-  @Output() onChange = new EventEmitter<string>();
+  @Input() charsLength: number = 3;
+  @Input() type: 'text' | 'number' | 'calendar' = 'text';
+  @Output() onChange = new EventEmitter<any>();
 
   ngOnChanges(changes: { initialValue: SimpleChange }) {
     if (changes.initialValue.previousValue !== changes.initialValue.currentValue) {
@@ -45,11 +44,9 @@ export default class InputEditComponent {
   }
 
   handleChange(value: string) {
-    this.isEditing = false;
-    this.onChange.emit(value);
-  }
+    let formattedValue: any = value;
+    if (this.type === 'number') formattedValue = Number(value);
 
-  handleStartEdit() {
-    this.isEditing = true;
+    this.onChange.emit(formattedValue);
   }
 }
