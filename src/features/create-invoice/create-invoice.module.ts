@@ -10,6 +10,7 @@ import CreateInvoiceComponent from './create-invoice.component';
 import CustomerComponent from './customer/customer.component';
 import UserBusinessComponent from './user-business/user-business.component';
 import TasksComponent from './tasks/tasks.component';
+import TaxesComponent from './taxes/taxes.component';
 
 @NgModule({
   imports: [
@@ -25,6 +26,7 @@ import TasksComponent from './tasks/tasks.component';
     CustomerComponent,
     UserBusinessComponent,
     TasksComponent,
+    TaxesComponent,
    ],
   exports: [CreateInvoiceComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

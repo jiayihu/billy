@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
-import StoreService, { IUser, ICustomer, IInvoice, ITask } from '../../services/store.service';
+import StoreService, { IUser, ICustomer, IInvoice, ITask, ITax } from '../../services/store.service';
 import * as moment from 'moment';
 import isNaN = require('lodash/isNaN');
 
@@ -10,11 +10,12 @@ import isNaN = require('lodash/isNaN');
   styles: [require('./create-invoice.component.css')],
 })
 export default class CreateInvoiceComponent {
-  user: IUser;
-  customers: ICustomer[];
-  invoice: IInvoice;
+  private user: IUser;
+  private customers: ICustomer[];
+  private invoice: IInvoice;
 
   private storeSub: Subscription;
+  private storeTaxes: ITax[];
 
   // @NOTE: Only for development
   private persistTasks() {
@@ -29,11 +30,20 @@ export default class CreateInvoiceComponent {
       location: 'Padova',
       number: 1, // @TODO: update with latest invoice number + 1
       tasks: storedTasks || [],
+      taxes: [],
       user: this.user,
     };
-    this.storeSub = storeService.store$.subscribe(store => {
+  }
+
+  ngOnInit() {
+    this.storeSub = this.storeService.store$.subscribe(store => {
       this.user = store.user;
       this.customers = store.customers;
+      this.storeTaxes = store.taxes;
+    });
+
+    this.storeService.store$.take(1).subscribe(store => {
+      if (this.invoice.taxes.length === 0) this.invoice.taxes = store.taxes;
     });
   }
 
@@ -69,11 +79,10 @@ export default class CreateInvoiceComponent {
     this.invoice.location = newLocation;
   }
 
-  handleEditNumber(newNumber: string): void {
-    const number = Number(newNumber);
-    if (isNaN(number)) return;
+  handleEditNumber(newNumber: number): void {
+    if (isNaN(newNumber)) return;
 
-    this.invoice.number = number;
+    this.invoice.number = newNumber;
   }
 
   /**
@@ -91,9 +100,7 @@ export default class CreateInvoiceComponent {
 
   handleEditTask(updatedTask: ITask) {
     const updatedTasks = this.invoice.tasks.map(task => {
-      if (task.id === updatedTask.id) {
-        return Object.assign({}, task, updatedTask);
-      }
+      if (task.id === updatedTask.id) return updatedTask;
       return task;
     });
 
@@ -108,5 +115,46 @@ export default class CreateInvoiceComponent {
       tasks: this.invoice.tasks.filter(task => task.id !== taskId),
     });
     this.persistTasks();
+  }
+
+  /**
+   * Invoice taxes event listeners
+   */
+
+  handleAddTax() {
+    const newTax: ITax = {
+      id: this.storeService.generateId('TAX'),
+      name: `Tax #${this.storeTaxes.length + 1}`,
+      rate: 0,
+    };
+    this.invoice = Object.assign({}, this.invoice, {
+      taxes: this.invoice.taxes.concat(newTax),
+    });
+    this.storeService.addTax(newTax);
+  }
+
+  handleAddInvoiceTax(taxId: string) {
+    const tax = this.storeTaxes.find(item => item.id === taxId);
+    this.invoice = Object.assign({}, this.invoice, {
+      taxes: this.invoice.taxes.concat(tax),
+    });
+  }
+
+  handleEditTax(updatedTax: ITax) {
+    const updatedTaxes = this.invoice.taxes.map(tax => {
+      if (tax.id === updatedTax.id) return updatedTax;
+      return tax;
+    });
+
+    this.invoice = Object.assign({}, this.invoice, {
+      taxes: updatedTaxes,
+    });
+    this.storeService.editTax(updatedTax);
+  }
+
+  handleRemoveTax(taxId: string) {
+    this.invoice = Object.assign({}, this.invoice, {
+      taxes: this.invoice.taxes.filter(tax => tax.id !== taxId),
+    });
   }
 }

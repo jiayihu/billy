@@ -135,7 +135,21 @@ export default class StoreService {
     this.editStore('customers', updatedCustomers);
   }
 
-  generateId(entity: string): string {
-    return `${entity.toUpperCase()}_${uuid.v4()}`;
+  addTax(tax: ITax) {
+    this.editStore('taxes', this.store.taxes.concat(tax));
+  }
+
+  editTax(updatedTax: ITax) {
+    const updatedTaxes = this.store.taxes.map(tax => {
+      if (tax.id === updatedTax.id) return updatedTax;
+      return tax;
+    });
+
+    this.editStore('taxes', updatedTaxes);
+  }
+
+  removeTax(taxId: string) {
+    const filteredTaxes = this.store.taxes.filter(tax => tax.id !== taxId);
+    this.editStore('taxes', filteredTaxes);
   }
 }

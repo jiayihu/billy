@@ -19,6 +19,7 @@
       Invoice #
       <input-edit
         class="invoice-number"
+        [charsLength]="4"
         [initialValue]="invoice.number"
         type="number"
         (onChange)="handleEditNumber($event)"
@@ -31,4 +32,13 @@
     (onEditTask)="handleEditTask($event)"
     (onRemoveTask)="handleRemoveTask($event)"
   ></tasks>
+  <taxes
+    [subtotal]="invoice.tasks | reduceSum:'amount'"
+    [availableTaxes]="storeTaxes"
+    [invoiceTaxes]="invoice.taxes"
+    (onAddTax)="handleAddTax($event)"
+    (onAddInvoiceTax)="handleAddInvoiceTax($event)"
+    (onEditTax)="handleEditTax($event)"
+    (onRemoveTax)="handleRemoveTax($event)"
+  ></taxes>
 </div>

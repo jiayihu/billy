@@ -33,15 +33,14 @@ export default class TasksComponent {
   }
 
   handleTaskChange(property: string, taskId: string, event: any) {
-    const isNumberProp = property === 'quantity' || property === 'price';
-    const newValue = isNumberProp ? Number(event.target.value) : event.target.value;
+    const newValue = event.target.value;
     const isNewTask = taskId === 'new-task';
     const task = isNewTask ? this.newTask : this.tasks.find(item => item.id === taskId);
     const updatedTask = Object.assign({}, task, {
       [property]: newValue,
     });
 
-    if (isNumberProp) {
+    if (property === 'quantity' || property === 'price') {
       updatedTask.amount = updatedTask.quantity * updatedTask.price;
     }
 

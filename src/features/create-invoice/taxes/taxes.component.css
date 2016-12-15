@@ -1,0 +1,43 @@
+:host {
+  display: block;
+  text-align: right;
+}
+
+.tax {
+  align-items: center;
+  display: flex;
+
+  &-name,
+  &-rate,
+  &-amount {
+    padding: .75rem;
+  }
+
+  &-name {
+    flex-grow: 1;
+    position: relative;
+  }
+
+  &-rate {
+    box-sizing: content-box;
+    flex-basis: 10%;
+    min-width: 7.5rem;
+    text-align: center;
+  }
+
+  &-amount {
+    flex-basis: 15%;
+    min-width: 10rem;
+    text-align: left;
+  }
+}
+
+.delete-btn {
+  color: var(--accent);
+  cursor: pointer;
+  margin-right: .5rem;
+}
+
+.tax-select {
+  margin-top: 1rem;
+}

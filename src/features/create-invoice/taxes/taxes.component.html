@@ -1,0 +1,28 @@
+<div *ngFor="let tax of invoiceTaxes" class="tax">
+  <div class="tax-name">
+    <icon class="delete-btn" name="circle-minus" [size]="1.5" (click)="handleTaxRemove(tax.id)"></icon>
+    <input
+      [value]="tax.name"
+      (change)="handleTaxChange('name', tax.id, $event.target.value)"
+      class="form-control form-control--inline"
+      type="text"
+    />
+  </div>
+  <div class="tax-rate">
+    Rate:
+    <input-edit
+      [initialValue]="tax.rate"
+      (onChange)="handleTaxChange('rate', tax.id, $event)"
+      type="number"
+    ></input-edit> %
+  </div>
+  <div class="tax-amount">{{tax.rate * subtotal / 100 | money}}</div>
+</div>
+<select-list
+  class="tax-select"
+  (onChange)="handleSelectTax($event)"
+  [options]="availableTaxes | filter:{ notIn: invoiceTaxes }"
+  [addOption]="true"
+  addOptionText="Or add a new tax"
+  defaultText="Select a tax"
+></select-list>

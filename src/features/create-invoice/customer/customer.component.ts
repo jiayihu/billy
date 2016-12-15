@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, Output, EventEmitter, SimpleChange } from '@angular/core';
+import { Component, Input, Output, EventEmitter, SimpleChange } from '@angular/core';
 import { ICustomer } from '../../../services/store.service';
 
 @Component({
