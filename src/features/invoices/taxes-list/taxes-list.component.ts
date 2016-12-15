@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ITax } from '../../../services/store.service';
 import { FormGroup } from '@angular/forms';
-import FormBuilderService, { IField, } from '../../../services/form-builder.service';
+import FormBuilderService, { IField } from '../../../services/form-builder.service';
 
 @Component({
   selector: 'taxes-list',
@@ -34,7 +34,6 @@ export default class TaxesListComponent {
       },
     ];
   }
-
 
   buildForm(tax: ITax): void {
     this.fields.forEach(field => field.value = tax[field.name] || '');
