@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import uuid = require('uuid');
-import set = require('lodash/set');
+import set = require('lodash/fp/set');
 
 export interface IUser {
   name: string;
@@ -99,7 +99,7 @@ export default class StoreService {
   }
 
   private editStore(path: string, value: any) {
-    this.store = set(this.store, path, value) as IStore;
+    this.store = set(path, value, this.store) as IStore;
     this.persist('store', this.store);
     this.storeSource.next(this.store);
   }
