@@ -15,7 +15,11 @@ export default class TasksComponent {
   @Output() onRemoveTask = new EventEmitter<string>();
 
   constructor() {
-    this.newTask = {
+    this.newTask = this.getDefaultTask();
+  }
+
+  getDefaultTask(): ITask {
+    return {
       id: '',
       description: '',
       quantity: 0,
@@ -26,6 +30,7 @@ export default class TasksComponent {
 
   handleAddTask() {
     this.onAddTask.emit(this.newTask);
+    this.newTask = this.getDefaultTask();
   }
 
   handleRemoveTask(taskId: string) {
