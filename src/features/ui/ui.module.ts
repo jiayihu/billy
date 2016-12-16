@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import BtnComponent from './button/button.component';
+import BtnComponent from './btn/btn.component';
 import DatepickerComponent from './datepicker/datepicker.component';
 import FieldComponent from './field/field.component';
 import IconComponent from './icon/icon.component';

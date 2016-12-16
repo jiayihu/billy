@@ -11,6 +11,7 @@
 - Use moduleId: module.id for html loading
 - i18n
 - Auth with routeGuards
+- Use lodash/fp
 
 Long Future:
 - Code splitting and lazy loading maybe
