@@ -9,4 +9,3 @@ The stack of technologies used for this project is the following:
 - Webpack
 - Bootstrap 4
 - CSS next
-- Service Workers
