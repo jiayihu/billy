@@ -7,7 +7,7 @@ import get = require('lodash/get');
 
 @Component({
   selector: 'customer-edit',
-  template: require('./customer-edit.component.html'),
+  templateUrl: './customer-edit.component.html',
 })
 export default class CustomerEditComponent {
   private fields: Array<IField | ISelectField>;

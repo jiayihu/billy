@@ -55,7 +55,7 @@ module.exports = {
     loaders: [
       {
         test: /\.tsx?$/,
-        loader: 'ts',
+        loaders: ['ts', 'angular2-template'],
         include: root.src,
       },
       {

@@ -4,7 +4,7 @@ import { IField, ISelectField } from '../../../services/form-builder.service';
 
 @Component({
   selector: 'field',
-  template: require('./field.component.html'),
+  templateUrl: './field.component.html',
 })
 export default class FieldComponent {
   @Input() form: FormGroup;

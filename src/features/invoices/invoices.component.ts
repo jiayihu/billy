@@ -4,7 +4,7 @@ import StoreService, { ITax } from '../../services/store.service';
 
 @Component({
   selector: 'invoices',
-  template: require('./invoices.component.html'),
+  templateUrl: './invoices.component.html',
 })
 export default class InvoicesComponent implements OnDestroy {
   private storeTaxes: ITax[] = [];

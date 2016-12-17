@@ -3,8 +3,8 @@ import { ITask } from '../../../services/store.service';
 
 @Component({
   selector: 'tasks',
-  template: require('./tasks.component.html'),
-  styles: [require('./tasks.component.css')],
+  templateUrl: './tasks.component.html',
+  styleUrls: ['./tasks.component.css'],
 })
 export default class TasksComponent {
   private newTask: ITask;

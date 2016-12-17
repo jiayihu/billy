@@ -14,8 +14,8 @@ import 'pikaday/css/pikaday.css';
 
 @Component({
   selector: 'datepicker',
-  template: require('./datepicker.component.html'),
-  styles: [require('./datepicker.component.css')],
+  templateUrl: './datepicker.component.html',
+  styleUrls: ['./datepicker.component.css'],
 })
 export default class DatepickerComponent implements AfterViewInit, OnDestroy {
   @ViewChild('input')

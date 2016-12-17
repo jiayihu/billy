@@ -7,7 +7,7 @@ interface ISelectOption {
 
 @Component({
   selector: 'select-list',
-  template: require('./select-list.component.html'),
+  templateUrl: './select-list.component.html',
 })
 export default class SelectListComponent {
   @Input() addOption: boolean;

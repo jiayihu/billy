@@ -5,8 +5,8 @@ import FormBuilderService, { IField } from '../../../services/form-builder.servi
 
 @Component({
   selector: 'taxes-list',
-  template: require('./taxes-list.component.html'),
-  styles: [require('./taxes-list.component.css')],
+  templateUrl: './taxes-list.component.html',
+  styleUrls: ['./taxes-list.component.css'],
 })
 export default class TaxesListComponent {
   private isEditing: boolean = false;

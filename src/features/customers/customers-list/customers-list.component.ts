@@ -4,8 +4,8 @@ import StoreService, { ICustomer } from '../../../services/store.service';
 
 @Component({
   selector: 'customers',
-  template: require('./customers-list.component.html'),
-  styles: [require('./customers-list.component.css')],
+  templateUrl: './customers-list.component.html',
+  styleUrls: ['./customers-list.component.css'],
 })
 export default class CustomersListComponent implements OnDestroy {
   private isEditing: boolean = false;

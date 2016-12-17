@@ -3,8 +3,8 @@ import { ITax } from '../../../services/store.service';
 
 @Component({
   selector: 'taxes',
-  template: require('./taxes.component.html'),
-  styles: [require('./taxes.component.css')],
+  templateUrl: './taxes.component.html',
+  styleUrls: ['./taxes.component.css'],
 })
 export default class TaxesComponent {
   @Input() subtotal: number = 0;

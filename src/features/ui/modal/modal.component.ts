@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'modal',
-  template: require('./modal.component.html'),
+  templateUrl: './modal.component.html',
 })
 export default class Modal {
   @Input() disabled: boolean;

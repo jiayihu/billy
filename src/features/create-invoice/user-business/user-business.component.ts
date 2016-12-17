@@ -6,8 +6,8 @@ import FormBuilderService, { IField, ISelectField, isSelectField } from '../../.
 
 @Component({
   selector: 'user-business',
-  template: require('./user-business.component.html'),
-  styles: [require('./user-business.component.css')],
+  templateUrl: './user-business.component.html',
+  styleUrls: ['./user-business.component.css'],
 })
 export default class UserBusinessComponent {
   private isEditing: boolean;

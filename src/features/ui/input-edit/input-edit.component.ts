@@ -8,8 +8,8 @@ import {
 
 @Component({
   selector: 'input-edit',
-  template: require('./input-edit.component.html'),
-  styles: [require('./input-edit.component.css')],
+  templateUrl: './input-edit.component.html',
+  styleUrls: ['./input-edit.component.css'],
 })
 export default class InputEditComponent {
   private currentValue: string;

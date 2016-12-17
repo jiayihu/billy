@@ -2,8 +2,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'btn',
-  template: require('./btn.component.html'),
-  styles: [require('./btn.component.css')],
+  templateUrl: './btn.component.html',
+  styleUrls: ['./btn.component.css'],
 })
 export default class BtnComponent {
   @Input() id: string;

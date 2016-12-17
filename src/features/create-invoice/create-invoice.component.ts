@@ -6,8 +6,8 @@ import isNaN = require('lodash/isNaN');
 
 @Component({
   selector: 'create-invoice',
-  template: require('./create-invoice.component.html'),
-  styles: [require('./create-invoice.component.css')],
+  templateUrl: './create-invoice.component.html',
+  styleUrls: ['./create-invoice.component.css'],
 })
 export default class CreateInvoiceComponent {
   private user: IUser;

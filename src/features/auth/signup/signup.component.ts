@@ -4,7 +4,7 @@ import { firebase } from '../../../firebase';
 
 @Component({
   selector: 'signup',
-  template: require('./signup.component.html'),
+  templateUrl: './signup.component.html',
 })
 export default class SignupComponent {
   email: string;

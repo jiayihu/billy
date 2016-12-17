@@ -3,8 +3,8 @@ import { ICustomer } from '../../../services/store.service';
 
 @Component({
   selector: 'customer',
-  template: require('./customer.component.html'),
-  styles: [require('./customer.component.css')],
+  templateUrl: './customer.component.html',
+  styleUrls: ['./customer.component.css'],
 })
 export default class CustomerComponent {
   private selectedCustomer: ICustomer;
