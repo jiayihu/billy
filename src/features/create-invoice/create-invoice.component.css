@@ -1,8 +1,17 @@
 .invoice-date-number {
-  margin-bottom: 3rem;
-  margin-top: 3rem;
+  margin: 5rem 0 3rem;
 }
 
 .invoice-number {
   font-size: 1.5rem;
+}
+
+.taxes {
+  display: block;
+  margin: 2rem 0;
+}
+
+.invoice-total {
+  font-size: 1.25rem;
+  text-align: right;
 }

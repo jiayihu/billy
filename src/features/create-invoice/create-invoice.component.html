@@ -33,6 +33,7 @@
     (onRemoveTask)="handleRemoveTask($event)"
   ></tasks>
   <taxes
+    class="taxes"
     [subtotal]="invoice.tasks | reduceSum:'amount'"
     [availableTaxes]="storeTaxes"
     [invoiceTaxes]="invoice.taxes"
@@ -41,4 +42,9 @@
     (onEditTax)="handleEditTax($event)"
     (onRemoveTax)="handleRemoveTax($event)"
   ></taxes>
+  <p class="invoice-total">
+    Total:
+    {{(invoice.tasks | reduceSum:'amount') * ( 1 + (invoice.taxes | reduceSum:'rate') / 100) | currency:'EUR':true}}
+  </p>
+  <notes (onNotesChange)="handleNotesChange($event)"></notes>
 </div>

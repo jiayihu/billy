@@ -8,6 +8,7 @@ import UIModule from '../ui/ui.module';
 
 import CreateInvoiceComponent from './create-invoice.component';
 import CustomerComponent from './customer/customer.component';
+import NotesComponent from './notes/notes.component';
 import UserBusinessComponent from './user-business/user-business.component';
 import TasksComponent from './tasks/tasks.component';
 import TaxesComponent from './taxes/taxes.component';
@@ -24,6 +25,7 @@ import TaxesComponent from './taxes/taxes.component';
   declarations: [
     CreateInvoiceComponent,
     CustomerComponent,
+    NotesComponent,
     UserBusinessComponent,
     TasksComponent,
     TaxesComponent,

@@ -26,8 +26,10 @@ export default class CreateInvoiceComponent {
     const storedTasks = JSON.parse(window.localStorage.getItem('billy-tasks'));
     this.invoice = {
       id: '',
+      customer: null,
       date: moment().format('DD/MM/YYYY'),
       location: 'Padova',
+      notes: '',
       number: 1, // @TODO: update with latest invoice number + 1
       tasks: storedTasks || [],
       taxes: [],
@@ -155,6 +157,12 @@ export default class CreateInvoiceComponent {
   handleRemoveTax(taxId: string) {
     this.invoice = Object.assign({}, this.invoice, {
       taxes: this.invoice.taxes.filter(tax => tax.id !== taxId),
+    });
+  }
+
+  handleNotesChange(notes: string) {
+    this.invoice = Object.assign({}, this.invoice, {
+      notes,
     });
   }
 }

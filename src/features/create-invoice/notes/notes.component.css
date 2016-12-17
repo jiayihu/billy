@@ -1,0 +1,14 @@
+:host {
+  display: block;
+  margin-top: 10rem;
+}
+
+.notes {
+  color: var(--divider);
+  text-transform: uppercase;
+
+  &-textarea {
+    height: 10rem;
+    line-height: 1.5;
+  }
+}
