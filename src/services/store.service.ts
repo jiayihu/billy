@@ -44,12 +44,13 @@ export interface ITax {
 export interface IInvoice {
   id: string;
   currency?: string;
-  customer?: ICustomer;
+  customer: ICustomer;
   date: string;
-  location?: string;
+  location: string;
+  notes: string;
   number: number;
-  tasks?: ITask[];
-  taxes?: ITax[];
+  tasks: ITask[];
+  taxes: ITax[];
   user: IUser;
 }
 

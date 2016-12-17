@@ -16,20 +16,8 @@
     </span>
     <span class="tax-rate">{{tax.rate}}%</span>
     <span class="tax-actions">
-      <btn
-        type="link"
-        class="edit-action"
-        (onClick)="handleTaxEdit(tax.id)"
-      >
-        Edit
-      </btn>
-      <btn
-        type="link"
-        class="delete-action"
-        (onClick)="handleTaxDelete(tax.id)"
-      >
-        Delete
-      </btn>
+      <btn type="link" class="edit-action" (onClick)="handleTaxEdit(tax.id)">Edit</btn>
+      <btn type="link" class="delete-action" (onClick)="handleTaxDelete(tax.id)">Delete</btn>
     </span>
   </list-group-item>
 </list-group>
