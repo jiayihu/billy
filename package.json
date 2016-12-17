@@ -36,7 +36,7 @@
     "style-loader": "^0.13.1",
     "ts-loader": "^0.8.2",
     "tslint": "^3.15.1",
-    "typescript": "^2.0.3",
+    "typescript": "^2.1.4",
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.15.2"
   },

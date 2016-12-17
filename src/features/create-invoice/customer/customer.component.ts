@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, SimpleChange } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ICustomer } from '../../../services/store.service';
 
 @Component({
@@ -7,27 +7,14 @@ import { ICustomer } from '../../../services/store.service';
   styleUrls: ['./customer.component.css'],
 })
 export default class CustomerComponent {
-  private selectedCustomer: ICustomer;
-
   private mode: 'adding' | 'editing' | '' = '';
 
   @Input() customers: ICustomer[];
+  @Input() selectedCustomer: ICustomer;
   @Output() onAddCustomer = new EventEmitter<ICustomer>();
   @Output() onEditCustomer = new EventEmitter<ICustomer>();
-
-  ngOnChanges(changes: {customers: SimpleChange}) {
-    if (changes.customers) {
-      const currentCustomers = changes.customers.currentValue;
-
-      // If there is only one customer when set it as selected by default
-      if (!this.selectedCustomer && currentCustomers.length === 1) {
-        const selectedCustomerId = currentCustomers[0].id;
-        this.selectedCustomer = this.customers.find(customer => customer.id === selectedCustomerId);
-      } else if (this.selectedCustomer) {
-        this.selectedCustomer = this.customers.find(customer => customer.id === this.selectedCustomer.id);
-      }
-    }
-  }
+  @Output() onRemoveCustomer = new EventEmitter<void>();
+  @Output() onSelectCustomer = new EventEmitter<string>();
 
   closeModal(): void {
     this.mode = '';
@@ -50,7 +37,7 @@ export default class CustomerComponent {
   }
 
   handleRemoveCustomer(): void {
-    this.selectedCustomer = null;
+    this.onRemoveCustomer.emit();
   }
 
   handleSelectCustomer(selectedCustomerId: string): void {
@@ -59,6 +46,6 @@ export default class CustomerComponent {
       return;
     }
 
-    this.selectedCustomer = this.customers.find(customer => customer.id === selectedCustomerId);
+    this.onSelectCustomer.emit(selectedCustomerId);
   }
 }

@@ -5,8 +5,11 @@
     <div class="col-sm-4 offset-sm-8">
       <customer
         [customers]="customers"
+        [selectedCustomer]="invoice.customer"
         (onAddCustomer)="handleAddCustomer($event)"
         (onEditCustomer)="handleEditCustomer($event)"
+        (onRemoveCustomer)="handleRemoveCustomer($event)"
+        (onSelectCustomer)="handleSelectCustomer($event)"
       ></customer>
     </div>
   </div>

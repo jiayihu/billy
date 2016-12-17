@@ -127,9 +127,9 @@ export default class StoreService {
     this.editStore('customers', filteredCustomers);
   }
 
-  editCustomer(customerId: string, newCustomer: ICustomer): void {
+  editCustomer(newCustomer: ICustomer): void {
     const updatedCustomers = this.store.customers.map(customer => {
-      if (customer.id !== customerId) return customer;
+      if (customer.id !== newCustomer.id) return customer;
 
       return Object.assign({}, customer, newCustomer);
     });

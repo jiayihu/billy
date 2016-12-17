@@ -44,7 +44,10 @@ export default class CustomersListComponent implements OnDestroy {
   }
 
   handleEditEnd(formValue) {
-    this.storeService.editCustomer(this.editingCustomer.id, formValue);
+    this.storeService.editCustomer({
+      ...formValue,
+      id: this.editingCustomer.id,
+    });
     this.endEdit();
   }
 }

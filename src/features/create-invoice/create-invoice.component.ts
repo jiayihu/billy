@@ -42,6 +42,8 @@ export default class CreateInvoiceComponent {
       this.user = store.user;
       this.customers = store.customers;
       this.storeTaxes = store.taxes;
+
+      this.setInvoiceCustomer(store.customers);
     });
 
     this.storeService.store$.take(1).subscribe(store => {
@@ -51,6 +53,26 @@ export default class CreateInvoiceComponent {
 
   ngOnDestroy() {
     this.storeSub.unsubscribe();
+  }
+
+  setInvoiceCustomer(customers: ICustomer[]) {
+    const invoice = this.invoice;
+    let invoiceCustomer: ICustomer;
+
+    if (!invoice.customer && customers.length === 1) {
+      // If there is no customer selected and only one available set it as default
+      invoiceCustomer = customers[0];
+    } else if (invoice.customer) {
+      // The selected customer could be changed
+      invoiceCustomer = customers.find(customer => customer.id === invoice.customer.id);
+    }
+
+    if (invoiceCustomer) {
+      this.invoice = {
+        ...invoice,
+        customer: invoiceCustomer,
+      };
+    }
   }
 
   handleBusinessChange(newBusinessInfo): void {
@@ -66,7 +88,21 @@ export default class CreateInvoiceComponent {
   }
 
   handleEditCustomer(newCustomer: ICustomer): void {
-    this.storeService.editCustomer(newCustomer.id, newCustomer);
+    this.storeService.editCustomer(newCustomer);
+  }
+
+  handleRemoveCustomer(): void {
+    this.invoice = {
+      ...this.invoice,
+      customer: null,
+    };
+  }
+
+  handleSelectCustomer(selectedCustomerId: string): void {
+    this.invoice = {
+      ...this.invoice,
+      customer: this.customers.find(customer => customer.id === selectedCustomerId),
+    };
   }
 
   handleEditDate(newDate: string): void {
