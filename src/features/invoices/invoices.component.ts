@@ -7,7 +7,7 @@ import StoreService, { ITax } from '../../services/store.service';
   templateUrl: './invoices.component.html',
 })
 export default class InvoicesComponent implements OnDestroy {
-  private storeTaxes: ITax[] = [];
+  storeTaxes: ITax[] = [];
   private storeSub: Subscription;
 
   constructor(private storeService: StoreService) {

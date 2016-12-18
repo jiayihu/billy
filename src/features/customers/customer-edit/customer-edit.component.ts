@@ -10,8 +10,8 @@ import get = require('lodash/get');
   templateUrl: './customer-edit.component.html',
 })
 export default class CustomerEditComponent {
-  private fields: Array<IField | ISelectField>;
-  private form: FormGroup;
+  fields: Array<IField | ISelectField>;
+  form: FormGroup;
 
   @Input() mode: 'adding' | 'editing' | '';
   @Input() customer: ICustomer;

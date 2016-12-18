@@ -8,11 +8,11 @@ import StoreService, { ICustomer } from '../../../services/store.service';
   styleUrls: ['./customers-list.component.css'],
 })
 export default class CustomersListComponent implements OnDestroy {
-  private isEditing: boolean = false;
-  private editingCustomer: ICustomer;
+  isEditing: boolean = false;
+  editingCustomer: ICustomer;
+  customers: ICustomer[];
 
   private storeSub: Subscription;
-  private customers: ICustomer[];
 
   constructor(private storeService: StoreService) {
     this.storeSub = storeService.store$.subscribe(store => {

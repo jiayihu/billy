@@ -7,7 +7,7 @@ import { ITask } from '../../../services/store.service';
   styleUrls: ['./tasks.component.css'],
 })
 export default class TasksComponent {
-  private newTask: ITask;
+  newTask: ITask;
 
   @Input() tasks: ITask[] = [];
   @Output() onAddTask = new EventEmitter<ITask>();

@@ -8,6 +8,7 @@
   - Angular2 API docs: https://angular.io/docs/ts/latest/api/forms/index/ControlValueAccessor-interface.html
 - i18n
 - Auth with routeGuards
+- Understand Zone.js in Angular 2
 
 Long Future:
 - Code splitting and lazy loading maybe

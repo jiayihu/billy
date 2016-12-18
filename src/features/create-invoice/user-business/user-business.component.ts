@@ -10,9 +10,9 @@ import FormBuilderService, { IField, ISelectField, isSelectField } from '../../.
   styleUrls: ['./user-business.component.css'],
 })
 export default class UserBusinessComponent {
-  private isEditing: boolean;
-  private fields: Array<IField | ISelectField>;
-  private form: FormGroup;
+  isEditing: boolean;
+  fields: Array<IField | ISelectField>;
+  form: FormGroup;
 
   @Input() user: IUser;
   @Output() onBusinessChange = new EventEmitter<IUser>();

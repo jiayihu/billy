@@ -7,7 +7,7 @@ import { ICustomer } from '../../../services/store.service';
   styleUrls: ['./customer.component.css'],
 })
 export default class CustomerComponent {
-  private mode: 'adding' | 'editing' | '' = '';
+  mode: 'adding' | 'editing' | '' = '';
 
   @Input() customers: ICustomer[];
   @Input() selectedCustomer: ICustomer;

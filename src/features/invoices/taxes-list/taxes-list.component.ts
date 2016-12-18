@@ -9,10 +9,10 @@ import FormBuilderService, { IField } from '../../../services/form-builder.servi
   styleUrls: ['./taxes-list.component.css'],
 })
 export default class TaxesListComponent {
-  private isEditing: boolean = false;
-  private selectedTaxId: string;
-  private form: FormGroup;
-  private fields: IField[];
+  isEditing: boolean = false;
+  selectedTaxId: string;
+  form: FormGroup;
+  fields: IField[];
 
   @Input() taxes: ITax[] = [];
   @Output() onEditTax = new EventEmitter<ITax>();

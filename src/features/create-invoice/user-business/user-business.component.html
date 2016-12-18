@@ -22,5 +22,5 @@
     <span [hidden]="!user.province">({{user.province}})</span>
   </p>
   <p *ngIf="user.vat">VAT {{user.vat}}</p>
-  <a (click)="handleEdit()">Edit your business details</a>
+  <btn type="link" (onClick)="handleEdit()">Edit your business details</btn>
 </div>

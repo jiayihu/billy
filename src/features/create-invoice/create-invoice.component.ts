@@ -10,12 +10,12 @@ import isNaN = require('lodash/isNaN');
   styleUrls: ['./create-invoice.component.css'],
 })
 export default class CreateInvoiceComponent {
-  private user: IUser;
-  private customers: ICustomer[];
-  private invoice: IInvoice;
+  user: IUser;
+  customers: ICustomer[];
+  invoice: IInvoice;
+  storeTaxes: ITax[];
 
   private storeSub: Subscription;
-  private storeTaxes: ITax[];
 
   // @NOTE: Only for development
   private persistTasks() {
