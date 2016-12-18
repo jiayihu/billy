@@ -5,7 +5,7 @@
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "isolatedModules": false,
-        "lib": ["es5", "dom", "es6", "dom.iterable", "scripthost"],
+        "lib": ["es5", "dom", "es2015", "dom.iterable", "scripthost"],
         "jsx": "react",
         "module": "commonjs",
         "moduleResolution": "node",

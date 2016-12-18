@@ -10,8 +10,10 @@ export default class InvoicesComponent implements OnDestroy {
   storeTaxes: ITax[] = [];
   private storeSub: Subscription;
 
-  constructor(private storeService: StoreService) {
-    this.storeSub = storeService.store$.subscribe(store => {
+  constructor(private storeService: StoreService) {}
+
+  ngOnInit() {
+    this.storeSub = this.storeService.store$.subscribe(store => {
       this.storeTaxes = store.taxes;
     });
   }

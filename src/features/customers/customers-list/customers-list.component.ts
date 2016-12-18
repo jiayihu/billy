@@ -14,8 +14,10 @@ export default class CustomersListComponent implements OnDestroy {
 
   private storeSub: Subscription;
 
-  constructor(private storeService: StoreService) {
-    this.storeSub = storeService.store$.subscribe(store => {
+  constructor(private storeService: StoreService) {}
+
+  ngOnInit() {
+    this.storeSub = this.storeService.store$.subscribe(store => {
       const customers = store.customers;
       this.customers = customers;
 
