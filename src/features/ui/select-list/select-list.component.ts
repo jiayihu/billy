@@ -1,4 +1,12 @@
-import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
 
 interface ISelectOption {
   name: string;
@@ -8,6 +16,7 @@ interface ISelectOption {
 @Component({
   selector: 'select-list',
   templateUrl: './select-list.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class SelectListComponent {
   @Input() addOption: boolean;

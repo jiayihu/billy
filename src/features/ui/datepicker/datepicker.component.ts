@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   EventEmitter,
@@ -16,6 +17,7 @@ import 'pikaday/css/pikaday.css';
   selector: 'datepicker',
   templateUrl: './datepicker.component.html',
   styleUrls: ['./datepicker.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class DatepickerComponent implements AfterViewInit, OnDestroy {
   @ViewChild('input')

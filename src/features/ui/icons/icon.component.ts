@@ -1,9 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
   selector: 'icon',
   templateUrl: './icon.component.html',
   styleUrls: ['./icon.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class IconComponent {
   @Input() name: string;

@@ -1,29 +1,22 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   Input,
   Output,
-  SimpleChange,
 } from '@angular/core';
 
 @Component({
   selector: 'input-edit',
   templateUrl: './input-edit.component.html',
   styleUrls: ['./input-edit.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class InputEditComponent {
-  private currentValue: string;
-
   @Input() initialValue: string;
   @Input() charsLength: number = 3;
   @Input() type: 'text' | 'number' | 'calendar' = 'text';
   @Output() onChange = new EventEmitter<any>();
-
-  ngOnChanges(changes: { initialValue: SimpleChange }) {
-    if (changes.initialValue.previousValue !== changes.initialValue.currentValue) {
-      this.currentValue = changes.initialValue.currentValue;
-    }
-  }
 
   handleChange(value: string) {
     let formattedValue: any = value;

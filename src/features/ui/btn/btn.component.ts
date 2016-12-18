@@ -1,9 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'btn',
   templateUrl: './btn.component.html',
   styleUrls: ['./btn.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class BtnComponent {
   @Input() id: string;

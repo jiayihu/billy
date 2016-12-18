@@ -1,10 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { IField, ISelectField } from '../../../services/form-builder.service';
 
 @Component({
   selector: 'field',
   templateUrl: './field.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class FieldComponent {
   @Input() form: FormGroup;
@@ -20,7 +21,6 @@ export default class FieldComponent {
       let formattedValue: any = rawValue;
 
       if (field.controlType === 'number') formattedValue = Number(rawValue);
-      console.log(field.controlType);
 
       field.onChange(formattedValue);
     }

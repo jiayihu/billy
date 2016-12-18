@@ -1,16 +1,16 @@
 <span [ngSwitch]="type">
   <datepicker
     *ngSwitchCase="'datepicker'"
-    [value]="currentValue"
+    [value]="initialValue"
     (onChange)="handleChange($event)"
   ></datepicker>
   <input
     #input
     *ngSwitchDefault
-    [attr.size]="currentValue.length || charsLength"
+    [attr.size]="initialValue.length || charsLength"
     class="input-edit form-control form-control--inline"
     type="text"
-    [value]="currentValue"
+    [value]="initialValue"
     (blur)="handleChange(input.value)"
     (keyup.enter)="handleChange(input.value)"
   />

@@ -1,5 +1,3 @@
-- Save selectedCustomer in create-invoice
-- Change Detection Strategy with OnPush
 - Create Custom Validator for VAT for example
 - Create Tooltip directive for forms errors
 - Async Pipe
