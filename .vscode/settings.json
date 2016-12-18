@@ -1,6 +1,0 @@
-// Inserire le impostazioni in questo file per sovrascrivere quelle utente e predefinite.
-{
-  "css.validate": false,
-  "html.suggest.angular1": false,
-  "html.suggest.ionic": false
-}

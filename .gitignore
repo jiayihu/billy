@@ -7,6 +7,7 @@ public
 dist
 env.json
 .idea
+.vscode
 
 # Compiled source #
 ###################
