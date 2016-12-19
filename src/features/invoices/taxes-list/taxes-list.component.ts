@@ -36,7 +36,7 @@ export default class TaxesListComponent {
   }
 
   buildForm(tax: ITax): void {
-    this.fields.forEach(field => field.value = tax[field.name] || '');
+    this.fields.forEach(field => field.value = tax[field.name]);
 
     this.form = this.formBuilderService.buildFormGroup(this.fields);
   }
@@ -48,9 +48,8 @@ export default class TaxesListComponent {
 
   handleEditEnd() {
     const editedTax = this.taxes.find(tax => tax.id === this.selectedTaxId);
-    const editedRate = Number(this.form.value.rate);
     const updatedTax = Object.assign({}, editedTax, this.form.value, {
-      rate: editedRate,
+      rate: this.form.value.rate,
     });
     this.onEditTax.emit(updatedTax);
     this.isEditing = false;

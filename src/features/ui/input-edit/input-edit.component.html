@@ -9,9 +9,11 @@
     *ngSwitchDefault
     [attr.size]="size === 'auto' ? initialValue.length || charsLength : null"
     [ngClass]="classnames()"
-    type="text"
+    [name]="name"
+    [required]="required"
     [value]="initialValue"
     (blur)="handleChange(input.value)"
     (keyup.enter)="handleChange(input.value)"
+    type="text"
   />
 </span>

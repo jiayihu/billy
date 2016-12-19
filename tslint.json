@@ -8,15 +8,17 @@
 
     "object-literal-sort-keys": false,
 
+    "one-line": [false],
+
     "member-access": false,
 
-    "member-ordering": false,
+    "member-ordering": [false],
 
-    "no-console": false,
+    "no-console": [false],
 
     "no-var-requires": false,
 
-    "ordered-imports": false,
+    "ordered-imports": [false],
 
     "quotemark": [true, "single"],
 

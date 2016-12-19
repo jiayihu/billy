@@ -22,13 +22,12 @@
       </select>
     </template>
   </template>
-  <input
+  <input-edit
     *ngSwitchDefault
     [formControlName]="field.name"
     [name]="field.name"
     [required]="field.required"
-    (change)="handleChange()"
-    class="form-control"
-    type="text"
-  />
+    [type]="field.controlType"
+    size="fluid"
+  ></input-edit>
 </div>
