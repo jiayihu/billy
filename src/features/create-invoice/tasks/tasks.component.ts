@@ -37,8 +37,7 @@ export default class TasksComponent {
     this.onRemoveTask.emit(taskId);
   }
 
-  handleTaskChange(property: string, taskId: string, event: any) {
-    const newValue = event.target.value;
+  handleTaskChange(property: string, taskId: string, newValue: any) {
     const isNewTask = taskId === 'new-task';
     const task = isNewTask ? this.newTask : this.tasks.find(item => item.id === taskId);
     const updatedTask = Object.assign({}, task, {

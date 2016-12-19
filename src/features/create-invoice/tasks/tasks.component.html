@@ -11,31 +11,31 @@
     <tr *ngFor="let task of tasks" [attr.data-id]="task.id">
       <td class="task-desc">
         <icon class="delete-btn task-btn" name="circle-minus" [size]="1.5" (click)="handleRemoveTask(task.id)"></icon>
-        <input
-          [value]="task.description"
-          (change)="handleTaskChange('description', task.id, $event)"
-          class="form-control"
+        <input-edit
+          [initialValue]="task.description"
+          (onChange)="handleTaskChange('description', task.id, $event)"
           placeholder="Add a description of the task or product"
+          size="fluid"
           type="text"
-        />
+        ></input-edit>
       </td>
       <td>
-        <input
-          [value]="task.quantity"
-          (change)="handleTaskChange('quantity', task.id, $event)"
-          class="form-control"
+        <input-edit
+          [initialValue]="task.quantity"
+          (onChange)="handleTaskChange('quantity', task.id, $event)"
           placeholder="0"
-          type="text"
-        />
+          size="fluid"
+          type="number"
+        ></input-edit>
       </td>
       <td>
-        <input
-          [value]="task.price"
-          (change)="handleTaskChange('price', task.id, $event)"
-          class="form-control"
+        <input-edit
+          [initialValue]="task.price"
+          (onChange)="handleTaskChange('price', task.id, $event)"
           placeholder="0"
-          type="text"
-        />
+          size="fluid"
+          type="number"
+        ></input-edit>
       </td>
       <td class="text-xs-right">{{task.amount | currency:'EUR':true}}</td>
     </tr>
@@ -44,32 +44,32 @@
     <tr class="new-task-row">
       <td class="new-task-desc">
         <icon class="add-btn task-btn" name="plus-circle" [size]="1.5" (click)="handleAddTask()"></icon>
-        <input
-          [value]="newTask.description"
-          (change)="handleTaskChange('description', 'new-task', $event)"
+        <input-edit
+          [initialValue]="newTask.description"
+          (onChange)="handleTaskChange('description', 'new-task', $event)"
           name="description"
-          class="form-control"
           placeholder="Add a description of the task or product"
+          size="fluid"
           type="text"
-        />
+        ></input-edit>
       </td>
       <td>
-        <input
-          [value]="newTask.quantity"
-          (change)="handleTaskChange('quantity', 'new-task', $event)"
-          class="form-control"
+        <input-edit
+          [initialValue]="newTask.quantity"
+          (onChange)="handleTaskChange('quantity', 'new-task', $event)"
           placeholder="0"
-          type="text"
-        />
+          size="fluid"
+          type="number"
+        ></input-edit>
       </td>
       <td>
-        <input
-          [value]="newTask.price"
-          (change)="handleTaskChange('price', 'new-task', $event)"
-          class="form-control"
+        <input-edit
+          [initialValue]="newTask.price"
+          (onChange)="handleTaskChange('price', 'new-task', $event)"
           placeholder="0"
-          type="text"
-        />
+          size="fluid"
+          type="number"
+        ></input-edit>
       </td>
       <td class="text-xs-right">{{ newTask.amount | currency:'EUR':true }}</td>
     </tr>

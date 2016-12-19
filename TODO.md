@@ -1,4 +1,5 @@
 - Create Custom Validator for VAT for example
+- Create custom directive validator
 - Create Tooltip directive for forms errors
 - Async Pipe
 - Replace pure tslint with codelyzer https://github.com/mgechev/codelyzer

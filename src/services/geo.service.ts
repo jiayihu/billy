@@ -53,7 +53,7 @@ export default class GeoService {
 
   getProvinces(countryCode: string): Observable<IProvince[]> {
     const cachedProvinces = this.provincesByCountry[countryCode];
-    if (cachedProvinces) return Observable.from([cachedProvinces]);
+    if (cachedProvinces) return Observable.of(cachedProvinces);
 
     const searchParams = new URLSearchParams('q=adm2&maxRows=1000');
     searchParams.append('username', this.apiUsername);

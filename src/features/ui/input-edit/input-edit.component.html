@@ -7,8 +7,8 @@
   <input
     #input
     *ngSwitchDefault
-    [attr.size]="initialValue.length || charsLength"
-    class="input-edit form-control form-control--inline"
+    [attr.size]="size === 'auto' ? initialValue.length || charsLength : null"
+    [ngClass]="classnames()"
     type="text"
     [value]="initialValue"
     (blur)="handleChange(input.value)"

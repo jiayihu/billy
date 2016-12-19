@@ -15,8 +15,17 @@ import {
 export default class InputEditComponent {
   @Input() initialValue: string;
   @Input() charsLength: number = 3;
+  @Input() size: 'fluid' | 'auto' = 'auto';
   @Input() type: 'text' | 'number' | 'calendar' = 'text';
   @Output() onChange = new EventEmitter<any>();
+
+  classnames(): Object {
+    return {
+      'input-edit': true,
+      'form-control': true,
+      'form-control--inline': this.size === 'auto',
+    };
+  }
 
   handleChange(value: string) {
     let formattedValue: any = value;
