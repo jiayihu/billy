@@ -1,10 +1,18 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import StoreService, { ITax } from '../../services/store.service';
+import LoggerService from '../../services/logger.service';
+import TaxesLoggerService from './services/taxes-logger.service';
 
 @Component({
   selector: 'invoices',
   templateUrl: './invoices.component.html',
+  providers: [
+    {
+      provide: LoggerService,
+      useClass: TaxesLoggerService,
+    },
+  ],
 })
 export default class InvoicesComponent implements OnDestroy {
   storeTaxes: ITax[] = [];

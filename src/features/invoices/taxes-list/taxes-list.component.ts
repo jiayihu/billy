@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ITax } from '../../../services/store.service';
 import { FormGroup } from '@angular/forms';
 import FormBuilderService, { IField } from '../../../services/form-builder.service';
+import LoggerService from '../../../services/logger.service';
 
 @Component({
   selector: 'taxes-list',
@@ -18,7 +19,10 @@ export default class TaxesListComponent {
   @Output() onEditTax = new EventEmitter<ITax>();
   @Output() onDeleteTax = new EventEmitter<string>();
 
-  constructor(private formBuilderService: FormBuilderService) {
+  constructor(
+    private formBuilderService: FormBuilderService,
+    private loggerService: LoggerService
+  ) {
     this.fields = [
       {
         name: 'name',
@@ -51,6 +55,7 @@ export default class TaxesListComponent {
     const updatedTax = Object.assign({}, editedTax, this.form.value, {
       rate: this.form.value.rate,
     });
+    this.loggerService.log(updatedTax);
     this.onEditTax.emit(updatedTax);
     this.isEditing = false;
     this.selectedTaxId = null;

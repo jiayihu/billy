@@ -15,6 +15,7 @@ import InvoicesModule from '../features/invoices/invoices.module';
 import StoreService from '../services/store.service';
 import FormBuilderService from '../services/form-builder.service';
 import GeoService from '../services/geo.service';
+import LoggerService from '../services/logger.service';
 
 @NgModule({
   imports: [
@@ -31,7 +32,7 @@ import GeoService from '../services/geo.service';
     FooterComponent,
     NavComponent,
   ],
-  providers: [StoreService, FormBuilderService, GeoService],
+  providers: [StoreService, FormBuilderService, GeoService, LoggerService],
   bootstrap: [AppComponent],
 })
 export default class AppModule {
