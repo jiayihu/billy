@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output, SimpleChange } from '@angular/c
 import GeoService from '../../../services/geo.service';
 import { FormGroup } from '@angular/forms';
 import { ICustomer } from '../../../services/store.service';
-import FormBuilderService, { IField, ISelectField, isSelectField } from '../../../services/form-builder.service';
+import FormBuilderService, { IField, ISelectField } from '../../../services/form-builder.service';
 import get = require('lodash/get');
 
 @Component({
@@ -86,16 +86,17 @@ export default class CustomerEditComponent {
   }
 
   buildForm(customer: ICustomer): void {
-    this.fields.forEach(field => field.value = customer[field.name] || '');
+    this.fields = this.fields.map(field => ({ ...field, value: customer[field.name] || '' }));
 
     this.form = this.formBuilderService.buildFormGroup(this.fields);
   }
 
   setFieldOptions(fieldName: string, options: any[]): void {
-    const foundField = this.fields.find(field => field.name === fieldName);
-    if (isSelectField(foundField)) {
-      foundField.options = options;
-    }
+    this.fields = this.fields.map(field => {
+      if (field.name === fieldName) return { ...field, options };
+
+      return field;
+    });
   }
 
   handleCancel() {

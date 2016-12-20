@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output, SimpleChange } from '@angular/c
 import { FormGroup } from '@angular/forms';
 import { IUser } from '../../../services/store.service';
 import GeoService from '../../../services/geo.service';
-import FormBuilderService, { IField, ISelectField, isSelectField } from '../../../services/form-builder.service';
+import FormBuilderService, { IField, ISelectField } from '../../../services/form-builder.service';
 
 @Component({
   selector: 'user-business',
@@ -85,7 +85,7 @@ export default class UserBusinessComponent {
   }
 
   buildForm(user: IUser): void {
-    this.fields.forEach(field => field.value = user[field.name] || '');
+    this.fields = this.fields.map(field => ({ ...field, value: user[field.name] || '' }));
 
     this.form = this.formBuilderService.buildFormGroup(this.fields);
   }
@@ -95,10 +95,11 @@ export default class UserBusinessComponent {
   }
 
   setFieldOptions(fieldName: string, options: any[]): void {
-    const foundField = this.fields.find(field => field.name === fieldName);
-    if (isSelectField(foundField)) {
-      foundField.options = options;
-    }
+    this.fields = this.fields.map(field => {
+      if (field.name === fieldName) return { ...field, options };
+
+      return field;
+    });
   }
 
   handleEdit(): void {
