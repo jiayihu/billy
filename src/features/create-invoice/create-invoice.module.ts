@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import CustomersModule from '../customers/customers.module';
+import DirectivesModule from '../directives/directives.module';
 import PipesModule from '../pipes/pipes.module';
 import UIModule from '../ui/ui.module';
 
@@ -17,6 +18,7 @@ import TaxesComponent from './taxes/taxes.component';
   imports: [
     CommonModule,
     CustomersModule,
+    DirectivesModule,
     UIModule,
     FormsModule,
     PipesModule,

@@ -25,6 +25,7 @@
     "@types/node": "0.0.2",
     "@types/pikaday": "0.0.32",
     "@types/uuid": "^2.0.29",
+    "@types/validator": "^5.7.35",
     "angular2-template-loader": "^0.6.0",
     "cross-env": "^1.0.8",
     "css-loader": "^0.23.1",
@@ -61,6 +62,7 @@
     "rxjs": "^5.0.0-rc.4",
     "typescript": "^2.1.1",
     "uuid": "^2.0.3",
+    "validator": "^6.2.0",
     "zone.js": "^0.7.2"
   },
   "repository": {

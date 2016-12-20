@@ -3,25 +3,16 @@
 
   "rules": {
     "arrow-parens": false,
-
     "curly": false,
-
     "object-literal-sort-keys": false,
-
     "one-line": [false],
-
     "member-access": false,
-
     "member-ordering": [false],
-
     "no-console": [false],
-
+    "no-string-literal": false,
     "no-var-requires": false,
-
     "ordered-imports": [false],
-
     "quotemark": [true, "single"],
-
     "variable-name": [true, "check-format", "allow-leading-underscore"]
   }
 }

@@ -32,7 +32,7 @@ export default class TaxesListComponent {
       {
         name: 'rate',
         label: 'Tax rate',
-        pattern: '(^[0-9]{1,2}(\.[0-9]{1,2})?$)|^100$',
+        range: '0-100',
         required: true,
         controlType: 'number',
       },
