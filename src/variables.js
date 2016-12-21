@@ -4,7 +4,7 @@
  * @see {https://github.com/mxstbr/react-boilerplate/issues/282}
  */
 
-module.exports = {
+const customProperties = {
   'dark-primary': '#0288D1',
   primary: '#03A9F4',
   'light-primary': '#B3E5FC',
@@ -12,4 +12,16 @@ module.exports = {
   'primary-text': '#212121',
   'secondary-text': '#757575',
   divider: '#BDBDBD',
+};
+
+const customMediaQueries = {
+  '--phone': '(min-width: 544px)',
+  '--tablet': '(min-width: 768px)',
+  '--desktop': '(min-width: 992px)',
+  '--large-desktop': '(min-width: 1200px)',
+};
+
+module.exports = {
+  customProperties,
+  customMediaQueries,
 };

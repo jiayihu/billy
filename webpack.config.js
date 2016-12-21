@@ -82,7 +82,10 @@ module.exports = {
       cssnext({
         features: {
           customProperties: {
-            variables: cssVariables,
+            variables: cssVariables.customProperties,
+          },
+          customMedia: {
+            extensions: cssVariables.customMediaQueries,
           },
         },
       }),

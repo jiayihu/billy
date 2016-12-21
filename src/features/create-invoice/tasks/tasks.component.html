@@ -1,83 +1,85 @@
-<table class="table tasks">
-  <thead>
-    <tr>
-      <th class="header-task">Task</th>
-      <th class="header-quantity">Quantity</th>
-      <th class="header-price">Price</th>
-      <th class="header-amount">Amount</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let task of tasks" [attr.data-id]="task.id">
-      <td class="task-desc">
-        <icon class="delete-btn task-btn" name="circle-minus" [size]="1.5" (click)="handleRemoveTask(task.id)"></icon>
-        <input-edit
-          [initialValue]="task.description"
-          (onChange)="handleTaskChange('description', task.id, $event)"
-          class="task-desc-input"
-          placeholder="Add a description of the task or product"
-          size="fluid"
-          type="text"
-        ></input-edit>
-      </td>
-      <td>
-        <input-edit
-          [initialValue]="task.quantity"
-          (onChange)="handleTaskChange('quantity', task.id, $event)"
-          placeholder="0"
-          size="fluid"
-          type="number"
-        ></input-edit>
-      </td>
-      <td>
-        <input-edit
-          [initialValue]="task.price"
-          (onChange)="handleTaskChange('price', task.id, $event)"
-          placeholder="0"
-          size="fluid"
-          type="number"
-        ></input-edit>
-      </td>
-      <td class="text-xs-right">{{task.amount | currency:'EUR':true}}</td>
-    </tr>
+<div class="table-responsive">
+  <table class="table tasks">
+    <thead>
+      <tr>
+        <th class="header-task">Task</th>
+        <th class="header-quantity">Quantity</th>
+        <th class="header-price">Price</th>
+        <th class="header-amount">Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let task of tasks" [attr.data-id]="task.id">
+        <td class="task-desc">
+          <icon class="delete-btn task-btn" name="circle-minus" [size]="1.5" (click)="handleRemoveTask(task.id)"></icon>
+          <input-edit
+            [initialValue]="task.description"
+            (onChange)="handleTaskChange('description', task.id, $event)"
+            class="task-desc-input"
+            placeholder="Add a description of the task or product"
+            size="fluid"
+            type="text"
+          ></input-edit>
+        </td>
+        <td>
+          <input-edit
+            [initialValue]="task.quantity"
+            (onChange)="handleTaskChange('quantity', task.id, $event)"
+            placeholder="0"
+            size="fluid"
+            type="number"
+          ></input-edit>
+        </td>
+        <td>
+          <input-edit
+            [initialValue]="task.price"
+            (onChange)="handleTaskChange('price', task.id, $event)"
+            placeholder="0"
+            size="fluid"
+            type="number"
+          ></input-edit>
+        </td>
+        <td class="text-xs-right">{{task.amount | currency:'EUR':true}}</td>
+      </tr>
 
-    <!-- New Task Row -->
-    <tr class="new-task-row">
-      <td class="new-task-desc">
-        <icon class="add-btn task-btn" name="plus-circle" [size]="1.5" (click)="handleAddTask()"></icon>
-        <input-edit
-          [initialValue]="newTask.description"
-          (onChange)="handleTaskChange('description', 'new-task', $event)"
-          class="task-desc-input"
-          name="description"
-          placeholder="Add a description of the task or product"
-          size="fluid"
-          type="text"
-        ></input-edit>
-      </td>
-      <td>
-        <input-edit
-          [initialValue]="newTask.quantity"
-          (onChange)="handleTaskChange('quantity', 'new-task', $event)"
-          placeholder="0"
-          size="fluid"
-          type="number"
-        ></input-edit>
-      </td>
-      <td>
-        <input-edit
-          [initialValue]="newTask.price"
-          (onChange)="handleTaskChange('price', 'new-task', $event)"
-          placeholder="0"
-          size="fluid"
-          type="number"
-        ></input-edit>
-      </td>
-      <td class="text-xs-right">{{ newTask.amount | currency:'EUR':true }}</td>
-    </tr>
-    <tr class="invoice-subtotal">
-      <td colspan="3"><strong>Subtotal</strong></td>
-      <td class="text-xs-right">{{tasks | reduceSum:'amount' | currency:'EUR':true }}</td>
-    </tr>
-  </tbody>
-</table>
+      <!-- New Task Row -->
+      <tr class="new-task-row">
+        <td class="new-task-desc">
+          <icon class="add-btn task-btn" name="plus-circle" [size]="1.5" (click)="handleAddTask()"></icon>
+          <input-edit
+            [initialValue]="newTask.description"
+            (onChange)="handleTaskChange('description', 'new-task', $event)"
+            class="task-desc-input"
+            name="description"
+            placeholder="Add a description of the task or product"
+            size="fluid"
+            type="text"
+          ></input-edit>
+        </td>
+        <td>
+          <input-edit
+            [initialValue]="newTask.quantity"
+            (onChange)="handleTaskChange('quantity', 'new-task', $event)"
+            placeholder="0"
+            size="fluid"
+            type="number"
+          ></input-edit>
+        </td>
+        <td>
+          <input-edit
+            [initialValue]="newTask.price"
+            (onChange)="handleTaskChange('price', 'new-task', $event)"
+            placeholder="0"
+            size="fluid"
+            type="number"
+          ></input-edit>
+        </td>
+        <td class="text-xs-right">{{ newTask.amount | currency:'EUR':true }}</td>
+      </tr>
+      <tr class="invoice-subtotal">
+        <td colspan="3"><strong>Subtotal</strong></td>
+        <td class="text-xs-right">{{tasks | reduceSum:'amount' | currency:'EUR':true }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -6,16 +6,21 @@
 .tax {
   align-items: center;
   display: flex;
+  flex-wrap: wrap;
+
+  &-name {
+    flex-basis: 100%;
+    white-space: nowrap;
+  }
+
+  &-rate {
+    margin-left: auto;
+  }
 
   &-name,
   &-rate,
   &-amount {
     padding: .75rem;
-  }
-
-  &-name {
-    flex-grow: 1;
-    position: relative;
   }
 
   &-rate {
@@ -27,8 +32,19 @@
 
   &-amount {
     flex-basis: 15%;
-    min-width: 10rem;
+    min-width: 7rem;
     text-align: left;
+  }
+}
+
+@media (--tablet) {
+  .tax {
+    flex-wrap: initial;
+
+    &-name {
+      flex-basis: auto;
+      flex-grow: 1;
+    }
   }
 }
 
