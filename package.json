@@ -51,6 +51,7 @@
     "@angular/platform-browser-dynamic": "^2.2.4",
     "@angular/router": "^3.2.4",
     "@angular/upgrade": "^2.2.4",
+    "angular2-notifications": "^0.4.48",
     "core-js": "^2.4.0",
     "firebase": "^3.4.0",
     "invariant": "^2.2.1",
