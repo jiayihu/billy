@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import uuid = require('uuid');
 import set = require('lodash/fp/set');
+import { NotificationsService } from 'angular2-notifications';
 
 export interface IUser {
   name: string;
@@ -71,7 +72,7 @@ export default class StoreService {
 
   store$ = this.storeSource.asObservable();
 
-  constructor() {
+  constructor(private notificationsService: NotificationsService) {
     const defaultStore: IStore = {
       user: { name: '' },
       customers: [],
@@ -162,5 +163,11 @@ export default class StoreService {
   addInvoice(invoice: IInvoice) {
     const newInvoice = { ...invoice, id: this.generateId('INVOICE') };
     this.editStore('invoices', this.store.invoices.concat(newInvoice));
+    this.notificationsService.success('Invoice', 'Invoice saved successfully.');
+  }
+
+  deleteInvoice(invoiceId: string) {
+    const filteredInvoices = this.store.invoices.filter(invoice => invoice.id !== invoiceId);
+    this.editStore('invoices', filteredInvoices);
   }
 }
