@@ -24,8 +24,8 @@
       {{(invoice.tasks | reduceSum:'amount') * ( 1 + (invoice.taxes | reduceSum:'rate') / 100) | currency:'EUR':true}}
     </span>
     <span class="invoice-actions">
-      <btn type="link" class="edit-action" (onClick)="handleinvoiceEdit(invoice.id)">Edit</btn>
-      <btn type="link" class="delete-action" (onClick)="handleinvoiceDelete(invoice.id)">Delete</btn>
+      <btn type="link" class="edit-action" (onClick)="handleInvoiceEdit(invoice.id)">Edit</btn>
+      <btn type="link" class="delete-action" (onClick)="handleInvoiceDelete(invoice.id)">Delete</btn>
     </span>
   </list-group-item>
 </list-group>
