@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
-import StoreService, { IUser, ICustomer, IInvoice, ITask, ITax } from '../../services/store.service';
+import StoreService, { ICustomer, IInvoice, ITask, ITax } from '../../services/store.service';
 import * as moment from 'moment';
 import isNaN = require('lodash/isNaN');
 import maxBy = require('lodash/maxBy');
@@ -11,7 +11,6 @@ import maxBy = require('lodash/maxBy');
   styleUrls: ['./create-invoice.component.css'],
 })
 export default class CreateInvoiceComponent {
-  user: IUser;
   customers: ICustomer[];
   invoice: IInvoice;
   storeTaxes: ITax[];
@@ -25,16 +24,16 @@ export default class CreateInvoiceComponent {
 
   constructor(private storeService: StoreService) {
     this.invoice = {
-        id: '',
-        customer: null,
-        date: moment().format('DD/MM/YYYY'),
-        location: 'Location',
-        notes: '',
-        number: 1,
-        tasks: [],
-        taxes: [],
-        user: this.user,
-      };
+      id: '',
+      customer: null,
+      date: moment().format('DD/MM/YYYY'),
+      location: 'Location',
+      notes: '',
+      number: 1,
+      tasks: [],
+      taxes: [],
+      user: null,
+    };
   }
 
   ngOnInit() {
@@ -52,11 +51,14 @@ export default class CreateInvoiceComponent {
     });
 
     this.storeSub = this.storeService.store$.subscribe(store => {
-      this.user = store.user;
       this.customers = store.customers;
       this.storeTaxes = store.taxes;
 
       this.setInvoiceCustomer(store.customers);
+      this.invoice = {
+        ...this.invoice,
+        user: store.user,
+      };
     });
   }
 
@@ -169,15 +171,10 @@ export default class CreateInvoiceComponent {
    */
 
   handleAddTax() {
-    const newTax: ITax = {
-      id: this.storeService.generateId('TAX'),
-      name: `Tax #${this.storeTaxes.length + 1}`,
-      rate: 0,
-    };
+    const newTax = this.storeService.addTax();
     this.invoice = Object.assign({}, this.invoice, {
       taxes: this.invoice.taxes.concat(newTax),
     });
-    this.storeService.addTax(newTax);
   }
 
   handleAddInvoiceTax(taxId: string) {

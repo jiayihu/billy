@@ -134,8 +134,15 @@ export default class StoreService {
     this.editStore('customers', updatedCustomers);
   }
 
-  addTax(tax: ITax) {
-    this.editStore('taxes', this.store.taxes.concat(tax));
+  addTax(): ITax {
+    const newTax: ITax = {
+      id: this.generateId('TAX'),
+      name: `Tax #${this.store.taxes.length + 1}`,
+      rate: 0,
+    };
+    this.editStore('taxes', this.store.taxes.concat(newTax));
+
+    return newTax;
   }
 
   editTax(updatedTax: ITax) {
