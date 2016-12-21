@@ -10,6 +10,7 @@ import { Component } from '@angular/core';
     </div>
     <simple-notifications [options]="notificationOptions"></simple-notifications>
   `,
+  styleUrls: ['./app.component.css'],
 })
 export default class AppComponent {
   notificationOptions = {

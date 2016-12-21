@@ -12,6 +12,7 @@ const customProperties = {
   'primary-text': '#212121',
   'secondary-text': '#757575',
   divider: '#BDBDBD',
+  success: '#8BC34A',
 };
 
 const customMediaQueries = {
