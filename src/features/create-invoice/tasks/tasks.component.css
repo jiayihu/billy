@@ -27,14 +27,17 @@
 
 .task-desc,
 .new-task-desc {
-  position: relative;
+  align-items: center;
+  display: flex;
+}
+
+.task-desc-input {
+  flex-grow: 1;
 }
 
 .task-btn {
   cursor: pointer;
-  left: -2rem;
-  position: absolute;
-  top: 1rem;
+  margin-right: .75rem;
 }
 
 .add-btn {

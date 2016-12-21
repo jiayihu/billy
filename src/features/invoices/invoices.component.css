@@ -1,0 +1,14 @@
+.invoice-headers {
+  color: var(--divider);
+  text-transform: uppercase;
+}
+
+.invoice-headers span {
+  padding: .75rem;
+}
+
+.invoice-headers,
+.invoice /deep/ > li {
+  align-items: center;
+  display: flex;
+}

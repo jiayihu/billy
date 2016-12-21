@@ -1,6 +1,9 @@
-<h2>New invoice</h2>
+<div class="heading">
+  <h2 class="title">New invoice</h2>
+  <btn class="save-btn" type="primary" (onClick)="handleSaveInvoice()">Save</btn>
+</div>
 <div class="invoice">
-  <user-business [user]="user" (onBusinessChange)="handleBusinessChange($event)"></user-business>
+  <user-business [user]="invoice.user" (onBusinessChange)="handleBusinessChange($event)"></user-business>
   <div class="row">
     <div class="col-sm-4 offset-sm-8">
       <customer
@@ -50,4 +53,7 @@
     {{(invoice.tasks | reduceSum:'amount') * ( 1 + (invoice.taxes | reduceSum:'rate') / 100) | currency:'EUR':true}}
   </p>
   <notes (onNotesChange)="handleNotesChange($event)"></notes>
+</div>
+<div class="footer">
+  <btn class="save-btn" type="primary" (onClick)="handleSaveInvoice()">Save</btn>
 </div>

@@ -14,6 +14,7 @@
         <input-edit
           [initialValue]="task.description"
           (onChange)="handleTaskChange('description', task.id, $event)"
+          class="task-desc-input"
           placeholder="Add a description of the task or product"
           size="fluid"
           type="text"
@@ -47,6 +48,7 @@
         <input-edit
           [initialValue]="newTask.description"
           (onChange)="handleTaskChange('description', 'new-task', $event)"
+          class="task-desc-input"
           name="description"
           placeholder="Add a description of the task or product"
           size="fluid"

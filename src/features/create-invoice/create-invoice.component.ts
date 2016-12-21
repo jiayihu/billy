@@ -86,6 +86,10 @@ export default class CreateInvoiceComponent {
     }
   }
 
+  handleSaveInvoice() {
+    this.storeService.addInvoice(this.invoice);
+  }
+
   handleBusinessChange(newBusinessInfo): void {
     this.storeService.editUser(newBusinessInfo);
   }

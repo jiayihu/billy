@@ -158,4 +158,9 @@ export default class StoreService {
     const filteredTaxes = this.store.taxes.filter(tax => tax.id !== taxId);
     this.editStore('taxes', filteredTaxes);
   }
+
+  addInvoice(invoice: IInvoice) {
+    const newInvoice = { ...invoice, id: this.generateId('INVOICE') };
+    this.editStore('invoices', this.store.invoices.concat(newInvoice));
+  }
 }

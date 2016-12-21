@@ -1,12 +1,13 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
-import StoreService, { ITax } from '../../services/store.service';
+import StoreService, { IInvoice, ITax } from '../../services/store.service';
 import LoggerService from '../../services/logger.service';
 import TaxesLoggerService from './services/taxes-logger.service';
 
 @Component({
   selector: 'invoices',
   templateUrl: './invoices.component.html',
+  styleUrls: ['./invoices.component.css'],
   providers: [
     {
       provide: LoggerService,
@@ -15,14 +16,16 @@ import TaxesLoggerService from './services/taxes-logger.service';
   ],
 })
 export default class InvoicesComponent implements OnDestroy {
-  storeTaxes: ITax[] = [];
+  invoices: IInvoice[] = [];
+  taxes: ITax[] = [];
   private storeSub: Subscription;
 
   constructor(private storeService: StoreService) {}
 
   ngOnInit() {
     this.storeSub = this.storeService.store$.subscribe(store => {
-      this.storeTaxes = store.taxes;
+      this.taxes = store.taxes;
+      this.invoices = store.invoices;
     });
   }
 

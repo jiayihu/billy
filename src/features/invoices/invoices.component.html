@@ -1,6 +1,38 @@
+<div class="invoice-headers">
+  <span class="invoice-header">
+    Number
+  </span>
+  <span class="invoice-header">
+    Date
+  </span>
+  <span class="invoice-header">
+    Customer
+  </span>
+  <span class="invoice-header">
+    Total
+  </span>
+  <span class="invoice-header">
+    Actions
+  </span>
+</div>
+<list-group>
+  <list-group-item *ngFor="let invoice of invoices" class="invoice">
+    <span>{{invoice.number}}</span>
+    <span>{{invoice.date}}</span>
+    <span>{{invoice.customer.name}}</span>
+    <span>
+      {{(invoice.tasks | reduceSum:'amount') * ( 1 + (invoice.taxes | reduceSum:'rate') / 100) | currency:'EUR':true}}
+    </span>
+    <span class="invoice-actions">
+      <btn type="link" class="edit-action" (onClick)="handleinvoiceEdit(invoice.id)">Edit</btn>
+      <btn type="link" class="delete-action" (onClick)="handleinvoiceDelete(invoice.id)">Delete</btn>
+    </span>
+  </list-group-item>
+</list-group>
+
 <h3>All taxes</h3>
 <taxes-list
-  [taxes]="storeTaxes"
+  [taxes]="taxes"
   (onEditTax)="handleTaxEdit($event)"
   (onDeleteTax)="handleTaxDelete($event)"
 ></taxes-list>
