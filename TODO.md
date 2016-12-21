@@ -1,3 +1,4 @@
+- Custom structural directive
 - Create Tooltip directive for forms errors
 - Async Pipe
 - Replace pure tslint with codelyzer https://github.com/mgechev/codelyzer

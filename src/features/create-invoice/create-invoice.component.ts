@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs/Subscription';
 import StoreService, { IUser, ICustomer, IInvoice, ITask, ITax } from '../../services/store.service';
 import * as moment from 'moment';
 import isNaN = require('lodash/isNaN');
+import maxBy = require('lodash/maxBy');
 
 @Component({
   selector: 'create-invoice',
@@ -23,31 +24,39 @@ export default class CreateInvoiceComponent {
   }
 
   constructor(private storeService: StoreService) {
-    const storedTasks = JSON.parse(window.localStorage.getItem('billy-tasks'));
     this.invoice = {
-      id: '',
-      customer: null,
-      date: moment().format('DD/MM/YYYY'),
-      location: 'Padova',
-      notes: '',
-      number: 1, // @TODO: update with latest invoice number + 1
-      tasks: storedTasks || [],
-      taxes: [],
-      user: this.user,
-    };
+        id: '',
+        customer: null,
+        date: moment().format('DD/MM/YYYY'),
+        location: 'Location',
+        notes: '',
+        number: 1,
+        tasks: [],
+        taxes: [],
+        user: this.user,
+      };
   }
 
   ngOnInit() {
+    this.storeService.store$.take(1).subscribe(store => {
+      const storedTasks = JSON.parse(window.localStorage.getItem('billy-tasks'));
+      const lastInvoice = maxBy(store.invoices, invoice => invoice.number);
+      const number = lastInvoice ? lastInvoice.number : 1;
+
+      this.invoice = {
+        ...this.invoice,
+        number,
+        tasks: storedTasks || [],
+        taxes: this.invoice.taxes.length ? this.invoice.taxes : store.taxes,
+      };
+    });
+
     this.storeSub = this.storeService.store$.subscribe(store => {
       this.user = store.user;
       this.customers = store.customers;
       this.storeTaxes = store.taxes;
 
       this.setInvoiceCustomer(store.customers);
-    });
-
-    this.storeService.store$.take(1).subscribe(store => {
-      if (this.invoice.taxes.length === 0) this.invoice.taxes = store.taxes;
     });
   }
 
@@ -105,13 +114,13 @@ export default class CreateInvoiceComponent {
     };
   }
 
-  handleEditDate(newDate: string): void {
-    this.invoice.date = newDate;
-  }
-
   /**
    * Invoice location, date and number event listeners
    */
+
+  handleEditDate(newDate: string): void {
+    this.invoice.date = newDate;
+  }
 
   handleEditLocation(newLocation: string): void {
     this.invoice.location = newLocation;
