@@ -33,6 +33,10 @@ export default class InvoicesComponent implements OnDestroy {
     this.storeSub.unsubscribe();
   }
 
+  handleInvoiceDelete(invoiceId: string) {
+    this.storeService.deleteInvoice(invoiceId);
+  }
+
   handleTaxEdit(updatedTax: ITax) {
     this.storeService.editTax(updatedTax);
   }
