@@ -40,7 +40,7 @@ export default class CreateInvoiceComponent {
     this.storeService.store$.take(1).subscribe(store => {
       const storedTasks = JSON.parse(window.localStorage.getItem('billy-tasks'));
       const lastInvoice = maxBy(store.invoices, invoice => invoice.number);
-      const number = lastInvoice ? lastInvoice.number : 1;
+      const number = lastInvoice ? lastInvoice.number + 1 : 1;
 
       this.invoice = {
         ...this.invoice,

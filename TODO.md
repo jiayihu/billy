@@ -1,4 +1,5 @@
-- Add notification system
+- CRUD API and authentication
+- Create model folder
 - Custom structural directive
 - Create Tooltip directive for forms errors
 - Async Pipe
