@@ -1,42 +1,44 @@
 <h3>My customers</h3>
-<div class="customer-headers">
-  <span class="customer-header-name">
-    Name
-  </span>
-  <span class="customer-header-actions">
-    Actions
-  </span>
+<div class="table-responsive">
+  <table class="table">
+    <thead class="table-headers thead-default">
+      <th>Name</th>
+      <th>Actions</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let customer of customers" class="customer">
+        <td class="customer-name">
+          <btn
+            [id]="customer.id"
+            type="link"
+            class="customer-name"
+            (onClick)="handleCustomerEdit($event)"
+          >
+            {{customer.name}}
+          </btn>
+        </td>
+        <td>
+          <btn
+            [id]="customer.id"
+            type="link"
+            class="edit-action"
+            (onClick)="handleCustomerEdit($event)"
+          >
+            Edit
+          </btn>
+          <btn
+            [id]="customer.id"
+            type="link"
+            class="delete-action"
+            (onClick)="handleCustomerDelete($event)"
+          >
+            Delete
+          </btn>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
-<list-group class="customers">
-  <list-group-item *ngFor="let customer of customers" class="customer">
-    <btn
-      [id]="customer.id"
-      type="link"
-      class="customer-name"
-      (onClick)="handleCustomerEdit($event)"
-    >
-      {{customer.name}}
-    </btn>
-    <div class="actions">
-      <btn
-        [id]="customer.id"
-        type="link"
-        class="edit-action"
-        (onClick)="handleCustomerEdit($event)"
-      >
-        Edit
-      </btn>
-      <btn
-        [id]="customer.id"
-        type="link"
-        class="delete-action"
-        (onClick)="handleCustomerDelete($event)"
-      >
-        Delete
-      </btn>
-    </div>
-  </list-group-item>
-</list-group>
 <customer-edit
   [mode]="isEditing ? 'editing' : null"
   [customer]="editingCustomer"

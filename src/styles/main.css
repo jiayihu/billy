@@ -24,11 +24,16 @@ p {
  * Bootstrap overrides
  */
 
-.modal {
-  background-color: rgba(0, 0, 0, .2);
+.table-headers {
+  color: var(--divider);
+  text-transform: uppercase;
 }
 
 .form-control--inline {
   display: inline-block;
   width: auto;
+}
+
+.modal {
+  background-color: rgba(0, 0, 0, .2);
 }
