@@ -6,6 +6,7 @@ import AuthModule from '../features/auth/auth.module';
 import CreateInvoiceModule from '../features/create-invoice/create-invoice.module';
 import CustomersModule from '../features/customers/customers.module';
 import InvoicesModule from '../features/invoices/invoices.module';
+import StaticModule from '../features/static/static.module';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 
 import routing from './app.routes';
@@ -27,6 +28,7 @@ import LoggerService from '../services/logger.service';
     CreateInvoiceModule,
     CustomersModule,
     InvoicesModule,
+    StaticModule,
     SimpleNotificationsModule,
   ],
   declarations: [
