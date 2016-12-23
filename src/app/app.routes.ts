@@ -4,6 +4,8 @@ import CustomersComponent from '../features/customers/customers-list/customers-l
 import InvoicesComponent from '../features/invoices/invoices.component';
 import SignupComponent from '../features/auth/signup/signup.component';
 
+import NotFoundComponent from '../features/static/not-found/not-found.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -25,6 +27,10 @@ const routes: Routes = [
   {
     component: SignupComponent,
     path: 'signup',
+  },
+  {
+    component: NotFoundComponent,
+    path: '**',
   },
 ];
 

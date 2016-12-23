@@ -1,3 +1,7 @@
+body {
+  color: var(--primary-text);
+}
+
 a {
   cursor: pointer;
 

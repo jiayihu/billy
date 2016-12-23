@@ -1,0 +1,12 @@
+:host {
+  display: block;
+  text-align: center;
+}
+
+.not-found {
+  max-width: 20rem;
+}
+
+.warning {
+  font-size: 2rem;
+}

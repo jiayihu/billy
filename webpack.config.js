@@ -74,6 +74,13 @@ module.exports = {
         include: path.src,
         exclude: [path.join(root.src, 'styles'), /node_modules/],
       },
+      {
+        test: /\.(png|jpg|jpeg|gif|svg)$/i,
+        loader: 'file-loader',
+        query: {
+          name: '/images/[name]_[hash:5].[ext]?[hash:5]',
+        },
+      },
     ],
   },
   plugins: IS_DEV ? devPlugins : prodPlugins,
