@@ -24,12 +24,12 @@ import LoggerService from '../services/logger.service';
   imports: [
     BrowserModule,
     HttpModule,
-    AppRoutingModule,
     AuthModule,
     CreateInvoiceModule,
     CustomersModule,
     InvoicesModule,
     StaticModule,
+    AppRoutingModule,
     SimpleNotificationsModule,
   ],
   declarations: [
