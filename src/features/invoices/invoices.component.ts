@@ -1,5 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
+import { Router } from '@angular/router';
 import StoreService, { IInvoice, ITax } from '../../services/store.service';
 import LoggerService from '../../services/logger.service';
 import TaxesLoggerService from './services/taxes-logger.service';
@@ -20,7 +21,7 @@ export default class InvoicesComponent implements OnDestroy {
   taxes: ITax[] = [];
   private storeSub: Subscription;
 
-  constructor(private storeService: StoreService) {}
+  constructor(private storeService: StoreService, private router: Router) {}
 
   ngOnInit() {
     this.storeSub = this.storeService.store$.subscribe(store => {
@@ -31,6 +32,10 @@ export default class InvoicesComponent implements OnDestroy {
 
   ngOnDestroy() {
     this.storeSub.unsubscribe();
+  }
+
+  handleInvoiceEdit(invoiceId: string) {
+    this.router.navigateByUrl(`/invoices/${invoiceId}`);
   }
 
   handleInvoiceDelete(invoiceId: string) {

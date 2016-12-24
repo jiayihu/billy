@@ -1,7 +1,8 @@
+import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import CreateInvoiceComponent from '../features/create-invoice/create-invoice.component';
 import CustomersComponent from '../features/customers/customers-list/customers-list.component';
-import InvoicesComponent from '../features/invoices/invoices.component';
+import { invoicesRoutes } from '../features/invoices/invoices-routing.module';
 import SignupComponent from '../features/auth/signup/signup.component';
 
 import NotFoundComponent from '../features/static/not-found/not-found.component';
@@ -16,10 +17,7 @@ const routes: Routes = [
     component: CreateInvoiceComponent,
     path: 'create',
   },
-  {
-    component: InvoicesComponent,
-    path: 'invoices',
-  },
+  ...invoicesRoutes,
   {
     component: CustomersComponent,
     path: 'customers',
@@ -34,4 +32,8 @@ const routes: Routes = [
   },
 ];
 
-export default RouterModule.forRoot(routes);
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule],
+})
+export default class AppRoutingModule {}
