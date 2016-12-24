@@ -9,7 +9,8 @@ import InvoicesModule from '../features/invoices/invoices.module';
 import StaticModule from '../features/static/static.module';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 
-import routing from './app.routes';
+import AppRoutingModule from './app-routing.module';
+
 import AppComponent from './app.component';
 import FooterComponent from './components/footer/footer.component';
 import NavComponent from './components/nav/nav.component';
@@ -23,7 +24,7 @@ import LoggerService from '../services/logger.service';
   imports: [
     BrowserModule,
     HttpModule,
-    routing,
+    AppRoutingModule,
     AuthModule,
     CreateInvoiceModule,
     CustomersModule,

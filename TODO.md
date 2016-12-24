@@ -1,3 +1,5 @@
+- Create SharedModule with Common, Directives, Pipes and UI Modules
+- Route transition animation 
 - CRUD API and authentication
 - Create model folder
 - Custom structural directive
