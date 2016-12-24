@@ -1,8 +1,8 @@
-- Create SharedModule with Common, Directives, Pipes and UI Modules
 - Route transition animation 
 - CRUD API and authentication
 - Create model folder
 - Custom structural directive
+- Cool select component
 - Create Tooltip directive for forms errors
 - Async Pipe
 - Replace pure tslint with codelyzer https://github.com/mgechev/codelyzer
