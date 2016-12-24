@@ -1,11 +1,8 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import SharedModule from '../shared.module';
 import CustomersModule from '../customers/customers.module';
-import DirectivesModule from '../directives/directives.module';
-import PipesModule from '../pipes/pipes.module';
-import UIModule from '../ui/ui.module';
 
 import CreateInvoiceComponent from './create-invoice.component';
 import CustomerComponent from './customer/customer.component';
@@ -16,12 +13,9 @@ import TaxesComponent from './taxes/taxes.component';
 
 @NgModule({
   imports: [
-    CommonModule,
+    SharedModule,
     CustomersModule,
-    DirectivesModule,
-    UIModule,
     FormsModule,
-    PipesModule,
     ReactiveFormsModule,
   ],
   declarations: [

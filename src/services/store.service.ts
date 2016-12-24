@@ -170,4 +170,14 @@ export default class StoreService {
     const filteredInvoices = this.store.invoices.filter(invoice => invoice.id !== invoiceId);
     this.editStore('invoices', filteredInvoices);
   }
+
+  editInvoice(updatedInvoice: ITax) {
+    const updatedInvoices = this.store.invoices.map(invoice => {
+      if (invoice.id === updatedInvoice.id) return updatedInvoice;
+      return invoice;
+    });
+
+    this.editStore('invoices', updatedInvoices);
+    this.notificationsService.success('Invoice', 'Invoice edited successfully.');
+  }
 }
