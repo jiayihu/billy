@@ -51,7 +51,10 @@ module.exports = {
     extensions: ['', '.js', '.ts'],
   },
   module: {
-    noParse: /node_modules\/localforage\/dist\/localforage.js/,
+    noParse: [
+      /moment.js/,
+      /node_modules\/localforage\/dist\/localforage.js/
+    ],
     loaders: [
       {
         test: /\.tsx?$/,
