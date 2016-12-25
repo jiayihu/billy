@@ -33,7 +33,6 @@ export default class SelectListComponent {
     // @NOTE: default text option has value ''
     if (value) this.onChange.emit(value);
 
-    // Reset the selection to default if 'add' option was selected
     if (value === 'add' || this.resetAfterSelect) this.selectEl.nativeElement.selectedIndex = 0;
   }
 }
