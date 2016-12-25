@@ -23,6 +23,7 @@ export default class SelectListComponent {
   @Input() addOptionText: string = 'Or add a new option';
   @Input() defaultText: string = 'Select an option';
   @Input() options: ISelectOption[];
+  @Input() resetAfterSelect: boolean = true;
   @Output() onChange = new EventEmitter<string>();
 
   @ViewChild('select')
@@ -33,6 +34,6 @@ export default class SelectListComponent {
     if (value) this.onChange.emit(value);
 
     // Reset the selection to default if 'add' option was selected
-    if (value === 'add') this.selectEl.nativeElement.selectedIndex = 0;
+    if (value === 'add' || this.resetAfterSelect) this.selectEl.nativeElement.selectedIndex = 0;
   }
 }
