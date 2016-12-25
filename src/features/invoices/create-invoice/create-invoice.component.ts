@@ -22,11 +22,6 @@ export default class CreateInvoiceComponent {
     this.invoice = set(path, value, this.invoice) as IInvoice;
   }
 
-  // @NOTE: Only for development
-  private persistTasks() {
-    window.localStorage.setItem('billy-tasks', JSON.stringify(this.invoice.tasks));
-  }
-
   constructor(private storeService: StoreService) {
     this.invoice = {
       id: '',
@@ -139,7 +134,6 @@ export default class CreateInvoiceComponent {
     const taskId = this.storeService.generateId('TASK');
     const newTask = Object.assign({}, task, { id: taskId });
     this.editInvoice('tasks', this.invoice.tasks.concat(newTask));
-    this.persistTasks();
   }
 
   handleEditTask(updatedTask: ITask) {
@@ -149,12 +143,10 @@ export default class CreateInvoiceComponent {
     });
 
     this.editInvoice('tasks', updatedTasks);
-    this.persistTasks();
   }
 
   handleRemoveTask(taskId: string) {
     this.editInvoice('tasks', this.invoice.tasks.filter(task => task.id !== taskId));
-    this.persistTasks();
   }
 
   /**
