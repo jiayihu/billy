@@ -171,7 +171,7 @@ export default class StoreService {
     this.editStore('invoices', filteredInvoices);
   }
 
-  editInvoice(updatedInvoice: ITax) {
+  editInvoice(updatedInvoice: IInvoice) {
     const updatedInvoices = this.store.invoices.map(invoice => {
       if (invoice.id === updatedInvoice.id) return updatedInvoice;
       return invoice;

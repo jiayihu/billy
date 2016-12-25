@@ -15,7 +15,7 @@ export const invoicesRoutes: Route[] = [
     pathMatch: 'full',
   },
   {
-    path: 'invoices/:invoiceId',
+    path: 'invoices/:invoiceId/edit',
     component: InvoicesEditComponent,
   },
 ];

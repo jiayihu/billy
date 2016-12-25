@@ -35,7 +35,7 @@ export default class InvoicesListComponent implements OnDestroy {
   }
 
   handleInvoiceEdit(invoiceId: string) {
-    this.router.navigateByUrl(`/invoices/${invoiceId}`);
+    this.router.navigateByUrl(`/invoices/${invoiceId}/edit`);
   }
 
   handleInvoiceDelete(invoiceId: string) {

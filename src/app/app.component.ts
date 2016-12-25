@@ -15,7 +15,7 @@ import { Component } from '@angular/core';
 export default class AppComponent {
   notificationOptions = {
     position: ['top', 'right'],
-    timeOut: 10 * 1000,
+    timeOut: 5 * 1000,
     showProgressBar: false,
     lastOnBottom: false,
   };
