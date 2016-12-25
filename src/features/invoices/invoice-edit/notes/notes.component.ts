@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'notes',
@@ -6,6 +6,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./notes.component.css'],
 })
 export default class NotesComponent {
+  @Input() notes: string = '';
   @Output() onNotesChange = new EventEmitter<string>();
 
   handleNotesChange(notes: string) {

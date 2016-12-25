@@ -48,5 +48,5 @@
     Total:
     {{(invoice.tasks | reduceSum:'amount') * ( 1 + (invoice.taxes | reduceSum:'rate') / 100) | currency:'EUR':true}}
   </p>
-  <notes (onNotesChange)="handleEvent('onNotesChange', $event)"></notes>
+  <notes [notes]="invoice.notes" (onNotesChange)="handleEvent('onNotesChange', $event)"></notes>
 </div>
