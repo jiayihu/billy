@@ -1,10 +1,10 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import SharedModule from '../shared.module';
-import CustomersModule from '../customers/customers.module';
+import SharedModule from '../../shared.module';
+import CustomersModule from '../../customers/customers.module';
 
-import CreateInvoiceComponent from './create-invoice.component';
+import InvoiceEditComponent from './invoice-edit.component';
 import CustomerComponent from './customer/customer.component';
 import NotesComponent from './notes/notes.component';
 import UserBusinessComponent from './user-business/user-business.component';
@@ -19,14 +19,14 @@ import TaxesComponent from './taxes/taxes.component';
     ReactiveFormsModule,
   ],
   declarations: [
-    CreateInvoiceComponent,
+    InvoiceEditComponent,
     CustomerComponent,
     NotesComponent,
     UserBusinessComponent,
     TasksComponent,
     TaxesComponent,
    ],
-  exports: [CreateInvoiceComponent],
+  exports: [InvoiceEditComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export default class CreateInvoiceModule {

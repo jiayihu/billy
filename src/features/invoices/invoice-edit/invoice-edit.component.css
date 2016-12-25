@@ -1,14 +1,3 @@
-.heading,
-.footer {
-  align-items: center;
-  display: flex;
-  margin: 2.5rem auto;
-}
-
-.save-btn {
-  margin-left: auto;
-}
-
 .invoice-date-number {
   margin: 5rem 0 3rem;
 }

@@ -1,0 +1,52 @@
+<div class="invoice">
+  <user-business [user]="invoice.user" (onBusinessChange)="handleEvent('onBusinessChange', $event)"></user-business>
+  <div class="row">
+    <div class="col-sm-4 offset-sm-8">
+      <customer
+        [customers]="customers"
+        [selectedCustomer]="invoice.customer"
+        (onAddCustomer)="handleEvent('onAddCustomer', $event)"
+        (onEditCustomer)="handleEvent('onEditCustomer', $event)"
+        (onRemoveCustomer)="handleEvent('onRemoveCustomer')"
+        (onSelectCustomer)="handleEvent('onSelectCustomer', $event)"
+      ></customer>
+    </div>
+  </div>
+  <div class="invoice-date-number clearfix">
+    <span>
+      <input-edit [initialValue]="invoice.location" (onChange)="handleEvent('onEditLocation', $event)"></input-edit>,
+      <input-edit [initialValue]="invoice.date" (onChange)="handleEvent('onEditDate', $event)" type="datepicker"></input-edit>
+    </span>
+    <span class="float-xs-right">
+      Invoice #
+      <input-edit
+        class="invoice-number"
+        [charsLength]="4"
+        [initialValue]="invoice.number"
+        type="number"
+        (onChange)="handleEvent('onEditNumber', $event)"
+      ></input-edit>
+    </span>
+  </div>
+  <tasks
+    [tasks]="invoice.tasks"
+    (onAddTask)="handleEvent('onAddTask', $event)"
+    (onEditTask)="handleEvent('onEditTask', $event)"
+    (onRemoveTask)="handleEvent('onRemoveTask', $event)"
+  ></tasks>
+  <taxes
+    class="taxes"
+    [subtotal]="invoice.tasks | reduceSum:'amount'"
+    [availableTaxes]="availableTaxes"
+    [invoiceTaxes]="invoice.taxes"
+    (onAddTax)="handleEvent('onAddTax', $event)"
+    (onAddInvoiceTax)="handleEvent('onAddInvoiceTax', $event)"
+    (onEditTax)="handleEvent('onEditTax', $event)"
+    (onRemoveTax)="handleEvent('onRemoveTax', $event)"
+  ></taxes>
+  <p class="invoice-total">
+    Total:
+    {{(invoice.tasks | reduceSum:'amount') * ( 1 + (invoice.taxes | reduceSum:'rate') / 100) | currency:'EUR':true}}
+  </p>
+  <notes (onNotesChange)="handleEvent('onNotesChange', $event)"></notes>
+</div>

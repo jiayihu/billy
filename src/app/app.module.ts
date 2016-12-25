@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 
 import AuthModule from '../features/auth/auth.module';
-import CreateInvoiceModule from '../features/create-invoice/create-invoice.module';
 import CustomersModule from '../features/customers/customers.module';
 import InvoicesModule from '../features/invoices/invoices.module';
 import StaticModule from '../features/static/static.module';
@@ -25,7 +24,6 @@ import LoggerService from '../services/logger.service';
     BrowserModule,
     HttpModule,
     AuthModule,
-    CreateInvoiceModule,
     CustomersModule,
     InvoicesModule,
     StaticModule,

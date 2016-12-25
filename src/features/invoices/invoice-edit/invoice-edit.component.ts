@@ -1,29 +1,33 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Observable }  from 'rxjs/Observable';
-import { Subscription }  from 'rxjs/Subscription';
-import { ActivatedRoute } from '@angular/router';
-import StoreService, { IInvoice } from '../../../services/store.service';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ICustomer, IInvoice, ITask, ITax, IUser } from '../../../services/store.service';
 
 @Component({
   selector: 'invoice-edit',
-  template: `<h3>Invoice edit</h3>`,
+  templateUrl: './invoice-edit.component.html',
+  styleUrls: ['./invoice-edit.component.css'],
 })
-export default class InvoiceEditComponent implements OnInit, OnDestroy {
-  invoice: IInvoice;
-  invoiceSub: Subscription;
+export default class InvoiceEditComponent {
+  @Input() customers: ICustomer[];
+  @Input() invoice: IInvoice;
+  @Input() availableTaxes: ITax[];
+  @Output() onBusinessChange = new EventEmitter<IUser>();
+  @Output() onAddCustomer = new EventEmitter<ICustomer>();
+  @Output() onEditCustomer = new EventEmitter<ICustomer>();
+  @Output() onRemoveCustomer = new EventEmitter<void>();
+  @Output() onSelectCustomer = new EventEmitter<string>();
+  @Output() onEditLocation = new EventEmitter<string>();
+  @Output() onEditDate = new EventEmitter<string>();
+  @Output() onEditNumber = new EventEmitter<string>();
+  @Output() onAddTask = new EventEmitter<ITask>();
+  @Output() onEditTask = new EventEmitter<ITask>();
+  @Output() onRemoveTask = new EventEmitter<string>();
+  @Output() onAddTax = new EventEmitter<void>();
+  @Output() onAddInvoiceTax = new EventEmitter<string>();
+  @Output() onEditTax = new EventEmitter<ITax>();
+  @Output() onRemoveTax = new EventEmitter<string>();
+  @Output() onNotesChange = new EventEmitter<string>();
 
-  constructor(private storeService: StoreService, private route: ActivatedRoute) {}
-
-  ngOnInit() {
-    this.invoiceSub = Observable.combineLatest(this.storeService.store$, this.route.params, (store, params) => {
-      const invoiceId = params['invoiceId'];
-      return store.invoices.find(invoice => invoice.id === invoiceId);
-    })
-    .do(invoice => console.log(invoice))
-    .subscribe(invoice => this.invoice = invoice);
-  }
-
-  ngOnDestroy() {
-    this.invoiceSub.unsubscribe();
+  handleEvent(emitterName: string, event = null) {
+    this[emitterName].emit(event);
   }
 }

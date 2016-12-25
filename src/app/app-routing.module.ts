@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import CreateInvoiceComponent from '../features/create-invoice/create-invoice.component';
 import CustomersComponent from '../features/customers/customers-list/customers-list.component';
 import SignupComponent from '../features/auth/signup/signup.component';
 
@@ -11,10 +10,6 @@ const routes: Routes = [
     path: '',
     pathMatch: 'full',
     redirectTo: 'create',
-  },
-  {
-    component: CreateInvoiceComponent,
-    path: 'create',
   },
   {
     component: CustomersComponent,

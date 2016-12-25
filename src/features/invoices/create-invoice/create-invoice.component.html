@@ -1,0 +1,28 @@
+<div class="heading">
+  <h2 class="title">New invoice</h2>
+  <btn class="save-btn" type="primary" (onClick)="handleSaveInvoice()">Save</btn>
+</div>
+<invoice-edit
+  [customers]="customers"
+  [invoice]="invoice"
+  [availableTaxes]="storeTaxes"
+  (onBusinessChange)="handleBusinessChange($event)"
+  (onAddCustomer)="handleAddCustomer($event)"
+  (onEditCustomer)="handleEditCustomer($event)"
+  (onRemoveCustomer)="handleRemoveCustomer($event)"
+  (onSelectCustomer)="handleSelectCustomer($event)"
+  (onEditLocation)="handleEditLocation($event)"
+  (onEditDate)="handleEditDate($event)"
+  (onEditNumber)="handleEditNumber($event)"
+  (onAddTask)="handleAddTask($event)"
+  (onEditTask)="handleEditTask($event)"
+  (onRemoveTask)="handleRemoveTask($event)"
+  (onAddTax)="handleAddTax($event)"
+  (onAddInvoiceTax)="handleAddInvoiceTax($event)"
+  (onEditTax)="handleEditTax($event)"
+  (onRemoveTax)="handleRemoveTax($event)"
+  (onNotesChange)="handleNotesChange($event)"
+></invoice-edit>
+<div class="footer">
+  <btn class="save-btn" type="primary" (onClick)="handleSaveInvoice()">Save</btn>
+</div>

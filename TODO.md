@@ -1,3 +1,4 @@
+- Find solution for long ../../../ paths
 - Route transition animation 
 - CRUD API and authentication
 - Create model folder
