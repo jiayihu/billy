@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
-import StoreService, { ICustomer, IInvoice, ITask, ITax } from '../../../services/store.service';
+import StoreService, { ICustomer, IInvoice, ITask, ITax } from '@services/store.service';
 import * as moment from 'moment';
 import isNaN = require('lodash/isNaN');
 import maxBy = require('lodash/maxBy');

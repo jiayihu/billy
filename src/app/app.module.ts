@@ -14,10 +14,10 @@ import AppComponent from './app.component';
 import FooterComponent from './components/footer/footer.component';
 import NavComponent from './components/nav/nav.component';
 
-import StoreService from '../services/store.service';
-import FormBuilderService from '../services/form-builder.service';
-import GeoService from '../services/geo.service';
-import LoggerService from '../services/logger.service';
+import StoreService from '@services/store.service';
+import FormBuilderService from '@services/form-builder.service';
+import GeoService from '@services/geo.service';
+import LoggerService from '@services/logger.service';
 
 @NgModule({
   imports: [

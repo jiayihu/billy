@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, Output, SimpleChange } from '@angular/core';
-import GeoService from '../../../services/geo.service';
+import GeoService from '@services/geo.service';
 import { FormGroup } from '@angular/forms';
-import { ICustomer } from '../../../services/store.service';
-import FormBuilderService, { IField, ISelectField } from '../../../services/form-builder.service';
+import { ICustomer } from '@services/store.service';
+import FormBuilderService, { IField, ISelectField } from '@services/form-builder.service';
 import get = require('lodash/get');
 
 @Component({

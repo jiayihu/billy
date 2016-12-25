@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ITax } from '../../../services/store.service';
+import { ITax } from '@services/store.service';
 import { FormGroup } from '@angular/forms';
-import FormBuilderService, { IField } from '../../../services/form-builder.service';
-import LoggerService from '../../../services/logger.service';
+import FormBuilderService, { IField } from '@services/form-builder.service';
+import LoggerService from '@services/logger.service';
 
 @Component({
   selector: 'taxes-list',

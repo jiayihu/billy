@@ -16,7 +16,11 @@
         "removeComments": true,
         "suppressImplicitAnyIndexErrors": true,
         "target": "es5",
-        "types": ["node"]
+        "types": ["node"],
+        "baseUrl": ".",
+        "paths": {
+          "@services/*": ["src/services/*"]
+        }
     },
     "exclude": [
         "dist",

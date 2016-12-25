@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable }  from 'rxjs/Observable';
 import { Subscription }  from 'rxjs/Subscription';
 import { ActivatedRoute } from '@angular/router';
-import StoreService, { ICustomer, IInvoice, ITask, ITax } from '../../../services/store.service';
+import StoreService, { ICustomer, IInvoice, ITask, ITax } from '@services/store.service';
 import isNaN = require('lodash/isNaN');
 import set = require('lodash/fp/set');
 

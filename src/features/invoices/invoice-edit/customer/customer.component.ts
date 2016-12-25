@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { ICustomer } from '../../../../services/store.service';
+import { ICustomer } from '@services/store.service';
 
 @Component({
   selector: 'customer',

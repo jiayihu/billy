@@ -48,6 +48,9 @@ module.exports = {
     filename: 'main.js',
   },
   resolve: {
+    alias: {
+      '@services': path.join(root.src, 'services'),
+    },
     extensions: ['', '.js', '.ts'],
   },
   module: {

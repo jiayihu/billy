@@ -1,8 +1,8 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { Router } from '@angular/router';
-import StoreService, { IInvoice, ITax } from '../../../services/store.service';
-import LoggerService from '../../../services/logger.service';
+import StoreService, { IInvoice, ITax } from '@services/store.service';
+import LoggerService from '@services/logger.service';
 import TaxesLoggerService from '../services/taxes-logger.service';
 
 @Component({

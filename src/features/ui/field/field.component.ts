@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { IField, ISelectField } from '../../../services/form-builder.service';
+import { IField, ISelectField } from '@services/form-builder.service';
 
 @Component({
   selector: 'field',
