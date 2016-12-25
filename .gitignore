@@ -8,6 +8,7 @@ dist
 env.json
 .idea
 .vscode
+stats.json
 
 # Compiled source #
 ###################

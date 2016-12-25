@@ -4,6 +4,7 @@ import StoreService, { ICustomer, IInvoice, ITask, ITax } from '../../../service
 import * as moment from 'moment';
 import isNaN = require('lodash/isNaN');
 import maxBy = require('lodash/maxBy');
+import set = require('lodash/fp/set');
 
 @Component({
   selector: 'create-invoice',
@@ -16,6 +17,10 @@ export default class CreateInvoiceComponent {
   storeTaxes: ITax[];
 
   private storeSub: Subscription;
+
+  private editInvoice(path: string, value: any) {
+    this.invoice = set(path, value, this.invoice) as IInvoice;
+  }
 
   // @NOTE: Only for development
   private persistTasks() {
@@ -54,9 +59,9 @@ export default class CreateInvoiceComponent {
       this.customers = store.customers;
       this.storeTaxes = store.taxes;
 
-      this.setInvoiceCustomer(store.customers);
       this.invoice = {
         ...this.invoice,
+        customer: this.getInvoiceCustomer(this.invoice, store.customers),
         user: store.user,
       };
     });
@@ -66,9 +71,8 @@ export default class CreateInvoiceComponent {
     this.storeSub.unsubscribe();
   }
 
-  setInvoiceCustomer(customers: ICustomer[]) {
-    const invoice = this.invoice;
-    let invoiceCustomer: ICustomer;
+  getInvoiceCustomer(invoice: IInvoice, customers: ICustomer[]) {
+    let invoiceCustomer: ICustomer = invoice.customer;
 
     if (!invoice.customer && customers.length === 1) {
       // If there is no customer selected and only one available set it as default
@@ -78,12 +82,7 @@ export default class CreateInvoiceComponent {
       invoiceCustomer = customers.find(customer => customer.id === invoice.customer.id);
     }
 
-    if (invoiceCustomer) {
-      this.invoice = {
-        ...invoice,
-        customer: invoiceCustomer,
-      };
-    }
+    return invoiceCustomer;
   }
 
   handleSaveInvoice() {
@@ -107,17 +106,11 @@ export default class CreateInvoiceComponent {
   }
 
   handleRemoveCustomer(): void {
-    this.invoice = {
-      ...this.invoice,
-      customer: null,
-    };
+    this.editInvoice('customer', null);
   }
 
   handleSelectCustomer(selectedCustomerId: string): void {
-    this.invoice = {
-      ...this.invoice,
-      customer: this.customers.find(customer => customer.id === selectedCustomerId),
-    };
+    this.editInvoice('customer', this.customers.find(customer => customer.id === selectedCustomerId));
   }
 
   /**
@@ -125,17 +118,17 @@ export default class CreateInvoiceComponent {
    */
 
   handleEditDate(newDate: string): void {
-    this.invoice.date = newDate;
+    this.editInvoice('date', newDate);
   }
 
   handleEditLocation(newLocation: string): void {
-    this.invoice.location = newLocation;
+    this.editInvoice('location', newLocation);
   }
 
   handleEditNumber(newNumber: number): void {
     if (isNaN(newNumber)) return;
 
-    this.invoice.number = newNumber;
+    this.editInvoice('number', newNumber);
   }
 
   /**
@@ -145,9 +138,7 @@ export default class CreateInvoiceComponent {
   handleAddTask(task: ITask) {
     const taskId = this.storeService.generateId('TASK');
     const newTask = Object.assign({}, task, { id: taskId });
-    this.invoice = Object.assign({}, this.invoice, {
-      tasks: this.invoice.tasks.concat(newTask),
-    });
+    this.editInvoice('tasks', this.invoice.tasks.concat(newTask));
     this.persistTasks();
   }
 
@@ -157,16 +148,12 @@ export default class CreateInvoiceComponent {
       return task;
     });
 
-    this.invoice = Object.assign({}, this.invoice, {
-      tasks: updatedTasks,
-    });
+    this.editInvoice('tasks', updatedTasks);
     this.persistTasks();
   }
 
   handleRemoveTask(taskId: string) {
-    this.invoice = Object.assign({}, this.invoice, {
-      tasks: this.invoice.tasks.filter(task => task.id !== taskId),
-    });
+    this.editInvoice('tasks', this.invoice.tasks.filter(task => task.id !== taskId));
     this.persistTasks();
   }
 
@@ -176,16 +163,12 @@ export default class CreateInvoiceComponent {
 
   handleAddTax() {
     const newTax = this.storeService.addTax();
-    this.invoice = Object.assign({}, this.invoice, {
-      taxes: this.invoice.taxes.concat(newTax),
-    });
+    this.editInvoice('taxes', this.invoice.taxes.concat(newTax));
   }
 
   handleAddInvoiceTax(taxId: string) {
     const tax = this.storeTaxes.find(item => item.id === taxId);
-    this.invoice = Object.assign({}, this.invoice, {
-      taxes: this.invoice.taxes.concat(tax),
-    });
+    this.editInvoice('taxes', this.invoice.taxes.concat(tax));
   }
 
   handleEditTax(updatedTax: ITax) {
@@ -194,21 +177,15 @@ export default class CreateInvoiceComponent {
       return tax;
     });
 
-    this.invoice = Object.assign({}, this.invoice, {
-      taxes: updatedTaxes,
-    });
+    this.editInvoice('taxes', updatedTaxes);
     this.storeService.editTax(updatedTax);
   }
 
   handleRemoveTax(taxId: string) {
-    this.invoice = Object.assign({}, this.invoice, {
-      taxes: this.invoice.taxes.filter(tax => tax.id !== taxId),
-    });
+    this.editInvoice('taxes', this.invoice.taxes.filter(tax => tax.id !== taxId));
   }
 
   handleNotesChange(notes: string) {
-    this.invoice = Object.assign({}, this.invoice, {
-      notes,
-    });
+    this.editInvoice('notes', notes);
   }
 }
