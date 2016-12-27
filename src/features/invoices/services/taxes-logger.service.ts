@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ITax } from '@services/store.service';
+import { ITax } from '@services/model.service';
 
 @Injectable()
 export default class TaxesLoggerService {

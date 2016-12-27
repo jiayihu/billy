@@ -9,7 +9,7 @@
       <th>Actions</th>
     </thead>
     <tbody>
-      <tr *ngFor="let invoice of invoices" class="invoice">
+      <tr *ngFor="let invoice of invoices$ | async" class="invoice">
         <td>{{invoice.number}}</td>
         <td>{{invoice.date}}</td>
         <td>{{invoice.customer.name}}</td>
@@ -27,7 +27,7 @@
 
 <h4>All taxes</h4>
 <taxes-list
-  [taxes]="taxes"
+  [taxes]="taxes$ | async"
   (onEditTax)="handleTaxEdit($event)"
   (onDeleteTax)="handleTaxDelete($event)"
 ></taxes-list>

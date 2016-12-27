@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ITask } from '@services/store.service';
+import { ITask } from '@services/model.service';
 
 @Component({
   selector: 'tasks',

@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
-import StoreService, { ICustomer, IInvoice, ITask, ITax } from '@services/store.service';
+import { Store } from '@ngrx/store';
+import { IState } from '@services/reducers/';
+import ModelService, { ICustomer, IInvoice, ITask, ITax } from '@services/model.service';
 import * as moment from 'moment';
 import isNaN = require('lodash/isNaN');
 import maxBy = require('lodash/maxBy');
@@ -14,15 +17,19 @@ import set = require('lodash/fp/set');
 export default class CreateInvoiceComponent {
   customers: ICustomer[];
   invoice: IInvoice;
-  storeTaxes: ITax[];
+  availableTaxes: ITax[];
 
-  private storeSub: Subscription;
+  private userSub: Subscription;
+  private customersSub: Subscription;
+  private taxesSub: Subscription;
 
   private editInvoice(path: string, value: any) {
     this.invoice = set(path, value, this.invoice) as IInvoice;
+
+    if (path === 'tasks') window.localStorage.setItem('billy-tasks', JSON.stringify(value));
   }
 
-  constructor(private storeService: StoreService) {
+  constructor(private modelService: ModelService, private store: Store<IState>) {
     this.invoice = {
       id: '',
       customer: null,
@@ -37,33 +44,34 @@ export default class CreateInvoiceComponent {
   }
 
   ngOnInit() {
-    this.storeService.store$.take(1).subscribe(store => {
+    Observable.combineLatest(
+      [this.modelService.invoices$, this.modelService.taxes$],
+      (invoices: IInvoice[], taxes: ITax[]) => ({ invoices, taxes })
+    ).take(1).subscribe(state => {
       const storedTasks = JSON.parse(window.localStorage.getItem('billy-tasks'));
-      const lastInvoice = maxBy(store.invoices, invoice => invoice.number);
+      const lastInvoice = maxBy(state.invoices, invoice => invoice.number);
       const number = lastInvoice ? lastInvoice.number + 1 : 1;
 
       this.invoice = {
         ...this.invoice,
         number,
         tasks: storedTasks || [],
-        taxes: this.invoice.taxes.length ? this.invoice.taxes : store.taxes,
+        taxes: this.invoice.taxes.length ? this.invoice.taxes : state.taxes,
       };
     });
 
-    this.storeSub = this.storeService.store$.subscribe(store => {
-      this.customers = store.customers;
-      this.storeTaxes = store.taxes;
-
-      this.invoice = {
-        ...this.invoice,
-        customer: this.getInvoiceCustomer(this.invoice, store.customers),
-        user: store.user,
-      };
+    this.customersSub = this.modelService.customers$.subscribe(customers => {
+      this.customers = customers;
+      this.editInvoice('customer', this.getInvoiceCustomer(this.invoice, customers));
     });
+    this.userSub = this.modelService.user$.subscribe(user => this.editInvoice('user', user));
+    this.taxesSub = this.modelService.taxes$.subscribe(taxes => this.availableTaxes = taxes);
   }
 
   ngOnDestroy() {
-    this.storeSub.unsubscribe();
+    this.userSub.unsubscribe();
+    this.customersSub.unsubscribe();
+    this.taxesSub.unsubscribe();
   }
 
   getInvoiceCustomer(invoice: IInvoice, customers: ICustomer[]) {
@@ -81,11 +89,11 @@ export default class CreateInvoiceComponent {
   }
 
   handleSaveInvoice() {
-    this.storeService.addInvoice(this.invoice);
+    this.modelService.addInvoice(this.invoice);
   }
 
   handleBusinessChange(newBusinessInfo): void {
-    this.storeService.editUser(newBusinessInfo);
+    this.modelService.editUser(newBusinessInfo);
   }
 
   /**
@@ -93,11 +101,11 @@ export default class CreateInvoiceComponent {
    */
 
   handleAddCustomer(newCustomer: ICustomer): void {
-    this.storeService.addCustomer(newCustomer);
+    this.modelService.addCustomer(newCustomer);
   }
 
   handleEditCustomer(newCustomer: ICustomer): void {
-    this.storeService.editCustomer(newCustomer);
+    this.modelService.editCustomer(newCustomer);
   }
 
   handleRemoveCustomer(): void {
@@ -131,7 +139,7 @@ export default class CreateInvoiceComponent {
    */
 
   handleAddTask(task: ITask) {
-    const taskId = this.storeService.generateId('TASK');
+    const taskId = this.modelService.generateId('TASK');
     const newTask = Object.assign({}, task, { id: taskId });
     this.editInvoice('tasks', this.invoice.tasks.concat(newTask));
   }
@@ -154,12 +162,12 @@ export default class CreateInvoiceComponent {
    */
 
   handleAddTax() {
-    const newTax = this.storeService.addTax();
+    const newTax = this.modelService.addTax();
     this.editInvoice('taxes', this.invoice.taxes.concat(newTax));
   }
 
   handleAddInvoiceTax(taxId: string) {
-    const tax = this.storeTaxes.find(item => item.id === taxId);
+    const tax = this.availableTaxes.find(item => item.id === taxId);
     this.editInvoice('taxes', this.invoice.taxes.concat(tax));
   }
 
@@ -170,7 +178,7 @@ export default class CreateInvoiceComponent {
     });
 
     this.editInvoice('taxes', updatedTaxes);
-    this.storeService.editTax(updatedTax);
+    this.modelService.editTax(updatedTax);
   }
 
   handleRemoveTax(taxId: string) {

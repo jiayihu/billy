@@ -1,7 +1,7 @@
-import { Component, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs/Subscription';
+import { Component } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
-import StoreService, { IInvoice, ITax } from '@services/store.service';
+import ModelService, { IInvoice, ITax } from '@services/model.service';
 import LoggerService from '@services/logger.service';
 import TaxesLoggerService from '../services/taxes-logger.service';
 
@@ -16,22 +16,15 @@ import TaxesLoggerService from '../services/taxes-logger.service';
     },
   ],
 })
-export default class InvoicesListComponent implements OnDestroy {
-  invoices: IInvoice[] = [];
-  taxes: ITax[] = [];
-  private storeSub: Subscription;
+export default class InvoicesListComponent {
+  invoices$: Observable< IInvoice[]>;
+  taxes$: Observable<ITax[]>;
 
-  constructor(private storeService: StoreService, private router: Router) {}
+  constructor(private modelService: ModelService, private router: Router) {}
 
   ngOnInit() {
-    this.storeSub = this.storeService.store$.subscribe(store => {
-      this.taxes = store.taxes;
-      this.invoices = store.invoices;
-    });
-  }
-
-  ngOnDestroy() {
-    this.storeSub.unsubscribe();
+    this.invoices$ = this.modelService.invoices$;
+    this.taxes$ = this.modelService.taxes$;
   }
 
   handleInvoiceEdit(invoiceId: string) {
@@ -39,14 +32,14 @@ export default class InvoicesListComponent implements OnDestroy {
   }
 
   handleInvoiceDelete(invoiceId: string) {
-    this.storeService.deleteInvoice(invoiceId);
+    this.modelService.deleteInvoice(invoiceId);
   }
 
   handleTaxEdit(updatedTax: ITax) {
-    this.storeService.editTax(updatedTax);
+    this.modelService.editTax(updatedTax);
   }
 
   handleTaxDelete(taxId: string) {
-    this.storeService.deleteTax(taxId);
+    this.modelService.deleteTax(taxId);
   }
 }
