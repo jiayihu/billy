@@ -7,7 +7,6 @@
     "build": "npm run clean && cross-env NODE_ENV=production webpack --config webpack.config.js",
     "build:profile": "npm run clean && cross-env NODE_ENV=production webpack --config webpack.config.js --profile --json > stats.json",
     "clean": "rimraf dist",
-    "postinstall": "typings install",
     "start": "webpack-dev-server --inline --config webpack.config.js",
     "lint": "tslint \"./src/**/*.ts\""
   },
