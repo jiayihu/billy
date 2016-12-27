@@ -3,6 +3,8 @@ import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import * as selectors from '@services/reducers/';
 import { customersActions, invoicesActions, taxesActions, userActions } from '@services/actions/';
+import ConfigService from '@services/config.service';
+import storage from '../utils/storage';
 import uuid = require('uuid');
 import { NotificationsService } from 'angular2-notifications';
 
@@ -67,14 +69,21 @@ export default class ModelService {
   invoices$: Observable<IInvoice[]>;
   taxes$: Observable<ITax[]>;
 
-  constructor(private notificationsService: NotificationsService, private store: Store<selectors.IState>) {
+  constructor(
+    private notificationsService: NotificationsService,
+    private store: Store<selectors.IState>,
+    private config: ConfigService
+  ) {
     this.user$ = this.store.select(selectors.getUser);
     this.customers$ = this.store.select(selectors.getCustomers);
     this.invoices$ = this.store.select(selectors.getInvoices);
     this.taxes$ = this.store.select(selectors.getTaxes);
 
-    this.store.debounceTime(300).subscribe(appState => {
-      window.localStorage.setItem('billy-store', JSON.stringify(appState));
+    this.store
+      .debounceTime(300)
+      .distinctUntilChanged()
+      .subscribe(appState => {
+      storage.setItem(this.config.get('LOCALSTORAGE'), appState);
     });
   }
 

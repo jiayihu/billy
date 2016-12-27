@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { Store } from '@ngrx/store';
 import { IState } from '@services/reducers/';
 import ModelService, { ICustomer, IInvoice, ITask, ITax } from '@services/model.service';
+import storage from '../../../utils/storage';
 import * as moment from 'moment';
 import isNaN = require('lodash/isNaN');
 import maxBy = require('lodash/maxBy');
@@ -26,7 +27,7 @@ export default class CreateInvoiceComponent {
   private editInvoice(path: string, value: any) {
     this.invoice = set(path, value, this.invoice) as IInvoice;
 
-    if (path === 'tasks') window.localStorage.setItem('billy-tasks', JSON.stringify(value));
+    if (path === 'tasks') storage.setItem('billy-tasks', value);
   }
 
   constructor(private modelService: ModelService, private store: Store<IState>) {
@@ -48,7 +49,7 @@ export default class CreateInvoiceComponent {
       [this.modelService.invoices$, this.modelService.taxes$],
       (invoices: IInvoice[], taxes: ITax[]) => ({ invoices, taxes })
     ).take(1).subscribe(state => {
-      const storedTasks = JSON.parse(window.localStorage.getItem('billy-tasks'));
+      const storedTasks = storage.getItem('billy-tasks');
       const lastInvoice = maxBy(state.invoices, invoice => invoice.number);
       const number = lastInvoice ? lastInvoice.number + 1 : 1;
 
