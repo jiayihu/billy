@@ -94,9 +94,11 @@ module.exports = {
   plugins: IS_DEV ? devPlugins : prodPlugins,
   postcss() {
     return [
+      require('postcss-inject-css-variables')(cssVariables.customProperties),
       cssnext({
         features: {
           customProperties: {
+            preserve: true,
             variables: cssVariables.customProperties,
           },
           customMedia: {

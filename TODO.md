@@ -1,7 +1,7 @@
-- Try ChangeDetectionStrategy.OnPush everywhere to see if changing a field reference provokes DOM update
+- @ngrx/effects
+- AOT Compilation
 - CRUD API and authentication
 - Custom structural directive
-- Create model folder
 - Create Tooltip directive for forms errors
 - i18n
 - Refactor to Angular2 official styleguide
@@ -12,8 +12,7 @@
 Low priority:
 - Route transition animation 
 - Cool select component
-- Async Pipe
-
+- CSS Theming
 
 Long Future:
 - Extend tslint with codelyzer https://github.com/mgechev/codelyzer

@@ -44,5 +44,5 @@ export default {
     }
 
     return false;
-  }
+  },
 };

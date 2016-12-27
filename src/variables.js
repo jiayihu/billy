@@ -6,13 +6,13 @@
 
 const customProperties = {
   'dark-primary': '#0288D1',
-  primary: '#03A9F4',
+  'primary': '#03A9F4',
   'light-primary': '#B3E5FC',
-  accent: '#FF5252',
+  'accent': '#FF5252',
   'primary-text': '#212121',
   'secondary-text': '#757575',
-  divider: '#BDBDBD',
-  success: '#8BC34A',
+  'divider': '#BDBDBD',
+  'success': '#8BC34A',
 };
 
 const customMediaQueries = {
