@@ -5,7 +5,6 @@ node_modules
 app.yaml
 public
 dist
-env.json
 .idea
 .vscode
 stats.json
