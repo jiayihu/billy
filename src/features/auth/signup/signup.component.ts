@@ -1,6 +1,9 @@
-import { Component, ViewChild } from '@angular/core';
-import { NgModel } from '@angular/forms';
-import { firebase } from '../../../firebase';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
+import { AngularFire } from 'angularfire2';
+import { NotificationsService } from 'angular2-notifications';
+import ModelService from '@services/model.service';
 
 @Component({
   selector: 'signup',
@@ -11,24 +14,24 @@ export default class SignupComponent {
   password: string;
   passwordConfirm: string;
 
-  @ViewChild('emailInput') emailInput: NgModel;
-  @ViewChild('pswInput') pswInput: NgModel;
+  constructor(
+    private firebase: AngularFire,
+    private modelService: ModelService,
+    private notifications: NotificationsService,
+    private router: Router,
+  ) {}
 
-  onSubmit() {
-    const email: string = this.emailInput.value;
-    const password: string = this.pswInput.value;
-    const auth = firebase.auth();
+  onSubmit(form: NgForm) {
+    const { email, password } = form.value;
 
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        // User is logged in
-        console.log('User logged in', user);
-      } else {
-        // No user is signed in.
-      }
-    });
-    console.log('onSubmit', email, password);
-    auth.createUserWithEmailAndPassword(email, password)
-      .catch(err => console.error(err));
+    this.firebase.auth.createUser({ email, password })
+      .then(() => {
+        this.notifications.success('Registration', 'Your account is created.');
+        this.router.navigateByUrl('/create');
+      })
+      .catch(err => {
+        console.error(err);
+        this.notifications.error('Registration', err.message);
+      });
   }
 }

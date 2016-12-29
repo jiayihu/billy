@@ -13,6 +13,7 @@ const customProperties = {
   'secondary-text': '#757575',
   'divider': '#BDBDBD',
   'success': '#8BC34A',
+  'danger': '#FF5252',
 };
 
 const customMediaQueries = {

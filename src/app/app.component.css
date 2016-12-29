@@ -3,21 +3,28 @@
 }
 
 /deep/ .simple-notification-wrapper .simple-notification {
-  background-color: #fff;
+  background-color: #fff !important;
+  box-shadow: 0 1px 8px var(--divider);
   color: #444;
 }
 
 /deep/ .simple-notification-wrapper .simple-notification .sn-title {
-  font-size: 1rem;
-  line-height: 1.5;
+  font-size: 1.5rem;
+  line-height: 1.75;
 }
 
 /deep/ .simple-notification-wrapper .simple-notification.success {
-  background: #fff;
   border-left: 4px solid var(--success);
-  box-shadow: 0 1px 8px var(--divider);
+
+  & svg {
+    fill: var(--success);
+  }
 }
 
-/deep/ .simple-notification-wrapper .simple-notification svg {
-  fill: var(--success);
+/deep/ .simple-notification-wrapper .simple-notification.error {
+  border-left: 4px solid var(--danger);
+
+  & svg {
+    fill: var(--danger);
+  }
 }

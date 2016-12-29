@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { NgRedux as Store } from 'ng2-redux';
 import * as selectors from '@services/reducers/';
-import { customersActions, invoicesActions, taxesActions, userActions } from '@services/actions/';
+import { authActions, customersActions, invoicesActions, taxesActions, userActions } from '@services/actions/';
 import ConfigService from '@services/config.service';
-import observableStore from '../utils/observableStore';
 import storage from '../utils/storage';
 import uuid = require('uuid');
 import { NotificationsService } from 'angular2-notifications';
+import { AngularFire } from 'angularfire2';
 
 export interface IUser {
   name: string;
@@ -73,6 +73,7 @@ export default class ModelService {
   constructor(
     private notificationsService: NotificationsService,
     private store: Store<selectors.IState>,
+    private firebase: AngularFire,
     private config: ConfigService
   ) {
     this.user$ = this.store.select(selectors.getUser);
@@ -80,16 +81,33 @@ export default class ModelService {
     this.invoices$ = this.store.select(selectors.getInvoices);
     this.taxes$ = this.store.select(selectors.getTaxes);
 
-    observableStore(this.store)
+    const store$ = this.store.select(s => s);
+
+    store$
       .debounceTime(300)
       .distinctUntilChanged()
       .subscribe(appState => {
         storage.setItem(this.config.get('LOCALSTORAGE'), appState);
       });
+
+    // Wait for Store to be available, then subscribe for auth changes. Otherwise
+    // Firebase could emit an auth object from localStorage before the Store is
+    // created.
+    store$
+      .take(1)
+      .concat(firebase.auth)
+      .skip(1)
+      .subscribe(auth => {
+        if (auth && auth.auth) this.authenticate(auth.auth);
+      });
   }
 
   generateId(entity: string): string {
     return `${entity.toUpperCase()}_${uuid.v4()}`;
+  }
+
+  authenticate(auth) {
+    this.store.dispatch(authActions.authenticate(auth));
   }
 
   editUser(value): void {

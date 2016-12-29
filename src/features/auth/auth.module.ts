@@ -8,6 +8,6 @@ import SignupComponent from './signup/signup.component';
   declarations: [SignupComponent],
   exports: [SignupComponent],
 })
-export default class AutModule {
+export default class AuthModule {
 
 }

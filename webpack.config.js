@@ -16,6 +16,10 @@ const devPlugins = [
     'process.env': {
       NODE_ENV: JSON.stringify('development'),
       GEONAMES: JSON.stringify(env.geonames),
+      FIREBASE_APIKEY: JSON.stringify(env.FIREBASE_APIKEY),
+      FIREBASE_AUTHDOMAIN: JSON.stringify(env.FIREBASE_AUTHDOMAIN),
+      FIREBASE_DATABASEURL: JSON.stringify(env.FIREBASE_DATABASEURL),
+      FIREBASE_STORAGE: JSON.stringify(env.FIREBASE_STORAGE),
     },
   }),
 ];

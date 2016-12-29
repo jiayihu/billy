@@ -1,22 +1,22 @@
 <h2>Sign Up</h2>
 
-<form (ngSubmit)="onSubmit()" #form="ngForm">
-  <div class="form-group">
-    <label for="email">Email address</label>
-    <input [(ngModel)]="email" name="email" #emailInput="ngModel" type="email" class="form-control" placeholder="Email" required />
-    <div *ngIf="!emailInput.valid && emailInput.dirty" class="alert alert-danger">An email address is required.</div>
-  </div>
-  <div class="form-group">
-    <label for="password">Password</label>
-    <input [(ngModel)]="password" name="password" #pswInput="ngModel" type="password" class="form-control" placeholder="Password" required />
-    <div *ngIf="!pswInput.valid && pswInput.dirty" class="alert alert-danger">A password is required.</div>
-  </div>
-  <div class="form-group">
-    <label for="passwordConfirm">Password confirm</label>
-    <input [(ngModel)]="passwordConfirm" name="passwordConfirm" #pswConfirm="ngModel" type="password" class="form-control" placeholder="Password confirm" required />
-    <div *ngIf="pswConfirm.dirty && pswConfirm.value !== pswInput.value && pswInput.valid" class="alert alert-danger">The the passwords must match.</div>
-  </div>
-  <button type="submit" class="btn btn-primary" [disabled]="!form.form.valid">Sign up</button>
-</form>
-
-<!-- @TODO: validate password and email. Show server errors -->
+<div class="col-sm-8 offset-sm-2">
+  <form (ngSubmit)="onSubmit(form)" #form="ngForm">
+    <div class="form-group">
+      <label for="email">Email address</label>
+      <input [(ngModel)]="email" name="email" #emailInput="ngModel" type="email" class="form-control" placeholder="Email" required />
+      <div *ngIf="!emailInput.valid && emailInput.dirty" class="alert alert-danger">An email address is required.</div>
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input [(ngModel)]="password" name="password" #pswInput="ngModel" type="password" class="form-control" placeholder="Password" required />
+      <div *ngIf="!pswInput.valid && pswInput.dirty" class="alert alert-danger">A password is required.</div>
+    </div>
+    <div class="form-group">
+      <label for="passwordConfirm">Password confirm</label>
+      <input [(ngModel)]="passwordConfirm" name="passwordConfirm" #pswConfirm="ngModel" type="password" class="form-control" placeholder="Password confirm" required />
+      <div *ngIf="pswConfirm.dirty && pswConfirm.value !== pswInput.value && pswInput.valid" class="alert alert-danger">The the passwords must match.</div>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="!form.form.valid">Sign up</button>
+  </form>
+</div>
