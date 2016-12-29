@@ -1,4 +1,4 @@
-import { Action } from '@ngrx/store';
+import { Action } from '../types/redux.types';
 import { IUser } from '../model.service';
 
 export const userActionTypes = {

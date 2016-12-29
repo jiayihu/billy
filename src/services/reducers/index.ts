@@ -1,4 +1,4 @@
-import { ActionReducer, combineReducers } from '@ngrx/store';
+import { combineReducers, Reducer } from 'redux';
 import customersReducer, { ICustomersState } from './customers.reducer';
 import invoicesReducer, { IInvoicesState } from './invoices.reducer';
 import taxesReducer, { ITaxesState } from './taxes.reducer';
@@ -16,7 +16,7 @@ export default combineReducers({
   customers: customersReducer,
   invoices: invoicesReducer,
   taxes: taxesReducer,
-}) as ActionReducer<IState>;
+}) as Reducer<IState>;
 
 /**
  * Selectors

@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { Store } from '@ngrx/store';
+import { NgRedux as Store } from 'ng2-redux';
 import * as selectors from '@services/reducers/';
 import { customersActions, invoicesActions, taxesActions, userActions } from '@services/actions/';
 import ConfigService from '@services/config.service';
+import observableStore from '../utils/observableStore';
 import storage from '../utils/storage';
 import uuid = require('uuid');
 import { NotificationsService } from 'angular2-notifications';
@@ -79,12 +80,12 @@ export default class ModelService {
     this.invoices$ = this.store.select(selectors.getInvoices);
     this.taxes$ = this.store.select(selectors.getTaxes);
 
-    this.store
+    observableStore(this.store)
       .debounceTime(300)
       .distinctUntilChanged()
       .subscribe(appState => {
-      storage.setItem(this.config.get('LOCALSTORAGE'), appState);
-    });
+        storage.setItem(this.config.get('LOCALSTORAGE'), appState);
+      });
   }
 
   generateId(entity: string): string {

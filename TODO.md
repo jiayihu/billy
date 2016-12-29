@@ -1,4 +1,4 @@
-- @ngrx/effects
+- redux observables
 - AOT Compilation
 - CRUD API and authentication
 - Custom structural directive

@@ -1,18 +1,26 @@
 import { NgModule } from '@angular/core';
-import { StoreModule } from '@ngrx/store';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { applyMiddleware, Store, compose, createStore } from 'redux';
+import { NgReduxModule, NgRedux } from 'ng2-redux';
 import storage from '../utils/storage';
 import rootReducer, { IState } from '@services/reducers/';
 import { LOCALSTORAGE } from '@services/config.service';
 
 let initialState: IState = storage.getItem(LOCALSTORAGE);
 
+const composeEnhancers = (<any> window).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store: Store<IState> = createStore(
+  rootReducer,
+  initialState,
+  composeEnhancers(applyMiddleware())
+);
+
 @NgModule({
   imports: [
-    StoreModule.provideStore(rootReducer, initialState || undefined),
-    StoreDevtoolsModule.instrumentOnlyWithExtension(),
+    NgReduxModule,
   ],
 })
 export default class AppStoreModule {
-
+  constructor(redux: NgRedux<IState>) {
+    redux.provideStore(store);
+  }
 }
