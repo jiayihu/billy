@@ -47,6 +47,7 @@ import LoggerService from '@services/logger.service';
       provide: APP_INITIALIZER,
       useFactory: (config: ConfigService) => () => config.load(),
       deps: [ConfigService],
+      multi: true,
     },
   ],
   bootstrap: [AppComponent],
