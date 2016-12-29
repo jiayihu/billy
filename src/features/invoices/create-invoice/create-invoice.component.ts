@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
-import { Store } from '@ngrx/store';
-import { IState } from '@services/reducers/';
 import ModelService, { ICustomer, IInvoice, ITask, ITax } from '@services/model.service';
 import storage from '../../../utils/storage';
 import * as moment from 'moment';
@@ -30,7 +28,7 @@ export default class CreateInvoiceComponent {
     if (path === 'tasks') storage.setItem('billy-tasks', value);
   }
 
-  constructor(private modelService: ModelService, private store: Store<IState>) {
+  constructor(private modelService: ModelService) {
     this.invoice = {
       id: '',
       customer: null,

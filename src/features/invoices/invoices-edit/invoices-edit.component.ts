@@ -1,8 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
-import { Store } from '@ngrx/store';
-import { IState } from '@services/reducers/';
 import { ActivatedRoute } from '@angular/router';
 import ModelService, { ICustomer, IInvoice, ITask, ITax } from '@services/model.service';
 import isNaN = require('lodash/isNaN');
@@ -29,7 +27,6 @@ export default class InvoicesEditComponent implements OnInit, OnDestroy {
   constructor(
     private modelService: ModelService,
     private route: ActivatedRoute,
-    private store: Store<IState>
   ) {}
 
   ngOnInit() {
