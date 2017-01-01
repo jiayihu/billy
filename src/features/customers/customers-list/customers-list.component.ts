@@ -1,6 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
-import ModelService from '@services/model.service';
 import CustomersModel, { ICustomer } from '@services/models/customers.model';
 
 @Component({
@@ -16,7 +15,6 @@ export default class CustomersListComponent implements OnDestroy {
   private customersSub: Subscription;
 
   constructor(
-    private modelService: ModelService,
     private customersModel: CustomersModel
   ) {}
 

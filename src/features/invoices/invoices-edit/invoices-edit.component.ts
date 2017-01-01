@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { ActivatedRoute } from '@angular/router';
-import ModelService from '@services/model.service';
 import CustomersModel, { ICustomer } from '@services/models/customers.model';
 import InvoicesModel, { IInvoice, ITask } from '@services/models/invoices.model';
 import TaxesModel, { ITax } from '@services/models/taxes.model';
@@ -28,7 +27,6 @@ export default class InvoicesEditComponent implements OnInit, OnDestroy {
   }
 
   constructor(
-    private modelService: ModelService,
     private customersModel: CustomersModel,
     private invoicesModel: InvoicesModel,
     private taxesModel: TaxesModel,
@@ -105,7 +103,7 @@ export default class InvoicesEditComponent implements OnInit, OnDestroy {
    */
 
   handleAddTask(task: ITask) {
-    const taskId = this.modelService.generateId('TASK');
+    const taskId = this.invoicesModel.generateId('TASK');
     const newTask = Object.assign({}, task, { id: taskId });
     this.editInvoice('tasks', this.invoice.tasks.concat(newTask));
   }

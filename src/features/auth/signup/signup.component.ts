@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { AngularFire } from 'angularfire2';
 import { NotificationsService } from 'angular2-notifications';
-import ModelService from '@services/model.service';
 
 @Component({
   selector: 'signup',
@@ -16,7 +15,6 @@ export default class SignupComponent {
 
   constructor(
     private firebase: AngularFire,
-    private modelService: ModelService,
     private notifications: NotificationsService,
     private router: Router,
   ) {}

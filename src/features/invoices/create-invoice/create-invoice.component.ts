@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
-import ModelService from '@services/model.service';
 import CustomersModel, { ICustomer } from '@services/models/customers.model';
 import InvoicesModel, { IInvoice, ITask } from '@services/models/invoices.model';
 import TaxesModel, { ITax } from '@services/models/taxes.model';
@@ -33,7 +32,6 @@ export default class CreateInvoiceComponent {
   }
 
   constructor(
-    private modelService: ModelService,
     private customersModel: CustomersModel,
     private invoicesModel: InvoicesModel,
     private userModel: UserModel,
@@ -148,7 +146,7 @@ export default class CreateInvoiceComponent {
    */
 
   handleAddTask(task: ITask) {
-    const taskId = this.modelService.generateId('TASK');
+    const taskId = this.invoicesModel.generateId('TASK');
     const newTask = Object.assign({}, task, { id: taskId });
     this.editInvoice('tasks', this.invoice.tasks.concat(newTask));
   }

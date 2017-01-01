@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
-import ModelService from '@services/model.service';
 import InvoicesModel, { IInvoice } from '@services/models/invoices.model';
 import TaxesModel, { ITax } from '@services/models/taxes.model';
 import LoggerService from '@services/logger.service';
@@ -23,7 +22,6 @@ export default class InvoicesListComponent {
   taxes$: Observable<ITax[]>;
 
   constructor(
-    private modelService: ModelService,
     private invoicesModel: InvoicesModel,
     private taxesModel: TaxesModel,
     private router: Router

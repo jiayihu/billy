@@ -22,5 +22,14 @@ const store: Store<IState> = createStore(
 export default class AppStoreModule {
   constructor(redux: NgRedux<IState>) {
     redux.provideStore(store);
+
+    const store$ = redux.select(s => s);
+
+    store$
+      .debounceTime(300)
+      .distinctUntilChanged()
+      .subscribe(appState => {
+        storage.setItem(LOCALSTORAGE, appState);
+      });
   }
 }
