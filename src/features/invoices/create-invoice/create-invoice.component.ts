@@ -1,7 +1,11 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
-import ModelService, { ICustomer, IInvoice, ITask, ITax } from '@services/model.service';
+import ModelService from '@services/model.service';
+import CustomersModel, { ICustomer } from '@services/models/customers.model';
+import InvoicesModel, { IInvoice, ITask } from '@services/models/invoices.model';
+import TaxesModel, { ITax } from '@services/models/taxes.model';
+import { UserModel } from '@services/models';
 import storage from '../../../utils/storage';
 import * as moment from 'moment';
 import isNaN = require('lodash/isNaN');
@@ -28,7 +32,13 @@ export default class CreateInvoiceComponent {
     if (path === 'tasks') storage.setItem('billy-tasks', value);
   }
 
-  constructor(private modelService: ModelService) {
+  constructor(
+    private modelService: ModelService,
+    private customersModel: CustomersModel,
+    private invoicesModel: InvoicesModel,
+    private userModel: UserModel,
+    private taxesModel: TaxesModel,
+  ) {
     this.invoice = {
       id: '',
       customer: null,
@@ -44,7 +54,7 @@ export default class CreateInvoiceComponent {
 
   ngOnInit() {
     Observable.combineLatest(
-      [this.modelService.invoices$, this.modelService.taxes$],
+      [this.invoicesModel.invoices$, this.taxesModel.taxes$],
       (invoices: IInvoice[], taxes: ITax[]) => ({ invoices, taxes })
     ).take(1).subscribe(state => {
       const storedTasks = storage.getItem('billy-tasks');
@@ -59,12 +69,12 @@ export default class CreateInvoiceComponent {
       };
     });
 
-    this.customersSub = this.modelService.customers$.subscribe(customers => {
+    this.customersSub = this.customersModel.customers$.subscribe(customers => {
       this.customers = customers;
       this.editInvoice('customer', this.getInvoiceCustomer(this.invoice, customers));
     });
-    this.userSub = this.modelService.user$.subscribe(user => this.editInvoice('user', user));
-    this.taxesSub = this.modelService.taxes$.subscribe(taxes => this.availableTaxes = taxes);
+    this.userSub = this.userModel.user$.subscribe(user => this.editInvoice('user', user));
+    this.taxesSub = this.taxesModel.taxes$.subscribe(taxes => this.availableTaxes = taxes);
   }
 
   ngOnDestroy() {
@@ -88,11 +98,11 @@ export default class CreateInvoiceComponent {
   }
 
   handleSaveInvoice() {
-    this.modelService.addInvoice(this.invoice);
+    this.invoicesModel.addInvoice(this.invoice);
   }
 
   handleBusinessChange(newBusinessInfo): void {
-    this.modelService.editUser(newBusinessInfo);
+    this.userModel.editUser(newBusinessInfo);
   }
 
   /**
@@ -100,11 +110,11 @@ export default class CreateInvoiceComponent {
    */
 
   handleAddCustomer(newCustomer: ICustomer): void {
-    this.modelService.addCustomer(newCustomer);
+    this.customersModel.addCustomer(newCustomer);
   }
 
   handleEditCustomer(newCustomer: ICustomer): void {
-    this.modelService.editCustomer(newCustomer);
+    this.customersModel.editCustomer(newCustomer);
   }
 
   handleRemoveCustomer(): void {
@@ -161,7 +171,7 @@ export default class CreateInvoiceComponent {
    */
 
   handleAddTax() {
-    const newTax = this.modelService.addTax();
+    const newTax = this.taxesModel.addTax();
     this.editInvoice('taxes', this.invoice.taxes.concat(newTax));
   }
 
@@ -177,7 +187,7 @@ export default class CreateInvoiceComponent {
     });
 
     this.editInvoice('taxes', updatedTaxes);
-    this.modelService.editTax(updatedTax);
+    this.taxesModel.editTax(updatedTax);
   }
 
   handleRemoveTax(taxId: string) {

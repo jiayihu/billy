@@ -11,7 +11,7 @@ const routes: Route[] = [
   {
     path: 'logout',
     component: LogoutComponent,
-  }
+  },
 ];
 
 @NgModule({

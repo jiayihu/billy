@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFire } from 'angularfire2';
-import ModelService from '@services/model.service';
+import { AuthModel } from '@services/models/';
 
 @Component({
   selector: 'logout',
@@ -18,15 +18,15 @@ export default class LogoutComponent implements OnInit {
   // @TODO: Move firebase to AuthModel
   constructor(
     private firebase: AngularFire,
-    private modelService: ModelService,
+    private authModel: AuthModel,
     private router: Router
   ) {}
 
   ngOnInit() {
     window.setTimeout(() => {
       this.firebase.auth.logout();
-      this.modelService.logout();
+      this.authModel.logout();
       this.router.navigateByUrl('/');
-    }, 3000);
+    }, 2000);
   }
 }

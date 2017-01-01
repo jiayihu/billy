@@ -1,5 +1,5 @@
 import { Action } from '../types/redux.types';
-import { IUser } from '../model.service';
+import { IUser } from '../models/user.model';
 import { userActionTypes } from '../actions/user.actions';
 
 export type IUserState = IUser;

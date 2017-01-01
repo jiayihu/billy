@@ -1,9 +1,8 @@
 import { Action } from '../types/redux.types';
+import { IAuth } from '../models/auth.model';
 import { authActionTypes } from '../actions/auth.actions';
 
-export interface IAuthState {
-  uuid: string;
-}
+export type IAuthState = IAuth;
 
 const initialState: IAuthState = {
   uuid: null,

@@ -2,7 +2,10 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { ActivatedRoute } from '@angular/router';
-import ModelService, { ICustomer, IInvoice, ITask, ITax } from '@services/model.service';
+import ModelService from '@services/model.service';
+import CustomersModel, { ICustomer } from '@services/models/customers.model';
+import InvoicesModel, { IInvoice, ITask } from '@services/models/invoices.model';
+import TaxesModel, { ITax } from '@services/models/taxes.model';
 import isNaN = require('lodash/isNaN');
 import set = require('lodash/fp/set');
 
@@ -26,12 +29,15 @@ export default class InvoicesEditComponent implements OnInit, OnDestroy {
 
   constructor(
     private modelService: ModelService,
+    private customersModel: CustomersModel,
+    private invoicesModel: InvoicesModel,
+    private taxesModel: TaxesModel,
     private route: ActivatedRoute,
   ) {}
 
   ngOnInit() {
     this.invoiceSub = Observable.combineLatest(
-      [this.modelService.invoices$, this.route.params],
+      [this.invoicesModel.invoices$, this.route.params],
       (invoices, params) => {
         const invoiceId = params['invoiceId'];
         return invoices.find(invoice => invoice.id === invoiceId);
@@ -39,8 +45,8 @@ export default class InvoicesEditComponent implements OnInit, OnDestroy {
     )
     .subscribe(invoice => this.invoice = invoice);
 
-    this.customersSub = this.modelService.customers$.subscribe(customers => this.customers = customers);
-    this.taxesSub = this.modelService.taxes$.subscribe(taxes => this.availableTaxes = taxes);
+    this.customersSub = this.customersModel.customers$.subscribe(customers => this.customers = customers);
+    this.taxesSub = this.taxesModel.taxes$.subscribe(taxes => this.availableTaxes = taxes);
   }
 
   ngOnDestroy() {
@@ -50,7 +56,7 @@ export default class InvoicesEditComponent implements OnInit, OnDestroy {
   }
 
   handleSaveInvoice() {
-    this.modelService.editInvoice(this.invoice);
+    this.invoicesModel.editInvoice(this.invoice);
   }
 
   handleBusinessChange(newBusinessInfo): void {
@@ -59,7 +65,7 @@ export default class InvoicesEditComponent implements OnInit, OnDestroy {
   }
 
   handleAddCustomer(newCustomer: ICustomer): void {
-    this.modelService.addCustomer(newCustomer);
+    this.customersModel.addCustomer(newCustomer);
   }
 
   handleEditCustomer(newCustomer: ICustomer): void {
@@ -122,7 +128,7 @@ export default class InvoicesEditComponent implements OnInit, OnDestroy {
    */
 
   handleAddTax() {
-    const newTax = this.modelService.addTax();
+    const newTax = this.taxesModel.addTax();
     this.editInvoice('taxes', this.invoice.taxes.concat(newTax));
   }
 

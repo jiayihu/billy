@@ -1,5 +1,5 @@
 import { Action } from '../types/redux.types';
-import { ITax } from '../model.service';
+import { ITax } from '../models/taxes.model';
 import { taxActionTypes } from '../actions/taxes.actions';
 
 export type ITaxesState = ITax[];

@@ -15,6 +15,7 @@ import AppComponent from './app.component';
 import FooterComponent from './components/footer/footer.component';
 import NavComponent from './components/nav/nav.component';
 
+import { models } from '@services/models';
 import ConfigService from '@services/config.service';
 import ModelService from '@services/model.service';
 import FormBuilderService from '@services/form-builder.service';
@@ -40,6 +41,7 @@ import LoggerService from '@services/logger.service';
     NavComponent,
   ],
   providers: [
+    ...models,
     ModelService,
     FormBuilderService,
     GeoService,

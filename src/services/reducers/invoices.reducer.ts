@@ -1,5 +1,5 @@
 import { Action } from '../types/redux.types';
-import { IInvoice } from '../model.service';
+import { IInvoice } from '../models/invoices.model';
 import { invoicesActionTypes } from '../actions/invoices.actions';
 
 export type IInvoicesState = IInvoice[];

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ITax } from '@services/model.service';
+import { ITax } from '@services/models/taxes.model';
 
 @Component({
   selector: 'taxes',

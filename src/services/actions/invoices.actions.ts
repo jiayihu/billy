@@ -1,5 +1,5 @@
 import { Action } from '../types/redux.types';
-import { IInvoice } from '../model.service';
+import { IInvoice } from '../models/invoices.model';
 
 export const invoicesActionTypes = {
   ADD_INVOICE: 'ADD_INVOICE',

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthModel } from '@services/models/';
 
 @Component({
   selector: 'app',
@@ -19,4 +20,6 @@ export default class AppComponent {
     showProgressBar: false,
     lastOnBottom: false,
   };
+
+  constructor(private authModel: AuthModel) {}
 }

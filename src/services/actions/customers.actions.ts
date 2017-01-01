@@ -1,5 +1,5 @@
 import { Action } from '../types/redux.types';
-import { ICustomer } from '../model.service';
+import { ICustomer } from '../models/customers.model';
 
 export const customersActionTypes = {
   ADD_CUSTOMER: 'ADD_CUSTOMER',

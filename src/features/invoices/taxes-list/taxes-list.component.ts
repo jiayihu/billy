@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ITax } from '@services/model.service';
+import { ITax } from '@services/models/taxes.model';
 import { FormGroup } from '@angular/forms';
 import FormBuilderService, { IField } from '@services/form-builder.service';
 import LoggerService from '@services/logger.service';

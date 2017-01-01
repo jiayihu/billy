@@ -1,6 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
-import ModelService, { ICustomer } from '@services/model.service';
+import ModelService from '@services/model.service';
+import CustomersModel, { ICustomer } from '@services/models/customers.model';
 
 @Component({
   selector: 'customers',
@@ -14,10 +15,13 @@ export default class CustomersListComponent implements OnDestroy {
 
   private customersSub: Subscription;
 
-  constructor(private modelService: ModelService) {}
+  constructor(
+    private modelService: ModelService,
+    private customersModel: CustomersModel
+  ) {}
 
   ngOnInit() {
-    this.customersSub = this.modelService.customers$.subscribe(customers => {
+    this.customersSub = this.customersModel.customers$.subscribe(customers => {
       this.customers = customers;
 
       if (this.editingCustomer) {
@@ -36,7 +40,7 @@ export default class CustomersListComponent implements OnDestroy {
   }
 
   handleCustomerDelete({ id }): void {
-    this.modelService.deleteCustomer(id);
+    this.customersModel.deleteCustomer(id);
   }
 
   handleCustomerEdit({ id }): void {
@@ -45,7 +49,7 @@ export default class CustomersListComponent implements OnDestroy {
   }
 
   handleEditEnd(formValue) {
-    this.modelService.editCustomer({
+    this.customersModel.editCustomer({
       ...formValue,
       id: this.editingCustomer.id,
     });

@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
-import ModelService, { IInvoice, ITax } from '@services/model.service';
+import ModelService from '@services/model.service';
+import InvoicesModel, { IInvoice } from '@services/models/invoices.model';
+import TaxesModel, { ITax } from '@services/models/taxes.model';
 import LoggerService from '@services/logger.service';
 import TaxesLoggerService from '../services/taxes-logger.service';
 
@@ -20,11 +22,16 @@ export default class InvoicesListComponent {
   invoices$: Observable< IInvoice[]>;
   taxes$: Observable<ITax[]>;
 
-  constructor(private modelService: ModelService, private router: Router) {}
+  constructor(
+    private modelService: ModelService,
+    private invoicesModel: InvoicesModel,
+    private taxesModel: TaxesModel,
+    private router: Router
+  ) {}
 
   ngOnInit() {
-    this.invoices$ = this.modelService.invoices$;
-    this.taxes$ = this.modelService.taxes$;
+    this.invoices$ = this.invoicesModel.invoices$;
+    this.taxes$ = this.taxesModel.taxes$;
   }
 
   handleInvoiceEdit(invoiceId: string) {
@@ -32,14 +39,14 @@ export default class InvoicesListComponent {
   }
 
   handleInvoiceDelete(invoiceId: string) {
-    this.modelService.deleteInvoice(invoiceId);
+    this.invoicesModel.deleteInvoice(invoiceId);
   }
 
   handleTaxEdit(updatedTax: ITax) {
-    this.modelService.editTax(updatedTax);
+    this.taxesModel.editTax(updatedTax);
   }
 
   handleTaxDelete(taxId: string) {
-    this.modelService.deleteTax(taxId);
+    this.taxesModel.deleteTax(taxId);
   }
 }

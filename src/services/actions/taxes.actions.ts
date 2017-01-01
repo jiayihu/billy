@@ -1,5 +1,5 @@
 import { Action } from '../types/redux.types';
-import { ITax } from '../model.service';
+import { ITax } from '../models/taxes.model';
 
 export const taxActionTypes = {
   ADD_TAX: 'ADD_TAX',

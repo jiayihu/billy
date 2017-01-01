@@ -1,5 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ICustomer, IInvoice, ITask, ITax, IUser } from '@services/model.service';
+import { ICustomer } from '@services/models/customers.model';
+import { IInvoice, ITask } from '@services/models/invoices.model';
+import { ITax } from '@services/models/taxes.model';
+import { IUser } from '@services/models/user.model';
 
 @Component({
   selector: 'invoice-edit',

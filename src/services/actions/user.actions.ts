@@ -1,5 +1,5 @@
 import { Action } from '../types/redux.types';
-import { IUser } from '../model.service';
+import { IUser } from '../models/user.model';
 
 export const userActionTypes = {
   EDIT_USER: 'EDIT_USER',

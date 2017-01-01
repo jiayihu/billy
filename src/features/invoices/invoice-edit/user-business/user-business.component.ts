@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output, SimpleChange } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { IUser } from '@services/model.service';
+import { IUser } from '@services/models/user.model';
 import GeoService from '@services/geo.service';
 import FormBuilderService, { IField, ISelectField } from '@services/form-builder.service';
 
