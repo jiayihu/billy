@@ -110,6 +110,10 @@ export default class ModelService {
     this.store.dispatch(authActions.authenticate(auth));
   }
 
+  logout() {
+    this.store.dispatch(authActions.logoutUser());
+  }
+
   editUser(value): void {
     this.store.dispatch(userActions.editUser(value));
   }

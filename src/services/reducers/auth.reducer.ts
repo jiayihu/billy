@@ -13,6 +13,8 @@ export default function authReducer(state: IAuthState = initialState, action: Ac
   switch (action.type) {
     case authActionTypes.AUTH_USER:
       return action.payload.auth;
+    case authActionTypes.LOGOUT_USER:
+      return initialState;
     default:
       return state;
   }
