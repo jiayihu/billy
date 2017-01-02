@@ -12,7 +12,7 @@ export interface ITax {
 }
 
 @Injectable()
-export default class AuthModel extends BaseModel {
+export default class TaxesModel extends BaseModel {
   taxes$: Observable<ITax[]>;
 
   constructor(private store: Store<selectors.IState>) {

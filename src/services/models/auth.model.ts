@@ -4,6 +4,7 @@ import { NgRedux as Store } from 'ng2-redux';
 import * as selectors from '@services/reducers/';
 import { authActions } from '@services/actions/';
 import { AngularFire } from 'angularfire2';
+import { NotificationsService } from 'angular2-notifications';
 
 export interface IAuth {
   uuid: string;
@@ -16,6 +17,7 @@ export default class AuthModel {
   constructor(
     private store: Store<selectors.IState>,
     private firebase: AngularFire,
+    private notifications: NotificationsService
   ) {
     this.auth$ = store.select('auth');
 
@@ -37,7 +39,16 @@ export default class AuthModel {
     this.store.dispatch(authActions.authenticate(auth));
   }
 
+  signup(email: string, password: string) {
+    return this.firebase.auth.createUser({ email, password });
+  }
+
+  login(email: string, password: string) {
+    return this.firebase.auth.login({ email, password });
+  }
+
   logout() {
     this.store.dispatch(authActions.logoutUser());
+    return this.firebase.auth.logout();
   }
 }

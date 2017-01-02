@@ -17,7 +17,7 @@ export interface ICustomer {
 }
 
 @Injectable()
-export default class AuthModel extends BaseModel {
+export default class CustomersModel extends BaseModel {
   customers$: Observable<ICustomer[]>;
 
   constructor(private store: Store<selectors.IState>) {

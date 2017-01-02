@@ -10,7 +10,7 @@ let initialState: IState = storage.getItem(LOCALSTORAGE);
 const composeEnhancers = (<any> window).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store: Store<IState> = createStore(
   rootReducer,
-  initialState,
+  initialState || undefined,
   composeEnhancers(applyMiddleware())
 );
 

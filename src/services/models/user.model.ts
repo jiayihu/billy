@@ -15,7 +15,7 @@ export interface IUser {
 }
 
 @Injectable()
-export default class AuthModel {
+export default class UserModel {
   user$: Observable<IUser>;
 
   constructor(private store: Store<selectors.IState>) {
