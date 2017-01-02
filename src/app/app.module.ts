@@ -17,6 +17,7 @@ import NavComponent from './components/nav/nav.component';
 
 import { models } from '@services/models';
 import AuthGuard from '@services/auth-guard.service';
+import DeactivateGuard from '@services/deactivate-guard.service';
 import ConfigService from '@services/config.service';
 import FormBuilderService from '@services/form-builder.service';
 import GeoService from '@services/geo.service';
@@ -43,6 +44,7 @@ import LoggerService from '@services/logger.service';
   providers: [
     ...models,
     AuthGuard,
+    DeactivateGuard,
     FormBuilderService,
     GeoService,
     LoggerService,

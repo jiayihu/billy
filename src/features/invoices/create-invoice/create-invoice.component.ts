@@ -5,6 +5,7 @@ import CustomersModel, { ICustomer } from '@services/models/customers.model';
 import InvoicesModel, { IInvoice, ITask } from '@services/models/invoices.model';
 import TaxesModel, { ITax } from '@services/models/taxes.model';
 import { UserModel } from '@services/models';
+import { IDeactivateComponent } from '@services/deactivate-guard.service';
 import storage from '../../../utils/storage';
 import * as moment from 'moment';
 import isNaN = require('lodash/isNaN');
@@ -16,18 +17,22 @@ import set = require('lodash/fp/set');
   templateUrl: './create-invoice.component.html',
   styleUrls: ['./create-invoice.component.css'],
 })
-export default class CreateInvoiceComponent {
+export default class CreateInvoiceComponent implements IDeactivateComponent {
   customers: ICustomer[];
   invoice: IInvoice;
   availableTaxes: ITax[];
+
+  private dirty: boolean = false;
 
   private userSub: Subscription;
   private customersSub: Subscription;
   private taxesSub: Subscription;
 
-  private editInvoice(path: string, value: any) {
+  private editInvoice(path: string, value: any, skipDirty: boolean = false) {
     this.invoice = set(path, value, this.invoice) as IInvoice;
+    this.dirty = skipDirty ? this.dirty : true;
 
+    // @NOTE: we persist invoice tasks only in this phase of development
     if (path === 'tasks') storage.setItem('billy-tasks', value);
   }
 
@@ -69,9 +74,9 @@ export default class CreateInvoiceComponent {
 
     this.customersSub = this.customersModel.customers$.subscribe(customers => {
       this.customers = customers;
-      this.editInvoice('customer', this.getInvoiceCustomer(this.invoice, customers));
+      this.editInvoice('customer', this.getInvoiceCustomer(this.invoice, customers), true);
     });
-    this.userSub = this.userModel.user$.subscribe(user => this.editInvoice('user', user));
+    this.userSub = this.userModel.user$.subscribe(user => this.editInvoice('user', user, true));
     this.taxesSub = this.taxesModel.taxes$.subscribe(taxes => this.availableTaxes = taxes);
   }
 
@@ -79,6 +84,12 @@ export default class CreateInvoiceComponent {
     this.userSub.unsubscribe();
     this.customersSub.unsubscribe();
     this.taxesSub.unsubscribe();
+  }
+
+  canDeactivate() {
+    if (this.dirty) return window.confirm('Your changes could be lost if you leave before saving.');
+
+    return true;
   }
 
   getInvoiceCustomer(invoice: IInvoice, customers: ICustomer[]) {
@@ -97,6 +108,7 @@ export default class CreateInvoiceComponent {
 
   handleSaveInvoice() {
     this.invoicesModel.addInvoice(this.invoice);
+    this.dirty = false;
   }
 
   handleBusinessChange(newBusinessInfo): void {

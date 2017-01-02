@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import CustomersModel, { ICustomer } from '@services/models/customers.model';
 import InvoicesModel, { IInvoice, ITask } from '@services/models/invoices.model';
 import TaxesModel, { ITax } from '@services/models/taxes.model';
+import { IDeactivateComponent } from '@services/deactivate-guard.service';
 import isNaN = require('lodash/isNaN');
 import set = require('lodash/fp/set');
 
@@ -13,10 +14,12 @@ import set = require('lodash/fp/set');
   templateUrl: './invoices-edit.component.html',
   styleUrls: ['./invoices-edit.component.css'],
 })
-export default class InvoicesEditComponent implements OnInit, OnDestroy {
+export default class InvoicesEditComponent implements OnInit, OnDestroy, IDeactivateComponent {
   customers: ICustomer[];
   availableTaxes: ITax[];
   invoice: IInvoice;
+
+  private dirty: boolean = false;
 
   private customersSub: Subscription;
   private taxesSub: Subscription;
@@ -24,6 +27,7 @@ export default class InvoicesEditComponent implements OnInit, OnDestroy {
 
   private editInvoice(path: string, value: any) {
     this.invoice = set(path, value, this.invoice) as IInvoice;
+    this.dirty = true;
   }
 
   constructor(
@@ -53,7 +57,14 @@ export default class InvoicesEditComponent implements OnInit, OnDestroy {
     this.invoiceSub.unsubscribe();
   }
 
+  canDeactivate() {
+    if (this.dirty) return window.confirm('Your changes could be lost if you leave before saving.');
+
+    return true;
+  }
+
   handleSaveInvoice() {
+    this.dirty = false;
     this.invoicesModel.editInvoice(this.invoice);
   }
 

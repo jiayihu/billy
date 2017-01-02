@@ -13,7 +13,6 @@ export default class AuthGuard implements CanActivate {
   }
 
   canActivate(): boolean {
-    console.log(this.isAuthenticated);
     if (this.isAuthenticated) return true;
 
     this.router.navigateByUrl('/login');
