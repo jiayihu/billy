@@ -1,4 +1,4 @@
-<h2>Sign Up</h2>
+<h2>Login</h2>
 
 <div class="col-sm-8 offset-sm-2">
   <form (ngSubmit)="onSubmit(form)" #form="ngForm">
@@ -12,16 +12,11 @@
       <input [(ngModel)]="password" name="password" #pswInput="ngModel" type="password" class="form-control" placeholder="Password" required />
       <div *ngIf="!pswInput.valid && pswInput.dirty" class="alert alert-danger">A password is required.</div>
     </div>
-    <div class="form-group">
-      <label for="passwordConfirm">Password confirm</label>
-      <input [(ngModel)]="passwordConfirm" name="passwordConfirm" #pswConfirm="ngModel" type="password" class="form-control" placeholder="Password confirm" required />
-      <div *ngIf="pswConfirm.dirty && pswConfirm.value !== pswInput.value && pswInput.valid" class="alert alert-danger">The the passwords must match.</div>
-    </div>
-    <button type="submit" class="btn btn-primary" [disabled]="!form.form.valid">Sign up</button>
+    <button type="submit" class="btn btn-primary" [disabled]="!form.form.valid">Login</button>
   </form>
   <hr />
   <p>
-    Already registered?
-    <a class="nav-link" routerLink="/login">Log in</a>
+    Don't have an account?
+    <a class="nav-link" routerLink="/signup">Sign up</a>
   </p>
 </div>

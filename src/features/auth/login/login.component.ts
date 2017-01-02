@@ -1,17 +1,16 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
-import { AuthModel } from '@services/models/';
 import { NotificationsService } from 'angular2-notifications';
+import { AuthModel } from '@services/models/';
 
 @Component({
-  selector: 'signup',
-  templateUrl: './signup.component.html',
+  selector: 'login',
+  templateUrl: './login.component.html',
 })
-export default class SignupComponent {
+export default class LoginComponent {
   email: string;
   password: string;
-  passwordConfirm: string;
 
   constructor(
     private authModel: AuthModel,
@@ -22,14 +21,14 @@ export default class SignupComponent {
   onSubmit(form: NgForm) {
     const { email, password } = form.value;
 
-    this.authModel.signup(email, password)
+    this.authModel.login(email, password)
       .then(() => {
-        this.notifications.success('Registration', 'Your account is created.');
+        this.notifications.success('Login', 'Welcome to Billy.');
         this.router.navigateByUrl('/create');
       })
       .catch(err => {
         console.error(err);
-        this.notifications.error('Registration', err.message);
+        this.notifications.error('Login', err.message);
       });
   }
 }

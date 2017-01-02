@@ -1,4 +1,5 @@
 - redux observables
+- Edit modals in named router outlets
 - AOT Compilation
 - CRUD API and authentication
 - Custom structural directive
