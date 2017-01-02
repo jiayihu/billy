@@ -25,6 +25,10 @@ export default combineReducers({
  * Selectors
  */
 
+export function isAuthenticated(state: IState): boolean {
+  return state.auth.isAuthenticated;
+}
+
 export function getUser(state: IState): IUserState {
   return state.user;
 }

@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { NgRedux as Store } from 'ng2-redux';
-import * as selectors from '@services/reducers/';
+import { IState } from '@services/reducers/';
 import { authActions } from '@services/actions/';
 import { AngularFire } from 'angularfire2';
 import { NotificationsService } from 'angular2-notifications';
 
 export interface IAuth {
-  uuid: string;
+  isAuthenticated: boolean;
+  uid: string;
 }
 
 @Injectable()
@@ -15,7 +16,7 @@ export default class AuthModel {
   auth$: Observable<IAuth>;
 
   constructor(
-    private store: Store<selectors.IState>,
+    private store: Store<IState>,
     private firebase: AngularFire,
     private notifications: NotificationsService
   ) {

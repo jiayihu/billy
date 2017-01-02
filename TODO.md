@@ -1,4 +1,5 @@
 - redux observables
+- Static routes with landing page
 - Edit modals in named router outlets
 - AOT Compilation
 - CRUD API and authentication

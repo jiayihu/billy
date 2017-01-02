@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { NgRedux as Store } from 'ng2-redux';
-import * as selectors from '@services/reducers/';
+import { IState } from '@services/reducers/';
 import { userActions } from '@services/actions/';
 
 export interface IUser {
@@ -18,7 +18,7 @@ export interface IUser {
 export default class UserModel {
   user$: Observable<IUser>;
 
-  constructor(private store: Store<selectors.IState>) {
+  constructor(private store: Store<IState>) {
     this.user$ = store.select('user');
   }
 

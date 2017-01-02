@@ -27,6 +27,7 @@ export default class AppStoreModule {
 
     store$
       .debounceTime(300)
+      .skip(1) // No need to persist again the initialState
       .distinctUntilChanged()
       .subscribe(appState => {
         storage.setItem(LOCALSTORAGE, appState);
