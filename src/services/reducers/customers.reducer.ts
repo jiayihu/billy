@@ -2,7 +2,7 @@ import { Action } from '../types/redux.types';
 import { ICustomer } from '../models/customers.model';
 import { customersActionTypes } from '../actions/customers.actions';
 
-export type ICustomersState = ICustomer[];
+export type ICustomersState = Readonly<ICustomer[]>;
 
 export default function customersReducer(state: ICustomersState = [], action: Action): ICustomersState {
   switch (action.type) {

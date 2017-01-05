@@ -2,7 +2,7 @@ import { Action } from '../types/redux.types';
 import { IInvoice } from '../models/invoices.model';
 import { invoicesActionTypes } from '../actions/invoices.actions';
 
-export type IInvoicesState = IInvoice[];
+export type IInvoicesState = Readonly<IInvoice[]>;
 
 export default function invoicesReducer(state: IInvoicesState = [], action: Action): IInvoicesState {
   switch (action.type) {

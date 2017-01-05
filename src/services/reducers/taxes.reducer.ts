@@ -2,7 +2,7 @@ import { Action } from '../types/redux.types';
 import { ITax } from '../models/taxes.model';
 import { taxActionTypes } from '../actions/taxes.actions';
 
-export type ITaxesState = ITax[];
+export type ITaxesState = Readonly<ITax[]>;
 
 export default function taxesReducer(state: ITaxesState = [], action: Action): ITaxesState {
   switch (action.type) {

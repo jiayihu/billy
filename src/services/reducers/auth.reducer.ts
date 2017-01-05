@@ -2,7 +2,7 @@ import { Action } from '../types/redux.types';
 import { IAuth } from '../models/auth.model';
 import { authActionTypes } from '../actions/auth.actions';
 
-export type IAuthState = IAuth;
+export type IAuthState = Readonly<IAuth>;
 
 const initialState: IAuthState = {
   isAuthenticated: false,

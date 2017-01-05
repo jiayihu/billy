@@ -6,11 +6,11 @@ import taxesReducer, { ITaxesState } from './taxes.reducer';
 import userReducer, { IUserState } from './user.reducer';
 
 export interface IState {
-  auth: IAuthState;
-  user: IUserState;
-  customers: ICustomersState;
-  invoices: IInvoicesState;
-  taxes: ITaxesState;
+  readonly auth: IAuthState;
+  readonly user: IUserState;
+  readonly customers: ICustomersState;
+  readonly invoices: IInvoicesState;
+  readonly taxes: ITaxesState;
 };
 
 export default combineReducers({

@@ -2,7 +2,7 @@ import { Action } from '../types/redux.types';
 import { IUser } from '../models/user.model';
 import { userActionTypes } from '../actions/user.actions';
 
-export type IUserState = IUser;
+export type IUserState = Readonly<IUser>;
 
 const initialState: IUserState = {
   name: '',
