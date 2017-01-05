@@ -10,17 +10,19 @@ const root = {
 };
 const IS_DEV = process.env.NODE_ENV !== 'production';
 
+const APIKeys = {
+  GEONAMES: JSON.stringify(env.geonames),
+  FIREBASE_APIKEY: JSON.stringify(env.FIREBASE_APIKEY),
+  FIREBASE_AUTHDOMAIN: JSON.stringify(env.FIREBASE_AUTHDOMAIN),
+  FIREBASE_DATABASEURL: JSON.stringify(env.FIREBASE_DATABASEURL),
+  FIREBASE_STORAGE: JSON.stringify(env.FIREBASE_STORAGE),
+};
 const devPlugins = [
   new webpack.NoErrorsPlugin(),
   new webpack.DefinePlugin({
-    'process.env': {
+    'process.env': Object.assign({}, {
       NODE_ENV: JSON.stringify('development'),
-      GEONAMES: JSON.stringify(env.geonames),
-      FIREBASE_APIKEY: JSON.stringify(env.FIREBASE_APIKEY),
-      FIREBASE_AUTHDOMAIN: JSON.stringify(env.FIREBASE_AUTHDOMAIN),
-      FIREBASE_DATABASEURL: JSON.stringify(env.FIREBASE_DATABASEURL),
-      FIREBASE_STORAGE: JSON.stringify(env.FIREBASE_STORAGE),
-    },
+    }, APIKeys),
   }),
 ];
 const prodPlugins = [
@@ -31,10 +33,9 @@ const prodPlugins = [
     },
   }),
   new webpack.DefinePlugin({
-    'process.env': {
+    'process.env': Object.assign({}, {
       NODE_ENV: JSON.stringify('production'),
-      GEONAMES: JSON.stringify(env.geonames),
-    },
+    }, APIKeys),
   }),
 ];
 
