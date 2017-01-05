@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import CustomersModel, { ICustomer } from '@services/models/customers.model';
 
@@ -7,7 +7,7 @@ import CustomersModel, { ICustomer } from '@services/models/customers.model';
   templateUrl: './customers-list.component.html',
   styleUrls: ['./customers-list.component.css'],
 })
-export default class CustomersListComponent implements OnDestroy {
+export default class CustomersListComponent implements OnInit, OnDestroy {
   isEditing: boolean = false;
   editingCustomer: ICustomer;
   customers: ICustomer[];

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, SimpleChange } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChange, OnInit, OnChanges } from '@angular/core';
 import GeoService from '@services/geo.service';
 import { FormGroup } from '@angular/forms';
 import { ICustomer } from '@services/models/customers.model';
@@ -9,7 +9,7 @@ import get = require('lodash/get');
   selector: 'customer-edit',
   templateUrl: './customer-edit.component.html',
 })
-export default class CustomerEditComponent {
+export default class CustomerEditComponent implements OnInit, OnChanges {
   fields: Array<IField | ISelectField>;
   form: FormGroup;
 

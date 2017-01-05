@@ -4,7 +4,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   selector: 'modal',
   templateUrl: './modal.component.html',
 })
-export default class Modal {
+export default class ModalComponent {
   @Input() disabled: boolean;
   @Input() isVisible: boolean;
   @Output() onClose = new EventEmitter<void>();

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import CustomersModel, { ICustomer } from '@services/models/customers.model';
@@ -17,7 +17,7 @@ import set = require('lodash/fp/set');
   templateUrl: './create-invoice.component.html',
   styleUrls: ['./create-invoice.component.css'],
 })
-export default class CreateInvoiceComponent implements IDeactivateComponent {
+export default class CreateInvoiceComponent implements IDeactivateComponent, OnInit, OnDestroy {
   customers: ICustomer[];
   invoice: IInvoice;
   availableTaxes: ITax[];

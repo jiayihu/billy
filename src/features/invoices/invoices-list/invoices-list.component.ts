@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
 import InvoicesModel, { IInvoice } from '@services/models/invoices.model';
@@ -17,7 +17,7 @@ import TaxesLoggerService from '../services/taxes-logger.service';
     },
   ],
 })
-export default class InvoicesListComponent {
+export default class InvoicesListComponent implements OnInit {
   invoices$: Observable< IInvoice[]>;
   taxes$: Observable<ITax[]>;
 

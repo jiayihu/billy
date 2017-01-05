@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, SimpleChange } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChange, OnInit, OnChanges } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { IUser } from '@services/models/user.model';
 import GeoService from '@services/geo.service';
@@ -9,7 +9,7 @@ import FormBuilderService, { IField, ISelectField } from '@services/form-builder
   templateUrl: './user-business.component.html',
   styleUrls: ['./user-business.component.css'],
 })
-export default class UserBusinessComponent {
+export default class UserBusinessComponent implements OnInit, OnChanges {
   isEditing: boolean;
   fields: Array<IField | ISelectField>;
   form: FormGroup;

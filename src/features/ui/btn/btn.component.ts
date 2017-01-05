@@ -8,7 +8,6 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 })
 export default class BtnComponent {
   @Input() id: string;
-  @Input('class') className: string = '';
   @Input() type: 'secondary' | 'primary' | 'link' = 'secondary';
   @Output() onClick = new EventEmitter<{ id: string, event: any }>();
 
@@ -16,7 +15,6 @@ export default class BtnComponent {
     return {
       btn: true,
       [`btn-${this.type}`]: true,
-      [this.className]: true,
     };
   }
 
