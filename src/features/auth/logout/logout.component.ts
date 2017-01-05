@@ -16,7 +16,7 @@ import { AuthModel } from '@services/models/';
 export default class LogoutComponent implements OnInit {
   constructor(
     private authModel: AuthModel,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit() {

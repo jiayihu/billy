@@ -11,7 +11,7 @@ const composeEnhancers = (<any> window).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || 
 const store: Store<IState> = createStore(
   rootReducer,
   initialState || undefined,
-  composeEnhancers(applyMiddleware())
+  composeEnhancers(applyMiddleware()),
 );
 
 @NgModule({

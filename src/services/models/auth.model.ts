@@ -18,7 +18,7 @@ export default class AuthModel {
   constructor(
     private store: Store<IState>,
     private firebase: AngularFire,
-    private notifications: NotificationsService
+    private notifications: NotificationsService,
   ) {
     this.auth$ = store.select('auth');
 

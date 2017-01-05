@@ -58,7 +58,7 @@ export default class CreateInvoiceComponent implements IDeactivateComponent {
   ngOnInit() {
     Observable.combineLatest(
       [this.invoicesModel.invoices$, this.taxesModel.taxes$],
-      (invoices: IInvoice[], taxes: ITax[]) => ({ invoices, taxes })
+      (invoices: IInvoice[], taxes: ITax[]) => ({ invoices, taxes }),
     ).take(1).subscribe(state => {
       const storedTasks = storage.getItem('billy-tasks');
       const lastInvoice = maxBy(state.invoices, invoice => invoice.number);

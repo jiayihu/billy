@@ -2,7 +2,7 @@
 - Static routes with landing page
 - Edit modals in named router outlets
 - AOT Compilation
-- CRUD API and authentication
+- CRUD API
 - Custom structural directive
 - Create Tooltip directive for forms errors
 - i18n

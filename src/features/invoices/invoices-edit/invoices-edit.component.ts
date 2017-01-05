@@ -43,7 +43,7 @@ export default class InvoicesEditComponent implements OnInit, OnDestroy, IDeacti
       (invoices, params) => {
         const invoiceId = params['invoiceId'];
         return invoices.find(invoice => invoice.id === invoiceId);
-      }
+      },
     )
     .subscribe(invoice => this.invoice = invoice);
 

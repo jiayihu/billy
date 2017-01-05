@@ -21,7 +21,7 @@ export default class TaxesListComponent {
 
   constructor(
     private formBuilderService: FormBuilderService,
-    private loggerService: LoggerService
+    private loggerService: LoggerService,
   ) {
     this.fields = [
       {

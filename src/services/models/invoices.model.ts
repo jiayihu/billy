@@ -36,7 +36,7 @@ export default class InvoicesModel extends BaseModel {
 
   constructor(
     private store: Store<selectors.IState>,
-    private notificationsService: NotificationsService
+    private notificationsService: NotificationsService,
   ) {
     super();
     this.invoices$ = this.store.select(selectors.getInvoices);

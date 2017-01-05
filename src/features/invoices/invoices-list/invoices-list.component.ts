@@ -24,7 +24,7 @@ export default class InvoicesListComponent {
   constructor(
     private invoicesModel: InvoicesModel,
     private taxesModel: TaxesModel,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit() {
