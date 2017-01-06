@@ -16,7 +16,7 @@
         "removeComments": true,
         "suppressImplicitAnyIndexErrors": true,
         "target": "es5",
-        "types": ["node"],
+        "types": ["node", "jasmine"],
         "baseUrl": ".",
         "paths": {
           "@services/*": ["src/services/*"]
