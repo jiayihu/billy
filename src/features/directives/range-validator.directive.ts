@@ -1,6 +1,6 @@
 import { Directive, forwardRef, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { AbstractControl, Validator, Validators, NG_VALIDATORS } from '@angular/forms';
-import { rangeValidator } from '../../validators/validate-number';
+import { rangeValidator } from '../../utils/validate-number';
 
 @Directive({
   selector: '[validateRange][ngModel], [validateRange][formControlName]',

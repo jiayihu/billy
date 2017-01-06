@@ -6,7 +6,7 @@
 
 import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { rangeValidator } from '../validators/validate-number';
+import { rangeValidator } from '../utils/validate-number';
 
 export interface IField {
   value?: string;
