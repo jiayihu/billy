@@ -19,7 +19,8 @@
         "types": ["node", "jasmine"],
         "baseUrl": ".",
         "paths": {
-          "@services/*": ["src/services/*"]
+          "@services/*": ["src/services/*"],
+          "@utils/*": ["src/utils/*"]
         }
     },
     "exclude": [

@@ -6,7 +6,7 @@ import InvoicesModel, { IInvoice, ITask } from '@services/models/invoices.model'
 import TaxesModel, { ITax } from '@services/models/taxes.model';
 import { UserModel } from '@services/models';
 import { IDeactivateComponent } from '@services/deactivate-guard.service';
-import storage from '../../../utils/storage';
+import storage from '@utils/storage';
 import * as moment from 'moment';
 import isNaN = require('lodash/isNaN');
 import maxBy = require('lodash/maxBy');

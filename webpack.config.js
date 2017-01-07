@@ -55,6 +55,7 @@ module.exports = {
   resolve: {
     alias: {
       '@services': path.join(root.src, 'services'),
+      '@utils': path.join(root.src, 'utils'),
     },
     extensions: ['', '.js', '.ts'],
   },
