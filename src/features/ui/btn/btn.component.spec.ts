@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { Component, DebugElement } from '@angular/core';
-import createTestComponent from '@utils/create-test-component';
+import createTestComponent from '@test/create-test-component';
 import BtnComponent from './btn.component';
 
 @Component({

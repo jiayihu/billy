@@ -20,6 +20,7 @@
         "baseUrl": ".",
         "paths": {
           "@services/*": ["src/services/*"],
+          "@test/*": ["src/test/*"],
           "@utils/*": ["src/utils/*"]
         }
     },
