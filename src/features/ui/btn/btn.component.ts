@@ -7,9 +7,8 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class BtnComponent {
-  @Input() id: string;
   @Input() type: 'secondary' | 'primary' | 'link' = 'secondary';
-  @Output() onClick = new EventEmitter<{ id: string, event: any }>();
+  @Output() onClick = new EventEmitter<any>();
 
   classnames() {
     return {
@@ -19,9 +18,6 @@ export default class BtnComponent {
   }
 
   handleClick(event) {
-    this.onClick.emit({
-      id: this.id,
-      event,
-    });
+    this.onClick.emit(event);
   }
 }

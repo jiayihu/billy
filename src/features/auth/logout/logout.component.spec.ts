@@ -36,15 +36,18 @@ describe('LogoutComponent', () => {
     router = fixture.debugElement.injector.get(Router);
 
     el = fixture.debugElement.query(By.css('alert')).nativeElement;
+    fixture.detectChanges();
   });
 
   it('should call authModel.logout() and redirect to /', async(() => {
-    fixture.detectChanges();
-
     fixture.whenStable().then(() => {
       fixture.detectChanges();
       expect(authModel.logout).toHaveBeenCalled();
       expect(router.navigateByUrl).toHaveBeenCalledWith('/');
     });
   }));
+
+  it('should show an alert for the user', () => {
+    expect(el).toBeDefined();
+  });
 });
