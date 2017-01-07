@@ -5,6 +5,7 @@ import {
   ElementRef,
   EventEmitter,
   Input,
+  Inject,
   OnDestroy,
   Output,
   ViewChild,
@@ -17,6 +18,9 @@ import 'pikaday/css/pikaday.css';
   selector: 'datepicker',
   templateUrl: './datepicker.component.html',
   styleUrls: ['./datepicker.component.css'],
+  providers: [
+    { provide: 'pikaday', useValue: pikaday },
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class DatepickerComponent implements AfterViewInit, OnDestroy {
@@ -29,9 +33,13 @@ export default class DatepickerComponent implements AfterViewInit, OnDestroy {
   @Input() showOnInit: boolean = false;
   @Output() onChange = new EventEmitter<string>();
 
+  constructor(
+    @Inject('pikaday') private pikaday,
+  ) {}
+
   ngAfterViewInit() {
     const input = this.inputEl.nativeElement;
-    this.datepicker = new pikaday({
+    this.datepicker = new this.pikaday({
       field: input,
       format: this.format,
       onSelect: (date: Date) => {
