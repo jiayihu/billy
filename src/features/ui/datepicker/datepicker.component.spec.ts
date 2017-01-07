@@ -1,7 +1,7 @@
 import { Component, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import DatepickerComponent from './datepicker.component';
+import DatepickerComponent, { pikadayToken } from './datepicker.component';
 
 @Component({
   selector: 'test-cmp',
@@ -37,7 +37,7 @@ describe('DatepickerComponent', () => {
     TestBed.overrideComponent(DatepickerComponent, {
       set: {
         providers: [
-          { provide: 'pikaday', useValue: spiedPikaday },
+          { provide: pikadayToken, useValue: spiedPikaday },
         ],
       },
     });

@@ -7,6 +7,7 @@ import {
   Input,
   Inject,
   OnDestroy,
+  OpaqueToken,
   Output,
   ViewChild,
 } from '@angular/core';
@@ -14,12 +15,14 @@ import * as moment from 'moment';
 import pikaday = require('pikaday');
 import 'pikaday/css/pikaday.css';
 
+export const pikadayToken = new OpaqueToken('pikaday');
+
 @Component({
   selector: 'datepicker',
   templateUrl: './datepicker.component.html',
   styleUrls: ['./datepicker.component.css'],
   providers: [
-    { provide: 'pikaday', useValue: pikaday },
+    { provide: pikadayToken, useValue: pikaday },
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -34,7 +37,7 @@ export default class DatepickerComponent implements AfterViewInit, OnDestroy {
   @Output() onChange = new EventEmitter<string>();
 
   constructor(
-    @Inject('pikaday') private pikaday,
+    @Inject(pikadayToken) private pikaday,
   ) {}
 
   ngAfterViewInit() {
