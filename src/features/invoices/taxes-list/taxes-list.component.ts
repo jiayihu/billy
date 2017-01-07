@@ -21,6 +21,7 @@ export default class TaxesListComponent {
 
   constructor(
     private formBuilderService: FormBuilderService,
+    // The actual LoggerService used is specified in parent InvoicesListComponent
     private loggerService: LoggerService,
   ) {
     this.fields = [

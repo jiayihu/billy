@@ -2,6 +2,7 @@
 // Generated on Fri Jan 06 2017 21:51:31 GMT+0100 (CET)
 
 const omit = require('lodash/omit');
+const webpackConfig = require('./webpack.config');
 
 module.exports = function(config) {
   config.set({
@@ -32,7 +33,7 @@ module.exports = function(config) {
     preprocessors: {
       'src/karma-test-shim.ts': ['webpack', 'sourcemap']
     },
-    webpack: omit(require('./webpack.config'), ['entry']),
+    webpack: omit(webpackConfig, ['entry']),
     mime: {
       'text/x-typescript': ['ts','tsx']
     },

@@ -1,3 +1,7 @@
+/**
+ * This file is adapted from Angular-cli generated src/test.ts file
+ */
+
 import 'core-js/client/shim.min.js';
 
 import 'zone.js/dist/zone';
@@ -7,6 +11,8 @@ import 'zone.js/dist/sync-test';
 import 'zone.js/dist/jasmine-patch';
 import 'zone.js/dist/async-test';
 import 'zone.js/dist/fake-async-test';
+import 'rxjs/Rx';
+
 import { getTestBed } from '@angular/core/testing';
 import {
   BrowserDynamicTestingModule,

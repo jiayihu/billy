@@ -26,7 +26,6 @@ describe('IconComponent template', () => {
   });
 
   it('should set the correct font size based on size input', () => {
-    comp.name = 'test';
     comp.size = 2;
     fixture.detectChanges();
     expect(el.style.fontSize).toEqual('2rem');

@@ -10,11 +10,12 @@
     "start": "webpack-dev-server --inline --config webpack.config.js",
     "lint": "tslint \"./src/**/*.ts\"",
     "lint:fix": "tslint \"./src/**/*.ts\" --fix",
-    "test": "karma start karma.conf.js"
+    "test": "karma start",
+    "test:once": "karma start --single-run"
   },
   "config": {
     "ghooks": {
-      "pre-push": "npm run lint"
+      "pre-push": "npm run lint && npm run test:once"
     }
   },
   "keywords": [],
