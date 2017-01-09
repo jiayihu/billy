@@ -31,17 +31,14 @@ To run the application you have first to register to the following services, whi
   2. [Firebase](https://console.firebase.google.com/) for authentication and database
       1. [Enable password based authentication](https://firebase.google.com/docs/auth/web/password-auth)
 
-Then put your API keys or usernames in a `env.json` file at the root of the project. You can find an example in [example-env.json](example-env.json):
+Then put your API keys or usernames in a `.env` file at the root of the project. You can find an example in [.example-env](.example-env):
 
-```javascript
-{
-  // geonames uses your account username for API requests
-  "geonames": "johndoe",
-  "FIREBASE_APIKEY": "your_firebase_account",
-  "FIREBASE_AUTHDOMAIN": "your_firebase_account",
-  "FIREBASE_DATABASEURL": "your_firebase_account",
-  "FIREBASE_STORAGE": "your_firebase_account"
-}
+```
+geonames=your_geonames_account
+FIREBASE_APIKEY=your_firebase_apikey
+FIREBASE_AUTHDOMAIN=your_firebase_authdomain
+FIREBASE_DATABASEURL=your_firebase_databaseurl
+FIREBASE_STORAGE=your_firebase_storag
 ```
 
 Now you're ready to start the application:

@@ -1,0 +1,5 @@
+geonames=your_geonames_account
+FIREBASE_APIKEY=your_firebase_apikey
+FIREBASE_AUTHDOMAIN=your_firebase_authdomain
+FIREBASE_DATABASEURL=your_firebase_databaseurl
+FIREBASE_STORAGE=your_firebase_storag

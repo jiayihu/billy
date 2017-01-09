@@ -1,5 +1,5 @@
+require('dotenv').config();
 const path = require('path');
-const env = require('./env.json');
 const webpack = require('webpack');
 const cssnext = require('postcss-cssnext');
 const cssVariables = require('./src/variables');
@@ -11,17 +11,17 @@ const root = {
 const IS_DEV = process.env.NODE_ENV !== 'production';
 
 const APIKeys = {
-  GEONAMES: JSON.stringify(env.geonames),
-  FIREBASE_APIKEY: JSON.stringify(env.FIREBASE_APIKEY),
-  FIREBASE_AUTHDOMAIN: JSON.stringify(env.FIREBASE_AUTHDOMAIN),
-  FIREBASE_DATABASEURL: JSON.stringify(env.FIREBASE_DATABASEURL),
-  FIREBASE_STORAGE: JSON.stringify(env.FIREBASE_STORAGE),
+  GEONAMES: JSON.stringify(process.env.geonames),
+  FIREBASE_APIKEY: JSON.stringify(process.env.FIREBASE_APIKEY),
+  FIREBASE_AUTHDOMAIN: JSON.stringify(process.env.FIREBASE_AUTHDOMAIN),
+  FIREBASE_DATABASEURL: JSON.stringify(process.env.FIREBASE_DATABASEURL),
+  FIREBASE_STORAGE: JSON.stringify(process.env.FIREBASE_STORAGE),
 };
 const devPlugins = [
   new webpack.NoErrorsPlugin(),
   new webpack.DefinePlugin({
     'process.env': Object.assign({}, {
-      NODE_ENV: JSON.stringify('development'),
+      NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
     }, APIKeys),
   }),
 ];
@@ -34,7 +34,7 @@ const prodPlugins = [
   }),
   new webpack.DefinePlugin({
     'process.env': Object.assign({}, {
-      NODE_ENV: JSON.stringify('production'),
+      NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'production'),
     }, APIKeys),
   }),
 ];
