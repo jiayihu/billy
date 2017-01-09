@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/jiayihu/billy.svg?branch=master)](https://travis-ci.org/jiayihu/billy)
+
 # 📠 Billy
 
 **Billy** is a web application for making invoices easier and faster, built as a way to experiment with Angular 2.
