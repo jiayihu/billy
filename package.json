@@ -1,6 +1,6 @@
 {
-  "name": "angular2",
-  "version": "1.0.0",
+  "name": "billy",
+  "version": "0.0.1",
   "description": "Online invoices built with Angular 2",
   "main": "index.js",
   "scripts": {
@@ -10,9 +10,9 @@
     "start": "webpack-dev-server --inline --config webpack.config.js",
     "lint": "tslint \"./src/**/*.ts\"",
     "lint:fix": "tslint \"./src/**/*.ts\" --fix",
-    "test": "karma start",
-    "test:once": "karma start --single-run",
-    "prepush": "npm run lint && npm run test:once"
+    "test": "karma start --single-run",
+    "test:watch": "karma start",
+    "prepush": "npm run lint && npm run test"
   },
   "keywords": [],
   "author": "",
