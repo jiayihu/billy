@@ -11,6 +11,7 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/first';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/publishLast';
 import 'rxjs/add/operator/share';
 import 'rxjs/add/operator/skip';
 import 'rxjs/add/operator/take';

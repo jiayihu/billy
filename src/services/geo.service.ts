@@ -18,7 +18,6 @@ export interface IProvince {
 @Injectable()
 export default class GeoService {
   private apiUsername: string = process.env.GEONAMES;
-  private countries: ICountry[];
   private countriesSource: Observable<ICountry[]>;
   private provincesByCountry: { [key: string]: IProvince[] } = {};
 
@@ -32,21 +31,16 @@ export default class GeoService {
   }
 
   getCountries(): Observable<ICountry[]> {
-    if (this.countries) return Observable.of(this.countries);
-    if (this.countriesSource) return this.countriesSource;
+    if (!this.countriesSource) {
+      const searchParams = new URLSearchParams('q=&featureCode=PCLI&maxRows=1000');
+      searchParams.append('username', this.apiUsername);
 
-    const searchParams = new URLSearchParams('q=&featureCode=PCLI&maxRows=1000');
-    searchParams.append('username', this.apiUsername);
-
-    this.countriesSource = this.http.get(ENDPOINT, { search: searchParams })
-      .map(response => {
-        this.countriesSource = null;
-        this.countries = response.json().geonames;
-
-        return this.countries;
-      })
-      .map(countries => countries.sort(GeoService.sortByName))
-      .share();
+      this.countriesSource = this.http.get(ENDPOINT, { search: searchParams })
+        .map(response => response.json().geonames)
+        .map(countries => countries.sort(GeoService.sortByName))
+        .publishLast()
+        .refCount();
+    }
 
     return this.countriesSource;
   }
