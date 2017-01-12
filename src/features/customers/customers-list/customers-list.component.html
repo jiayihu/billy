@@ -9,28 +9,25 @@
       <tr *ngFor="let customer of customers" class="customer">
         <td class="customer-name">
           <btn
-            [id]="customer.id"
             type="link"
             class="customer-name"
-            (onClick)="handleCustomerEdit($event)"
+            (onClick)="handleCustomerEdit(customer.id)"
           >
             {{customer.name}}
           </btn>
         </td>
         <td>
           <btn
-            [id]="customer.id"
             type="link"
             class="edit-action"
-            (onClick)="handleCustomerEdit($event)"
+            (onClick)="handleCustomerEdit(customer.id)"
           >
             Edit
           </btn>
           <btn
-            [id]="customer.id"
             type="link"
             class="delete-action"
-            (onClick)="handleCustomerDelete($event)"
+            (onClick)="handleCustomerDelete(customer.id)"
           >
             Delete
           </btn>

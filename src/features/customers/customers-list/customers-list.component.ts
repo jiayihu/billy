@@ -37,11 +37,11 @@ export default class CustomersListComponent implements OnInit, OnDestroy {
     this.editingCustomer = null;
   }
 
-  handleCustomerDelete({ id }): void {
+  handleCustomerDelete(id: string): void {
     this.customersModel.deleteCustomer(id);
   }
 
-  handleCustomerEdit({ id }): void {
+  handleCustomerEdit(id: string): void {
     this.isEditing = true;
     this.editingCustomer = this.customers.find(customer => customer.id === id);
   }
