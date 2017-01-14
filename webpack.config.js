@@ -1,8 +1,7 @@
 require('dotenv').config();
 const path = require('path');
 const webpack = require('webpack');
-const cssnext = require('postcss-cssnext');
-const cssVariables = require('./src/variables');
+const postCSSPlugins = require('./postcss.config');
 
 const root = {
   src: path.join(__dirname, 'src'),
@@ -18,25 +17,29 @@ const APIKeys = {
   FIREBASE_STORAGE: JSON.stringify(process.env.FIREBASE_STORAGE),
 };
 const devPlugins = [
-  new webpack.NoErrorsPlugin(),
   new webpack.DefinePlugin({
     'process.env': Object.assign({}, {
       NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
     }, APIKeys),
   }),
+  new webpack.ContextReplacementPlugin(
+    /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
+    root.src
+  ),
 ];
 const prodPlugins = [
-  new webpack.optimize.OccurrenceOrderPlugin(),
-  new webpack.optimize.UglifyJsPlugin({
-    compressor: {
-      warnings: false,
-    },
-  }),
   new webpack.DefinePlugin({
     'process.env': Object.assign({}, {
       NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'production'),
     }, APIKeys),
   }),
+  new webpack.optimize.UglifyJsPlugin({
+    sourceMap: true,
+  }),
+  new webpack.ContextReplacementPlugin(
+    /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
+    root.src
+  ),
 ];
 
 module.exports = {
@@ -58,7 +61,7 @@ module.exports = {
       '@test': path.join(root.src, 'test'),
       '@utils': path.join(root.src, 'utils'),
     },
-    extensions: ['', '.js', '.ts'],
+    extensions: ['.js', '.ts'],
   },
   module: {
     noParse: [
@@ -67,52 +70,46 @@ module.exports = {
       /moment.js/,
       /node_modules\/localforage\/dist\/localforage.js/
     ],
-    loaders: [
+    rules: [
       {
         test: /\.tsx?$/,
-        loaders: ['ts', 'angular2-template'],
+        use: ['ts-loader', 'angular2-template-loader'],
         include: root.src,
       },
       {
         test: /\.html$/,
-        loader: 'raw',
+        use: ['raw-loader'],
         include: root.src,
       },
       {
         test: /\.css$/,
-        loaders: ['style', 'css', 'postcss'],
+        use: ['style-loader', 'css-loader', {
+          loader: 'postcss-loader',
+          options: { plugins: postCSSPlugins },
+        }],
         include: [path.join(root.src, 'styles'), /node_modules/],
       },
       {
         test: /\.css$/,
-        loaders: ['raw', 'postcss'],
+        use: ['raw-loader', {
+          loader: 'postcss-loader',
+          options: { plugins: postCSSPlugins },
+        }],
         include: path.src,
         exclude: [path.join(root.src, 'styles'), /node_modules/],
       },
       {
         test: /\.(png|jpg|jpeg|gif|svg)$/i,
-        loader: 'file-loader',
-        query: {
-          name: '/images/[name]_[hash:5].[ext]?[hash:5]',
-        },
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '/images/[name]_[hash:5].[ext]?[hash:5]',
+            },
+          },
+        ],
       },
     ],
   },
   plugins: IS_DEV ? devPlugins : prodPlugins,
-  postcss() {
-    return [
-      require('postcss-inject-css-variables')(cssVariables.customProperties),
-      cssnext({
-        features: {
-          customProperties: {
-            preserve: true,
-            variables: cssVariables.customProperties,
-          },
-          customMedia: {
-            extensions: cssVariables.customMediaQueries,
-          },
-        },
-      }),
-    ];
-  },
 };
