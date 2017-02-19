@@ -43,7 +43,7 @@ export default class InvoicesModel extends BaseModel {
   }
 
   addInvoice(invoice: IInvoice) {
-    this.store.dispatch(invoicesActions.addInvoice(invoice));
+    this.store.dispatch(invoicesActions.addInvoice.request(invoice));
     this.notificationsService.success('Invoice', 'Invoice saved successfully.');
   }
 

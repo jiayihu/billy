@@ -1,12 +1,12 @@
 import { IAction } from '../types/redux.types';
 import { IInvoice } from '../models/invoices.model';
-import { actionTypes } from '../actions/invoices.actions';
+import { actionTypes, addInvoice } from '../actions/invoices.actions';
 
 export type IInvoicesState = Readonly<IInvoice[]>;
 
 export default function invoicesReducer(state: IInvoicesState = [], action: IAction): IInvoicesState {
   switch (action.type) {
-    case actionTypes.ADD_INVOICE_SUCCEEDED:
+    case addInvoice.types.success:
       return state.concat(action.payload.invoice);
     case actionTypes.EDIT_INVOICE:
       return state.map(invoice => {
