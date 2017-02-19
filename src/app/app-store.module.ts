@@ -3,24 +3,31 @@ import { applyMiddleware, Store, compose, createStore } from 'redux';
 import { NgReduxModule, NgRedux } from '@angular-redux/store';
 import storage from '@utils/storage';
 import rootReducer, { IState } from '@services/reducers/';
+import { createEpicMiddleware, combineEpics } from 'redux-observable';
+import { effects, FirebaseEffects } from '@services/effects/';
 import { LOCALSTORAGE } from '@services/config.service';
 
-let initialState: IState = storage.getItem(LOCALSTORAGE);
-
-const composeEnhancers = (<any> window).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store: Store<IState> = createStore(
-  rootReducer,
-  initialState || undefined,
-  composeEnhancers(applyMiddleware()),
-);
-
 @NgModule({
-  imports: [
-    NgReduxModule,
-  ],
+  imports: [ NgReduxModule ],
+  providers: [...effects],
 })
 export default class AppStoreModule {
-  constructor(redux: NgRedux<IState>) {
+  constructor(
+    redux: NgRedux<IState>,
+    firebaseEffects: FirebaseEffects,
+  ) {
+    let initialState: IState = storage.getItem(LOCALSTORAGE);
+    const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+    const epics = combineEpics(firebaseEffects.addInvoice);
+
+    const store: Store<IState> = createStore(
+      rootReducer,
+      initialState || undefined,
+      composeEnhancers(applyMiddleware(
+        createEpicMiddleware(epics),
+      )),
+    );
+
     redux.provideStore(store);
 
     const store$ = redux.select(s => s);

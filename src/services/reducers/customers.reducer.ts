@@ -1,14 +1,14 @@
 import { IAction } from '../types/redux.types';
 import { ICustomer } from '../models/customers.model';
-import { customersActionTypes } from '../actions/customers.actions';
+import { actionTypes } from '../actions/customers.actions';
 
 export type ICustomersState = Readonly<ICustomer[]>;
 
 export default function customersReducer(state: ICustomersState = [], action: IAction): ICustomersState {
   switch (action.type) {
-    case customersActionTypes.ADD_CUSTOMER:
+    case actionTypes.ADD_CUSTOMER:
       return state.concat(action.payload.customer);
-    case customersActionTypes.EDIT_CUSTOMER: {
+    case actionTypes.EDIT_CUSTOMER: {
       const newCustomer = action.payload.customer;
       return state.map(customer => {
         if (customer.id === newCustomer.id) return { ...customer, ...newCustomer };
@@ -16,7 +16,7 @@ export default function customersReducer(state: ICustomersState = [], action: IA
         return customer;
       });
     }
-    case customersActionTypes.DELETE_CUSTOMER:
+    case actionTypes.DELETE_CUSTOMER:
       return state.filter(customer => customer.id !== action.payload.customerId);
     default:
       return state;
