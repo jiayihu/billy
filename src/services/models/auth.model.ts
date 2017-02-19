@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { NgRedux as Store } from 'ng2-redux';
+import { NgRedux as Store } from '@angular-redux/store';
 import { IState } from '@services/reducers/';
 import { authActions } from '@services/actions/';
 import { AngularFire } from 'angularfire2';

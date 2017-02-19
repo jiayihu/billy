@@ -1,5 +1,5 @@
 import { NgZone } from '@angular/core';
-import { NgRedux as Store } from 'ng2-redux';
+import { NgRedux as Store } from '@angular-redux/store';
 const defaultReducer = (state, action) => state;
 
 class MockNgZone {

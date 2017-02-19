@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { applyMiddleware, Store, compose, createStore } from 'redux';
-import { NgReduxModule, NgRedux } from 'ng2-redux';
+import { NgReduxModule, NgRedux } from '@angular-redux/store';
 import storage from '@utils/storage';
 import rootReducer, { IState } from '@services/reducers/';
 import { LOCALSTORAGE } from '@services/config.service';

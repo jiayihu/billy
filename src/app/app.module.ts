@@ -34,7 +34,7 @@ import LoggerService from '@services/logger.service';
     InvoicesModule,
     StaticModule,
     AppRoutingModule,
-    SimpleNotificationsModule,
+    SimpleNotificationsModule.forRoot(),
   ],
   declarations: [
     AppComponent,

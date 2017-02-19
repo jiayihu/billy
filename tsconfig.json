@@ -1,22 +1,15 @@
 {
     "compilerOptions": {
         "allowSyntheticDefaultImports": true,
-        "declaration": false,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
-        "isolatedModules": false,
         "lib": ["es5", "dom", "es2015", "dom.iterable", "scripthost"],
-        "jsx": "react",
         "module": "commonjs",
         "moduleResolution": "node",
-        "noImplicitAny": false,
-        "noImplicitUseStrict": false,
         "noLib": false,
-        "preserveConstEnums": true,
-        "removeComments": true,
+        "skipLibCheck": true,
         "suppressImplicitAnyIndexErrors": true,
         "target": "es5",
-        "types": ["node", "jasmine"],
         "baseUrl": ".",
         "paths": {
           "@services/*": ["src/services/*"],

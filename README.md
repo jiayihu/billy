@@ -11,7 +11,7 @@ The stack of technologies used for this project is the following:
 - Firebase
 - Bootstrap 4
 - CSS next
-- Webpack
+- Webpack 2
 
 > The project is still a Work in Progress, but you can run it if you wish to have a look to nice features like Boostrap 4 or CSS variables.
 

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { NgRedux as Store } from 'ng2-redux';
+import { NgRedux as Store } from '@angular-redux/store';
 import * as selectors from '@services/reducers/';
 import { invoicesActions } from '@services/actions/';
 import BaseModel from './base.model';

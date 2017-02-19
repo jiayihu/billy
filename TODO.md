@@ -1,5 +1,6 @@
 - [redux-observable](https://github.com/redux-observable/redux-observable)
 - CRUD API
+- Replace moment with date-fns
 - i18n
 - AOT Compilation
 - Edit modals in named router outlets
@@ -13,4 +14,5 @@ Low priority:
 
 Long Future:
 - Code splitting and lazy loading maybe
+- Setup Sentry.js in production
 - Reading uploaded PDFs with Mozilla's pdf.js

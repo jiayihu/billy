@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs/Observable';
-import { NgRedux as Store } from 'ng2-redux';
+import { NgRedux as Store } from '@angular-redux/store';
 
 export default function observableStore<T>(store: Store<T>): Observable<T> {
   return Observable.create(observer => {

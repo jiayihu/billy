@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
-import { NgRedux as Store } from 'ng2-redux';
+import { NgRedux as Store } from '@angular-redux/store';
 import { IState, isAuthenticated } from '@services/reducers/';
 
 @Injectable()

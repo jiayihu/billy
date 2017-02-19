@@ -49,7 +49,7 @@ module.exports = {
     port: 3000,
   } : {},
   devtool: 'eval',
-  entry: root.src,
+  entry: path.join(root.src, 'index.ts'),
   output: {
     path: root.dest,
     publicPath: 'dist',
