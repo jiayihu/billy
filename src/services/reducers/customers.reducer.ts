@@ -1,10 +1,10 @@
-import { Action } from '../types/redux.types';
+import { IAction } from '../types/redux.types';
 import { ICustomer } from '../models/customers.model';
 import { customersActionTypes } from '../actions/customers.actions';
 
 export type ICustomersState = Readonly<ICustomer[]>;
 
-export default function customersReducer(state: ICustomersState = [], action: Action): ICustomersState {
+export default function customersReducer(state: ICustomersState = [], action: IAction): ICustomersState {
   switch (action.type) {
     case customersActionTypes.ADD_CUSTOMER:
       return state.concat(action.payload.customer);

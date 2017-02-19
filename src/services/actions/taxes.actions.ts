@@ -1,4 +1,4 @@
-import { Action } from '../types/redux.types';
+import { IAction } from '../types/redux.types';
 import { ITax } from '../models/taxes.model';
 
 export const taxActionTypes = {
@@ -7,21 +7,21 @@ export const taxActionTypes = {
   DELETE_TAX: 'DELETE_TAX',
 };
 
-export function addTax(tax: ITax): Action {
+export function addTax(tax: ITax): IAction {
   return {
     type: taxActionTypes.ADD_TAX,
     payload: { tax },
   };
 }
 
-export function editTax(tax: ITax): Action {
+export function editTax(tax: ITax): IAction {
   return {
     type: taxActionTypes.EDIT_TAX,
     payload: { tax },
   };
 }
 
-export function deleteTax(taxId: string): Action {
+export function deleteTax(taxId: string): IAction {
   return {
     type: taxActionTypes.DELETE_TAX,
     payload: { taxId },

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { NgRedux as Store } from '@angular-redux/store';
+import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import * as selectors from '@services/reducers/';
 import { invoicesActions } from '@services/actions/';
 import BaseModel from './base.model';
@@ -37,9 +38,13 @@ export default class InvoicesModel extends BaseModel {
   constructor(
     private store: Store<selectors.IState>,
     private notificationsService: NotificationsService,
+    private firebase: AngularFire,
   ) {
     super();
     this.invoices$ = this.store.select(selectors.getInvoices);
+    this.firebase.database.list('/invoices').subscribe(invoices => {
+      console.log(invoices);
+    });
   }
 
   addInvoice(invoice: IInvoice) {

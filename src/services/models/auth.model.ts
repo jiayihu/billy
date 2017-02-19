@@ -24,13 +24,7 @@ export default class AuthModel {
 
     const store$ = this.store.select(s => s);
 
-    // Wait for Store to be available, then subscribe for auth changes. Otherwise
-    // Firebase could emit an auth object from localStorage before the Store is
-    // created.
-    store$
-      .take(1)
-      .concat(firebase.auth)
-      .skip(1)
+    firebase.auth
       .subscribe(auth => {
         if (auth && auth.auth) this.authenticate(auth.auth);
       });

@@ -1,4 +1,4 @@
-import { Action } from '../types/redux.types';
+import { IAction } from '../types/redux.types';
 import { IAuth } from '../models/auth.model';
 import { authActionTypes } from '../actions/auth.actions';
 
@@ -9,7 +9,7 @@ const initialState: IAuthState = {
   uid: null,
 };
 
-export default function authReducer(state: IAuthState = initialState, action: Action): IAuthState {
+export default function authReducer(state: IAuthState = initialState, action: IAction): IAuthState {
   switch (action.type) {
     case authActionTypes.AUTH_USER:
       return {

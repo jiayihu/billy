@@ -1,10 +1,10 @@
-import { Action } from '../types/redux.types';
+import { IAction } from '../types/redux.types';
 import { ITax } from '../models/taxes.model';
 import { taxActionTypes } from '../actions/taxes.actions';
 
 export type ITaxesState = Readonly<ITax[]>;
 
-export default function taxesReducer(state: ITaxesState = [], action: Action): ITaxesState {
+export default function taxesReducer(state: ITaxesState = [], action: IAction): ITaxesState {
   switch (action.type) {
     case taxActionTypes.ADD_TAX:
       return state.concat(action.payload.tax);

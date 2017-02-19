@@ -6,6 +6,7 @@
 - Edit modals in named router outlets
 - Custom structural directive
 - Create Tooltip directive for forms errors
+- Remove `skipLibCheck`. [Issue](https://github.com/DefinitelyTyped/DefinitelyTyped/issues/14324)
 
 Low priority:
 - Route transition animation 

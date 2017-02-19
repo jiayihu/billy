@@ -1,4 +1,4 @@
-import { Action } from '../types/redux.types';
+import { IAction } from '../types/redux.types';
 import { ICustomer } from '../models/customers.model';
 
 export const customersActionTypes = {
@@ -7,21 +7,21 @@ export const customersActionTypes = {
   DELETE_CUSTOMER: 'DELETE_CUSTOMER',
 };
 
-export function addCustomer(customer: ICustomer): Action {
+export function addCustomer(customer: ICustomer): IAction {
   return {
     type: customersActionTypes.ADD_CUSTOMER,
     payload: { customer },
   };
 }
 
-export function editCustomer(customer: ICustomer): Action {
+export function editCustomer(customer: ICustomer): IAction {
   return {
     type: customersActionTypes.EDIT_CUSTOMER,
     payload: { customer },
   };
 }
 
-export function deleteCustomer(customerId: string): Action {
+export function deleteCustomer(customerId: string): IAction {
   return {
     type: customersActionTypes.DELETE_CUSTOMER,
     payload: { customerId },
