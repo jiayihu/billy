@@ -1,21 +1,24 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
-import { NgRedux as Store } from '@angular-redux/store';
+import AuthModel from './models/auth.model';
+import { Observable } from 'rxjs/Observable';
 import { IState, isAuthenticated } from '@services/reducers/';
 
 @Injectable()
 export default class AuthGuard implements CanActivate {
-  private isAuthenticated: boolean = false;
+  private isAuthenticated$: Observable<boolean>;
 
-  constructor(private store: Store<IState>, private router: Router) {
-    store.select(isAuthenticated)
-      .subscribe((isAuthenticated) => this.isAuthenticated = isAuthenticated);
+  constructor(private authModel: AuthModel, private router: Router) {
+    // auth$ is emitted by the store before the authentication is actually checked
+    this.isAuthenticated$ = Observable.combineLatest(
+      authModel.auth$,
+      authModel.checkedAuth$,
+      (auth, checkedAuth) => auth.isAuthenticated,
+    );
   }
 
-  canActivate(): boolean {
-    if (this.isAuthenticated) return true;
-
-    this.router.navigateByUrl('/login');
-    return false;
+  canActivate(): Observable<boolean> {
+    return this.isAuthenticated$
+      .do(isAuthenticated => !isAuthenticated && this.router.navigateByUrl('/login'));
   }
 }
