@@ -1,5 +1,6 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { AsyncSubject } from 'rxjs/AsyncSubject';
 import { NgRedux as Store } from '@angular-redux/store';
 import { IState } from '@services/reducers/';
 import { authActions } from '@services/actions/';
@@ -14,7 +15,7 @@ export interface IAuth {
 @Injectable()
 export default class AuthModel {
   auth$: Observable<IAuth>;
-  checkedAuth$ = new EventEmitter<boolean>();
+  checkedAuth$ = new AsyncSubject<boolean>();
 
   constructor(
     private store: Store<IState>,
@@ -28,7 +29,8 @@ export default class AuthModel {
     firebase.auth
       .subscribe(auth => {
         if (auth && auth.auth) this.authenticate(auth.auth);
-        this.checkedAuth$.emit(true);
+        this.checkedAuth$.next(true);
+        this.checkedAuth$.complete();
       });
   }
 
