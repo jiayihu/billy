@@ -2,7 +2,7 @@ import { IAction } from '../types/redux.types';
 import { actionTypes as errorTypes, showError } from './errors.actions';
 
 interface IPayloadCreators {
-  request(...args: any[]): any;
+  request?(...args: any[]): any;
   success(...args: any[]): any;
   failure?(errorMsg: string): any;
 }

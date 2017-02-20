@@ -6,6 +6,8 @@ export type IInvoicesState = Readonly<IInvoice[]>;
 
 export default function invoicesReducer(state: IInvoicesState = [], action: IAction): IInvoicesState {
   switch (action.type) {
+    case invoicesActions.addInvoices.types.success:
+      return state.concat(action.payload.invoices);
     case invoicesActions.addInvoice.types.success:
       return state.concat(action.payload.invoice);
     case invoicesActions.editInvoice.types.success:
