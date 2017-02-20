@@ -28,6 +28,8 @@ export default class CreateInvoiceComponent implements IDeactivateComponent, OnI
   private customersSub: Subscription;
   private taxesSub: Subscription;
 
+  // @TODO: invoice state must be moved on the Store, otherwise it's not possible
+  // to add new taxes added or keep invoice state between routes
   private editInvoice(path: string, value: any, skipDirty: boolean = false) {
     this.invoice = set(path, value, this.invoice) as IInvoice;
     this.dirty = skipDirty ? this.dirty : true;

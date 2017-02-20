@@ -29,16 +29,16 @@ export default class TaxesModel extends BaseModel {
       name: `Tax #${storedtaxes.length + 1}`,
       rate: 0,
     };
-    this.store.dispatch(taxesActions.addTax(newTax));
+    this.store.dispatch(taxesActions.addTax.request(newTax));
 
     return newTax;
   }
 
   editTax(updatedTax: ITax) {
-    this.store.dispatch(taxesActions.editTax(updatedTax));
+    this.store.dispatch(taxesActions.editTax.request(updatedTax));
   }
 
   deleteTax(taxId: string) {
-    this.store.dispatch(taxesActions.deleteTax(taxId));
+    this.store.dispatch(taxesActions.deleteTax.request(taxId));
   }
 }

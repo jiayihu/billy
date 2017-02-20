@@ -28,14 +28,14 @@ export default class CustomersModel extends BaseModel {
   addCustomer(customer: ICustomer): void {
     const customerId = this.generateId('CUSTOMER');
     const newCustomer = Object.assign({}, customer, { id: customerId });
-    this.store.dispatch(customersActions.addCustomer(newCustomer));
+    this.store.dispatch(customersActions.addCustomer.request(newCustomer));
   }
 
   deleteCustomer(customerId: string): void {
-    this.store.dispatch(customersActions.deleteCustomer(customerId));
+    this.store.dispatch(customersActions.deleteCustomer.request(customerId));
   }
 
   editCustomer(newCustomer: ICustomer): void {
-    this.store.dispatch(customersActions.editCustomer(newCustomer));
+    this.store.dispatch(customersActions.editCustomer.request(newCustomer));
   }
 }

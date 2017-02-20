@@ -1,29 +1,22 @@
 import { IAction } from '../types/redux.types';
 import { ICustomer } from '../models/customers.model';
+import createAction from './createAction';
 
-export const actionTypes = {
-  ADD_CUSTOMER: 'ADD_CUSTOMER',
-  EDIT_CUSTOMER: 'EDIT_CUSTOMER',
-  DELETE_CUSTOMER: 'DELETE_CUSTOMER',
-};
+export const addCustomers = createAction('ADD_CUSTOMERS', {
+  success: (customers) => ({ customers }),
+});
 
-export function addCustomer(customer: ICustomer): IAction {
-  return {
-    type: actionTypes.ADD_CUSTOMER,
-    payload: { customer },
-  };
-}
+export const addCustomer = createAction('ADD_CUSTOMER', {
+  request: (customer) => ({ customer }),
+  success: (customer) => ({ customer }),
+});
 
-export function editCustomer(customer: ICustomer): IAction {
-  return {
-    type: actionTypes.EDIT_CUSTOMER,
-    payload: { customer },
-  };
-}
+export const editCustomer = createAction('EDIT_CUSTOMER', {
+  request: (customer) => ({ customer }),
+  success: (customer) => ({ customer }),
+});
 
-export function deleteCustomer(customerId: string): IAction {
-  return {
-    type: actionTypes.DELETE_CUSTOMER,
-    payload: { customerId },
-  };
-}
+export const deleteCustomer = createAction('DELETE_CUSTOMER', {
+  request: (customerId) => ({ customerId }),
+  success: (customerId) => ({ customerId }),
+});

@@ -1,5 +1,4 @@
-- [redux-observable](https://github.com/redux-observable/redux-observable)
-- CRUD API
+- Connect notifications to errors state
 - Replace moment with date-fns
 - i18n
 - AOT Compilation

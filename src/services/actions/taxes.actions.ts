@@ -1,29 +1,22 @@
 import { IAction } from '../types/redux.types';
 import { ITax } from '../models/taxes.model';
+import createAction from './createAction';
 
-export const actionTypes = {
-  ADD_TAX: 'ADD_TAX',
-  EDIT_TAX: 'EDIT_TAX',
-  DELETE_TAX: 'DELETE_TAX',
-};
+export const addTaxes = createAction('ADD_TAXES', {
+  success: (taxes) => ({ taxes }),
+});
 
-export function addTax(tax: ITax): IAction {
-  return {
-    type: actionTypes.ADD_TAX,
-    payload: { tax },
-  };
-}
+export const addTax = createAction('ADD_TAX', {
+  request: (tax) => ({ tax }),
+  success: (tax) => ({ tax }),
+});
 
-export function editTax(tax: ITax): IAction {
-  return {
-    type: actionTypes.EDIT_TAX,
-    payload: { tax },
-  };
-}
+export const editTax = createAction('EDIT_TAX', {
+  request: (tax) => ({ tax }),
+  success: (tax) => ({ tax }),
+});
 
-export function deleteTax(taxId: string): IAction {
-  return {
-    type: actionTypes.DELETE_TAX,
-    payload: { taxId },
-  };
-}
+export const deleteTax = createAction('DELETE_TAX', {
+  request: (taxId) => ({ taxId }),
+  success: (taxId) => ({ taxId }),
+});

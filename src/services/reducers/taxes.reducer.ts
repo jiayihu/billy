@@ -1,20 +1,22 @@
 import { IAction } from '../types/redux.types';
 import { ITax } from '../models/taxes.model';
-import { actionTypes } from '../actions/taxes.actions';
+import { taxesActions } from '../actions/';
 
 export type ITaxesState = Readonly<ITax[]>;
 
 export default function taxesReducer(state: ITaxesState = [], action: IAction): ITaxesState {
   switch (action.type) {
-    case actionTypes.ADD_TAX:
+    case taxesActions.addTaxes.types.success:
+      return state.concat(action.payload.taxes);
+    case taxesActions.addTax.types.success:
       return state.concat(action.payload.tax);
-    case actionTypes.EDIT_TAX:
+    case taxesActions.editTax.types.success:
       return state.map(tax => {
         if (tax.id === action.payload.tax.id) return action.payload.tax;
 
         return tax;
       });
-    case actionTypes.DELETE_TAX:
+    case taxesActions.deleteTax.types.success:
       return state.filter(tax => tax.id !== action.payload.taxId);
     default:
       return state;
