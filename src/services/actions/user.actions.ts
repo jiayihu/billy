@@ -1,13 +1,8 @@
 import { IAction } from '../types/redux.types';
 import { IUser } from '../models/user.model';
+import createAction from './createAction';
 
-export const actionTypes = {
-  EDIT_USER: 'EDIT_USER',
-};
-
-export function editUser(user: IUser): IAction {
-  return {
-    type: actionTypes.EDIT_USER,
-    payload: { user },
-  };
-}
+export const editUser = createAction('EDIT_USER', {
+  request: (user) => ({ user }),
+  success: (user) => ({ user }),
+});

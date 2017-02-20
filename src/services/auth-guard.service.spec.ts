@@ -16,7 +16,7 @@ describe('AuthGuardService', () => {
     guard.canActivate().subscribe(result => {
       expect(result).toBe(true);
       done();
-    })
+    });
   });
 
   it('should return false if user is not authenticated and redirect to /login', (done) => {

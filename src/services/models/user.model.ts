@@ -23,6 +23,6 @@ export default class UserModel {
   }
 
   editUser(value): void {
-    this.store.dispatch(userActions.editUser(value));
+    this.store.dispatch(userActions.editUser.request(value));
   }
 }

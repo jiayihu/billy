@@ -1,6 +1,6 @@
 import { IAction } from '../types/redux.types';
 import { IUser } from '../models/user.model';
-import { actionTypes } from '../actions/user.actions';
+import { userActions } from '../actions/';
 
 export type IUserState = Readonly<IUser>;
 
@@ -10,7 +10,7 @@ const initialState: IUserState = {
 
 export default function(state: IUserState = initialState, action: IAction): IUserState {
   switch (action.type) {
-    case actionTypes.EDIT_USER:
+    case userActions.editUser.types.success:
       return { ...state, ...action.payload.user };
     default:
       return state;
