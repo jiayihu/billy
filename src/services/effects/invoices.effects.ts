@@ -8,7 +8,7 @@ import { IAction } from '../types/redux.types';
 import { invoicesActions } from '@services/actions/';
 
 @Injectable()
-export default class FirebaseEffects {
+export default class InvoicesEffects {
   private invoices$: FirebaseListObservable<IInvoice[]>;
 
   constructor(private firebase: AngularFire, private store: Store<any>) {
@@ -28,9 +28,31 @@ export default class FirebaseEffects {
         return Observable.from(this.invoices$.push(action.payload.invoice))
           .map(invoiceRef => {
             const invoice = { ...action.payload.invoice, id: invoiceRef.key };
-            return invoicesActions.addInvoice.success(invoice);
+            return invoicesActions.deleteInvoice.success(invoice);
           })
-          .catch((error) => Observable.of(invoicesActions.addInvoice.failure(error.message || error)));
+          .catch((error) => Observable.of(invoicesActions.addInvoice.failure(error.message)));
+      });
+  }
+
+  editInvoice = (actions$: ActionsObservable<IAction>) => {
+    return actions$.ofType(invoicesActions.addInvoice.types.request)
+      .switchMap(action => {
+        const invoice = action.payload.invoice;
+
+        return Observable.from(this.invoices$.update(invoice.id, invoice))
+          .map(() => invoicesActions.editInvoice.success(invoice))
+          .catch((error) => Observable.of(invoicesActions.editInvoice.failure(error.message)));
+      });
+  }
+
+  deleteInvoice = (actions$: ActionsObservable<IAction>) => {
+    return actions$.ofType(invoicesActions.deleteInvoice.types.request)
+      .switchMap(action => {
+        const invoiceId = action.payload.invoiceId;
+
+        return Observable.from(this.invoices$.remove(invoiceId))
+          .map(() => invoicesActions.deleteInvoice.success(invoiceId))
+          .catch((error) => Observable.of(invoicesActions.deleteInvoice.failure(error.message)));
       });
   }
 }

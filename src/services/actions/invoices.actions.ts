@@ -12,16 +12,12 @@ export const addInvoice = createAction('ADD_INVOICE', {
   success: (invoice) => ({ invoice }),
 });
 
-export function editInvoice(invoice: IInvoice): IAction {
-  return {
-    type: actionTypes.EDIT_INVOICE,
-    payload: { invoice },
-  };
-}
+export const editInvoice = createAction('EDIT_INVOICE', {
+  request: (invoice) => ({ invoice }),
+  success: (invoice) => ({ invoice }),
+});
 
-export function deleteInvoice(invoiceId: string): IAction {
-  return {
-    type: actionTypes.DELETE_INVOICE,
-    payload: { invoiceId },
-  };
-}
+export const deleteInvoice = createAction('DELETE_INVOICE', {
+  request: (invoiceId) => ({ invoiceId }),
+  success: (invoiceId) => ({ invoiceId }),
+});

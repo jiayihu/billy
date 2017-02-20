@@ -3,7 +3,7 @@ import { applyMiddleware, Store, compose, createStore } from 'redux';
 import { NgReduxModule, NgRedux } from '@angular-redux/store';
 import rootReducer, { IState } from '@services/reducers/';
 import { createEpicMiddleware, combineEpics } from 'redux-observable';
-import { effects, FirebaseEffects } from '@services/effects/';
+import { effects, InvoicesEffects } from '@services/effects/';
 import { LOCALSTORAGE } from '@services/config.service';
 
 @NgModule({
@@ -13,10 +13,14 @@ import { LOCALSTORAGE } from '@services/config.service';
 export default class AppStoreModule {
   constructor(
     redux: NgRedux<IState>,
-    firebaseEffects: FirebaseEffects,
+    firebaseEffects: InvoicesEffects,
   ) {
     const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-    const epics = combineEpics(firebaseEffects.addInvoice);
+    const epics = combineEpics(
+      firebaseEffects.addInvoice,
+      firebaseEffects.editInvoice,
+      firebaseEffects.deleteInvoice,
+    );
 
     const store: Store<IState> = createStore(
       rootReducer,

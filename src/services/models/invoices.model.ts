@@ -48,11 +48,11 @@ export default class InvoicesModel extends BaseModel {
   }
 
   deleteInvoice(invoiceId: string) {
-    this.store.dispatch(invoicesActions.deleteInvoice(invoiceId));
+    this.store.dispatch(invoicesActions.deleteInvoice.request(invoiceId));
   }
 
   editInvoice(updatedInvoice: IInvoice) {
-    this.store.dispatch(invoicesActions.editInvoice(updatedInvoice));
+    this.store.dispatch(invoicesActions.editInvoice.request(updatedInvoice));
     this.notificationsService.success('Invoice', 'Invoice edited successfully.');
   }
 }

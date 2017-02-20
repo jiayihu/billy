@@ -1,6 +1,6 @@
-import FirebaseEffects from './firebase.effects';
-export { default as FirebaseEffects } from './firebase.effects';
+import InvoicesEffects from './invoices.effects';
+export { default as InvoicesEffects } from './invoices.effects';
 
 export const effects = [
-  FirebaseEffects,
+  InvoicesEffects,
 ];
