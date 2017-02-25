@@ -1,5 +1,3 @@
-import { IAction } from '../types/redux.types';
-
 export const actionTypes = {
   SHOW_ERROR: 'SHOW_ERROR',
 };

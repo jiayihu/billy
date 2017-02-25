@@ -4,7 +4,6 @@ import { NgRedux as Store } from '@angular-redux/store';
 import { ActionsObservable } from 'redux-observable';
 import { AngularFire, FirebaseAuth, FirebaseListObservable } from 'angularfire2';
 import { IInvoice } from '../models/invoices.model';
-import { IAction } from '../types/redux.types';
 import { invoicesActions } from '@services/actions/';
 
 @Injectable()

@@ -1,4 +1,3 @@
-import { IAction } from '../types/redux.types';
 import { IUser } from '../models/user.model';
 import { userActions } from '../actions/';
 

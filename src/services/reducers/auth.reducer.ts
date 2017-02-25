@@ -1,4 +1,3 @@
-import { IAction } from '../types/redux.types';
 import { IAuth } from '../models/auth.model';
 import { actionTypes } from '../actions/auth.actions';
 

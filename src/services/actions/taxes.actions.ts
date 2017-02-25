@@ -1,4 +1,3 @@
-import { IAction } from '../types/redux.types';
 import { ITax } from '../models/taxes.model';
 import createAction from './createAction';
 

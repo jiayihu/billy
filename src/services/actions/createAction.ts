@@ -1,4 +1,3 @@
-import { IAction } from '../types/redux.types';
 import { actionTypes as errorTypes, showError } from './errors.actions';
 
 interface IPayloadCreators {

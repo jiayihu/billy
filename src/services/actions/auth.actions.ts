@@ -1,5 +1,3 @@
-import { IAction } from '../types/redux.types';
-
 export const actionTypes = {
   AUTH_USER: 'AUTH_USER',
   LOGOUT_USER: 'LOGOUT_USER',
