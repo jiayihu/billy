@@ -1,7 +1,7 @@
 {
   "name": "billy",
   "version": "0.0.1",
-  "description": "Online invoices built with Angular 2",
+  "description": "Online invoices built with Angular 2+",
   "main": "index.js",
   "scripts": {
     "build": "npm run clean && cross-env NODE_ENV=production webpack --config webpack.config.js",
