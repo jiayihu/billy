@@ -12,6 +12,8 @@ export default class TaxesEffects {
 
   constructor(private firebase: AngularFire, private firebaseAuth: FirebaseAuth, private store: Store<any>) {
     firebaseAuth.subscribe(authState => {
+      if (!authState) return;
+
       const userId = authState.uid;
       this.taxes$ = firebase.database.list(`/taxes/${userId}`);
 

@@ -12,6 +12,8 @@ export default class CustomersEffects {
 
   constructor(private firebase: AngularFire, private firebaseAuth: FirebaseAuth, private store: Store<any>) {
     firebaseAuth.subscribe(authState => {
+      if (!authState) return;
+
       const userId = authState.uid;
       this.customers$ = firebase.database.list(`/customers/${userId}`);
 
