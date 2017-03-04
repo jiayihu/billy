@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { NgRedux as Store } from '@angular-redux/store';
 import * as selectors from '@services/reducers/';
 import { invoicesActions } from '@services/actions/';
-import BaseModel from './base.model';
+import uniqueId = require('lodash/uniqueId');
 import { NotificationsService } from 'angular2-notifications';
 import { ICustomer } from './customers.model';
 import { IUser } from './user.model';
@@ -31,15 +31,18 @@ export interface IInvoice {
 }
 
 @Injectable()
-export default class InvoicesModel extends BaseModel {
+export default class InvoicesModel {
   invoices$: Observable<IInvoice[]>;
 
   constructor(
     private store: Store<selectors.IState>,
     private notificationsService: NotificationsService,
   ) {
-    super();
     this.invoices$ = this.store.select(selectors.getInvoices);
+  }
+
+  generateId(entity: string): string {
+    return uniqueId(`${entity}_`);
   }
 
   addInvoice(invoice: IInvoice) {

@@ -48,7 +48,19 @@ export default class InvoicesEditComponent implements OnInit, OnDestroy, IDeacti
     .subscribe(invoice => this.invoice = invoice);
 
     this.customersSub = this.customersModel.customers$.subscribe(customers => this.customers = customers);
-    this.taxesSub = this.taxesModel.taxes$.subscribe(taxes => this.availableTaxes = taxes);
+    this.taxesSub = this.taxesModel.taxes$.subscribe(taxes => {
+      if (this.availableTaxes && taxes.length === this.availableTaxes.length + 1) {
+        /**
+         * If the new list of taxes has a new tax it means that the user added a
+         * new tax and the server saved it successfully. This is a dirty trick
+         * used to add an async item and without moving the internal Invoice state
+         * to the global state for now.
+         */
+        const newTax = taxes[taxes.length - 1];
+        this.editInvoice('taxes', this.invoice.taxes.concat(newTax));
+      }
+      this.availableTaxes = taxes;
+    });
   }
 
   ngOnDestroy() {
@@ -137,8 +149,7 @@ export default class InvoicesEditComponent implements OnInit, OnDestroy, IDeacti
    */
 
   handleAddTax() {
-    const newTax = this.taxesModel.addTax();
-    this.editInvoice('taxes', this.invoice.taxes.concat(newTax));
+    this.taxesModel.addTax();
   }
 
   handleAddInvoiceTax(taxId: string) {

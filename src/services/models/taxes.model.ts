@@ -3,7 +3,6 @@ import { Observable } from 'rxjs/Observable';
 import { NgRedux as Store } from '@angular-redux/store';
 import * as selectors from '@services/reducers/';
 import { taxesActions } from '@services/actions/';
-import BaseModel from './base.model';
 
 export interface ITax {
   id: string;
@@ -12,21 +11,20 @@ export interface ITax {
 }
 
 @Injectable()
-export default class TaxesModel extends BaseModel {
+export default class TaxesModel {
+  private taxes: ITax[];
   taxes$: Observable<ITax[]>;
 
   constructor(private store: Store<selectors.IState>) {
-    super();
     this.taxes$ = this.store.select(selectors.getTaxes);
+    this.taxes$.subscribe(taxes => this.taxes = taxes);
   }
 
   addTax(): ITax {
-    let storedtaxes: ITax[];
-    this.taxes$.first().subscribe(taxes => storedtaxes = taxes);
-    console.log('storedTaxes: ', storedtaxes);
+    const taxIndex = this.taxes ? this.taxes.length + 1 : 1;
     const newTax: ITax = {
-      id: this.generateId('TAX'),
-      name: `Tax #${storedtaxes.length + 1}`,
+      id: '',
+      name: `Tax #${taxIndex}`,
       rate: 0,
     };
     this.store.dispatch(taxesActions.addTax.request(newTax));

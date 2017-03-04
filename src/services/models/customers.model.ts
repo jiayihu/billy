@@ -3,7 +3,6 @@ import { Observable } from 'rxjs/Observable';
 import { NgRedux as Store } from '@angular-redux/store';
 import * as selectors from '@services/reducers/';
 import { customersActions } from '@services/actions/';
-import BaseModel from './base.model';
 
 export interface ICustomer {
   id: string;
@@ -17,18 +16,15 @@ export interface ICustomer {
 }
 
 @Injectable()
-export default class CustomersModel extends BaseModel {
+export default class CustomersModel {
   customers$: Observable<ICustomer[]>;
 
   constructor(private store: Store<selectors.IState>) {
-    super();
     this.customers$ = this.store.select(selectors.getCustomers);
   }
 
   addCustomer(customer: ICustomer): void {
-    const customerId = this.generateId('CUSTOMER');
-    const newCustomer = Object.assign({}, customer, { id: customerId });
-    this.store.dispatch(customersActions.addCustomer.request(newCustomer));
+    this.store.dispatch(customersActions.addCustomer.request(customer));
   }
 
   deleteCustomer(customerId: string): void {
