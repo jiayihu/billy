@@ -4,7 +4,7 @@ import { AuthModel } from '@services/models/';
 @Component({
   selector: 'app',
   template: `
-    <app-nav></app-nav>
+    <app-nav [isAuthenticated]="isAuthenticated"></app-nav>
     <div class="container">
       <router-outlet></router-outlet>
     </div>
@@ -20,6 +20,9 @@ export default class AppComponent {
     showProgressBar: false,
     lastOnBottom: false,
   };
+  isAuthenticated: boolean;
 
-  constructor(private authModel: AuthModel) {}
+  constructor(private authModel: AuthModel) {
+    authModel.auth$.subscribe(auth => this.isAuthenticated = auth.isAuthenticated);
+  }
 }

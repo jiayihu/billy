@@ -11,7 +11,7 @@
       <a class="nav-link" routerLink="/customers">Customers</a>
     </li>
 
-    <li class="nav-item float-xs-right" routerLinkActive="active">
+    <li *ngIf="isAuthenticated" class="nav-item float-xs-right" routerLinkActive="active">
       <a class="nav-link" routerLink="/logout">Logout</a>
     </li>
   </ul>
