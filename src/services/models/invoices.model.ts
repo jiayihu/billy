@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { NgRedux as Store } from '@angular-redux/store';
 import * as selectors from '@services/reducers/';
 import { invoicesActions } from '@services/actions/';
+import isEmpty = require('lodash/isEmpty');
 import uniqueId = require('lodash/uniqueId');
 import { NotificationsService } from 'angular2-notifications';
 import { ICustomer } from './customers.model';
@@ -32,12 +33,14 @@ export interface IInvoice {
 
 @Injectable()
 export default class InvoicesModel {
+  newInvoiceId$: Observable<string>;
   invoices$: Observable<IInvoice[]>;
 
   constructor(
     private store: Store<selectors.IState>,
     private notificationsService: NotificationsService,
   ) {
+    this.newInvoiceId$ = this.store.select(selectors.getNewInvoiceId);
     this.invoices$ = this.store.select(selectors.getInvoices);
   }
 
@@ -46,6 +49,8 @@ export default class InvoicesModel {
   }
 
   addInvoice(invoice: IInvoice) {
+    if (!this.checkValidity(invoice)) return;
+
     this.store.dispatch(invoicesActions.addInvoice.request(invoice));
     this.notificationsService.success('Invoice', 'Invoice saved successfully.');
   }
@@ -55,7 +60,23 @@ export default class InvoicesModel {
   }
 
   editInvoice(updatedInvoice: IInvoice) {
+    if (!this.checkValidity(updatedInvoice)) return;
+
     this.store.dispatch(invoicesActions.editInvoice.request(updatedInvoice));
     this.notificationsService.success('Invoice', 'Invoice edited successfully.');
   }
+
+  private checkValidity(invoice: IInvoice): boolean {
+    const requiredFields = ['customer', 'date', 'location', 'number', 'tasks', 'user'];
+    for (let field of requiredFields) {
+      const value = invoice[field];
+      if (!value || (typeof value !== 'number' && isEmpty(value))) {
+        this.notificationsService.error('Invoice', `Cannot save, '${field}' is required.`);
+        return false;
+      }
+    }
+
+    return true;
+  }
+
 }

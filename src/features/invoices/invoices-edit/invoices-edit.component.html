@@ -1,6 +1,15 @@
 <div class="heading">
   <h2 class="title">Edit invoice</h2>
-  <btn class="save-btn" type="primary" (onClick)="handleSaveInvoice()">Save</btn>
+  <div class="invoice-btns">
+    <btn class="print-btn" type="secondary" (onClick)="handlePrint()">
+      <icon name="printer"></icon>
+      Print
+    </btn>
+    <btn class="save-btn" type="primary" (onClick)="handleSave()">
+      <icon name="database"></icon>
+      Save
+    </btn>
+  </div>
 </div>
 <invoice-edit
   *ngIf="invoice"
@@ -25,5 +34,14 @@
   (onNotesChange)="handleNotesChange($event)"
 ></invoice-edit>
 <div class="footer">
-  <btn class="save-btn" type="primary" (onClick)="handleSaveInvoice()">Save</btn>
+  <div class="invoice-btns">
+    <btn class="print-btn" type="secondary" (onClick)="handlePrint()">
+      <icon name="printer"></icon>
+      Print
+    </btn>
+    <btn class="save-btn" type="primary" (onClick)="handleSave()">
+      <icon name="database"></icon>
+      Save
+    </btn>
+  </div>
 </div>

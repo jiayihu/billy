@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import CustomersModel, { ICustomer } from '@services/models/customers.model';
 import InvoicesModel, { IInvoice, ITask } from '@services/models/invoices.model';
 import TaxesModel, { ITax } from '@services/models/taxes.model';
@@ -35,6 +35,7 @@ export default class InvoicesEditComponent implements OnInit, OnDestroy, IDeacti
     private invoicesModel: InvoicesModel,
     private taxesModel: TaxesModel,
     private route: ActivatedRoute,
+    private router: Router,
   ) {}
 
   ngOnInit() {
@@ -75,7 +76,11 @@ export default class InvoicesEditComponent implements OnInit, OnDestroy, IDeacti
     return true;
   }
 
-  handleSaveInvoice() {
+  handlePrint() {
+    this.router.navigateByUrl(`/invoices/${this.invoice.id}/print`);
+  }
+
+  handleSave() {
     this.dirty = false;
     this.invoicesModel.editInvoice(this.invoice);
   }

@@ -33,18 +33,22 @@ export function isAuthenticated(state: IState): boolean {
   return state.auth.isAuthenticated;
 }
 
-export function getUser(state: IState): IUserState {
+export function getUser(state: IState) {
   return state.user;
 }
 
-export function getCustomers(state: IState): ICustomersState {
+export function getCustomers(state: IState) {
   return state.customers;
 }
 
-export function getInvoices(state: IState): IInvoicesState {
- return state.invoices;
+export function getNewInvoiceId(state: IState) {
+  return state.invoices.newId;
 }
 
-export function getTaxes(state: IState): ITaxesState {
+export function getInvoices(state: IState) {
+ return state.invoices.list;
+}
+
+export function getTaxes(state: IState) {
  return state.taxes;
 }

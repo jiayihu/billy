@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import CustomersModel, { ICustomer } from '@services/models/customers.model';
@@ -6,7 +7,6 @@ import InvoicesModel, { IInvoice, ITask } from '@services/models/invoices.model'
 import TaxesModel, { ITax } from '@services/models/taxes.model';
 import { UserModel } from '@services/models';
 import { IDeactivateComponent } from '@services/deactivate-guard.service';
-import storage from '@utils/storage';
 import * as moment from 'moment';
 import isNaN = require('lodash/isNaN');
 import maxBy = require('lodash/maxBy');
@@ -24,18 +24,14 @@ export default class CreateInvoiceComponent implements IDeactivateComponent, OnI
 
   private dirty: boolean = false;
 
+  private newIdSub: Subscription;
   private userSub: Subscription;
   private customersSub: Subscription;
   private taxesSub: Subscription;
 
-  // @TODO: invoice state must be moved on the Store, otherwise it's not possible
-  // to add new taxes added or keep invoice state between routes
   private editInvoice(path: string, value: any, skipDirty: boolean = false) {
     this.invoice = set(path, value, this.invoice) as IInvoice;
     this.dirty = skipDirty ? this.dirty : true;
-
-    // @NOTE: we persist invoice tasks only in this phase of development
-    if (path === 'tasks') storage.setItem('billy-tasks', value);
   }
 
   constructor(
@@ -43,6 +39,7 @@ export default class CreateInvoiceComponent implements IDeactivateComponent, OnI
     private invoicesModel: InvoicesModel,
     private userModel: UserModel,
     private taxesModel: TaxesModel,
+    private router: Router,
   ) {
     this.invoice = {
       id: '',
@@ -62,18 +59,20 @@ export default class CreateInvoiceComponent implements IDeactivateComponent, OnI
       [this.invoicesModel.invoices$, this.taxesModel.taxes$],
       (invoices: IInvoice[], taxes: ITax[]) => ({ invoices, taxes }),
     ).take(1).subscribe(state => {
-      const storedTasks = storage.getItem('billy-tasks');
       const lastInvoice = maxBy(state.invoices, invoice => invoice.number);
       const number = lastInvoice ? lastInvoice.number + 1 : 1;
 
       this.invoice = {
         ...this.invoice,
         number,
-        tasks: storedTasks || [],
+        tasks: [],
         taxes: this.invoice.taxes.length ? this.invoice.taxes : state.taxes,
       };
     });
 
+    this.newIdSub = this.invoicesModel.newInvoiceId$.subscribe(newId => {
+      this.editInvoice('id', newId, true);
+    });
     this.customersSub = this.customersModel.customers$.subscribe(customers => {
       this.customers = customers;
       this.editInvoice('customer', this.getInvoiceCustomer(this.invoice, customers), true);
@@ -88,7 +87,7 @@ export default class CreateInvoiceComponent implements IDeactivateComponent, OnI
          * to the global state for now.
          */
         const newTax = taxes[taxes.length - 1];
-        this.editInvoice('taxes', this.invoice.taxes.concat(newTax));
+        this.editInvoice('taxes', this.invoice.taxes.concat(newTax), true);
       }
       this.availableTaxes = taxes;
     });
@@ -120,8 +119,14 @@ export default class CreateInvoiceComponent implements IDeactivateComponent, OnI
     return invoiceCustomer;
   }
 
-  handleSaveInvoice() {
-    this.invoicesModel.addInvoice(this.invoice);
+  handlePrint() {
+    if (this.invoice.id) this.router.navigateByUrl(`/invoices/${this.invoice.id}/print`);
+  }
+
+  handleSave() {
+    this.invoice.id
+      ? this.invoicesModel.editInvoice(this.invoice)
+      : this.invoicesModel.addInvoice(this.invoice);
     this.dirty = false;
   }
 

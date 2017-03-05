@@ -13,16 +13,16 @@ import { LOCALSTORAGE } from '@services/config.service';
 export default class AppStoreModule {
   constructor(
     redux: NgRedux<IState>,
-    firebaseEffects: InvoicesEffects,
+    invoicesEffects: InvoicesEffects,
     customersEffects: CustomersEffects,
     taxesEffects: TaxesEffects,
     userEffects: UserEffects,
   ) {
     const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
     const epics = combineEpics(
-      firebaseEffects.addInvoice,
-      firebaseEffects.editInvoice,
-      firebaseEffects.deleteInvoice,
+      invoicesEffects.addInvoice,
+      invoicesEffects.editInvoice,
+      invoicesEffects.deleteInvoice,
       customersEffects.addCustomer,
       customersEffects.editCustomer,
       customersEffects.deleteCustomer,

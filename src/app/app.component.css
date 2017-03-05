@@ -2,6 +2,10 @@
   min-height: calc(100vh - 11rem);
 }
 
+/deep/ .simple-notification-wrapper {
+  width: 25rem !important;
+}
+
 /deep/ .simple-notification-wrapper .simple-notification {
   background-color: #fff !important;
   box-shadow: 0 1px 8px var(--divider);
@@ -9,7 +13,7 @@
 }
 
 /deep/ .simple-notification-wrapper .simple-notification .sn-title {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   line-height: 1.75;
 }
 
