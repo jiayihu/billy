@@ -6,7 +6,7 @@ export type ICustomersState = Readonly<ICustomer[]>;
 export default function customersReducer(state: ICustomersState = [], action: IAction): ICustomersState {
   switch (action.type) {
     case customersActions.addCustomers.types.success:
-      return state.concat(action.payload.customers);
+      return action.payload.customers;
     case customersActions.addCustomer.types.success:
       return state.concat(action.payload.customer);
     case customersActions.editCustomer.types.success: {

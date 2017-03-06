@@ -7,14 +7,15 @@ import InvoicesModel, { IInvoice } from '@services/models/invoices.model';
 @Component({
   selector: 'print-invoice',
   template: `
-    <default-template [invoice]="invoice" ></default-template>
+    <spinner *ngIf="!invoice"></spinner>
+    <default-template *ngIf="invoice" [invoice]="invoice" ></default-template>
   `,
   styles: [`
     :host {
       font-family: 'Alegreya', serif;
       padding-top: 2rem;
     }
-  `]
+  `],
 })
 export class PrintInvoiceComponent {
   invoice: IInvoice;

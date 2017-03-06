@@ -19,7 +19,7 @@ function newIdReducer(state: string = '', action: IAction): string {
 function listReducer(state: IInvoice[] = [], action: IAction): IInvoice[] {
   switch (action.type) {
     case invoicesActions.addInvoices.types.success:
-      return state.concat(action.payload.invoices);
+      return action.payload.invoices;
     case invoicesActions.addInvoice.types.success:
       return state.concat(action.payload.invoice);
     case invoicesActions.editInvoice.types.success:

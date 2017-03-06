@@ -12,6 +12,7 @@ import ListGroupItemComponent from './list-group/list-group-item.component';
 import InputEditComponent from './input-edit/input-edit.component';
 import ModalComponent from './modal/modal.component';
 import SelectListComponent from './select-list/select-list.component';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 const uiComponents = [
   AlertComponent,
@@ -24,6 +25,7 @@ const uiComponents = [
   ListGroupItemComponent,
   ModalComponent,
   SelectListComponent,
+  SpinnerComponent,
 ];
 
 @NgModule({

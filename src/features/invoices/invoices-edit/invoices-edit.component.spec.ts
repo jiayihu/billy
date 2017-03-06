@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import InvoicesEditComponent from './invoices-edit.component';
 import CustomersModel from '@services/models/customers.model';
 import InvoicesModel from '@services/models/invoices.model';
@@ -22,6 +22,7 @@ describe('InvoicesEditComponent', () => {
         { provide: InvoicesModel, useClass: InvoicesModelStub },
         { provide: TaxesModel, useClass: TaxesModelStub },
         { provide: ActivatedRoute, useClass: ActivatedRouteStub },
+        { provide: Router, useValue: {} },
       ],
       schemas: [NO_ERRORS_SCHEMA],
     });

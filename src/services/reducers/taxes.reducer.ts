@@ -6,7 +6,7 @@ export type ITaxesState = Readonly<ITax[]>;
 export default function taxesReducer(state: ITaxesState = [], action: IAction): ITaxesState {
   switch (action.type) {
     case taxesActions.addTaxes.types.success:
-      return state.concat(action.payload.taxes);
+      return action.payload.taxes;
     case taxesActions.addTax.types.success:
       return state.concat(action.payload.tax);
     case taxesActions.editTax.types.success:
