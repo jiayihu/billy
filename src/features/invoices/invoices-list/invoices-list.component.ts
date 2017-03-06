@@ -40,6 +40,10 @@ export default class InvoicesListComponent implements OnInit {
     this.invoicesModel.deleteInvoice(invoiceId);
   }
 
+  handleInvoicePrint(invoiceId: string) {
+    this.router.navigateByUrl(`/invoices/${invoiceId}/print`);
+  }
+
   handleTaxEdit(updatedTax: ITax) {
     this.taxesModel.editTax(updatedTax);
   }

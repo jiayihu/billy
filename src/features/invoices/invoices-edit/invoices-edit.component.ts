@@ -25,11 +25,6 @@ export default class InvoicesEditComponent implements OnInit, OnDestroy, IDeacti
   private taxesSub: Subscription;
   private invoiceSub: Subscription;
 
-  private editInvoice(path: string, value: any, skipDirty: boolean = false) {
-    this.invoice = set(path, value, this.invoice) as IInvoice;
-    this.dirty = skipDirty ? this.dirty : true;
-  }
-
   constructor(
     private customersModel: CustomersModel,
     private invoicesModel: InvoicesModel,
@@ -134,6 +129,7 @@ export default class InvoicesEditComponent implements OnInit, OnDestroy, IDeacti
     const taskId = this.invoicesModel.generateId('TASK');
     const newTask = Object.assign({}, task, { id: taskId });
     this.editInvoice('tasks', this.invoice.tasks.concat(newTask));
+    this.updateTotal();
   }
 
   handleEditTask(updatedTask: ITask) {
@@ -143,6 +139,7 @@ export default class InvoicesEditComponent implements OnInit, OnDestroy, IDeacti
     });
 
     this.editInvoice('tasks', updatedTasks);
+    this.updateTotal();
   }
 
   handleRemoveTask(taskId: string) {
@@ -177,5 +174,18 @@ export default class InvoicesEditComponent implements OnInit, OnDestroy, IDeacti
 
   handleNotesChange(notes: string) {
     this.editInvoice('notes', notes);
+  }
+
+  private updateTotal() {
+    const tasksTotal = this.invoice.tasks.reduce((sum, task) => sum + task.amount, 0);
+    const taxesRate = this.invoice.taxes.reduce((sum, tax) => sum + tax.rate, 0);
+    const invoiceTotal = tasksTotal * (1 + taxesRate / 100);
+
+    this.editInvoice('total', invoiceTotal);
+  }
+
+  private editInvoice(path: string, value: any, skipDirty: boolean = false) {
+    this.invoice = set(path, value, this.invoice) as IInvoice;
+    this.dirty = skipDirty ? this.dirty : true;
   }
 }

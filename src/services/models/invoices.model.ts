@@ -28,6 +28,7 @@ export interface IInvoice {
   number: number;
   tasks: ITask[];
   taxes: ITax[];
+  total: number;
   user: IUser;
 }
 

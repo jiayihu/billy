@@ -1,9 +1,7 @@
-- Connect notifications to errors state
+- Connect notifications to errors state and show success notifications properly
 - Replace moment with date-fns
 - i18n
 - AOT Compilation
-- Edit modals in named router outlets
-- Custom structural directive
 - Create Tooltip directive for forms errors
 - Remove `skipLibCheck`. [Issue](https://github.com/DefinitelyTyped/DefinitelyTyped/issues/14324)
 

@@ -1,5 +1,6 @@
 :root {
   --dark-grey: #212121;
+  --grey: var(--secondary-text); /* Global CSS Variable */
   --light-grey: #f1f1f1;
 }
 
@@ -23,4 +24,39 @@
 .total-sum {
   font-size: 3rem;
   letter-spacing: 2px;
+}
+
+.content {
+  padding: 32pt;
+}
+
+.tax {
+  display: flex;
+}
+
+.tax-name {
+  margin-left: auto;
+  margin-right: 3rem;
+}
+
+.tax-rate {
+  margin-right: 3rem;
+}
+
+.invoice-total {
+  margin: 2rem 0;
+}
+
+.notes {
+  color: var(--grey);
+  font-size: 0.875em;
+  margin-top: 10rem;
+}
+
+.notes-title {
+  border-bottom: 2px solid var(--grey);
+}
+
+.notes-text {
+  white-space: pre;
 }

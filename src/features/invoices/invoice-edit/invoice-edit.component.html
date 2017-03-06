@@ -1,7 +1,7 @@
 <div class="invoice">
   <user-business [user]="invoice.user" (onBusinessChange)="handleEvent('onBusinessChange', $event)"></user-business>
   <div class="row">
-    <div class="col-sm-4 offset-sm-8">
+    <div class="col-sm-6 offset-sm-6">
       <customer
         [customers]="customers"
         [selectedCustomer]="invoice.customer"
@@ -46,7 +46,7 @@
   ></taxes>
   <p class="invoice-total">
     Total:
-    {{(invoice.tasks | reduceSum:'amount') * ( 1 + (invoice.taxes | reduceSum:'rate') / 100) | currency:'EUR':true}}
+    {{invoice.total | currency:'EUR':true}}
   </p>
   <notes [notes]="invoice.notes" (onNotesChange)="handleEvent('onNotesChange', $event)"></notes>
 </div>

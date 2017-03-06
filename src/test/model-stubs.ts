@@ -35,6 +35,7 @@ export class InvoicesModelStub {
     number: 0,
     tasks: [],
     taxes: [],
+    total: 0,
     user: { name: 'Luigi' },
   };
 

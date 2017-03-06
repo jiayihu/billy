@@ -14,11 +14,12 @@
         <td>{{invoice.date}}</td>
         <td>{{invoice.customer.name}}</td>
         <td>
-          {{(invoice.tasks | reduceSum:'amount') * ( 1 + (invoice.taxes | reduceSum:'rate') / 100) | currency:'EUR':true}}
+          {{invoice.total | currency:'EUR':true}}
         </td>
         <td class="invoice-actions">
           <btn type="link" class="edit-action" (onClick)="handleInvoiceEdit(invoice.id)">Edit</btn>
           <btn type="link" class="delete-action" (onClick)="handleInvoiceDelete(invoice.id)">Delete</btn>
+          <btn type="link" class="edit-action" (onClick)="handleInvoicePrint(invoice.id)">Print</btn>
         </td>
       </tr>
     </tbody>
