@@ -1,33 +1,20 @@
-<label [attr.for]="field.name" class="col-sm-4 col-form-label">
-  {{field.label}}
-  <span *ngIf="field.required">*</span>
-</label>
-<div
-  [ngSwitch]="field.controlType"
-  [ngClass]="inputClassName"
-  [formGroup]="form"
-  [class.has-danger]="form.controls[field.name].invalid && form.controls[field.name].dirty"
->
-  <template [ngIf]="field.options && !!field.options.length">
-    <template [ngSwitchCase]="'select'">
-      <select
-        [formControlName]="field.name"
-        [name]="field.name"
-        (change)="field.onChange && field.onChange(form.controls[field.name].value)"
-        class="form-control"
-      >
-        <option *ngFor="let option of field.options" [value]="option.value">
-          {{option.label}}
-        </option>
-      </select>
+<div class="form-group row">
+  <label [attr.for]="field.name" class="col-sm-4 col-form-label">
+    {{field.label}}
+    <span *ngIf="field.required">*</span>
+  </label>
+  <div [ngSwitch]="field.controlType" [ngClass]="inputClassName" [formGroup]="form" [class.has-danger]="form.controls[field.name].invalid && form.controls[field.name].dirty">
+    <template [ngIf]="field.options && !!field.options.length">
+      <template [ngSwitchCase]="'select'">
+        <select [formControlName]="field.name" [name]="field.name" (change)="field.onChange && field.onChange(form.controls[field.name].value)"
+          class="form-control">
+          <option *ngFor="let option of field.options" [value]="option.value">
+            {{option.label}}
+          </option>
+        </select>
+      </template>
     </template>
-  </template>
-  <input-edit
-    *ngSwitchDefault
-    [formControlName]="field.name"
-    [name]="field.name"
-    [required]="field.required"
-    [type]="field.controlType"
-    size="fluid"
-  ></input-edit>
+    <input-edit *ngSwitchDefault [formControlName]="field.name" [name]="field.name" [required]="field.required" [type]="field.controlType"
+      size="fluid"></input-edit>
+  </div>
 </div>

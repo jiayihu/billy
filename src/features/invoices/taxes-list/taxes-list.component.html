@@ -27,9 +27,7 @@
   <modal-title>Edit tax</modal-title>
   <modal-body>
     <form [formGroup]="form">
-      <div *ngFor="let field of fields" class="form-group row">
-        <field [form]="form" [field]="field"></field>
-      </div>
+      <field *ngFor="let field of fields" [form]="form" [field]="field"></field>
     </form>
   </modal-body>
 </modal>
