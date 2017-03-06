@@ -8,7 +8,13 @@ import InvoicesModel, { IInvoice } from '@services/models/invoices.model';
   selector: 'print-invoice',
   template: `
     <default-template [invoice]="invoice" ></default-template>
-  `
+  `,
+  styles: [`
+    :host {
+      font-family: 'Alegreya', serif;
+      padding-top: 2rem;
+    }
+  `]
 })
 export class PrintInvoiceComponent {
   invoice: IInvoice;

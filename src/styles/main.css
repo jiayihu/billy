@@ -28,6 +28,10 @@ p {
  * Bootstrap overrides
  */
 
+.btn {
+  cursor: pointer;
+}
+
 .table-headers {
   color: var(--divider);
   text-transform: uppercase;
@@ -40,4 +44,12 @@ p {
 
 .modal {
   background-color: rgba(0, 0, 0, .2);
+}
+
+.text-md {
+  font-size: 1.25rem;
+}
+
+.text-lg {
+  font-size: 1.5rem;
 }

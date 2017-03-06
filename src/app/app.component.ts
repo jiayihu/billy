@@ -4,11 +4,11 @@ import { AuthModel } from '@services/models/';
 @Component({
   selector: 'app',
   template: `
-    <app-nav [isAuthenticated]="isAuthenticated"></app-nav>
+    <app-nav class="print-hidden" [isAuthenticated]="isAuthenticated"></app-nav>
     <div class="container">
       <router-outlet></router-outlet>
     </div>
-    <app-footer></app-footer>
+    <app-footer class="print-hidden"></app-footer>
     <simple-notifications [options]="notificationOptions"></simple-notifications>
   `,
   styleUrls: ['./app.component.css'],

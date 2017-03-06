@@ -25,9 +25,9 @@ export default class InvoicesEditComponent implements OnInit, OnDestroy, IDeacti
   private taxesSub: Subscription;
   private invoiceSub: Subscription;
 
-  private editInvoice(path: string, value: any) {
+  private editInvoice(path: string, value: any, skipDirty: boolean = false) {
     this.invoice = set(path, value, this.invoice) as IInvoice;
-    this.dirty = true;
+    this.dirty = skipDirty ? this.dirty : true;
   }
 
   constructor(
@@ -58,7 +58,7 @@ export default class InvoicesEditComponent implements OnInit, OnDestroy, IDeacti
          * to the global state for now.
          */
         const newTax = taxes[taxes.length - 1];
-        this.editInvoice('taxes', this.invoice.taxes.concat(newTax));
+        this.editInvoice('taxes', this.invoice.taxes.concat(newTax), true);
       }
       this.availableTaxes = taxes;
     });

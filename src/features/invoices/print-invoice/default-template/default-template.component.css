@@ -1,0 +1,26 @@
+:root {
+  --dark-grey: #212121;
+  --light-grey: #f1f1f1;
+}
+
+.header {
+  background-color: var(--light-grey);
+  background-image: url('/assets/images/geometry2.png');
+  background-repeat: repeat;
+  padding: 32pt;
+}
+
+.metadata {
+  padding-top: 3rem;
+}
+
+.total {
+  background-color: var(--dark-grey);
+  color: white;
+  padding: 1rem 1rem 0;
+}
+
+.total-sum {
+  font-size: 3rem;
+  letter-spacing: 2px;
+}
