@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
-import { applyMiddleware, Store, compose, createStore } from 'redux';
-import { NgReduxModule, NgRedux } from '@angular-redux/store';
+import { NgReduxModule, NgRedux, DevToolsExtension } from '@angular-redux/store';
 import rootReducer, { IState } from '@services/reducers/';
 import { createEpicMiddleware, combineEpics } from 'redux-observable';
 import { effects, InvoicesEffects, CustomersEffects, TaxesEffects, UserEffects } from '@services/effects/';
@@ -13,12 +12,12 @@ import { LOCALSTORAGE } from '@services/config.service';
 export default class AppStoreModule {
   constructor(
     redux: NgRedux<IState>,
+    reduxDevtools: DevToolsExtension,
     invoicesEffects: InvoicesEffects,
     customersEffects: CustomersEffects,
     taxesEffects: TaxesEffects,
     userEffects: UserEffects,
   ) {
-    const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
     const epics = combineEpics(
       invoicesEffects.addInvoice,
       invoicesEffects.editInvoice,
@@ -31,15 +30,9 @@ export default class AppStoreModule {
       taxesEffects.deleteTax,
       userEffects.editUser,
     );
+    const middlewares = [createEpicMiddleware(epics)];
+    const enhancers = reduxDevtools.isEnabled() ? [reduxDevtools.enhancer()] : [];
 
-    const store: Store<IState> = createStore(
-      rootReducer,
-      undefined,
-      composeEnhancers(applyMiddleware(
-        createEpicMiddleware(epics),
-      )),
-    );
-
-    redux.provideStore(store);
+    redux.configureStore(rootReducer, undefined, middlewares, enhancers);
   }
 }
