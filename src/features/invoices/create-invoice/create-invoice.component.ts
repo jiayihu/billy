@@ -7,7 +7,7 @@ import InvoicesModel, { IInvoice, ITask } from '@services/models/invoices.model'
 import TaxesModel, { ITax } from '@services/models/taxes.model';
 import { UserModel } from '@services/models';
 import { IDeactivateComponent } from '@services/deactivate-guard.service';
-import * as moment from 'moment';
+import * as format from 'date-fns/format';
 import isNaN = require('lodash/isNaN');
 import maxBy = require('lodash/maxBy');
 import set = require('lodash/fp/set');
@@ -39,7 +39,7 @@ export default class CreateInvoiceComponent implements IDeactivateComponent, OnI
     this.invoice = {
       id: '',
       customer: null,
-      date: moment().format('DD/MM/YYYY'),
+      date: format(new Date(), 'DD/MM/YYYY'),
       location: 'Location',
       notes: '',
       number: 1,

@@ -64,12 +64,6 @@ module.exports = {
     extensions: ['.js', '.ts'],
   },
   module: {
-    noParse: [
-      // Don't add moment locales automatically
-      // @see https://github.com/webpack/webpack/issues/198#issuecomment-229242671
-      /moment.js/,
-      /node_modules\/localforage\/dist\/localforage.js/
-    ],
     rules: [
       {
         test: /\.tsx?$/,

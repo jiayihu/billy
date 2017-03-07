@@ -1,5 +1,4 @@
 - Connect notifications to errors state and show success notifications properly
-- Replace moment with date-fns
 - i18n
 - AOT Compilation
 - Create Tooltip directive for forms errors

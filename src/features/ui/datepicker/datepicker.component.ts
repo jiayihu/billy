@@ -11,9 +11,9 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import * as moment from 'moment';
 import pikaday = require('pikaday');
 import 'pikaday/css/pikaday.css';
+import * as format from 'date-fns/format';
 
 export const pikadayToken = new OpaqueToken('pikaday');
 
@@ -46,7 +46,7 @@ export default class DatepickerComponent implements AfterViewInit, OnDestroy {
       field: input,
       format: this.format,
       onSelect: (date: Date) => {
-        const formattedDate = moment(date).format(this.format);
+        const formattedDate = format(date, this.format);
         this.onChange.emit(formattedDate);
       },
     });
