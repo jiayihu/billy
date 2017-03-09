@@ -8,7 +8,7 @@ export const addTaxes = createAction('ADD_TAXES', {
 export const addTax = createAction('ADD_TAX', {
   request: (tax) => ({ tax }),
   success: (tax) => ({ tax }),
-});
+}, { lifecycle: true });
 
 export const editTax = createAction('EDIT_TAX', {
   request: (tax) => ({ tax }),

@@ -20,16 +20,16 @@ export default class TaxesModel {
     this.taxes$.subscribe(taxes => this.taxes = taxes);
   }
 
-  addTax(): ITax {
+  addTax(): Promise<ITax> {
     const taxIndex = this.taxes ? this.taxes.length + 1 : 1;
     const newTax: ITax = {
       id: '',
       name: `Tax #${taxIndex}`,
       rate: 0,
     };
-    this.store.dispatch(taxesActions.addTax.request(newTax));
 
-    return newTax;
+    return this.store.dispatch(taxesActions.addTax.request(newTax))
+      .then(response => response.payload.tax);
   }
 
   editTax(updatedTax: ITax) {

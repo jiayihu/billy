@@ -4,7 +4,7 @@ import { invoicesActions } from '../actions/';
 
 export type IInvoicesState = Readonly<IInvoice[]>;
 
-export default function invoicesReducer(state: IInvoice[] = [], action: IAction): IInvoice[] {
+export default function invoicesReducer(state: IInvoicesState = [], action: IAction): IInvoicesState {
   switch (action.type) {
     case invoicesActions.addInvoices.types.success:
       return action.payload.invoices;
