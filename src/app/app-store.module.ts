@@ -4,6 +4,7 @@ import rootReducer, { IState } from '@services/reducers/';
 import { createEpicMiddleware, combineEpics } from 'redux-observable';
 import { effects, InvoicesEffects, CustomersEffects, TaxesEffects, UserEffects } from '@services/effects/';
 import { LOCALSTORAGE } from '@services/config.service';
+import actionLifecycleMidleware from '@services/middlewares/action-lifecycle.middleware';
 
 @NgModule({
   imports: [ NgReduxModule ],
@@ -30,7 +31,7 @@ export default class AppStoreModule {
       taxesEffects.deleteTax,
       userEffects.editUser,
     );
-    const middlewares = [createEpicMiddleware(epics)];
+    const middlewares = [createEpicMiddleware(epics), actionLifecycleMidleware];
     const enhancers = reduxDevtools.isEnabled() ? [reduxDevtools.enhancer()] : [];
 
     redux.configureStore(rootReducer, undefined, middlewares, enhancers);

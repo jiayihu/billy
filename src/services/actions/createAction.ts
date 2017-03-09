@@ -1,4 +1,5 @@
 import { actionTypes as errorTypes, showError } from './errors.actions';
+import { IActionLifecycle } from '@services/middlewares/action-lifecycle.middleware';
 
 interface IPayloadCreators {
   request?(...args: any[]): any;
@@ -13,9 +14,16 @@ interface IActionCreator {
   failure(errorMsg: string): IAction;
 }
 
-const defaultPayload = (args) => args;
+interface IOptions {
+  lifecycle: boolean;
+}
 
-export default function createAction(type: string, payloadCreators: IPayloadCreators): IActionCreator {
+const defaultPayload = (args) => args;
+const defaultOptions: IOptions = {
+  lifecycle: false,
+};
+
+export default function createAction(type: string, payloadCreators: IPayloadCreators, options: IOptions = defaultOptions): IActionCreator {
   const requestType = `${type}_REQUEST`;
   const successType = `${type}_SUCCESS`;
   const failureType = payloadCreators.failure ? `${type}_FAILURE` : errorTypes.SHOW_ERROR;
@@ -23,9 +31,12 @@ export default function createAction(type: string, payloadCreators: IPayloadCrea
   return {
     types: { request: requestType, success: successType, failure: failureType },
     request(...args) {
+      const lifecycle: IActionLifecycle = { resolveType: successType, rejectType: failureType };
+
       return {
         type: requestType,
         payload: payloadCreators.request ? payloadCreators.request(...args) : defaultPayload(args),
+        meta: options.lifecycle ? { lifecycle } : null,
       };
     },
     success(...args) {
