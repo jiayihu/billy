@@ -24,7 +24,6 @@ export default class CreateInvoiceComponent implements IDeactivateComponent, OnI
 
   private dirty: boolean = false;
 
-  private newIdSub: Subscription;
   private userSub: Subscription;
   private customersSub: Subscription;
   private taxesSub: Subscription;
@@ -66,9 +65,6 @@ export default class CreateInvoiceComponent implements IDeactivateComponent, OnI
       };
     });
 
-    this.newIdSub = this.invoicesModel.newInvoiceId$.subscribe(newId => {
-      this.editInvoice('id', newId, true);
-    });
     this.customersSub = this.customersModel.customers$.subscribe(customers => {
       this.customers = customers;
       this.editInvoice('customer', this.getInvoiceCustomer(this.invoice, customers), true);
@@ -122,7 +118,8 @@ export default class CreateInvoiceComponent implements IDeactivateComponent, OnI
   handleSave() {
     this.invoice.id
       ? this.invoicesModel.editInvoice(this.invoice)
-      : this.invoicesModel.addInvoice(this.invoice);
+      : this.invoicesModel.addInvoice(this.invoice)
+        .then(invoice => this.editInvoice('id', invoice.id, true));
     this.dirty = false;
   }
 

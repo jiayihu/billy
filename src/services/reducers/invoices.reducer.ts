@@ -2,21 +2,9 @@ import { combineReducers, Reducer } from 'redux';
 import { IInvoice } from '../models/invoices.model';
 import { invoicesActions } from '../actions/';
 
-export interface IInvoicesState {
-  readonly newId: string;
-  readonly list: IInvoice[];
-};
+export type IInvoicesState = Readonly<IInvoice[]>;
 
-function newIdReducer(state: string = '', action: IAction): string {
-  switch (action.type) {
-    case invoicesActions.addInvoice.types.success:
-      return action.payload.invoice.id;
-    default:
-      return state;
-  }
-}
-
-function listReducer(state: IInvoice[] = [], action: IAction): IInvoice[] {
+export default function invoicesReducer(state: IInvoice[] = [], action: IAction): IInvoice[] {
   switch (action.type) {
     case invoicesActions.addInvoices.types.success:
       return action.payload.invoices;
@@ -34,8 +22,3 @@ function listReducer(state: IInvoice[] = [], action: IAction): IInvoice[] {
       return state;
   }
 }
-
-export default combineReducers({
-  newId: newIdReducer,
-  list: listReducer,
-}) as Reducer<IInvoicesState>;

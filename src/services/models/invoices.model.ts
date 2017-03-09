@@ -34,14 +34,12 @@ export interface IInvoice {
 
 @Injectable()
 export default class InvoicesModel {
-  newInvoiceId$: Observable<string>;
   invoices$: Observable<IInvoice[]>;
 
   constructor(
     private store: Store<selectors.IState>,
     private notificationsService: NotificationsService,
   ) {
-    this.newInvoiceId$ = this.store.select(selectors.getNewInvoiceId);
     this.invoices$ = this.store.select(selectors.getInvoices);
   }
 
@@ -49,11 +47,14 @@ export default class InvoicesModel {
     return uniqueId(`${entity}_`);
   }
 
-  addInvoice(invoice: IInvoice) {
+  addInvoice(invoice: IInvoice): Promise<IInvoice> {
     if (!this.checkValidity(invoice)) return;
 
-    this.store.dispatch(invoicesActions.addInvoice.request(invoice));
-    this.notificationsService.success('Invoice', 'Invoice saved successfully.');
+    return this.store.dispatch(invoicesActions.addInvoice.request(invoice))
+      .then(response => {
+        this.notificationsService.success('Invoice', 'Invoice saved successfully.');
+        return response.payload.invoice;
+      });
   }
 
   deleteInvoice(invoiceId: string) {

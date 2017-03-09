@@ -41,12 +41,8 @@ export function getCustomers(state: IState) {
   return state.customers;
 }
 
-export function getNewInvoiceId(state: IState) {
-  return state.invoices.newId;
-}
-
 export function getInvoices(state: IState) {
- return state.invoices.list;
+ return state.invoices;
 }
 
 export function getTaxes(state: IState) {
