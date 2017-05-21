@@ -23,7 +23,7 @@ export interface IActionLifecycle {
  * fetchSomething().then(action => doSomething(action))
  */
 const middleware: Middleware = (store) => (next) => {
-  const pending: { [key: string]: Function[] } = {};
+  const pending: { [key: string]: Function } = {};
 
   return (action: IAction) => {
     let returned;
@@ -34,8 +34,8 @@ const middleware: Middleware = (store) => (next) => {
         const pendingResolves = pending[lifecycle.resolveType];
         const pendingRejections = pending[lifecycle.rejectType];
 
-        pending[lifecycle.resolveType] = pendingResolves ? [...pendingResolves, resolve] : [resolve];
-        pending[lifecycle.rejectType] = pendingRejections ? [...pendingRejections, reject] : [resolve];;
+        pending[lifecycle.resolveType] = resolve;
+        pending[lifecycle.rejectType] = reject;
       });
       next(action);
     } else {
@@ -44,9 +44,9 @@ const middleware: Middleware = (store) => (next) => {
 
     // This part is called later when the success/error action is dispatched
     if (pending[action.type]) {
-      const actionCallbacks = pending[action.type];
+      const actionCallback = pending[action.type];
       delete pending[action.type];
-      actionCallbacks.forEach(callback => callback(action));
+      actionCallback(action);
     }
 
     return returned;

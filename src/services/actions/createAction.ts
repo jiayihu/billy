@@ -23,7 +23,11 @@ const defaultOptions: IOptions = {
   lifecycle: false,
 };
 
-export default function createAction(type: string, payloadCreators: IPayloadCreators, options: IOptions = defaultOptions): IActionCreator {
+export default function createAction(
+  type: string,
+  payloadCreators: IPayloadCreators,
+  options: IOptions = defaultOptions,
+): IActionCreator {
   const requestType = `${type}_REQUEST`;
   const successType = `${type}_SUCCESS`;
   const failureType = payloadCreators.failure ? `${type}_FAILURE` : errorTypes.SHOW_ERROR;
