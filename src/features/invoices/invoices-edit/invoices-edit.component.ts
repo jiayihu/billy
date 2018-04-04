@@ -19,7 +19,7 @@ export default class InvoicesEditComponent implements OnInit, OnDestroy, IDeacti
   availableTaxes: ITax[];
   invoice: IInvoice;
 
-  private dirty: boolean = false;
+  private dirty = false;
 
   private customersSub: Subscription;
   private taxesSub: Subscription;

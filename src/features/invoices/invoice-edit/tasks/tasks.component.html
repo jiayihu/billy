@@ -39,7 +39,7 @@
             type="number"
           ></input-edit>
         </td>
-        <td class="text-xs-right">{{task.amount | currency:'EUR':true}}</td>
+        <td class="text-xs-right">{{ task.amount | currency:'EUR':true }}</td>
       </tr>
 
       <!-- New Task Row -->
@@ -78,7 +78,7 @@
       </tr>
       <tr class="invoice-subtotal">
         <td colspan="3"><strong>Subtotal</strong></td>
-        <td class="text-xs-right">{{tasks | reduceSum:'amount' | currency:'EUR':true }}</td>
+        <td class="text-xs-right">{{ tasks | reduceSum:'amount' | currency:'EUR':true }}</td>
       </tr>
     </tbody>
   </table>

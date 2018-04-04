@@ -1,6 +1,6 @@
 <div class="form-group row">
   <label [attr.for]="field.name" class="col-sm-4 col-form-label">
-    {{field.label}}
+    {{ field.label }}
     <span *ngIf="field.required">*</span>
   </label>
   <div [ngSwitch]="field.controlType" [ngClass]="inputClassName" [formGroup]="form" [class.has-danger]="form.controls[field.name].invalid && form.controls[field.name].dirty">
@@ -9,7 +9,7 @@
         <select [formControlName]="field.name" [name]="field.name" (change)="field.onChange && field.onChange(form.controls[field.name].value)"
           class="form-control">
           <option *ngFor="let option of field.options" [value]="option.value">
-            {{option.label}}
+            {{ option.label }}
           </option>
         </select>
       </ng-template>

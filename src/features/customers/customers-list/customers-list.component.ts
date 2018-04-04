@@ -8,7 +8,7 @@ import CustomersModel, { ICustomer } from '@services/models/customers.model';
   styleUrls: ['./customers-list.component.css']
 })
 export default class CustomersListComponent implements OnInit, OnDestroy {
-  isEditing: boolean = false;
+  isEditing = false;
   editingCustomer: ICustomer;
   customers: ICustomer[];
 

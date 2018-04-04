@@ -10,7 +10,7 @@ import LoggerService from '@services/logger.service';
   styleUrls: ['./taxes-list.component.css']
 })
 export default class TaxesListComponent {
-  isEditing: boolean = false;
+  isEditing = false;
   selectedTaxId: string;
   form: FormGroup;
   fields: IField[];

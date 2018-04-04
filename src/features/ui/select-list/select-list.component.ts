@@ -20,10 +20,10 @@ interface ISelectOption {
 })
 export default class SelectListComponent {
   @Input() addOption: boolean;
-  @Input() addOptionText: string = 'Or add a new option';
-  @Input() defaultText: string = 'Select an option';
+  @Input() addOptionText = 'Or add a new option';
+  @Input() defaultText = 'Select an option';
   @Input() options: ISelectOption[];
-  @Input() resetAfterSelect: boolean = true;
+  @Input() resetAfterSelect = true;
   @Output() onChange = new EventEmitter<string>();
 
   @ViewChild('select') private selectEl: ElementRef;

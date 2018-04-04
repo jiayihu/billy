@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 
-export const LOCALSTORAGE: string = 'billy-store';
+export const LOCALSTORAGE = 'billy-store';
 
 /**
  * Set application configuration on startup

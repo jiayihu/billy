@@ -7,7 +7,7 @@ import { ITax } from '@services/models/taxes.model';
   styleUrls: ['./taxes.component.css']
 })
 export default class TaxesComponent {
-  @Input() subtotal: number = 0;
+  @Input() subtotal = 0;
   @Input() availableTaxes: ITax[];
   @Input() invoiceTaxes: ITax[];
   @Output() onAddTax = new EventEmitter<void>();

@@ -12,13 +12,13 @@
       </form>
     </modal-body>
   </modal>
-  <p><span class="name">{{user.name}}</span></p>
-  <p>{{user.address}}</p>
+  <p><span class="name">{{ user.name }}</span></p>
+  <p>{{ user.address }}</p>
   <p>
-    <span>{{user.zip}}</span>
-    <span>{{user.city}}</span>
-    <span [hidden]="!user.province">({{user.province}})</span>
+    <span>{{ user.zip }}</span>
+    <span>{{ user.city }}</span>
+    <span [hidden]="!user.province">({{ user.province }})</span>
   </p>
-  <p *ngIf="user.vat">VAT {{user.vat}}</p>
+  <p *ngIf="user.vat">VAT {{ user.vat }}</p>
   <btn type="link" (onClick)="handleEdit()">Edit your business details</btn>
 </div>

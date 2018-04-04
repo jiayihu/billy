@@ -28,9 +28,9 @@ export default class InputEditComponent implements ControlValueAccessor {
   onTouch: Function;
 
   @Input() initialValue: any = '';
-  @Input() charsLength: number = 3;
-  @Input() name: string = '';
-  @Input() required: boolean = false;
+  @Input() charsLength = 3;
+  @Input() name = '';
+  @Input() required = false;
   @Input() size: 'fluid' | 'auto' = 'auto';
   @Input() type: 'text' | 'number' | 'calendar' = 'text';
   @Output() onChange = new EventEmitter<any>();

@@ -22,7 +22,7 @@ export default class CreateInvoiceComponent implements IDeactivateComponent, OnI
   invoice: IInvoice;
   availableTaxes: ITax[];
 
-  private dirty: boolean = false;
+  private dirty = false;
 
   private userSub: Subscription;
   private customersSub: Subscription;

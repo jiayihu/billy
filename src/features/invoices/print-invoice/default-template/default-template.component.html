@@ -1,38 +1,38 @@
 <div class="header">
   <div class="row">
     <div class="col-4">
-      <p class="text-md font-weight-bold">{{invoice.user.name}}</p>
-      <p>{{invoice.user?.address}}</p>
+      <p class="text-md font-weight-bold">{{ invoice.user.name }}</p>
+      <p>{{ invoice.user?.address }}</p>
       <p>
-        <span>{{invoice.user?.zip}}</span>
-        <span>{{invoice.user?.city}}</span>
-        <span>({{invoice.user?.province}})</span>
+        <span>{{ invoice.user?.zip }}</span>
+        <span>{{ invoice.user?.city }}</span>
+        <span>({{ invoice.user?.province }})</span>
       </p>
-      <p>VAT {{invoice.user.vat}}</p>
+      <p>VAT {{ invoice.user.vat }}</p>
     </div>
 
     <div class="col-4 offset-4 text-right">
-      <p class="text-md font-weight-bold">{{invoice.customer.name}}</p>
-      <p>{{invoice.customer?.address}}</p>
+      <p class="text-md font-weight-bold">{{ invoice.customer.name }}</p>
+      <p>{{ invoice.customer?.address }}</p>
       <p>
-        <span>{{invoice.customer?.zip}}</span>
-        <span>{{invoice.customer?.city}}</span>
-        <span>({{invoice.customer?.province}})</span>
+        <span>{{ invoice.customer?.zip }}</span>
+        <span>{{ invoice.customer?.city }}</span>
+        <span>({{ invoice.customer?.province }})</span>
       </p>
-      <p>VAT {{invoice.customer.vat}}</p>
+      <p>VAT {{ invoice.customer.vat }}</p>
     </div>
   </div>
 
   <div class="metadata row">
     <div class="col-4">
-      <p class="text-lg">Invoice #{{invoice.number}}</p>
-      <p>{{invoice.date}}</p>
+      <p class="text-lg">Invoice #{{ invoice.number }}</p>
+      <p>{{ invoice.date }}</p>
     </div>
 
     <div class="col-6 offset-2 text-right">
       <div class="total">
         <p class="text-left">TOTAL</p>
-        <p class="total-sum">{{invoice.total | currency:'EUR':true}} </p>
+        <p class="total-sum">{{ invoice.total | currency:'EUR':true }} </p>
       </div>
     </div>
   </div>
@@ -48,10 +48,10 @@
     </thead>
     <tbody>
       <tr *ngFor="let task of invoice.tasks">
-        <td>{{task.quantity}}</td>
-        <td>{{task.description}}</td>
-        <td>{{task.price}}</td>
-        <td>{{task.amount | currency:'EUR':true}}</td>
+        <td>{{ task.quantity }}</td>
+        <td>{{ task.description }}</td>
+        <td>{{ task.price }}</td>
+        <td>{{ task.amount | currency:'EUR':true }}</td>
       </tr>
     </tbody>
   </table>
@@ -59,19 +59,19 @@
   <div class="text-right">
     <p class="text-md">Taxes</p>
     <div *ngFor="let tax of invoice.taxes" class="tax text-left">
-      <span class="tax-name">{{tax.name}}</span>
-      <span class="tax-rate">Rate: {{tax.rate}}%</span>
+      <span class="tax-name">{{ tax.name }}</span>
+      <span class="tax-rate">Rate: {{ tax.rate }}%</span>
       <span class="tax-amount text-xs-right">
-        {{tax.rate / 100 * (invoice.tasks | reduceSum:'amount') | currency:'EUR':true}}
+        {{ tax.rate / 100 * (invoice.tasks | reduceSum:'amount') | currency:'EUR':true }}
       </span>
     </div>
   </div>
 
-  <div class="invoice-total text-right text-lg">Total {{invoice.total | currency:'EUR':true}}</div>
+  <div class="invoice-total text-right text-lg">Total {{ invoice.total | currency:'EUR':true }}</div>
 
 
   <div class="notes">
     <p class="notes-title">NOTES</p>
-    <p class="notes-text">{{invoice.notes}}</p>
+    <p class="notes-text">{{ invoice.notes }}</p>
   </div>
 </div>

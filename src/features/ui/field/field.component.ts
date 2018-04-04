@@ -10,5 +10,5 @@ import { IField, ISelectField } from '@services/form-builder.service';
 export default class FieldComponent {
   @Input() form: FormGroup;
   @Input() field: IField | ISelectField;
-  @Input() inputClassName: string = 'col-sm-8';
+  @Input() inputClassName = 'col-sm-8';
 }

@@ -11,14 +11,14 @@
   </div>
 
   <div *ngIf="selectedCustomer">
-    <p><span class="name">{{selectedCustomer.name}}</span></p>
-    <p>{{selectedCustomer.address}}</p>
+    <p><span class="name">{{ selectedCustomer.name }}</span></p>
+    <p>{{ selectedCustomer.address }}</p>
     <p>
-      <span>{{selectedCustomer.zip}}</span>
-      <span>{{selectedCustomer.city}}</span>
-      <span [hidden]="!selectedCustomer.province">({{selectedCustomer.province}})</span>
+      <span>{{ selectedCustomer.zip }}</span>
+      <span>{{ selectedCustomer.city }}</span>
+      <span [hidden]="!selectedCustomer.province">({{ selectedCustomer.province }})</span>
     </p>
-    <p>VAT {{selectedCustomer.vat}}</p>
+    <p>VAT {{ selectedCustomer.vat }}</p>
     <btn type="link" (onClick)="handleEditCustomer()">Edit customer</btn> •
     <btn type="link" (onClick)="handleRemoveCustomer()">Remove</btn>
   </div>

@@ -7,8 +7,8 @@
     </thead>
     <tbody>
       <tr *ngFor="let tax of taxes" class="tax">
-        <td class="tax-name"><strong>{{tax.name}}</strong></td>
-        <td>{{tax.rate}} %</td>
+        <td class="tax-name"><strong>{{ tax.name }}</strong></td>
+        <td>{{ tax.rate }} %</td>
         <td class="invoice-actions">
           <btn type="link" class="edit-action" (onClick)="handleTaxEdit(tax.id)">Edit</btn>
           <btn type="link" class="delete-action" (onClick)="handleTaxDelete(tax.id)">Delete</btn>
