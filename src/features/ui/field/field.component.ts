@@ -5,7 +5,7 @@ import { IField, ISelectField } from '@services/form-builder.service';
 @Component({
   selector: 'field',
   templateUrl: './field.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export default class FieldComponent {
   @Input() form: FormGroup;

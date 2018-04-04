@@ -8,6 +8,6 @@ const pipes = [FilterPipe, ReduceSumPipe];
 @NgModule({
   imports: [],
   declarations: pipes,
-  exports: pipes,
+  exports: pipes
 })
 export default class PipesModule {}

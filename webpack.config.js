@@ -18,20 +18,28 @@ const APIKeys = {
 };
 const devPlugins = [
   new webpack.DefinePlugin({
-    'process.env': Object.assign({}, {
-      NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
-    }, APIKeys),
+    'process.env': Object.assign(
+      {},
+      {
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
+      },
+      APIKeys
+    ),
   }),
   new webpack.ContextReplacementPlugin(
-    /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
-    root.src
+    /\@angular(\\|\/)core(\\|\/)esm5/,
+    path.join(__dirname, root.src)
   ),
 ];
 const prodPlugins = [
   new webpack.DefinePlugin({
-    'process.env': Object.assign({}, {
-      NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'production'),
-    }, APIKeys),
+    'process.env': Object.assign(
+      {},
+      {
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'production'),
+      },
+      APIKeys
+    ),
   }),
   new webpack.optimize.UglifyJsPlugin({
     sourceMap: true,
@@ -40,14 +48,17 @@ const prodPlugins = [
     /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
     root.src
   ),
+  new webpack.optimize.ModuleConcatenationPlugin(),
 ];
 
 module.exports = {
-  devServer: IS_DEV ? {
-    historyApiFallback: true,
-    noInfo: false,
-    port: 3000,
-  } : {},
+  devServer: IS_DEV
+    ? {
+        historyApiFallback: true,
+        noInfo: false,
+        port: 3000,
+      }
+    : {},
   devtool: 'eval',
   entry: path.join(root.src, 'index.ts'),
   output: {
@@ -77,18 +88,25 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader', {
-          loader: 'postcss-loader',
-          options: { plugins: postCSSPlugins },
-        }],
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: { plugins: postCSSPlugins },
+          },
+        ],
         include: [path.join(root.src, 'styles'), /node_modules/],
       },
       {
         test: /\.css$/,
-        use: ['raw-loader', {
-          loader: 'postcss-loader',
-          options: { plugins: postCSSPlugins },
-        }],
+        use: [
+          'raw-loader',
+          {
+            loader: 'postcss-loader',
+            options: { plugins: postCSSPlugins },
+          },
+        ],
         include: path.src,
         exclude: [path.join(root.src, 'styles'), /node_modules/],
       },

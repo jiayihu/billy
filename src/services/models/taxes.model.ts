@@ -17,7 +17,7 @@ export default class TaxesModel {
 
   constructor(private store: Store<selectors.IState>) {
     this.taxes$ = this.store.select(selectors.getTaxes);
-    this.taxes$.subscribe(taxes => this.taxes = taxes);
+    this.taxes$.subscribe(taxes => (this.taxes = taxes));
   }
 
   addTax(): Promise<ITax> {
@@ -25,10 +25,11 @@ export default class TaxesModel {
     const newTax: ITax = {
       id: '',
       name: `Tax #${taxIndex}`,
-      rate: 0,
+      rate: 0
     };
 
-    return this.store.dispatch(taxesActions.addTax.request(newTax))
+    return (this.store as any)
+      .dispatch(taxesActions.addTax.request(newTax))
       .then(response => response.payload.tax);
   }
 

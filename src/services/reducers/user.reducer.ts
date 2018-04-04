@@ -1,10 +1,10 @@
 import { IUser } from '../models/user.model';
 import { userActions } from '../actions/';
 
-export type IUserState = Readonly<IUser>;
+export type IUserState = IUser;
 
 const initialState: IUserState = {
-  name: '',
+  name: ''
 };
 
 export default function(state: IUserState = initialState, action: IAction): IUserState {

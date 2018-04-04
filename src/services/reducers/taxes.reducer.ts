@@ -1,7 +1,7 @@
 import { ITax } from '../models/taxes.model';
 import { taxesActions } from '../actions/';
 
-export type ITaxesState = Readonly<ITax[]>;
+export type ITaxesState = ITax[];
 
 export default function taxesReducer(state: ITaxesState = [], action: IAction): ITaxesState {
   switch (action.type) {

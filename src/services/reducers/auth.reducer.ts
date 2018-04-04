@@ -1,11 +1,11 @@
 import { IAuth } from '../models/auth.model';
 import { actionTypes } from '../actions/auth.actions';
 
-export type IAuthState = Readonly<IAuth>;
+export type IAuthState = IAuth;
 
 const initialState: IAuthState = {
   isAuthenticated: false,
-  uid: null,
+  uid: null
 };
 
 export default function authReducer(state: IAuthState = initialState, action: IAction): IAuthState {
@@ -13,7 +13,7 @@ export default function authReducer(state: IAuthState = initialState, action: IA
     case actionTypes.AUTH_USER:
       return {
         uid: action.payload.auth.uid,
-        isAuthenticated: true,
+        isAuthenticated: true
       };
     case actionTypes.LOGOUT_USER:
       return initialState;

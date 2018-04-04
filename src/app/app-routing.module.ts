@@ -8,21 +8,21 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'create',
+    redirectTo: 'create'
   },
   {
     component: CustomersComponent,
     canActivate: [AuthGuard],
-    path: 'customers',
+    path: 'customers'
   },
   {
     component: NotFoundComponent,
-    path: '**',
-  },
+    path: '**'
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
 export default class AppRoutingModule {}

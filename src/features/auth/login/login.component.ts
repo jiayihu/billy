@@ -6,7 +6,7 @@ import { AuthModel } from '@services/models/';
 
 @Component({
   selector: 'login',
-  templateUrl: './login.component.html',
+  templateUrl: './login.component.html'
 })
 export default class LoginComponent {
   email: string;
@@ -15,13 +15,14 @@ export default class LoginComponent {
   constructor(
     private authModel: AuthModel,
     private notifications: NotificationsService,
-    private router: Router,
+    private router: Router
   ) {}
 
   onSubmit(form: NgForm) {
     const { email, password } = form.value;
 
-    this.authModel.login(email, password)
+    this.authModel
+      .login(email, password)
       .then(() => {
         this.notifications.success('Login', 'Welcome to Billy.');
         this.router.navigateByUrl('/create');

@@ -8,12 +8,16 @@ export default class ActivatedRouteStub {
 
   params = this.paramsSource.asObservable();
 
-  get testParams() { return this._testParams; }
+  get testParams() {
+    return this._testParams;
+  }
 
   set testParams(params: {}) {
     this._testParams = params;
     this.paramsSource.next(params);
   }
 
-  get snapshot() { return { params: this._testParams }; }
+  get snapshot() {
+    return { params: this._testParams };
+  }
 }

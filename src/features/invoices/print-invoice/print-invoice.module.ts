@@ -7,6 +7,6 @@ import { PrintInvoiceComponent } from './print-invoice.component';
 @NgModule({
   imports: [SharedModule],
   declarations: [DefaultTemplateComponent, PrintInvoiceComponent],
-  exports: [PrintInvoiceComponent],
+  exports: [PrintInvoiceComponent]
 })
 export class PrintInvoiceModule {}

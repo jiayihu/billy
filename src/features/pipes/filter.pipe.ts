@@ -6,7 +6,7 @@ interface IFilterOptions {
 }
 
 @Pipe({
-  name: 'filter',
+  name: 'filter'
 })
 export default class FilterPipe implements PipeTransform {
   transform(items: any[], options: IFilterOptions): any[] {

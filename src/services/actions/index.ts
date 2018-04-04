@@ -5,11 +5,4 @@ import * as invoicesActions from './invoices.actions';
 import * as taxesActions from './taxes.actions';
 import * as userActions from './user.actions';
 
-export {
-  authActions,
-  customersActions,
-  errorsActions,
-  invoicesActions,
-  taxesActions,
-  userActions,
-};
+export { authActions, customersActions, errorsActions, invoicesActions, taxesActions, userActions };

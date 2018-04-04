@@ -2,13 +2,19 @@ import { NgModule } from '@angular/core';
 import { NgReduxModule, NgRedux, DevToolsExtension } from '@angular-redux/store';
 import rootReducer, { IState } from '@services/reducers/';
 import { createEpicMiddleware, combineEpics } from 'redux-observable';
-import { effects, InvoicesEffects, CustomersEffects, TaxesEffects, UserEffects } from '@services/effects/';
+import {
+  effects,
+  InvoicesEffects,
+  CustomersEffects,
+  TaxesEffects,
+  UserEffects
+} from '@services/effects/';
 import { LOCALSTORAGE } from '@services/config.service';
 import actionLifecycleMidleware from '@services/middlewares/action-lifecycle.middleware';
 
 @NgModule({
-  imports: [ NgReduxModule ],
-  providers: [...effects],
+  imports: [NgReduxModule],
+  providers: [...effects]
 })
 export default class AppStoreModule {
   constructor(
@@ -17,7 +23,7 @@ export default class AppStoreModule {
     invoicesEffects: InvoicesEffects,
     customersEffects: CustomersEffects,
     taxesEffects: TaxesEffects,
-    userEffects: UserEffects,
+    userEffects: UserEffects
   ) {
     const epics = combineEpics(
       invoicesEffects.addInvoice,
@@ -29,7 +35,7 @@ export default class AppStoreModule {
       taxesEffects.addTax,
       taxesEffects.editTax,
       taxesEffects.deleteTax,
-      userEffects.editUser,
+      userEffects.editUser
     );
     const middlewares = [createEpicMiddleware(epics), actionLifecycleMidleware];
     const enhancers = reduxDevtools.isEnabled() ? [reduxDevtools.enhancer()] : [];

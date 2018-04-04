@@ -4,7 +4,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   selector: 'icon',
   templateUrl: './icon.component.html',
   styleUrls: ['./icon.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export default class IconComponent {
   @Input() name: string = '';
@@ -14,7 +14,7 @@ export default class IconComponent {
     return {
       icon: true,
       lnr: true,
-      [`lnr-${this.name}`]: true,
+      [`lnr-${this.name}`]: true
     };
   }
 }

@@ -10,4 +10,4 @@ export default function observableStore<T>(store: Store<T>): Observable<T> {
     });
     return unsubscriber;
   });
-};
+}

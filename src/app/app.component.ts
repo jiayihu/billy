@@ -11,18 +11,18 @@ import { AuthModel } from '@services/models/';
     <app-footer class="print-hidden"></app-footer>
     <simple-notifications [options]="notificationOptions"></simple-notifications>
   `,
-  styleUrls: ['./app.component.css'],
+  styleUrls: ['./app.component.css']
 })
 export default class AppComponent {
   notificationOptions = {
     position: ['top', 'right'],
     timeOut: 5 * 1000,
     showProgressBar: false,
-    lastOnBottom: false,
+    lastOnBottom: false
   };
   isAuthenticated: boolean;
 
   constructor(private authModel: AuthModel) {
-    authModel.auth$.subscribe(auth => this.isAuthenticated = auth.isAuthenticated);
+    authModel.auth$.subscribe(auth => (this.isAuthenticated = auth.isAuthenticated));
   }
 }

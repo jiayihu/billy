@@ -22,7 +22,7 @@ export interface IActionLifecycle {
  * Then you can use the action as following:
  * fetchSomething().then(action => doSomething(action))
  */
-const middleware: Middleware = (store) => (next) => {
+const middleware: Middleware = store => next => {
   const pending: { [key: string]: Function } = {};
 
   return (action: IAction) => {

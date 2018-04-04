@@ -9,15 +9,15 @@ describe('LogoutComponent', () => {
   let comp: LogoutComponent;
   let fixture: ComponentFixture<LogoutComponent>;
   let el: HTMLElement;
-  let authModel: { logout: jasmine.Spy };
-  let router: { navigateByUrl: jasmine.Spy };
+  let authModel: any;
+  let router: any;
 
   beforeEach(() => {
     const routerStub = {
-      navigateByUrl: jasmine.createSpy('navigateByUrl'),
+      navigateByUrl: jasmine.createSpy('navigateByUrl')
     };
     const authModelStub = {
-      logout: jasmine.createSpy('logout'),
+      logout: jasmine.createSpy('logout')
     };
 
     TestBed.configureTestingModule({
@@ -25,8 +25,8 @@ describe('LogoutComponent', () => {
       declarations: [LogoutComponent],
       providers: [
         { provide: Router, useValue: routerStub },
-        { provide: AuthModel, useValue: authModelStub },
-      ],
+        { provide: AuthModel, useValue: authModelStub }
+      ]
     });
 
     fixture = TestBed.createComponent(LogoutComponent);
@@ -39,13 +39,16 @@ describe('LogoutComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should call authModel.logout() and redirect to /', async(() => {
-    fixture.whenStable().then(() => {
-      fixture.detectChanges();
-      expect(authModel.logout).toHaveBeenCalled();
-      expect(router.navigateByUrl).toHaveBeenCalledWith('/');
-    });
-  }));
+  it(
+    'should call authModel.logout() and redirect to /',
+    async(() => {
+      fixture.whenStable().then(() => {
+        fixture.detectChanges();
+        expect(authModel.logout).toHaveBeenCalled();
+        expect(router.navigateByUrl).toHaveBeenCalledWith('/');
+      });
+    })
+  );
 
   it('should show an alert for the user', () => {
     expect(el).toBeDefined();

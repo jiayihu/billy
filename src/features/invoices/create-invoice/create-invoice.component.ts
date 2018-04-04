@@ -15,7 +15,7 @@ import set = require('lodash/fp/set');
 @Component({
   selector: 'create-invoice',
   templateUrl: './create-invoice.component.html',
-  styleUrls: ['./create-invoice.component.css'],
+  styleUrls: ['./create-invoice.component.css']
 })
 export default class CreateInvoiceComponent implements IDeactivateComponent, OnInit, OnDestroy {
   customers: ICustomer[];
@@ -33,7 +33,7 @@ export default class CreateInvoiceComponent implements IDeactivateComponent, OnI
     private invoicesModel: InvoicesModel,
     private userModel: UserModel,
     private taxesModel: TaxesModel,
-    private router: Router,
+    private router: Router
   ) {
     this.invoice = {
       id: '',
@@ -45,32 +45,34 @@ export default class CreateInvoiceComponent implements IDeactivateComponent, OnI
       tasks: [],
       taxes: [],
       total: 0,
-      user: null,
+      user: null
     };
   }
 
   ngOnInit() {
     Observable.combineLatest(
       [this.invoicesModel.invoices$, this.taxesModel.taxes$],
-      (invoices: IInvoice[], taxes: ITax[]) => ({ invoices, taxes }),
-    ).take(1).subscribe(state => {
-      const lastInvoice = maxBy(state.invoices, invoice => invoice.number);
-      const number = lastInvoice ? lastInvoice.number + 1 : 1;
+      (invoices: IInvoice[], taxes: ITax[]) => ({ invoices, taxes })
+    )
+      .take(1)
+      .subscribe(state => {
+        const lastInvoice = maxBy(state.invoices, invoice => invoice.number);
+        const number = lastInvoice ? lastInvoice.number + 1 : 1;
 
-      this.invoice = {
-        ...this.invoice,
-        number,
-        tasks: [],
-        taxes: this.invoice.taxes.length ? this.invoice.taxes : state.taxes,
-      };
-    });
+        this.invoice = {
+          ...this.invoice,
+          number,
+          tasks: [],
+          taxes: this.invoice.taxes.length ? this.invoice.taxes : state.taxes
+        };
+      });
 
     this.customersSub = this.customersModel.customers$.subscribe(customers => {
       this.customers = customers;
       this.editInvoice('customer', this.getInvoiceCustomer(this.invoice, customers), true);
     });
     this.userSub = this.userModel.user$.subscribe(user => this.editInvoice('user', user, true));
-    this.taxesSub = this.taxesModel.taxes$.subscribe(taxes => this.availableTaxes = taxes);
+    this.taxesSub = this.taxesModel.taxes$.subscribe(taxes => (this.availableTaxes = taxes));
   }
 
   ngOnDestroy() {
@@ -106,8 +108,9 @@ export default class CreateInvoiceComponent implements IDeactivateComponent, OnI
   handleSave() {
     this.invoice.id
       ? this.invoicesModel.editInvoice(this.invoice)
-      : this.invoicesModel.addInvoice(this.invoice)
-        .then(invoice => this.editInvoice('id', invoice.id, true));
+      : this.invoicesModel
+          .addInvoice(this.invoice)
+          .then(invoice => this.editInvoice('id', invoice.id, true));
     this.dirty = false;
   }
 
@@ -132,7 +135,10 @@ export default class CreateInvoiceComponent implements IDeactivateComponent, OnI
   }
 
   handleSelectCustomer(selectedCustomerId: string): void {
-    this.editInvoice('customer', this.customers.find(customer => customer.id === selectedCustomerId));
+    this.editInvoice(
+      'customer',
+      this.customers.find(customer => customer.id === selectedCustomerId)
+    );
   }
 
   /**
@@ -183,7 +189,8 @@ export default class CreateInvoiceComponent implements IDeactivateComponent, OnI
    */
 
   handleAddTax() {
-    this.taxesModel.addTax()
+    this.taxesModel
+      .addTax()
       .then(tax => this.editInvoice('taxes', this.invoice.taxes.concat(tax), true));
   }
 

@@ -8,9 +8,9 @@ import { rangeValidator } from '@utils/validate-number';
     {
       provide: NG_VALIDATORS,
       useExisting: forwardRef(() => RangeValidatorDirective),
-      multi: true,
-    },
-  ],
+      multi: true
+    }
+  ]
 })
 export default class RangeValidatorDirective implements Validator, OnChanges {
   @Input('validateRange') range: string;
@@ -23,7 +23,7 @@ export default class RangeValidatorDirective implements Validator, OnChanges {
     }
   }
 
-  validate(control: AbstractControl): {[key: string]: any} {
+  validate(control: AbstractControl): { [key: string]: any } {
     return this.valFn(control);
   }
 }

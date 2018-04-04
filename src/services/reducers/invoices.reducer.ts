@@ -2,9 +2,12 @@ import { combineReducers, Reducer } from 'redux';
 import { IInvoice } from '../models/invoices.model';
 import { invoicesActions } from '../actions/';
 
-export type IInvoicesState = Readonly<IInvoice[]>;
+export type IInvoicesState = IInvoice[];
 
-export default function invoicesReducer(state: IInvoicesState = [], action: IAction): IInvoicesState {
+export default function invoicesReducer(
+  state: IInvoicesState = [],
+  action: IAction
+): IInvoicesState {
   switch (action.type) {
     case invoicesActions.addInvoices.types.success:
       return action.payload.invoices;

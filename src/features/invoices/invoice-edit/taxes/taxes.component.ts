@@ -4,7 +4,7 @@ import { ITax } from '@services/models/taxes.model';
 @Component({
   selector: 'taxes',
   templateUrl: './taxes.component.html',
-  styleUrls: ['./taxes.component.css'],
+  styleUrls: ['./taxes.component.css']
 })
 export default class TaxesComponent {
   @Input() subtotal: number = 0;
@@ -27,7 +27,7 @@ export default class TaxesComponent {
   handleTaxChange(property: string, taxId: string, newValue: any) {
     const tax = this.invoiceTaxes.find(item => item.id === taxId);
     const updatedTax = Object.assign({}, tax, {
-      [property]: newValue,
+      [property]: newValue
     });
 
     this.onEditTax.emit(updatedTax);

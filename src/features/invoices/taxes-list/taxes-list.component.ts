@@ -7,7 +7,7 @@ import LoggerService from '@services/logger.service';
 @Component({
   selector: 'taxes-list',
   templateUrl: './taxes-list.component.html',
-  styleUrls: ['./taxes-list.component.css'],
+  styleUrls: ['./taxes-list.component.css']
 })
 export default class TaxesListComponent {
   isEditing: boolean = false;
@@ -22,26 +22,26 @@ export default class TaxesListComponent {
   constructor(
     private formBuilderService: FormBuilderService,
     // The actual LoggerService used is specified in parent InvoicesListComponent
-    private loggerService: LoggerService,
+    private loggerService: LoggerService
   ) {
     this.fields = [
       {
         name: 'name',
         label: 'Tax name',
-        required: true,
+        required: true
       },
       {
         name: 'rate',
         label: 'Tax rate',
         range: '0-100',
         required: true,
-        controlType: 'number',
-      },
+        controlType: 'number'
+      }
     ];
   }
 
   buildForm(tax: ITax): void {
-    this.fields.forEach(field => field.value = tax[field.name]);
+    this.fields.forEach(field => (field.value = tax[field.name]));
 
     this.form = this.formBuilderService.buildFormGroup(this.fields);
   }
@@ -54,7 +54,7 @@ export default class TaxesListComponent {
   handleEditEnd() {
     const editedTax = this.taxes.find(tax => tax.id === this.selectedTaxId);
     const updatedTax = Object.assign({}, editedTax, this.form.value, {
-      rate: this.form.value.rate,
+      rate: this.form.value.rate
     });
     this.loggerService.log(updatedTax);
     this.onEditTax.emit(updatedTax);

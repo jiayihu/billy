@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import AuthModel from './models/auth.model';
 import { Observable } from 'rxjs/Observable';
-import { IState, isAuthenticated } from '@services/reducers/';
+import { IState } from '@services/reducers/';
 
 @Injectable()
 export default class AuthGuard implements CanActivate {
@@ -13,12 +13,13 @@ export default class AuthGuard implements CanActivate {
     this.isAuthenticated$ = Observable.combineLatest(
       authModel.auth$,
       authModel.checkedAuth$,
-      (auth, checkedAuth) => auth.isAuthenticated,
+      (auth, checkedAuth) => auth.isAuthenticated
     );
   }
 
   canActivate(): Observable<boolean> {
-    return this.isAuthenticated$
-      .do(isAuthenticated => !isAuthenticated && this.router.navigateByUrl('/login'));
+    return this.isAuthenticated$.do(
+      isAuthenticated => !isAuthenticated && this.router.navigateByUrl('/login')
+    );
   }
 }

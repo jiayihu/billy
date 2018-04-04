@@ -7,9 +7,4 @@ export { default as TaxesEffects } from './taxes.effects';
 import UserEffects from './user.effects';
 export { default as UserEffects } from './user.effects';
 
-export const effects = [
-  InvoicesEffects,
-  CustomersEffects,
-  TaxesEffects,
-  UserEffects,
-];
+export const effects = [InvoicesEffects, CustomersEffects, TaxesEffects, UserEffects];

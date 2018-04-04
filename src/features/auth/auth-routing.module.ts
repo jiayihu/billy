@@ -7,20 +7,20 @@ import SignupComponent from './signup/signup.component';
 const routes: Route[] = [
   {
     path: 'login',
-    component: LoginComponent,
+    component: LoginComponent
   },
   {
     path: 'logout',
-    component: LogoutComponent,
+    component: LogoutComponent
   },
   {
     path: 'signup',
-    component: SignupComponent,
-  },
+    component: SignupComponent
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
 export default class AuthRoutingModule {}

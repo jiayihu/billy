@@ -36,7 +36,7 @@ export class InvoicesModelStub {
     tasks: [],
     taxes: [],
     total: 0,
-    user: { name: 'Luigi' },
+    user: { name: 'Luigi' }
   };
 
   private invoices: IInvoice[] = [InvoicesModelStub.invoice];

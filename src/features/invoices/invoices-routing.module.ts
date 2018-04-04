@@ -12,29 +12,29 @@ export const invoicesRoutes: Route[] = [
     path: 'create',
     canActivate: [AuthGuard],
     canDeactivate: [DeactivateGuard],
-    component: CreateInvoiceComponent,
+    component: CreateInvoiceComponent
   },
   {
     path: 'invoices',
     canActivate: [AuthGuard],
     component: InvoicesListComponent,
-    pathMatch: 'full',
+    pathMatch: 'full'
   },
   {
     path: 'invoices/:invoiceId/edit',
     canActivate: [AuthGuard],
     canDeactivate: [DeactivateGuard],
-    component: InvoicesEditComponent,
+    component: InvoicesEditComponent
   },
   {
     path: 'invoices/:invoiceId/print',
     canActivate: [AuthGuard],
-    component: PrintInvoiceComponent,
-  },
+    component: PrintInvoiceComponent
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(invoicesRoutes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
 export default class InvoicesRoutingModule {}

@@ -4,7 +4,7 @@ import { AsyncSubject } from 'rxjs/AsyncSubject';
 import { NgRedux as Store } from '@angular-redux/store';
 import { IState } from '@services/reducers/';
 import { authActions } from '@services/actions/';
-import { AngularFire } from 'angularfire2';
+import { AngularFireAuth } from 'angularfire2/auth';
 import { NotificationsService } from 'angular2-notifications';
 
 export interface IAuth {
@@ -19,19 +19,19 @@ export default class AuthModel {
 
   constructor(
     private store: Store<IState>,
-    private firebase: AngularFire,
-    private notifications: NotificationsService,
+    private firebaseAuth: AngularFireAuth,
+    private notifications: NotificationsService
   ) {
     this.auth$ = store.select('auth');
 
     const store$ = this.store.select(s => s);
 
-    firebase.auth
-      .subscribe(auth => {
-        if (auth && auth.auth) this.authenticate(auth.auth);
-        this.checkedAuth$.next(true);
-        this.checkedAuth$.complete();
-      });
+    firebaseAuth.authState.subscribe(auth => {
+      console.log(auth);
+      // if (auth && auth.auth) this.authenticate(auth.auth);
+      // this.checkedAuth$.next(true);
+      // this.checkedAuth$.complete();
+    });
   }
 
   authenticate(auth) {
@@ -39,15 +39,15 @@ export default class AuthModel {
   }
 
   signup(email: string, password: string) {
-    return this.firebase.auth.createUser({ email, password });
+    return this.firebaseAuth.auth.createUserWithEmailAndPassword(email, password);
   }
 
   login(email: string, password: string) {
-    return this.firebase.auth.login({ email, password });
+    return this.firebaseAuth.auth.signInWithEmailAndPassword(email, password);
   }
 
   logout() {
     this.store.dispatch(authActions.logoutUser());
-    return this.firebase.auth.logout();
+    return this.firebaseAuth.auth.signOut();
   }
 }

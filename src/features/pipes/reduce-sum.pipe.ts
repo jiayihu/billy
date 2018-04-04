@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'reduceSum',
+  name: 'reduceSum'
 })
 export default class ReduceSumPipe implements PipeTransform {
   transform(array: any[], property: string): number {

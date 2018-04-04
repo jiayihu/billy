@@ -5,7 +5,7 @@ import CustomersModel, { ICustomer } from '@services/models/customers.model';
 @Component({
   selector: 'customers',
   templateUrl: './customers-list.component.html',
-  styleUrls: ['./customers-list.component.css'],
+  styleUrls: ['./customers-list.component.css']
 })
 export default class CustomersListComponent implements OnInit, OnDestroy {
   isEditing: boolean = false;
@@ -14,9 +14,7 @@ export default class CustomersListComponent implements OnInit, OnDestroy {
 
   private customersSub: Subscription;
 
-  constructor(
-    private customersModel: CustomersModel,
-  ) {}
+  constructor(private customersModel: CustomersModel) {}
 
   ngOnInit() {
     this.customersSub = this.customersModel.customers$.subscribe(customers => {
@@ -49,7 +47,7 @@ export default class CustomersListComponent implements OnInit, OnDestroy {
   handleEditEnd(formValue) {
     this.customersModel.editCustomer({
       ...formValue,
-      id: this.editingCustomer.id,
+      id: this.editingCustomer.id
     });
     this.endEdit();
   }

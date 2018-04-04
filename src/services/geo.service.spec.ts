@@ -12,10 +12,10 @@ describe('GeoService', () => {
         {
           provide: Http,
           useFactory: (backend, options) => new Http(backend, options),
-          deps: [MockBackend, BaseRequestOptions],
+          deps: [MockBackend, BaseRequestOptions]
         },
-        GeoService,
-      ],
+        GeoService
+      ]
     });
   });
 
@@ -23,21 +23,27 @@ describe('GeoService', () => {
     const mockResponse = {
       geonames: [
         { countryCode: 'UK', geonameId: 0, name: 'United Kingdom' },
-        { countryCode: 'IT', geonameId: 1, name: 'Italy' },
-      ] as ICountry[],
+        { countryCode: 'IT', geonameId: 1, name: 'Italy' }
+      ] as ICountry[]
     };
 
-    beforeEach(inject([MockBackend], (mockBackend: MockBackend) => {
-      mockBackend.connections.subscribe((connection: MockConnection) => {
-        connection.mockRespond(new Response(new ResponseOptions({
-          body: JSON.stringify(mockResponse),
-        })));
-      });
-    }));
+    beforeEach(
+      inject([MockBackend], (mockBackend: MockBackend) => {
+        mockBackend.connections.subscribe((connection: MockConnection) => {
+          connection.mockRespond(
+            new Response(
+              new ResponseOptions({
+                body: JSON.stringify(mockResponse)
+              })
+            )
+          );
+        });
+      })
+    );
 
-    it('should get all countries with ICountry properties', inject(
-      [GeoService],
-      (geoService: GeoService) => {
+    it(
+      'should get all countries with ICountry properties',
+      inject([GeoService], (geoService: GeoService) => {
         geoService.getCountries().subscribe(countries => {
           countries.forEach(country => {
             expect(country.countryCode.length).toBe(2);
@@ -45,78 +51,81 @@ describe('GeoService', () => {
             expect(country.name).toBeDefined();
           });
         });
-      }),
+      })
     );
 
-    it('should return the result sorted by name', inject(
-      [GeoService],
-      (geoService: GeoService) => {
+    it(
+      'should return the result sorted by name',
+      inject([GeoService], (geoService: GeoService) => {
         geoService.getCountries().subscribe(countries => {
           expect(countries[0].name).toBe('Italy');
           expect(countries[1].name).toBe('United Kingdom');
         });
-      }),
+      })
     );
 
-    it('should return the same result from cache after the first request', inject(
-      [GeoService],
-      (geoService: GeoService) => {
+    it(
+      'should return the same result from cache after the first request',
+      inject([GeoService], (geoService: GeoService) => {
         geoService.getCountries().subscribe(countries => {
           geoService.getCountries().subscribe(countriesAgain => {
             expect(countries).toBe(countriesAgain);
           });
         });
-      }),
+      })
     );
   });
 
   describe('getProvinces', () => {
     const mockResponse = {
-      geonames: [
-        { geonameId: 0, name: 'Padova' },
-        { geonameId: 1, name: 'Milano' },
-      ] as IProvince[],
+      geonames: [{ geonameId: 0, name: 'Padova' }, { geonameId: 1, name: 'Milano' }] as IProvince[]
     };
 
-    beforeEach(inject([MockBackend], (mockBackend: MockBackend) => {
-      mockBackend.connections.subscribe((connection: MockConnection) => {
-        connection.mockRespond(new Response(new ResponseOptions({
-          body: JSON.stringify(mockResponse),
-        })));
-      });
-    }));
+    beforeEach(
+      inject([MockBackend], (mockBackend: MockBackend) => {
+        mockBackend.connections.subscribe((connection: MockConnection) => {
+          connection.mockRespond(
+            new Response(
+              new ResponseOptions({
+                body: JSON.stringify(mockResponse)
+              })
+            )
+          );
+        });
+      })
+    );
 
-    it('should get all provinces with IProvince properties', inject(
-      [GeoService],
-      (geoService: GeoService) => {
+    it(
+      'should get all provinces with IProvince properties',
+      inject([GeoService], (geoService: GeoService) => {
         geoService.getProvinces('IT').subscribe(provinces => {
           provinces.forEach(province => {
             expect(province.geonameId).toBeDefined();
             expect(province.name).toBeDefined();
           });
         });
-      }),
+      })
     );
 
-    it('should return the result sorted by name', inject(
-      [GeoService],
-      (geoService: GeoService) => {
+    it(
+      'should return the result sorted by name',
+      inject([GeoService], (geoService: GeoService) => {
         geoService.getProvinces('IT').subscribe(provinces => {
           expect(provinces[0].name).toBe('Milano');
           expect(provinces[1].name).toBe('Padova');
         });
-      }),
+      })
     );
 
-    it('should return the same result from cache after the first request', inject(
-      [GeoService],
-      (geoService: GeoService) => {
+    it(
+      'should return the same result from cache after the first request',
+      inject([GeoService], (geoService: GeoService) => {
         geoService.getProvinces('IT').subscribe(provinces => {
           geoService.getProvinces('IT').subscribe(provincesAgain => {
             expect(provinces).toBe(provincesAgain);
           });
         });
-      }),
+      })
     );
   });
 });

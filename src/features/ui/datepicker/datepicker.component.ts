@@ -7,38 +7,33 @@ import {
   Input,
   Inject,
   OnDestroy,
-  OpaqueToken,
+  InjectionToken,
   Output,
-  ViewChild,
+  ViewChild
 } from '@angular/core';
 import pikaday = require('pikaday');
 import 'pikaday/css/pikaday.css';
 import * as format from 'date-fns/format';
 
-export const pikadayToken = new OpaqueToken('pikaday');
+export const pikadayToken = new InjectionToken<string>('pikaday');
 
 @Component({
   selector: 'datepicker',
   templateUrl: './datepicker.component.html',
   styleUrls: ['./datepicker.component.css'],
-  providers: [
-    { provide: pikadayToken, useValue: pikaday },
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [{ provide: pikadayToken, useValue: pikaday }],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export default class DatepickerComponent implements AfterViewInit, OnDestroy {
-  @ViewChild('input')
-  private inputEl: ElementRef;
+  @ViewChild('input') private inputEl: ElementRef;
   private datepicker: Pikaday;
 
-  @Input() format: string = 'DD/MM/YYYY';
+  @Input() format = 'DD/MM/YYYY';
   @Input() value: string;
-  @Input() showOnInit: boolean = false;
+  @Input() showOnInit = false;
   @Output() onChange = new EventEmitter<string>();
 
-  constructor(
-    @Inject(pikadayToken) private pikaday,
-  ) {}
+  constructor(@Inject(pikadayToken) private pikaday) {}
 
   ngAfterViewInit() {
     const input = this.inputEl.nativeElement;
@@ -48,7 +43,7 @@ export default class DatepickerComponent implements AfterViewInit, OnDestroy {
       onSelect: (date: Date) => {
         const formattedDate = format(date, this.format);
         this.onChange.emit(formattedDate);
-      },
+      }
     });
 
     if (this.showOnInit) this.datepicker.show();

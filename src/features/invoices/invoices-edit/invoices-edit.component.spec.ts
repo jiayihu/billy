@@ -14,31 +14,35 @@ describe('InvoicesEditComponent', () => {
   let debugEl: DebugElement;
   let el: HTMLElement;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [InvoicesEditComponent],
-      providers: [
-        { provide: CustomersModel, useClass: CustomersModelStub },
-        { provide: InvoicesModel, useClass: InvoicesModelStub },
-        { provide: TaxesModel, useClass: TaxesModelStub },
-        { provide: ActivatedRoute, useClass: ActivatedRouteStub },
-        { provide: Router, useValue: {} },
-      ],
-      schemas: [NO_ERRORS_SCHEMA],
-    });
+  beforeEach(
+    async(() => {
+      TestBed.configureTestingModule({
+        declarations: [InvoicesEditComponent],
+        providers: [
+          { provide: CustomersModel, useClass: CustomersModelStub },
+          { provide: InvoicesModel, useClass: InvoicesModelStub },
+          { provide: TaxesModel, useClass: TaxesModelStub },
+          { provide: ActivatedRoute, useClass: ActivatedRouteStub },
+          { provide: Router, useValue: {} }
+        ],
+        schemas: [NO_ERRORS_SCHEMA]
+      });
 
-    fixture = TestBed.createComponent(InvoicesEditComponent);
-    comp = fixture.componentInstance;
+      fixture = TestBed.createComponent(InvoicesEditComponent);
+      comp = fixture.componentInstance;
 
-    const activatedRoute: ActivatedRouteStub = fixture.debugElement.injector.get(ActivatedRoute);
-    activatedRoute.testParams = { invoiceId: 'INVOICE_0' };
+      const activatedRoute: ActivatedRouteStub = fixture.debugElement.injector.get(
+        ActivatedRoute
+      ) as any;
+      activatedRoute.testParams = { invoiceId: 'INVOICE_0' };
 
-    fixture.detectChanges();
-
-    return fixture.whenStable().then(() => {
       fixture.detectChanges();
-    });
-  }));
+
+      return fixture.whenStable().then(() => {
+        fixture.detectChanges();
+      });
+    })
+  );
 
   it('should edit the invoice based on `invoiceId` route param', () => {
     expect(comp.invoice).toEqual(InvoicesModelStub.invoice);

@@ -12,23 +12,16 @@ import TasksComponent from './tasks/tasks.component';
 import TaxesComponent from './taxes/taxes.component';
 
 @NgModule({
-  imports: [
-    SharedModule,
-    CustomersModule,
-    FormsModule,
-    ReactiveFormsModule,
-  ],
+  imports: [SharedModule, CustomersModule, FormsModule, ReactiveFormsModule],
   declarations: [
     InvoiceEditComponent,
     CustomerComponent,
     NotesComponent,
     UserBusinessComponent,
     TasksComponent,
-    TaxesComponent,
-   ],
+    TaxesComponent
+  ],
   exports: [InvoiceEditComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export default class CreateInvoiceModule {
-
-}
+export default class CreateInvoiceModule {}

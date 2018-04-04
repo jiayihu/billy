@@ -10,12 +10,14 @@ import InvoicesModel, { IInvoice } from '@services/models/invoices.model';
     <spinner *ngIf="!invoice"></spinner>
     <default-template *ngIf="invoice" [invoice]="invoice" ></default-template>
   `,
-  styles: [`
+  styles: [
+    `
     :host {
       font-family: 'Alegreya', serif;
       padding-top: 2rem;
     }
-  `],
+  `
+  ]
 })
 export class PrintInvoiceComponent {
   invoice: IInvoice;
@@ -29,8 +31,7 @@ export class PrintInvoiceComponent {
       (invoices, params) => {
         const invoiceId = params['invoiceId'];
         return invoices.find(invoice => invoice.id === invoiceId);
-      },
-    )
-      .subscribe(invoice => this.invoice = invoice);
+      }
+    ).subscribe(invoice => (this.invoice = invoice));
   }
 }

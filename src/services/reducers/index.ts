@@ -6,19 +6,19 @@ import taxesReducer, { ITaxesState } from './taxes.reducer';
 import userReducer, { IUserState } from './user.reducer';
 
 export interface IState {
-  readonly auth: IAuthState;
-  readonly user: IUserState;
-  readonly customers: ICustomersState;
-  readonly invoices: IInvoicesState;
-  readonly taxes: ITaxesState;
-};
+  auth: IAuthState;
+  user: IUserState;
+  customers: ICustomersState;
+  invoices: IInvoicesState;
+  taxes: ITaxesState;
+}
 
 export default combineReducers({
   auth: authReducer,
   user: userReducer,
   customers: customersReducer,
   invoices: invoicesReducer,
-  taxes: taxesReducer,
+  taxes: taxesReducer
 }) as Reducer<IState>;
 
 /**
@@ -42,9 +42,9 @@ export function getCustomers(state: IState) {
 }
 
 export function getInvoices(state: IState) {
- return state.invoices;
+  return state.invoices;
 }
 
 export function getTaxes(state: IState) {
- return state.taxes;
+  return state.taxes;
 }

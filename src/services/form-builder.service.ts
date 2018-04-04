@@ -22,7 +22,7 @@ export interface IField {
 }
 
 export interface ISelectField extends IField {
-  options: Array<{ label: string, value: string }>;
+  options: Array<{ label: string; value: string }>;
 }
 
 export function isSelectField(object: any): object is ISelectField {

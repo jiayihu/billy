@@ -7,14 +7,14 @@ import RangeValidatorDirective from './range-validator.directive';
 
 @Component({
   selector: 'test-cmp',
-  template: '',
+  template: ''
 })
 class TestComponent implements OnInit {
   form: FormGroup;
 
   ngOnInit() {
     this.form = new FormGroup({
-      number: new FormControl(10),
+      number: new FormControl(10)
     });
   }
 }
@@ -26,7 +26,7 @@ describe('RangeValidatorDirective', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [ReactiveFormsModule],
-      declarations: [RangeValidatorDirective, TestComponent],
+      declarations: [RangeValidatorDirective, TestComponent]
     });
     const template = `
       <form [formGroup]="form">

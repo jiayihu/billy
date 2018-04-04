@@ -7,6 +7,6 @@ const directives = [RangeValidatorDirective];
 @NgModule({
   imports: [],
   declarations: directives,
-  exports: directives,
+  exports: directives
 })
 export default class DirectivesModule {}

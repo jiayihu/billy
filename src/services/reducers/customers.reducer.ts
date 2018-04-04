@@ -1,9 +1,12 @@
 import { ICustomer } from '../models/customers.model';
 import { customersActions } from '../actions/';
 
-export type ICustomersState = Readonly<ICustomer[]>;
+export type ICustomersState = ICustomer[];
 
-export default function customersReducer(state: ICustomersState = [], action: IAction): ICustomersState {
+export default function customersReducer(
+  state: ICustomersState = [],
+  action: IAction
+): ICustomersState {
   switch (action.type) {
     case customersActions.addCustomers.types.success:
       return action.payload.customers;

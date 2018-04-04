@@ -6,8 +6,6 @@ import NotFoundComponent from './not-found/not-found.component';
 
 @NgModule({
   imports: [SharedModule, RouterModule],
-  declarations: [NotFoundComponent],
+  declarations: [NotFoundComponent]
 })
-export default class StaticModule {
-
-}
+export default class StaticModule {}

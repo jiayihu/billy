@@ -25,12 +25,12 @@ const uiComponents = [
   ListGroupItemComponent,
   ModalComponent,
   SelectListComponent,
-  SpinnerComponent,
+  SpinnerComponent
 ];
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule],
   declarations: uiComponents,
-  exports: uiComponents,
+  exports: uiComponents
 })
-export default class UIModule { }
+export default class UIModule {}

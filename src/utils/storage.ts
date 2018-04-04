@@ -8,7 +8,7 @@ const isAvailable: boolean = (function isAvailableIffe() {
   } catch (e) {
     return false;
   }
-}());
+})();
 
 export default {
   getItem(key: string): any {
@@ -44,5 +44,5 @@ export default {
     }
 
     return false;
-  },
+  }
 };

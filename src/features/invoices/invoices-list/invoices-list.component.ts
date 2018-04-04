@@ -13,18 +13,18 @@ import TaxesLoggerService from '../services/taxes-logger.service';
   providers: [
     {
       provide: LoggerService,
-      useClass: TaxesLoggerService,
-    },
-  ],
+      useClass: TaxesLoggerService
+    }
+  ]
 })
 export default class InvoicesListComponent implements OnInit {
-  invoices$: Observable< IInvoice[]>;
+  invoices$: Observable<IInvoice[]>;
   taxes$: Observable<ITax[]>;
 
   constructor(
     private invoicesModel: InvoicesModel,
     private taxesModel: TaxesModel,
-    private router: Router,
+    private router: Router
   ) {}
 
   ngOnInit() {

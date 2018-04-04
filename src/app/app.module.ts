@@ -34,13 +34,9 @@ import LoggerService from '@services/logger.service';
     InvoicesModule,
     StaticModule,
     AppRoutingModule,
-    SimpleNotificationsModule.forRoot(),
+    SimpleNotificationsModule.forRoot()
   ],
-  declarations: [
-    AppComponent,
-    FooterComponent,
-    NavComponent,
-  ],
+  declarations: [AppComponent, FooterComponent, NavComponent],
   providers: [
     ...models,
     AuthGuard,
@@ -53,11 +49,9 @@ import LoggerService from '@services/logger.service';
       provide: APP_INITIALIZER,
       useFactory: (config: ConfigService) => () => config.load(),
       deps: [ConfigService],
-      multi: true,
-    },
+      multi: true
+    }
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
-export default class AppModule {
-
-}
+export default class AppModule {}

@@ -4,8 +4,6 @@ import { Component } from '@angular/core';
   selector: 'list-group',
   template: `
     <ul class="list-group"><ng-content></ng-content><ul>
-  `,
+  `
 })
-export default class ListGroupComponent {
-
-}
+export default class ListGroupComponent {}

@@ -4,14 +4,14 @@ import {
   EventEmitter,
   forwardRef,
   Input,
-  Output,
+  Output
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 const DEFAULT_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
   useExisting: forwardRef(() => InputEditComponent),
-  multi: true,
+  multi: true
 };
 
 @Component({
@@ -19,7 +19,7 @@ const DEFAULT_VALUE_ACCESSOR: any = {
   templateUrl: './input-edit.component.html',
   styleUrls: ['./input-edit.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [DEFAULT_VALUE_ACCESSOR],
+  providers: [DEFAULT_VALUE_ACCESSOR]
 })
 export default class InputEditComponent implements ControlValueAccessor {
   // Function called to propagate change in the form and other controls when
@@ -39,7 +39,7 @@ export default class InputEditComponent implements ControlValueAccessor {
     return {
       'input-edit': true,
       'form-control': true,
-      'form-control--inline': this.size === 'auto',
+      'form-control--inline': this.size === 'auto'
     };
   }
 

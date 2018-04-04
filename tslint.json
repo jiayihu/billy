@@ -1,9 +1,5 @@
 {
-  "extends": "tslint:recommended",
-
-  "rulesDirectory": [
-    "node_modules/codelyzer"
-  ],
+  "extends": ["tslint:recommended", "tslint-angular"],
 
   "rules": {
     "arrow-parens": false,
@@ -19,6 +15,8 @@
     "no-var-requires": false,
     "ordered-imports": [false],
     "quotemark": [true, "single"],
+    "semicolon": false,
+    "trailing-comma": false,
     "variable-name": [true, "check-format", "allow-leading-underscore"],
 
     "directive-selector": [false, "attribute", "bly", "camelCase"],
@@ -30,6 +28,7 @@
     "no-attribute-parameter-decorator": true,
     "no-input-rename": false,
     "no-output-rename": true,
+    "no-output-on-prefix": false,
     "no-forward-ref": false,
     "use-life-cycle-interface": true,
     "use-pipe-transform-interface": true,

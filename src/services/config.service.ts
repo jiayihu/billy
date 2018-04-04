@@ -14,7 +14,9 @@ export default class ConfigService {
 
   constructor(private http: Http) {}
 
-  get(key: string) { return this.config[key]; }
+  get(key: string) {
+    return this.config[key];
+  }
 
   /**
    * This should load a .json config file from the server, but for now it sets
@@ -22,7 +24,7 @@ export default class ConfigService {
    */
   load() {
     this.config = {
-      LOCALSTORAGE,
+      LOCALSTORAGE
     };
   }
 }

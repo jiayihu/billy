@@ -35,7 +35,8 @@ export default class GeoService {
       const searchParams = new URLSearchParams('q=&featureCode=PCLI&maxRows=1000');
       searchParams.append('username', this.apiUsername);
 
-      this.countriesSource = this.http.get(ENDPOINT, { search: searchParams })
+      this.countriesSource = this.http
+        .get(ENDPOINT, { search: searchParams })
         .map(response => response.json().geonames)
         .map(countries => countries.sort(GeoService.sortByName))
         .publishLast()
@@ -54,7 +55,8 @@ export default class GeoService {
     searchParams.append('country', countryCode);
     searchParams.append('lang', countryCode);
 
-    return this.http.get(ENDPOINT, { search: searchParams })
+    return this.http
+      .get(ENDPOINT, { search: searchParams })
       .map(response => response.json().geonames)
       .map((provinces: IProvince[]) => {
         const sortedProvinces = provinces.sort(GeoService.sortByName);

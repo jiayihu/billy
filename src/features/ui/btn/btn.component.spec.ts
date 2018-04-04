@@ -6,12 +6,14 @@ import BtnComponent from './btn.component';
 
 @Component({
   selector: 'test-cmp',
-  template: '',
+  template: ''
 })
 class TestComponent {
   event: any;
 
-  handleClick(event) { this.event = event; }
+  handleClick(event) {
+    this.event = event;
+  }
 }
 
 describe('BtnComponent', () => {
@@ -22,7 +24,7 @@ describe('BtnComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [BtnComponent, TestComponent],
+      declarations: [BtnComponent, TestComponent]
     });
     const template = '<btn type="primary" (onClick)="handleClick($event)"></btn>';
     fixture = createTestComponent(template, TestComponent);

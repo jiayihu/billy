@@ -6,7 +6,7 @@ import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'signup',
-  templateUrl: './signup.component.html',
+  templateUrl: './signup.component.html'
 })
 export default class SignupComponent {
   email: string;
@@ -16,13 +16,14 @@ export default class SignupComponent {
   constructor(
     private authModel: AuthModel,
     private notifications: NotificationsService,
-    private router: Router,
+    private router: Router
   ) {}
 
   onSubmit(form: NgForm) {
     const { email, password } = form.value;
 
-    this.authModel.signup(email, password)
+    this.authModel
+      .signup(email, password)
       .then(() => {
         this.notifications.success('Registration', 'Your account is created.');
         this.router.navigateByUrl('/create');

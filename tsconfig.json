@@ -19,7 +19,8 @@
     },
     "exclude": [
         "dist",
-        "node_modules"
+        "node_modules",
+        "src/**/*.spec.ts"
     ],
     "compileOnSave": false,
     "buildOnSave": false,

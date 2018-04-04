@@ -10,6 +10,6 @@ import CustomersListComponent from './customers-list/customers-list.component';
   imports: [SharedModule, ReactiveFormsModule],
   declarations: [CustomerEditComponent, CustomersListComponent],
   exports: [CustomerEditComponent, CustomersListComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export default class CustomersModule {}

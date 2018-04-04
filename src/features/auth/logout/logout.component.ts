@@ -10,14 +10,11 @@ import { AuthModel } from '@services/models/';
   styles: [
     `
       alert { margin: 1.5rem; }
-    `,
-  ],
+    `
+  ]
 })
 export default class LogoutComponent implements OnInit {
-  constructor(
-    private authModel: AuthModel,
-    private router: Router,
-  ) {}
+  constructor(private authModel: AuthModel, private router: Router) {}
 
   ngOnInit() {
     window.setTimeout(() => {

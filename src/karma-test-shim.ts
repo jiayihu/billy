@@ -16,7 +16,7 @@ import 'rxjs/Rx';
 import { getTestBed } from '@angular/core/testing';
 import {
   BrowserDynamicTestingModule,
-  platformBrowserDynamicTesting,
+  platformBrowserDynamicTesting
 } from '@angular/platform-browser-dynamic/testing';
 
 // Unfortunately there's no typing for the `__karma__` variable. Just declare it as any.
@@ -25,13 +25,10 @@ declare var require: any;
 
 // Prevent Karma from running prematurely.
 // tslint:disable-next-line
-__karma__.loaded = function () {};
+__karma__.loaded = function() {};
 
 // First, initialize the Angular testing environment.
-getTestBed().initTestEnvironment(
-  BrowserDynamicTestingModule,
-  platformBrowserDynamicTesting(),
-);
+getTestBed().initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
 // Then we find all the tests.
 let context = require.context('./', true, /\.spec\.ts$/);
 // And load the modules.

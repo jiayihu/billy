@@ -4,7 +4,7 @@ import { ITask } from '@services/models/invoices.model';
 @Component({
   selector: 'tasks',
   templateUrl: './tasks.component.html',
-  styleUrls: ['./tasks.component.css'],
+  styleUrls: ['./tasks.component.css']
 })
 export default class TasksComponent {
   newTask: ITask;
@@ -24,7 +24,7 @@ export default class TasksComponent {
       description: '',
       quantity: 0,
       price: 0,
-      amount: 0,
+      amount: 0
     };
   }
 
@@ -41,7 +41,7 @@ export default class TasksComponent {
     const isNewTask = taskId === 'new-task';
     const task = isNewTask ? this.newTask : this.tasks.find(item => item.id === taskId);
     const updatedTask = Object.assign({}, task, {
-      [property]: newValue,
+      [property]: newValue
     });
 
     if (property === 'quantity' || property === 'price') {
@@ -55,5 +55,4 @@ export default class TasksComponent {
 
     this.onEditTask.emit(updatedTask);
   }
-
 }

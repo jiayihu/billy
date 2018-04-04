@@ -5,7 +5,7 @@ import {
   EventEmitter,
   Input,
   Output,
-  ViewChild,
+  ViewChild
 } from '@angular/core';
 
 interface ISelectOption {
@@ -16,7 +16,7 @@ interface ISelectOption {
 @Component({
   selector: 'select-list',
   templateUrl: './select-list.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export default class SelectListComponent {
   @Input() addOption: boolean;
@@ -26,8 +26,7 @@ export default class SelectListComponent {
   @Input() resetAfterSelect: boolean = true;
   @Output() onChange = new EventEmitter<string>();
 
-  @ViewChild('select')
-  private selectEl: ElementRef;
+  @ViewChild('select') private selectEl: ElementRef;
 
   handleSelect(value: string): void {
     // @NOTE: default text option has value ''

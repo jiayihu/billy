@@ -12,7 +12,7 @@ import set = require('lodash/fp/set');
 @Component({
   selector: 'invoices-edit',
   templateUrl: './invoices-edit.component.html',
-  styleUrls: ['./invoices-edit.component.css'],
+  styleUrls: ['./invoices-edit.component.css']
 })
 export default class InvoicesEditComponent implements OnInit, OnDestroy, IDeactivateComponent {
   customers: ICustomer[];
@@ -30,7 +30,7 @@ export default class InvoicesEditComponent implements OnInit, OnDestroy, IDeacti
     private invoicesModel: InvoicesModel,
     private taxesModel: TaxesModel,
     private route: ActivatedRoute,
-    private router: Router,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -39,12 +39,13 @@ export default class InvoicesEditComponent implements OnInit, OnDestroy, IDeacti
       (invoices, params) => {
         const invoiceId = params['invoiceId'];
         return invoices.find(invoice => invoice.id === invoiceId);
-      },
-    )
-    .subscribe(invoice => this.invoice = invoice);
+      }
+    ).subscribe(invoice => (this.invoice = invoice));
 
-    this.customersSub = this.customersModel.customers$.subscribe(customers => this.customers = customers);
-    this.taxesSub = this.taxesModel.taxes$.subscribe(taxes => this.availableTaxes = taxes);
+    this.customersSub = this.customersModel.customers$.subscribe(
+      customers => (this.customers = customers)
+    );
+    this.taxesSub = this.taxesModel.taxes$.subscribe(taxes => (this.availableTaxes = taxes));
   }
 
   ngOnDestroy() {
@@ -139,7 +140,8 @@ export default class InvoicesEditComponent implements OnInit, OnDestroy, IDeacti
    */
 
   handleAddTax() {
-    this.taxesModel.addTax()
+    this.taxesModel
+      .addTax()
       .then(tax => this.editInvoice('taxes', this.invoice.taxes.concat(tax), true));
   }
 

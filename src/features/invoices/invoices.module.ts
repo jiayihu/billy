@@ -17,15 +17,15 @@ import TaxesListComponent from './taxes-list/taxes-list.component';
     ReactiveFormsModule,
     InvoiceEditModule,
     PrintInvoiceModule,
-    InvoicesRoutingModule,
+    InvoicesRoutingModule
   ],
   declarations: [
     CreateInvoiceComponent,
     InvoicesEditComponent,
     InvoicesListComponent,
-    TaxesListComponent,
+    TaxesListComponent
   ],
   exports: [],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export default class InvoicesModule {}

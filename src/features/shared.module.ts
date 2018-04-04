@@ -4,15 +4,10 @@ import DirectivesModule from './directives/directives.module';
 import PipesModule from './pipes/pipes.module';
 import UiModule from './ui/ui.module';
 
-const modules = [
-  CommonModule,
-  DirectivesModule,
-  PipesModule,
-  UiModule,
-];
+const modules = [CommonModule, DirectivesModule, PipesModule, UiModule];
 
 @NgModule({
   imports: modules,
-  exports: modules,
+  exports: modules
 })
 export default class SharedModule {}

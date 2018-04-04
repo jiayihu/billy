@@ -4,7 +4,7 @@ import { Component, Input } from '@angular/core';
   selector: 'alert',
   template: `
     <div [ngClass]="classnames()"><ng-content></ng-content></div>
-  `,
+  `
 })
 export default class AlertComponent {
   @Input() type: 'success' | 'info' | 'warning' | 'danger';
@@ -12,7 +12,7 @@ export default class AlertComponent {
   classnames(): Object {
     return {
       alert: true,
-      [`alert-${this.type}`]: this.type,
+      [`alert-${this.type}`]: this.type
     };
   }
 }

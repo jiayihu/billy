@@ -9,8 +9,6 @@ import AuthRoutingModule from './auth-routing.module';
 @NgModule({
   imports: [SharedModule, FormsModule, AuthRoutingModule],
   declarations: [SignupComponent, LoginComponent, LogoutComponent],
-  exports: [],
+  exports: []
 })
-export default class AuthModule {
-
-}
+export default class AuthModule {}

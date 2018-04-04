@@ -4,7 +4,7 @@ import { ICustomer } from '@services/models/customers.model';
 @Component({
   selector: 'customer',
   templateUrl: './customer.component.html',
-  styleUrls: ['./customer.component.css'],
+  styleUrls: ['./customer.component.css']
 })
 export default class CustomerComponent {
   mode: 'adding' | 'editing' | '' = '';
@@ -26,9 +26,11 @@ export default class CustomerComponent {
 
   handleEditCustomerEnd(customer: ICustomer): void {
     if (this.mode === 'editing') {
-      this.onEditCustomer.emit(Object.assign({}, customer, {
-        id: this.selectedCustomer.id,
-      }));
+      this.onEditCustomer.emit(
+        Object.assign({}, customer, {
+          id: this.selectedCustomer.id
+        })
+      );
     } else {
       this.onAddCustomer.emit(customer);
     }

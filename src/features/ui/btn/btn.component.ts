@@ -4,7 +4,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
   selector: 'btn',
   templateUrl: './btn.component.html',
   styleUrls: ['./btn.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export default class BtnComponent {
   @Input() type: 'secondary' | 'primary' | 'link' = 'secondary';
@@ -13,7 +13,7 @@ export default class BtnComponent {
   classnames() {
     return {
       btn: true,
-      [`btn-${this.type}`]: true,
+      [`btn-${this.type}`]: true
     };
   }
 

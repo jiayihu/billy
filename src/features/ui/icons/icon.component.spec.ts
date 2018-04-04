@@ -11,7 +11,7 @@ describe('IconComponent template', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [IconComponent],
+      declarations: [IconComponent]
     });
     fixture = TestBed.createComponent(IconComponent);
     comp = fixture.componentInstance;

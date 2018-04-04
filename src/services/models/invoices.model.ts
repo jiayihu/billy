@@ -38,7 +38,7 @@ export default class InvoicesModel {
 
   constructor(
     private store: Store<selectors.IState>,
-    private notificationsService: NotificationsService,
+    private notificationsService: NotificationsService
   ) {
     this.invoices$ = this.store.select(selectors.getInvoices);
   }
@@ -50,7 +50,8 @@ export default class InvoicesModel {
   addInvoice(invoice: IInvoice): Promise<IInvoice> {
     if (!this.checkValidity(invoice)) return;
 
-    return this.store.dispatch(invoicesActions.addInvoice.request(invoice))
+    return (this.store as any)
+      .dispatch(invoicesActions.addInvoice.request(invoice))
       .then(response => {
         this.notificationsService.success('Invoice', 'Invoice saved successfully.');
         return response.payload.invoice;
@@ -70,7 +71,7 @@ export default class InvoicesModel {
 
   private checkValidity(invoice: IInvoice): boolean {
     const requiredFields = ['customer', 'date', 'location', 'number', 'tasks', 'user'];
-    for (let field of requiredFields) {
+    for (const field of requiredFields) {
       const value = invoice[field];
       if (!value || (typeof value !== 'number' && isEmpty(value))) {
         this.notificationsService.error('Invoice', `Cannot save, '${field}' is required.`);
@@ -80,5 +81,4 @@ export default class InvoicesModel {
 
     return true;
   }
-
 }

@@ -8,7 +8,7 @@ interface IPayloadCreators {
 }
 
 interface IActionCreator {
-  types: { request: string; success: string; failure: string; };
+  types: { request: string; success: string; failure: string };
   request(...args: any[]): IAction;
   success(...args: any[]): IAction;
   failure(errorMsg: string): IAction;
@@ -18,15 +18,15 @@ interface IOptions {
   lifecycle: boolean;
 }
 
-const defaultPayload = (args) => args;
+const defaultPayload = args => args;
 const defaultOptions: IOptions = {
-  lifecycle: false,
+  lifecycle: false
 };
 
 export default function createAction(
   type: string,
   payloadCreators: IPayloadCreators,
-  options: IOptions = defaultOptions,
+  options: IOptions = defaultOptions
 ): IActionCreator {
   const requestType = `${type}_REQUEST`;
   const successType = `${type}_SUCCESS`;
@@ -40,24 +40,24 @@ export default function createAction(
       return {
         type: requestType,
         payload: payloadCreators.request ? payloadCreators.request(...args) : defaultPayload(args),
-        meta: options.lifecycle ? { lifecycle } : null,
+        meta: options.lifecycle ? { lifecycle } : null
       };
     },
     success(...args) {
       return {
         type: successType,
-        payload: payloadCreators.success ? payloadCreators.success(...args) : defaultPayload(args),
+        payload: payloadCreators.success ? payloadCreators.success(...args) : defaultPayload(args)
       };
     },
     failure(errorMsg: string) {
       if (payloadCreators.failure) {
         return {
           type: failureType,
-          payload: payloadCreators.failure(errorMsg),
+          payload: payloadCreators.failure(errorMsg)
         };
       }
 
       return showError(errorMsg);
-    },
+    }
   };
 }

@@ -7,7 +7,7 @@ import { IUser } from '@services/models/user.model';
 @Component({
   selector: 'invoice-edit',
   templateUrl: './invoice-edit.component.html',
-  styleUrls: ['./invoice-edit.component.css'],
+  styleUrls: ['./invoice-edit.component.css']
 })
 export default class InvoiceEditComponent {
   @Input() customers: ICustomer[];
