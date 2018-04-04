@@ -22,12 +22,14 @@ export default class UserEffects {
       const userId = authState.uid;
       this.user$ = db.object(`/users/${userId}`);
 
-      // this.user$.$ref.once('value', userSnap => {
-      //   const user = userSnap.val();
-      //   if (!user) return;
+      this.user$
+        .valueChanges()
+        .first()
+        .subscribe(user => {
+          if (!user) return;
 
-      //   store.dispatch(userActions.editUser.success(user));
-      // });
+          store.dispatch(userActions.editUser.success(user));
+        });
     });
   }
 

@@ -27,10 +27,9 @@ export default class AuthModel {
     const store$ = this.store.select(s => s);
 
     firebaseAuth.authState.subscribe(auth => {
-      console.log(auth);
-      // if (auth && auth.auth) this.authenticate(auth.auth);
-      // this.checkedAuth$.next(true);
-      // this.checkedAuth$.complete();
+      if (auth) this.authenticate(auth.toJSON());
+      this.checkedAuth$.next(true);
+      this.checkedAuth$.complete();
     });
   }
 

@@ -23,16 +23,14 @@ export default class TaxesEffects {
       this.taxes$ = db.list(`/taxes/${userId}`);
 
       // Add taxes to the store ad application startup
-      // this.taxes$.$ref.once('value', taxesSnap => {
-      //   const taxesMap = taxesSnap.val();
+      this.taxes$
+        .valueChanges()
+        .first()
+        .subscribe(taxes => {
+          if (!taxes) return;
 
-      //   if (!taxesMap) return;
-
-      //   const taxes = Object.keys(taxesMap).map(taxId => {
-      //     return { ...taxesMap[taxId], id: taxId };
-      //   });
-      //   store.dispatch(taxesActions.addTaxes.success(taxes));
-      // });
+          store.dispatch(taxesActions.addTaxes.success(taxes));
+        });
     });
   }
 

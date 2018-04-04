@@ -23,16 +23,14 @@ export default class InvoicesEffects {
       this.invoices$ = db.list(`/invoices/${userId}`);
 
       // Add invoices to the store ad application startup
-      // this.invoices$.$ref.once('value', invoicesSnap => {
-      //   const invoicesMap = invoicesSnap.val();
+      this.invoices$
+        .valueChanges()
+        .first()
+        .subscribe(invoices => {
+          if (!invoices) return;
 
-      //   if (!invoicesMap) return;
-
-      //   const invoices = Object.keys(invoicesMap).map(invoiceId => {
-      //     return { ...invoicesMap[invoiceId], id: invoiceId };
-      //   });
-      //   store.dispatch(invoicesActions.addInvoices.success(invoices));
-      // });
+          store.dispatch(invoicesActions.addInvoices.success(invoices));
+        });
     });
   }
 

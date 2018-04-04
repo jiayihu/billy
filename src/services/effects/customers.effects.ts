@@ -23,16 +23,14 @@ export default class CustomersEffects {
       this.customers$ = db.list(`/customers/${userId}`);
 
       // Add customers to the store at application startup
-      // this.customers$.$ref.once('value', customersSnap => {
-      //   const customersMap = customersSnap.val();
+      this.customers$
+        .valueChanges()
+        .first()
+        .subscribe(customers => {
+          if (!customers) return;
 
-      //   if (!customersMap) return;
-
-      //   const customers = Object.keys(customersMap).map(customerId => {
-      //     return { ...customersMap[customerId], id: customerId };
-      //   });
-      //   store.dispatch(customersActions.addCustomers.success(customers));
-      // });
+          store.dispatch(customersActions.addCustomers.success(customers));
+        });
     });
   }
 

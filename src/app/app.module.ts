@@ -1,6 +1,7 @@
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import AuthModule from '../features/auth/auth.module';
 import CustomersModule from '../features/customers/customers.module';
@@ -27,6 +28,7 @@ import LoggerService from '@services/logger.service';
   imports: [
     BrowserModule,
     HttpModule,
+    BrowserAnimationsModule,
     AppFirebaseModule,
     AppStoreModule,
     AuthModule,
@@ -34,7 +36,7 @@ import LoggerService from '@services/logger.service';
     InvoicesModule,
     StaticModule,
     AppRoutingModule,
-    SimpleNotificationsModule.forRoot()
+    SimpleNotificationsModule.forRoot(),
   ],
   declarations: [AppComponent, FooterComponent, NavComponent],
   providers: [
@@ -49,9 +51,9 @@ import LoggerService from '@services/logger.service';
       provide: APP_INITIALIZER,
       useFactory: (config: ConfigService) => () => config.load(),
       deps: [ConfigService],
-      multi: true
-    }
+      multi: true,
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export default class AppModule {}
