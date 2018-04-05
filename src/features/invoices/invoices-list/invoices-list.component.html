@@ -14,7 +14,7 @@
         <td>{{ invoice.date }}</td>
         <td>{{ invoice.customer.name }}</td>
         <td>
-          {{ invoice.total | currency:'EUR':true }}
+          {{ invoice.total | currency:'EUR' }}
         </td>
         <td class="invoice-actions">
           <btn type="link" class="edit-action" (onClick)="handleInvoiceEdit(invoice.id)">Edit</btn>

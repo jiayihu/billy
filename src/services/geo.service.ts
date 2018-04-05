@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Http, URLSearchParams } from '@angular/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
 const ENDPOINT = 'http://ws.geonames.org/searchJSON';
@@ -21,7 +22,7 @@ export default class GeoService {
   private countriesSource: Observable<ICountry[]>;
   private provincesByCountry: { [key: string]: IProvince[] } = {};
 
-  constructor(private http: Http) {}
+  constructor(private http: HttpClient) {}
 
   static sortByName(a, b): number {
     if (a.name < b.name) return -1;
@@ -32,12 +33,12 @@ export default class GeoService {
 
   getCountries(): Observable<ICountry[]> {
     if (!this.countriesSource) {
-      const searchParams = new URLSearchParams('q=&featureCode=PCLI&maxRows=1000');
-      searchParams.append('username', this.apiUsername);
+      let searchParams = new HttpParams({ fromString: 'q=&featureCode=PCLI&maxRows=1000' });
+      searchParams = searchParams.append('username', this.apiUsername);
 
       this.countriesSource = this.http
-        .get(ENDPOINT, { search: searchParams })
-        .map(response => response.json().geonames)
+        .get(ENDPOINT, { params: searchParams })
+        .map((response: any) => response.geonames)
         .map(countries => countries.sort(GeoService.sortByName))
         .publishLast()
         .refCount();
@@ -50,14 +51,14 @@ export default class GeoService {
     const cachedProvinces = this.provincesByCountry[countryCode];
     if (cachedProvinces) return Observable.of(cachedProvinces);
 
-    const searchParams = new URLSearchParams('q=adm2&maxRows=1000');
-    searchParams.append('username', this.apiUsername);
-    searchParams.append('country', countryCode);
-    searchParams.append('lang', countryCode);
+    let searchParams = new HttpParams({ fromString: 'q=adm2&maxRows=1000' });
+    searchParams = searchParams.append('username', this.apiUsername);
+    searchParams = searchParams.append('country', countryCode);
+    searchParams = searchParams.append('lang', countryCode);
 
     return this.http
-      .get(ENDPOINT, { search: searchParams })
-      .map(response => response.json().geonames)
+      .get(ENDPOINT, { params: searchParams })
+      .map((response: any) => response.geonames)
       .map((provinces: IProvince[]) => {
         const sortedProvinces = provinces.sort(GeoService.sortByName);
         this.provincesByCountry[countryCode] = provinces;

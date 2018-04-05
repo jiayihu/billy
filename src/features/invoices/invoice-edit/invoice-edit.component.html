@@ -46,7 +46,7 @@
   ></taxes>
   <p class="invoice-total">
     Total:
-    {{ invoice.total | currency:'EUR':true }}
+    {{ invoice.total | currency:'EUR' }}
   </p>
   <notes [notes]="invoice.notes" (onNotesChange)="handleEvent('onNotesChange', $event)"></notes>
 </div>

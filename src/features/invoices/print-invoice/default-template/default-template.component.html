@@ -32,7 +32,7 @@
     <div class="col-6 offset-2 text-right">
       <div class="total">
         <p class="text-left">TOTAL</p>
-        <p class="total-sum">{{ invoice.total | currency:'EUR':true }} </p>
+        <p class="total-sum">{{ invoice.total | currency:'EUR' }} </p>
       </div>
     </div>
   </div>
@@ -51,7 +51,7 @@
         <td>{{ task.quantity }}</td>
         <td>{{ task.description }}</td>
         <td>{{ task.price }}</td>
-        <td>{{ task.amount | currency:'EUR':true }}</td>
+        <td>{{ task.amount | currency:'EUR' }}</td>
       </tr>
     </tbody>
   </table>
@@ -62,12 +62,12 @@
       <span class="tax-name">{{ tax.name }}</span>
       <span class="tax-rate">Rate: {{ tax.rate }}%</span>
       <span class="tax-amount text-xs-right">
-        {{ tax.rate / 100 * (invoice.tasks | reduceSum:'amount') | currency:'EUR':true }}
+        {{ tax.rate / 100 * (invoice.tasks | reduceSum:'amount') | currency:'EUR' }}
       </span>
     </div>
   </div>
 
-  <div class="invoice-total text-right text-lg">Total {{ invoice.total | currency:'EUR':true }}</div>
+  <div class="invoice-total text-right text-lg">Total {{ invoice.total | currency:'EUR' }}</div>
 
 
   <div class="notes">

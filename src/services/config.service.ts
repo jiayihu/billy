@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 
 export const LOCALSTORAGE = 'billy-store';
 
@@ -12,7 +12,7 @@ export const LOCALSTORAGE = 'billy-store';
 export default class ConfigService {
   private config = {};
 
-  constructor(private http: Http) {}
+  constructor(private http: HttpClient) {}
 
   get(key: string) {
     return this.config[key];
@@ -24,7 +24,7 @@ export default class ConfigService {
    */
   load() {
     this.config = {
-      LOCALSTORAGE
+      LOCALSTORAGE,
     };
   }
 }

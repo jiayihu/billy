@@ -1,6 +1,6 @@
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule, LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import AuthModule from '../features/auth/auth.module';
@@ -24,10 +24,15 @@ import FormBuilderService from '@services/form-builder.service';
 import GeoService from '@services/geo.service';
 import LoggerService from '@services/logger.service';
 
+import { registerLocaleData } from '@angular/common';
+import localeIt from '@angular/common/locales/it';
+
+registerLocaleData(localeIt);
+
 @NgModule({
   imports: [
     BrowserModule,
-    HttpModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     AppFirebaseModule,
     AppStoreModule,
@@ -52,6 +57,10 @@ import LoggerService from '@services/logger.service';
       useFactory: (config: ConfigService) => () => config.load(),
       deps: [ConfigService],
       multi: true,
+    },
+    {
+      provide: LOCALE_ID,
+      useValue: 'it',
     },
   ],
   bootstrap: [AppComponent],
